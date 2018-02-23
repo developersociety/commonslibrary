@@ -1,0 +1,20 @@
+/htdocs/media
+/htdocs/static
+
+# Python
+*.py[co]
+
+# Testing
+.coverage
+.tox
+htmlcov
+reports
+
+# NodeJS
+/node_modules
+npm-debug.log
+npm-debug.log.*
+static/css
+
+# Database
+*.dump
