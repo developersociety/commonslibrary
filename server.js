@@ -6,9 +6,8 @@ const webpackConfig = require('./webpack.config');
 
 const compiler = Webpack(webpackConfig);
 const devServerOptions = Object.assign({}, webpackConfig.devServer, {
-  inline: true,
-  publicPath: '/static/bundles/',
-  hot: true
+  publicPath: '127.0.0.1:8080/static/bundles/',
+  inline: true
 });
 const server = new WebpackDevServer(compiler, devServerOptions);
 

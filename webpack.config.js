@@ -6,8 +6,8 @@ module.exports = {
   context: __dirname,
 
   entry: [
-    'webpack-dev-server/client?http://127.0.0.1:8080',
-    './static/js/index' // entry point of our app. assets/js/index.js should require other js modules and dependencies it needs
+    './static/js/index',
+    'webpack-dev-server/client?http://127.0.0.1:8080/'
   ],
 
   output: {
