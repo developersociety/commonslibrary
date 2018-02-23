@@ -6,10 +6,9 @@ const webpackConfig = require('./webpack.config');
 
 const compiler = Webpack(webpackConfig);
 const devServerOptions = Object.assign({}, webpackConfig.devServer, {
-  stats: {
-    colors: true
-  },
-  inline: true
+  inline: true,
+  publicPath: '/static/bundles/',
+  hot: true
 });
 const server = new WebpackDevServer(compiler, devServerOptions);
 
