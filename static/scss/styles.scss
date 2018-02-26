@@ -1,4 +1,4 @@
-@import 'normalize/import-now';
+@import '~normalize.css/normalize.css';
 
 @import 'variables';
 @import 'typography';
@@ -12,6 +12,10 @@
 
 * {
     box-sizing: border-box;
+}
+
+body {
+    background: green;
 }
 
 :first-child {

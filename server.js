@@ -8,7 +8,10 @@ const compiler = Webpack(webpackConfig);
 
 const server = new WebpackDevServer(compiler, {
   inline: true,
-  publicPath: webpackConfig.output.publicPath
+  publicPath: webpackConfig.output.publicPath,
+  headers: {
+    "Access-Control-Allow-Origin": "*",
+  }
 });
 
 server.listen(8080, '127.0.0.1', () => {
