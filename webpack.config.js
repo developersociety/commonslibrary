@@ -6,13 +6,13 @@ module.exports = {
   context: __dirname,
 
   entry: [
-    './static/js/index',
-    'webpack-dev-server/client?http://127.0.0.1:8080/'
+    'webpack-dev-server/client?http://127.0.0.1:8080/',
+    './static/js/index'
   ],
 
   output: {
       path: path.resolve('./static/bundles/'),
-      filename: "[name]-[hash].js",
+      filename: "[name].js",
       publicPath: 'http://127.0.0.1:8080/static/bundles/'
   },
 
