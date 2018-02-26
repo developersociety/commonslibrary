@@ -7,20 +7,20 @@ module.exports = {
   context: __dirname,
 
   entry: [
-    './static/js/index',
-    './static/scss/styles.scss'
+    './static/src/js/index',
+    './static/src/scss/styles.scss'
   ],
 
   output: {
-      path: path.resolve('./static/bundles/'),
-      filename: "[name].js",
+    path: path.resolve('./static/dist/'),
+    filename: "[name].js",
   },
 
   plugins: [
-    new BundleTracker({filename: './webpack-stats.json'}),
+    new BundleTracker({filename: './webpack-production-stats.json'}),
     new webpack.optimize.UglifyJsPlugin(),
     new ExtractTextPlugin({
-      filename: 'static/css/[name].css',
+      filename: 'css/[name].css',
       allChunks: true,
     })
   ],

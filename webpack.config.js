@@ -8,20 +8,20 @@ module.exports = {
 
   entry: [
     'webpack-dev-server/client?http://127.0.0.1:8080/',
-    './static/js/index',
-    './static/scss/styles.scss'
+    './static/src/js/index',
+    './static/src/scss/styles.scss'
   ],
 
   output: {
-      path: path.resolve('./static/bundles/'),
-      filename: "[name].js",
-      publicPath: 'http://127.0.0.1:8080/static/bundles/'
+    path: path.resolve('./static/bundles/'),
+    filename: "[name].js",
+    publicPath: 'http://127.0.0.1:8080/static/bundles/'
   },
 
   plugins: [
     new BundleTracker({filename: './webpack-stats.json'}),
     new ExtractTextPlugin({
-      filename: 'static/css/[name].css',
+      filename: 'css/[name].css',
       allChunks: true,
     })
   ],
