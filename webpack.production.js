@@ -7,7 +7,6 @@ module.exports = {
   context: __dirname,
 
   entry: [
-    'webpack-dev-server/client?http://127.0.0.1:8080/',
     './static/js/index',
     './static/scss/styles.scss'
   ],
@@ -15,11 +14,11 @@ module.exports = {
   output: {
       path: path.resolve('./static/bundles/'),
       filename: "[name].js",
-      publicPath: 'http://127.0.0.1:8080/static/bundles/'
   },
 
   plugins: [
     new BundleTracker({filename: './webpack-stats.json'}),
+    new webpack.optimize.UglifyJsPlugin(),
     new ExtractTextPlugin({
       filename: 'static/css/[name].css',
       allChunks: true,
@@ -37,7 +36,7 @@ module.exports = {
         test: /\.css$/,
         exclude: '/node_modules/',
         loader: ExtractTextPlugin.extract({
-          use: ['css-loader?importLoaders=1'],
+          use: ['css-loader?importLoaders=1!minimize', 'postcss-loader'],
         })
       },
       {
@@ -45,7 +44,8 @@ module.exports = {
         exclude: '/node_modules/',
         loader: ExtractTextPlugin.extract([
           'css-loader?url=false',
-          'sass-loader'
+          'sass-loader',
+          'postcss-loader'
         ])
       }
     ]

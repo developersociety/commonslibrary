@@ -1,5 +1,6 @@
 import atexit
 import os
+import signal
 import subprocess
 
 from django.contrib.staticfiles.management.commands.runserver import (
