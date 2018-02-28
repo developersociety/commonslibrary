@@ -22,3 +22,7 @@ static/css
 
 # Database
 *.dump
+
+# Webpack
+webpack-production-stats.json
+webpack-stats.json
