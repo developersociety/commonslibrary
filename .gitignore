@@ -1,6 +1,9 @@
 /htdocs/media
 /htdocs/static
 
+# Mac
+.DS_STORE
+
 # Python
 *.py[co]
 

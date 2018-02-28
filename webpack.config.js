@@ -44,9 +44,16 @@ module.exports = {
         test: /\.scss$/,
         exclude: '/node_modules/',
         loader: ExtractTextPlugin.extract([
-          'css-loader?url=false',
+          'css-loader',
           'sass-loader'
         ])
+      },
+      {
+        test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/,
+        loader: 'file-loader',
+        options: {
+          name: 'assets/[name].[ext]'
+        }
       }
     ]
   },
