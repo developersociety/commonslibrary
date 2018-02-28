@@ -1,49 +1,48 @@
+// Font imports
+@font-face {
+    font-family: 'Brandon';
+    src: url("../fonts/brandon.woff2") format('woff2'), url("../fonts/national-regular.woff") format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'National';
+    src: url("../fonts/national-regular.woff2") format('woff2'), url("../fonts/national-regular.woff") format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'National';
+    src: url("../fonts/national-regular-italic.woff2") format('woff2'), url("../fonts/national-regular-italic.woff") format('woff');
+    font-weight: 400;
+    font-style: italic;
+}
+@font-face {
+    font-family: 'National';
+    src: url("../fonts/national-light-webfont.woff2") format('woff2'), url("../fonts/national-light.woff") format('woff');
+    font-weight: 300;
+    font-style: normal
+}
+@font-face {
+    font-family: 'National';
+    src: url("../fonts/national-light-italic.woff2") format('woff2'), url("../fonts/national-light-italic.woff") format('woff');
+    font-weight: 300;
+    font-style: italic;
+}
+
 // Base sizes
 $base-font-size: 1rem !default;
-$base-line-height: 1.5 !default;
-$base-font: 'Open Sans';
+$base-line-height: 1.2 !default;
+$base-font: 'National';
+$base-font-headline: 'Brandon';
 
 
 // Colors
-$color-text: #000000 !default;
-$color-background: #1a191b !default;
-$color-footer: #1a191b !default;
+$color-text: #4A4A4A !default;
+$color-background: #000000 !default;
+$color-line: #E5E5E5 !default;
 
-$color-inverted-background: #000000 !default;
-$color-inverted-text: #ffffff !default;
-
-$color-primary: #323134 !default;
-$color-secondary: #bcbcbc !default;
-$color-accent: #bcbcbc !default;
-$color-line: #bcbcbc !default;
-
+$color-accent: #50E3C2 !default;
 
 // Size
 $width-gap: 1.5rem;
-$width-line: 0.125rem;
-$width-container: 60rem !default;
-$width-column-gap: 1.5rem;
-$width-radius: 0.125rem;
-
-$width-logo: 12.5rem;
-$height-logo-ratio: 60%;
-
-// Style
-$style-button: none;
-
-// Icon
-$icon-width: 1.5em;
-$icon-height: $icon-width;
-
-
-// Headlines
-
-///     FONT SIZE  |  LINE H  |  MARGIN T  |  MARGIN B
-$headline-scale: (
-    h1: (3.375rem,    1.1,       1.6785em,    0.3em),
-    h2: (2.25rem,     1.2,       0.9em,       0.45em),
-    h3: (1.5rem,      1.5,       1.33em,      0.66em),
-    h4: (1.25rem,     1.1,       1.2em,       0.8em),
-    h5: (1.1rem,      1.1,       1.125em,     0.9em),
-    h6: (1rem,        1,         1.5em,       0.5em)
-) !default;

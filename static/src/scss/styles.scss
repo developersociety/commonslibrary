@@ -1,21 +1,8 @@
 @import '~normalize.css/normalize.css';
 
-@import 'variables';
-@import 'typography';
-@import 'accessibility';
-
-@import 'mixins/mixins';
-
-@import 'layout/layout';
-@import 'elements/elements';
-@import 'forms/forms';
-
+// Global rules
 * {
     box-sizing: border-box;
-}
-
-body {
-    background: red;
 }
 
 :first-child {
@@ -25,3 +12,20 @@ body {
 :last-child {
     margin-bottom: 0;
 }
+
+// Variables / imports
+@import 'variables';
+
+// Utility classes
+@import 'utility/mixins';
+@import 'utility/includes';
+
+// Site styles
+@import 'accessibility';
+@import 'resources';
+@import 'typography';
+@import 'grid';
+@import 'search';
+@import 'icons';
+@import 'tags';
+@import 'navigation';

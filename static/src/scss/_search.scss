@@ -1,0 +1,65 @@
+.search-bar {
+    background: $color-accent;
+}
+
+.search-form {
+    @extend %flex-row;
+
+    input {
+        width: 100%;
+        background: none;
+        border: none;
+        padding: $width-gap*1.5 $width-gap;
+        outline: none;
+        font-size: 1.675rem;
+        line-height: inherit;
+        color: $color-background;
+
+        &::placeholder {
+            color: inherit;
+        }
+    }
+
+    button {
+        @extend %flex-row;
+
+        background: $color-background;
+        border: none;
+        width: 4rem;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+.search-filter__tags,
+.search-filter__groups,
+.search-filter__people {
+    padding: $width-gap;
+    background: $color-accent;
+}
+
+.search-filter__type {
+    color: #ffffff;
+    margin-bottom: $width-gap/4;
+    padding-left: $width-gap/2;
+}
+
+.search-filter__tags {
+    grid-column: auto / span 2;
+}
+
+.search-filter__people {
+    grid-column: auto / span auto
+}
+
+.search-filter {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+    grid-gap: 2px;
+    padding-top: 2px;
+    font-family: $base-font-headline;
+    font-size: 1.25rem;
+    text-transform: uppercase;
+    background: rgba($color-background, 0.05);
+    min-width: 0;
+}

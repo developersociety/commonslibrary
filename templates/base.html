@@ -14,7 +14,11 @@
     {% endif %}
   </head>
   <body>
-    <div id="react-app"></div>
+    {% block header_content %}
+    {% endblock header_content %}
+
+    {% block main_content %}
+    {% endblock main_content %}
     {% render_bundle 'main' 'js' %}
   </body>
 </html>

@@ -1,0 +1,38 @@
+.main-navigation {
+    @extend %reset-box;
+
+    list-style: none;
+    font-family: $base-font-headline;
+    font-size: 1.25rem;
+    text-transform: uppercase;
+    color: #ffffff;
+
+    a {
+        display: block;
+        color: inherit;
+        text-decoration: none;
+        padding: $width-gap;
+    }
+
+    .main-navigation__item {
+        background: $color-background;
+        color: #ffffff;
+        white-space: nowrap;
+
+        + .main-navigation__item {
+            border-left: 2px solid rgba(#ffffff, 0.25);
+        }
+    }
+
+    .main-navigation__account {
+        margin-left: auto;
+        font-size: 1rem;
+        color: $color-text;
+    }
+
+    @media all and (min-width: 541px) {
+        display: flex;
+        flex-flow: row nowrap;
+    }
+}
+
