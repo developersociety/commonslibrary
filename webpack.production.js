@@ -14,6 +14,7 @@ module.exports = {
   output: {
     path: path.resolve('./static/dist/'),
     filename: "[name].js",
+    publicPath: '../'
   },
 
   plugins: [
@@ -36,17 +37,23 @@ module.exports = {
         test: /\.css$/,
         exclude: '/node_modules/',
         loader: ExtractTextPlugin.extract({
-          use: ['css-loader?importLoaders=1!minimize', 'postcss-loader'],
+          use: ['css-loader?importLoaders=1'],
         })
       },
       {
         test: /\.scss$/,
         exclude: '/node_modules/',
         loader: ExtractTextPlugin.extract([
-          'css-loader?url=false',
-          'sass-loader',
-          'postcss-loader'
+          'css-loader',
+          'sass-loader'
         ])
+      },
+      {
+        test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/,
+        loader: 'file-loader',
+        options: {
+          name: 'assets/[name].[ext]'
+        }
       }
     ]
   },

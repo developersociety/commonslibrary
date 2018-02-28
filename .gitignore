@@ -1,5 +1,6 @@
 /htdocs/media
 /htdocs/static
+/static/dist
 
 # Mac
 .DS_STORE
