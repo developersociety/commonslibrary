@@ -101,6 +101,10 @@
     @extend %flex-row;
 
     margin-left: auto;
+    user-select: none;
+    cursor: pointer;
+
+    .true { color: $color-accent; }
 
     .icon {
         width: 1.25rem;

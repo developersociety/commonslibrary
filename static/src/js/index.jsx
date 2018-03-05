@@ -17,11 +17,8 @@ class ResourceList extends React.Component {
   render() {
     const resourcesList = this.state.resources.map((resource, index) =>
       <Resource
-        key={index}
-        summary={resource.resource.summary}
-        image={resource.resource.image}
-        group={resource.resource.group}
-        user={resource.resource.user}
+        key={resource.resource.id}
+        resource={resource.resource}
       />
     )
 
