@@ -28,20 +28,22 @@
         width: 4rem;
         align-items: center;
         justify-content: center;
+        color: #ffffff;
+        font-size: 1.6875em;
     }
 }
 
 .search-filter__tags,
 .search-filter__groups,
 .search-filter__people {
-    padding: $width-gap;
+    padding: $width-gap 1rem;
     background: $color-accent;
 }
 
 .search-filter__type {
     color: #ffffff;
     margin-bottom: $width-gap/4;
-    padding-left: $width-gap/2;
+    padding-left: 0.5rem;
 }
 
 .search-filter__tags {
@@ -50,6 +52,23 @@
 
 .search-filter__people {
     grid-column: auto / span auto
+}
+
+@media all and (min-width: 481px) and (max-width: 1258px) {
+    .search-filter__tags {
+        grid-column: 1 / -1;
+    }
+
+    .search-filter__groups,
+    .search-filter__people {
+        grid-column: auto / span 1;
+    }
+}
+
+@media all and (min-width: 964px) and (max-width: 1258px) {
+    .search-filter__people {
+        grid-column: auto / span 2
+    }
 }
 
 .search-filter {

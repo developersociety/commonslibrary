@@ -14,25 +14,84 @@
         padding: $width-gap;
     }
 
-    .main-navigation__item {
-        background: $color-background;
-        color: #ffffff;
-        white-space: nowrap;
-
-        + .main-navigation__item {
-            border-left: 2px solid rgba(#ffffff, 0.25);
-        }
-    }
-
-    .main-navigation__account {
-        margin-left: auto;
-        font-size: 1rem;
-        color: $color-text;
-    }
-
     @media all and (min-width: 541px) {
         display: flex;
         flex-flow: row nowrap;
+        position: relative;
+
+        &:after {
+            content: '';
+            display: block;
+            width: 100%;
+            background: rgba($color-background, 0.05);
+            position: absolute;
+            bottom: 0; left: 0;
+            height: 2px;
+        }
+    }
+}
+
+.main-navigation__item {
+    @extend %flex-column;
+
+    background: $color-background;
+    color: #ffffff;
+    white-space: nowrap;
+    justify-content: center;
+    position: relative;
+
+    &:hover,
+    &:active,
+    &.active {
+        color: $color-accent;
+    }
+
+    + .main-navigation__item {
+        border-left: 2px solid rgba(#ffffff, 0.25);
+    }
+
+    &.inverse {
+        background: $color-accent;
+        color: $color-background;
+    }
+
+    @media all and (min-width: 541px) {
+
+        &.active:after {
+            content: '';
+            display: inline-block;
+            width: 0;
+            height: 0;
+            border-left: 0.75rem solid transparent;
+            border-right: 0.75rem solid transparent;
+            border-top: 0.75rem solid $color-background;
+            position: absolute;
+            top: 100%; left: 50%;
+            transform: translateX(-50%);
+        }
+    }
+}
+
+.main-navigation__account {
+    @extend %flex-column;
+
+    margin-left: auto;
+    font-size: 1rem;
+    color: $color-text;
+    justify-content: center;
+}
+
+.footer-navigation {
+    @extend %flex-row;
+    @extend %reset-box;
+
+    list-style: none;
+    margin-top: 1rem;
+
+    a { color: inherit; }
+
+    li + li {
+        margin-left: $width-gap*0.75;
     }
 }
 
