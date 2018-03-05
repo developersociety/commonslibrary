@@ -5,14 +5,14 @@ export class ResourceFilter extends React.Component {
     super();
     this.state = {
       activeFilter: 'date',
-      order: 'forward'
+      reserve: false
     }
   }
 
   handleClick(filter, e) {
     this.setState(prevState => ({
       activeFilter: filter,
-      order: prevState.activeFilter == filter ? 'reverse' : prevState.order
+      order: !prevState.reverse
     }));
   }
 
