@@ -9,20 +9,22 @@ export class ResourceAction extends React.Component {
       hasLiked: false,
       hasTried: false,
     }
+
+    // handler binds
     this.handleLikeClick = this.handleLikeClick.bind(this);
     this.handleTryClick = this.handleTryClick.bind(this);
   }
 
   handleLikeClick() {
     this.setState(prevState => ({
-      likes: !prevState.hasLiked? prevState.likes + 1: prevState.likes - 1,
+      likes: !prevState.hasLiked ? prevState.likes + 1: prevState.likes - 1,
       hasLiked: !prevState.hasLiked,
     }));
   }
 
   handleTryClick() {
     this.setState(prevState => ({
-      tries: !prevState.hasTried? prevState.tries + 1: prevState.tries - 1,
+      tries: !prevState.hasTried ? prevState.tries + 1: prevState.tries - 1,
       hasTried: !prevState.hasTried,
     }));
   }
