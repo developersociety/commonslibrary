@@ -8,6 +8,7 @@ const compiler = Webpack(webpackConfig);
 
 const server = new WebpackDevServer(compiler, {
   inline: true,
+  noInfo: true,
   publicPath: webpackConfig.output.publicPath,
   headers: {
     "Access-Control-Allow-Origin": "*",
