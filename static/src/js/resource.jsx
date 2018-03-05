@@ -6,10 +6,20 @@ export class Resource extends React.Component {
   render() {
     const resource = this.props.resource;
 
-    return (
-      <div className="resource with-image">
-        <header className="resource-image">
+    let resourceClass = 'resource';
+    let resourceHeader = null;
+
+    if (resource.image) {
+      resourceClass = resourceClass + ' with-image';
+      resourceHeader = (
+        <header className='resource-image' style={{backgroundImage: 'url(' + resource.image + ')'}}>
         </header>
+      );
+    }
+
+    return (
+      <div className={resourceClass}>
+        {resourceHeader}
         <div className="resource-summary">{resource.summary}</div>
         <footer className="resource-footer">
           <div className="resource-user">
