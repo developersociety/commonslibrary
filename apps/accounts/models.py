@@ -5,6 +5,8 @@ from django.utils import timezone
 from ckeditor.fields import RichTextField
 from sorl.thumbnail import ImageField
 
+from directory.models import Organisation
+
 from .managers import UserManager
 
 
@@ -31,6 +33,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     photo = ImageField('Profile picture', upload_to='uploads/accounts/images/%Y/%m/%d', blank=True)
     phone = models.CharField(max_length=32, blank=True)
     address = RichTextField('Work address', blank=True)
+    organisations = models.ManyToManyField(Organisation, null=True, blank=True)
 
     objects = UserManager()
 

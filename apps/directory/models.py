@@ -4,7 +4,7 @@ from django.db import models
 from ckeditor.fields import RichTextField
 
 
-class Group(models.Model):
+class Organisation(models.Model):
     title = models.CharField(max_length=256, unique=True)
     url = models.URLField(blank=True)
     telephone = models.CharField(max_length=16, blank=True)
@@ -12,8 +12,8 @@ class Group(models.Model):
     description = RichTextField(blank=True)
     logo = models.ImageField(blank=True)
     email = models.EmailField(blank=True)
-    created_by = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='groups_created')
-    updated_by = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='groups_updated')
+    created_by = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='organisations_created')
+    updated_by = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='organisations_updated')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

@@ -1,25 +1,27 @@
 from django.contrib import admin
 
-from .models import Group
+from .models import Organisation
 
 
-@admin.register(Group)
-class GroupAdmin(admin.ModelAdmin):
+@admin.register(Organisation)
+class OrganisationAdmin(admin.ModelAdmin):
     list_display = ('title', 'url', 'telephone', 'email', 'created_by', 'created_at',)
     readonly_fields = ('id', 'created_by', 'updated_by', 'created_at', 'updated_at',)
     search_fields = ['title']
     date_hierarchy = 'created_at'
     fieldsets = [
-        ('Group', {
+        ('Organisation', {
             'fields': ('title', 'url', 'email', 'telephone', 'logo',),
         }),
         ('Texts', {
             'fields': ('address', 'description',),
         }),
-        ('Meta', {
-            'classes': ('collapse',),
-            'fields': ('id', 'created_by', 'updated_by', 'created_at', 'updated_at',),
-        }),
+        (
+            'Meta', {
+                'classes': ('collapse',),
+                'fields': ('id', 'created_by', 'updated_by', 'created_at', 'updated_at',),
+            }
+        ),
     ]
 
     def save_model(self, request, obj, form, change):
