@@ -55,8 +55,7 @@ THIRD_PARTY_APPS = [
 ]
 
 PROJECT_APPS = [
-    # 'accounts.apps.AccountsConfig',
-    'accounts',
+    'accounts.apps.AccountsConfig',
 ]
 
 INSTALLED_APPS = DEFAULT_APPS + THIRD_PARTY_APPS + PROJECT_APPS
