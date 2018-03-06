@@ -50,10 +50,13 @@ DEFAULT_APPS = [
 ]
 
 THIRD_PARTY_APPS = [
+    'ckeditor',
     'raven.contrib.django.raven_compat',
 ]
 
-PROJECT_APPS = []
+PROJECT_APPS = [
+    'groups.apps.GroupsConfig',
+]
 
 INSTALLED_APPS = DEFAULT_APPS + THIRD_PARTY_APPS + PROJECT_APPS
 
@@ -237,3 +240,17 @@ CONTENTFILES_SSL = True
 
 # Improved cookie security
 CSRF_COOKIE_HTTPONLY = True
+
+
+# yapf: disable
+CKEDITOR_CONFIGS = {
+    'default': {
+        'skin': 'moono-lisa',
+        'toolbar_Basic': [['Source', '-', 'Bold', 'Italic']],
+        'toolbar': [{
+            'name': 'basicstyles',
+            'items': ['Bold', 'Italic', 'Underline', 'Strike', 'Image', 'Link'],
+        }],
+    }
+}
+# yapf: enable

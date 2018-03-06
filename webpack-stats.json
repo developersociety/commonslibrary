@@ -1,0 +1,1 @@
+{"status":"done","publicPath":"http://127.0.0.1:8080/static/bundles/","chunks":{"main":[{"name":"main.js","publicPath":"http://127.0.0.1:8080/static/bundles/main.js","path":"/var/www/commonslibrary/static/bundles/main.js"},{"name":"css/main.css","publicPath":"http://127.0.0.1:8080/static/bundles/css/main.css","path":"/var/www/commonslibrary/static/bundles/css/main.css"}]}}
