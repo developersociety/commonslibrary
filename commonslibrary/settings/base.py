@@ -56,6 +56,7 @@ THIRD_PARTY_APPS = [
 
 PROJECT_APPS = [
     'groups.apps.GroupsConfig',
+    'accounts.apps.AccountsConfig',
 ]
 
 INSTALLED_APPS = DEFAULT_APPS + THIRD_PARTY_APPS + PROJECT_APPS
@@ -241,6 +242,7 @@ CONTENTFILES_SSL = True
 # Improved cookie security
 CSRF_COOKIE_HTTPONLY = True
 
+AUTH_USER_MODEL = 'accounts.User'
 
 # yapf: disable
 CKEDITOR_CONFIGS = {
