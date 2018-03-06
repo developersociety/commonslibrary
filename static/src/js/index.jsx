@@ -5,7 +5,7 @@ import { Resource } from './resource';
 import { ResourceFilter } from './resource_filter';
 
 
-const ResourceData = require('./resources.json');
+const ResourceData = require('./data_sample/resources.json');
 
 class ResourceList extends React.Component {
   constructor () {
@@ -13,6 +13,8 @@ class ResourceList extends React.Component {
     this.state = {
       resources: ResourceData
     }
+
+    // handler binds
     this.updateResourceList = this.updateResourceList.bind(this);
   }
 
@@ -23,19 +25,18 @@ class ResourceList extends React.Component {
   }
 
   render() {
-    const resources = this.state.resources;
-    const resourcesList = resources.map((resource, index) =>
-      <Resource
-        key={resource.resource.id}
-        resource={resource.resource}
-      />
-    )
-
     return(
       <div className="resources">
-        <ResourceFilter resourceCount={resources.length}/>
+        <ResourceFilter
+          resourceCount={this.state.resources.length}
+          updateResourceList={this.updateResourceList}/>
         <div className="resources-grid">
-          {resourcesList}
+          {this.state.resources.map((resource, index) =>
+            <Resource
+              key={resource.resource.id}
+              resource={resource.resource}
+            />
+          )}
         </div>
       </div>
     )

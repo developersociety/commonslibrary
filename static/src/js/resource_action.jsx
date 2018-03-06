@@ -15,6 +15,13 @@ export class ResourceAction extends React.Component {
     this.handleTryClick = this.handleTryClick.bind(this);
   }
 
+  componentWillReceiveProps(props) {
+    this.setState({
+      likes: props.tries,
+      tries: props.likes,
+    })
+  }
+
   handleLikeClick() {
     this.setState(prevState => ({
       likes: !prevState.hasLiked ? prevState.likes + 1: prevState.likes - 1,
