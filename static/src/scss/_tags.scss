@@ -9,6 +9,8 @@
     background: $color-background;
     color: #ffffff;
     margin: 0 0.25rem 0.25rem 0;
+    user-select: none;
+    cursor: pointer;
 
     &.active {
         background: #ffffff;

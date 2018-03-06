@@ -1,8 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import { Resource } from './resource';
-import { ResourceFilter } from './resource_filter';
+import { Search } from './search/search';
+
+import { Resource } from './resource/resource';
+import { ResourceFilter } from './resource/resource_filter';
 
 
 const ResourceData = require('./data_sample/resources.json');
@@ -27,6 +29,7 @@ class ResourceList extends React.Component {
   render() {
     return(
       <div className="resources">
+        <Search />
         <ResourceFilter
           resourceCount={this.state.resources.length}
           updateResourceList={this.updateResourceList}/>
