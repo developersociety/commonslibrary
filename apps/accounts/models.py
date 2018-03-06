@@ -28,9 +28,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         )
     )
     date_joined = models.DateTimeField('date joined', default=timezone.now)
-    photo = ImageField(
-        'Profile picture', upload_to='uploads/accounts/images/%Y/%m/%d', blank=True
-    )
+    photo = ImageField('Profile picture', upload_to='uploads/accounts/images/%Y/%m/%d', blank=True)
     phone = models.CharField(max_length=32, blank=True)
     address = RichTextField('Work address', blank=True)
 
