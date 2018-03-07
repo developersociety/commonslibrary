@@ -15,6 +15,7 @@ export class ResourceFilter extends React.Component {
       order: prevState.activeFilter == filter ? !prevState.reverse : false
     }));
 
+    // fake API call
     fetch('http://127.0.0.1:8080/static/src/js/data_sample/' + filter + '.json')
       .then(response => response.json())
       .then(newData => this.props.updateResourceList(newData));
