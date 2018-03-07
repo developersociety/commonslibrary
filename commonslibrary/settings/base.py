@@ -126,10 +126,11 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 
 WEBPACK_LOADER = {
     'DEFAULT': {
-        'CACHE': not DEBUG, 'BUNDLE_DIR_NAME': 'bundles/', 'STATS_FILE':
-            os.path.join(BASE_DIR, 'webpack-stats.json'),
-        'IGNORE': ['.+\.hot-update.js', '.+\.map']
-    }
+        'CACHE': not DEBUG,
+        'BUNDLE_DIR_NAME': 'bundles/',
+        'STATS_FILE': os.path.join(BASE_DIR, 'webpack-stats.json'),
+        'IGNORE': [r'.+\.hot-update.js', r'.+\.map'],
+    },
 }
 
 # File uploads
