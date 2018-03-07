@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { ResourceFilterOption } from './resource_filter_option';
+
 export class ResourceFilter extends React.Component {
   constructor() {
     super();
@@ -7,6 +9,9 @@ export class ResourceFilter extends React.Component {
       activeFilter: 'date',
       reserve: false
     }
+
+    // handler binds
+    this.handleClick = this.handleClick.bind(this);
   }
 
   handleClick(filter, e) {
@@ -15,7 +20,7 @@ export class ResourceFilter extends React.Component {
       order: prevState.activeFilter == filter ? !prevState.reverse : false
     }));
 
-    // fake API call
+    // fake API call, replace with real one
     fetch('http://127.0.0.1:8080/static/src/js/data_sample/' + filter + '.json')
       .then(response => response.json())
       .then(newData => this.props.updateResourceList(newData));
@@ -31,14 +36,11 @@ export class ResourceFilter extends React.Component {
         <div className="resource-filter__controls">
           <p>Sort by</p>
           {sortOptions.map((option, index) =>
-            <span
+            <ResourceFilterOption
               key={index}
+              filter={option}
               className={'resource-filter__option ' + (active == option ? 'active' : '')}
-              onClick={(e) => this.handleClick(option, e)}
-              data='test data'
-              id={option}>
-              {option}
-            </span>
+              handleClick={this.handleClick}/>
           )}
         </div>
       </div>

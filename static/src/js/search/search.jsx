@@ -14,6 +14,7 @@ export class Search extends React.Component {
 
     // handler binds
     this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(event) {
@@ -24,10 +25,17 @@ export class Search extends React.Component {
     }
   }
 
+  handleSubmit(event) {
+    event.preventDefault();
+    let tags = this.searchTags.state.selectedOptions;
+    let groups = this.searchGroups.state.selectedOptions;
+    let people = this.searchPeople.state.selectedOptions;
+  }
+
   render() {
     return(
       <div className="search-bar">
-        <form action="." className="search-form">
+        <form onSubmit={this.handleSubmit} className="search-form">
           <input
             type="text"
             placeholder="Type here to search for resource"
@@ -42,15 +50,21 @@ export class Search extends React.Component {
         <div className="search-filter">
           <div className="search-filter__tags">
             <p className="search-filter__type">Tags</p>
-            <SearchOptionManager searchOptions={this.state.searchOptions.tags}/>
+            <SearchOptionManager
+              ref={(searchTags) => {this.searchTags = searchTags;}}
+              searchOptions={this.state.searchOptions.tags}/>
           </div>
           <div className="search-filter__groups">
             <p className="search-filter__type">Groups</p>
-            <SearchOptionManager searchOptions={this.state.searchOptions.groups}/>
+            <SearchOptionManager
+              ref={(searchGroups) => {this.searchGroups = searchGroups;}}
+              searchOptions={this.state.searchOptions.groups}/>
           </div>
           <div className="search-filter__people">
             <p className="search-filter__type">People</p>
-            <SearchOptionManager searchOptions={this.state.searchOptions.people}/>
+            <SearchOptionManager
+              ref={(searchPeople) => {this.searchPeople = searchPeople;}}
+              searchOptions={this.state.searchOptions.people}/>
           </div>
         </div>
       </div>
