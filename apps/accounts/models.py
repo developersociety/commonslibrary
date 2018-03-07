@@ -1,8 +1,8 @@
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
+from django.contrib.postgres.fields import CIEmailField
 from django.db import models
 from django.utils import timezone
 
-from ckeditor.fields import RichTextField
 from sorl.thumbnail import ImageField
 
 from directory.models import Organisation
@@ -11,7 +11,7 @@ from .managers import UserManager
 
 
 class User(AbstractBaseUser, PermissionsMixin):
-    email = models.EmailField('email address', unique=True)
+    email = CIEmailField('email address', unique=True)
     first_name = models.CharField('first name', max_length=30)
     is_email_confirmed = models.BooleanField(default=False)
     first_name = models.CharField('first name', max_length=30)
@@ -32,8 +32,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     date_joined = models.DateTimeField('date joined', default=timezone.now)
     photo = ImageField('Profile picture', upload_to='uploads/accounts/images/%Y/%m/%d', blank=True)
     phone = models.CharField(max_length=32, blank=True)
-    address = RichTextField('Work address', blank=True)
     organisations = models.ManyToManyField(Organisation, null=True, blank=True)
+    address = models.TextField('Work address', blank=True)
 
     objects = UserManager()
 
