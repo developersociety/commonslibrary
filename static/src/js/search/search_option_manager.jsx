@@ -3,7 +3,7 @@ import React from 'react';
 import { SearchOption } from './search_option';
 
 
-export class SearchTags extends React.Component {
+export class SearchOptionManager extends React.Component {
   constructor() {
     super();
     this.state = {

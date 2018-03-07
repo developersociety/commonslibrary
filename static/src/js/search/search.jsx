@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { SearchTags } from './search_tags';
+import { SearchOptionManager } from './search_option_manager';
 
 const searchData = require('../data_sample/search.json');
 
@@ -42,9 +42,15 @@ export class Search extends React.Component {
         <div className="search-filter">
           <div className="search-filter__tags">
             <p className="search-filter__type">Tags</p>
-            <SearchTags searchOptions={this.state.searchOptions.tags}/>
-            {/*<SearchGroups searchOptions={this.state.searchOptions}/>
-            <SearchPeople searchOptions={this.state.searchOptions}/>*/}
+            <SearchOptionManager searchOptions={this.state.searchOptions.tags}/>
+          </div>
+          <div className="search-filter__groups">
+            <p className="search-filter__type">Groups</p>
+            <SearchOptionManager searchOptions={this.state.searchOptions.groups}/>
+          </div>
+          <div className="search-filter__people">
+            <p className="search-filter__type">People</p>
+            <SearchOptionManager searchOptions={this.state.searchOptions.people}/>
           </div>
         </div>
       </div>
