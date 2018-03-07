@@ -12,8 +12,12 @@ class Organisation(models.Model):
     description = RichTextField(blank=True)
     logo = models.ImageField(blank=True)
     email = models.EmailField(blank=True)
-    created_by = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='organisations_created')
-    updated_by = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='organisations_updated')
+    created_by = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='organisations_created'
+    )
+    updated_by = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='organisations_updated'
+    )
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

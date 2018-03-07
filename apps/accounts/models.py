@@ -32,7 +32,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     date_joined = models.DateTimeField('date joined', default=timezone.now)
     photo = ImageField('Profile picture', upload_to='uploads/accounts/images/%Y/%m/%d', blank=True)
     phone = models.CharField(max_length=32, blank=True)
-    organisations = models.ManyToManyField(Organisation, null=True, blank=True)
+    organisations = models.ManyToManyField(Organisation, blank=True)
     address = models.TextField('Work address', blank=True)
 
     objects = UserManager()
