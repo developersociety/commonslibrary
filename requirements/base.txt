@@ -1,5 +1,5 @@
 Django==1.11.10
-Pillow==4.1.1
+Pillow==4.3.0
 dj-database-url==0.4.1
 django-ckeditor==5.4.0
 olefile==0.45.1

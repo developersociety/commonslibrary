@@ -52,6 +52,7 @@ DEFAULT_APPS = [
 THIRD_PARTY_APPS = [
     'ckeditor',
     'raven.contrib.django.raven_compat',
+    'sorl.thumbnail',
     'webpack_loader',
 ]
 
@@ -240,11 +241,21 @@ LOGGING = {
             'level': 'DEBUG',
             'propagate': False,
         },
+        'sorl.thumbnail': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+            'propagate': False,
+        },
     },
 }
 
 # Sites framework
 SITE_ID = 1
+
+# Thumbnail generation
+THUMBNAIL_PREFIX = 'thumbs/'
+THUMBNAIL_PRESERVE_FORMAT = True
+THUMBNAIL_QUALITY = 100
 
 # Cloud storage
 CONTENTFILES_PREFIX = 'commonslibrary'
