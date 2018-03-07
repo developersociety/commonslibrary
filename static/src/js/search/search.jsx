@@ -59,19 +59,22 @@ export class Search extends React.Component {
             <p className="search-filter__type">Tags</p>
             <SearchOptionManager
               ref={(searchTags) => {this.searchTags = searchTags;}}
-              searchOptions={this.state.searchOptions.tags}/>
+              searchOptions={this.state.searchOptions.tags}
+              type="tags"/>
           </div>
           <div className="search-filter__groups">
             <p className="search-filter__type">Groups</p>
             <SearchOptionManager
               ref={(searchGroups) => {this.searchGroups = searchGroups;}}
-              searchOptions={this.state.searchOptions.groups}/>
+              searchOptions={this.state.searchOptions.groups}
+              type="groups"/>
           </div>
           <div className="search-filter__people">
             <p className="search-filter__type">People</p>
             <SearchOptionManager
               ref={(searchPeople) => {this.searchPeople = searchPeople;}}
-              searchOptions={this.state.searchOptions.people}/>
+              searchOptions={this.state.searchOptions.people}
+              type="people"/>
           </div>
         </div>
       </div>

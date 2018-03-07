@@ -14,14 +14,14 @@ export class SearchOptionManager extends React.Component {
     this.handleOptionSelection = this.handleOptionSelection.bind(this);
   }
 
-  handleOptionSelection(tag) {
+  handleOptionSelection(option) {
     let prevSelected = this.state.selectedOptions;
-    let index = prevSelected.indexOf(tag);
+    let index = prevSelected.indexOf(option);
 
-    // if not in state add else remove
+    // if not in state add, else remove
     if(index === -1) {
       this.setState(newState => {
-        newState.selectedOptions.push(tag)
+        newState.selectedOptions.push(option)
         return { selectedOptions: newState.selectedOptions }
       })
     } else {
@@ -33,7 +33,7 @@ export class SearchOptionManager extends React.Component {
   }
 
   render() {
-
+    console.log('starting render ' + this.props.type)
     return (
       <div className="tag-list">
         {this.state.selectedOptions.map(tag =>
@@ -46,8 +46,8 @@ export class SearchOptionManager extends React.Component {
 
         )}
         {this.props.searchOptions.map(tag => {
-          console.log(tag.option, this.state.selectedOptions)
           if (!this.state.selectedOptions.includes(tag.option)) {
+            console.log(tag.option, this.state.selectedOptions)
             return (
               <SearchOption
                 key={tag.option.id}

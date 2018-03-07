@@ -13,7 +13,6 @@ export class SearchOption extends React.Component {
 
   render() {
     let activeClass = this.props.active ? 'tag active' : 'tag'
-
     return (
       <div
         className={activeClass}
