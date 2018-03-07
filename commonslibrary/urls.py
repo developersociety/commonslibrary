@@ -6,12 +6,14 @@ from django.contrib import admin
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.http import HttpResponseServerError
 from django.template import TemplateDoesNotExist, loader
+from django.views.generic import TemplateView
 
 admin.site.site_title = 'Commons Library'
 admin.site.site_header = 'Commons Library'
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^test/', TemplateView.as_view(template_name='test.html')),
 ]
 
 # Make it easier to see a 404 page under debug

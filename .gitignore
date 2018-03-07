@@ -1,5 +1,9 @@
 /htdocs/media
 /htdocs/static
+/static/dist
+
+# Mac
+.DS_STORE
 
 # Python
 *.py[co]
@@ -18,3 +22,7 @@ static/css
 
 # Database
 *.dump
+
+# Webpack
+webpack-production-stats.json
+webpack-stats.json

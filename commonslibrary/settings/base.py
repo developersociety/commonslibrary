@@ -51,6 +51,7 @@ DEFAULT_APPS = [
 
 THIRD_PARTY_APPS = [
     'raven.contrib.django.raven_compat',
+    'webpack_loader',
 ]
 
 PROJECT_APPS = []
@@ -117,6 +118,16 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'htdocs/static')
 STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
 
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
+
+# Webpack
+
+WEBPACK_LOADER = {
+    'DEFAULT': {
+        'CACHE': not DEBUG, 'BUNDLE_DIR_NAME': 'bundles/', 'STATS_FILE':
+            os.path.join(BASE_DIR, 'webpack-stats.json'),
+        'IGNORE': ['.+\.hot-update.js', '.+\.map']
+    }
+}
 
 # File uploads
 # https://docs.djangoproject.com/en/1.11/ref/settings/#file-uploads
