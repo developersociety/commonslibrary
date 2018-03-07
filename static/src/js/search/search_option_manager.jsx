@@ -36,7 +36,7 @@ export class SearchOptionManager extends React.Component {
 
     return (
       <div className="tag-list">
-        {this.state.selectedOptions.map((tag, index) =>
+        {this.state.selectedOptions.map(tag =>
           <SearchOption
             key={tag.id}
             option={tag}
@@ -45,7 +45,8 @@ export class SearchOptionManager extends React.Component {
             handleOptionSelection={this.handleOptionSelection} />
 
         )}
-        {this.props.searchOptions.map((tag, index) => {
+        {this.props.searchOptions.map(tag => {
+          console.log(tag.option, this.state.selectedOptions)
           if (!this.state.selectedOptions.includes(tag.option)) {
             return (
               <SearchOption
