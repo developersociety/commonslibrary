@@ -1,7 +1,7 @@
 from django.contrib.admin.sites import AdminSite
 from django.contrib.auth.models import Permission
 from django.contrib.contenttypes.models import ContentType
-from django.test import TestCase, RequestFactory
+from django.test import RequestFactory, TestCase
 
 from accounts.admin import UserAdmin
 from accounts.models import User
@@ -30,9 +30,7 @@ class UserAdminTest(TestCase):
     def test_permissions_with_organisation(self):
         self.user_admin.add_remove_permissions(self.user_with_org)
         content_type = ContentType.objects.get_for_model(User)
-        permission = Permission.objects.get(
-            content_type=content_type, codename='change_user'
-        )
+        permission = Permission.objects.get(content_type=content_type, codename='change_user')
         permission_string = '{app_label}.{permission}'.format(
             app_label=permission.content_type.app_label,
             permission=permission.codename,
