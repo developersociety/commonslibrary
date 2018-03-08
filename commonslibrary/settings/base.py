@@ -57,6 +57,7 @@ THIRD_PARTY_APPS = [
 ]
 
 PROJECT_APPS = [
+    'directory.apps.DirectoryConfig',
     'accounts.apps.AccountsConfig',
 ]
 
