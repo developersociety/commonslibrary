@@ -39,7 +39,7 @@ class UserAdmin(BaseUserAdmin):
         """ Only display users which belongs for the requested user. """
         qs = super().get_queryset(request)
         if not request.user.is_superuser and request.user.organisations.exists():
-            qs = qs.filter(organisations__in=request.user.organisations.all())
+            qs = qs.filter(organisations__in=request.user.organisations.all()).distinct()
         return qs
 
     def add_remove_permissions(self, obj):

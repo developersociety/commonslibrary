@@ -11,6 +11,8 @@ from django.contrib.staticfiles.management.commands.runserver import (
 class Command(StaticfilesRunserverCommand):
 
     def inner_run(self, *args, **options):
+        os.environ['WEBPACK_PORT'] = '3000'
+
         self.start_webpack()
 
         return super().inner_run(*args, **options)
