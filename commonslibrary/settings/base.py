@@ -53,6 +53,8 @@ THIRD_PARTY_APPS = [
     'ckeditor',
     'crispy_forms',
     'raven.contrib.django.raven_compat',
+    'sorl.thumbnail',
+    'webpack_loader',
 ]
 
 PROJECT_APPS = [
@@ -122,6 +124,17 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'htdocs/static')
 STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
 
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
+
+# Webpack
+
+WEBPACK_LOADER = {
+    'DEFAULT': {
+        'CACHE': not DEBUG,
+        'BUNDLE_DIR_NAME': 'bundles/',
+        'STATS_FILE': os.path.join(BASE_DIR, 'webpack-stats.json'),
+        'IGNORE': [r'.+\.hot-update.js', r'.+\.map'],
+    },
+}
 
 # File uploads
 # https://docs.djangoproject.com/en/1.11/ref/settings/#file-uploads
@@ -230,11 +243,21 @@ LOGGING = {
             'level': 'DEBUG',
             'propagate': False,
         },
+        'sorl.thumbnail': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+            'propagate': False,
+        },
     },
 }
 
 # Sites framework
 SITE_ID = 1
+
+# Thumbnail generation
+THUMBNAIL_PREFIX = 'thumbs/'
+THUMBNAIL_PRESERVE_FORMAT = True
+THUMBNAIL_QUALITY = 100
 
 # Cloud storage
 CONTENTFILES_PREFIX = 'commonslibrary'

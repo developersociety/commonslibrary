@@ -18,7 +18,7 @@ class UserCreationForm(BaseUserCreationForm):
 class UserRegistrationForm(forms.ModelForm):
 
     error_messages = {
-        'password_mismatch': "The two password fields didn't match."
+        'password_mismatch': "The two password fields didn't match.",
     }
     password = forms.CharField(
         widget=forms.PasswordInput,

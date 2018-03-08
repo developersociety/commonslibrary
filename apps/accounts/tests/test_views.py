@@ -30,4 +30,5 @@ class UserRegistrationTestView(WebTest):
         self.assertEqual(response.status_code, 302)
         self.assertTrue(User.objects.filter(email=email).exists())
         self.assertFalse(user.is_active)
+        # Organisation is always required.
         self.assertTrue(user.organisations.count() > 0)

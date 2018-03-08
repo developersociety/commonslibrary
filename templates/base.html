@@ -1,46 +1,24 @@
+{% load render_bundle from webpack_loader %}
+
 <!DOCTYPE html>
 
 {% load staticfiles %}
 
 <html lang="en">
   <head>
+    {% render_bundle 'main' 'css' %}
     <title>{% block title %}{{ request.site.name }}{% endblock %}</title>
-    <link href="{% static 'css/styles.css' %}" rel="stylesheet">
 
     {% if BROWSERSYNC_URL %}
       <script src="{{ BROWSERSYNC_URL }}" async></script>
     {% endif %}
   </head>
   <body>
-    {% include 'includes/sprite.html' %}
+    <div id="react-app"></div>
 
-    <header class="page-header">
-      {% include 'includes/nav.html' %}
-    </header>
+    {% block content %}
+    {% endblock content %}
 
-    <main>
-      <div class="container">
-        {% block content %}
-        {% endblock content %}
-      </div>
-    </main>
-
-    <footer class="page-footer inverted">
-      <div class="container">
-        <div class="row">
-          <div class="page-footer__legal column-8">
-            <div class="footer__brand">
-              <a href="/" class="page__logo"></a>
-            </div>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus, ullam quae minima?</p>
-            <p class="footer__copyright">&copy; {% now 'Y' %}. Website by <a href="https://www.dev.ngo">The Developer Society</a></p>
-          </div>
-
-          <div class="page-footer__social column-4">
-            {% include 'includes/social.html' %}
-          </div>
-        </div>
-      </div>
-    </footer>
+    {% render_bundle 'main' 'js' %}
   </body>
 </html>
