@@ -29,6 +29,10 @@ export class Search extends React.Component {
             searchOptions: newData
           })
         })
+    } else {
+      this.setState({
+        searchOptions: searchData
+      })
     }
   }
 
