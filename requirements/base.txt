@@ -1,11 +1,13 @@
-Django==1.11.10
-pytz==2018.3
-pylibmc==1.5.2
-psycopg2==2.7.3.2
-Pillow==4.1.1
-olefile==0.45.1
+Django==1.11.11
+Pillow==4.3.0
 dj-database-url==0.4.1
+django-ckeditor==5.4.0
+olefile==0.45.1
+psycopg2==2.7.3.2
+pylibmc==1.5.2
+pytz==2018.3
 raven==6.5.0
+sorl-thumbnail==12.4.1
 
 # Storage
 django-storages==1.6.5

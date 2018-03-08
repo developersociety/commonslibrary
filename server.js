@@ -3,8 +3,10 @@
 const Webpack = require('webpack');
 const WebpackDevServer = require('webpack-dev-server');
 const webpackConfig = require('./webpack.config');
-
 const compiler = Webpack(webpackConfig);
+
+const webpackPort = parseInt(process.env.WEBPACK_PORT || 3000);
+
 
 const server = new WebpackDevServer(compiler, {
   inline: true,
@@ -15,6 +17,6 @@ const server = new WebpackDevServer(compiler, {
   }
 });
 
-server.listen(8080, '127.0.0.1', () => {
-  console.log('Starting server on 127.0.0.1:8080');
+server.listen(webpackPort, '127.0.0.1', () => {
+  console.log('Starting server on 127.0.0.1:' + webpackPort);
 });

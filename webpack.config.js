@@ -3,11 +3,13 @@ const webpack = require('webpack');
 const BundleTracker = require('webpack-bundle-tracker');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
+const webpackPort = parseInt(process.env.WEBPACK_PORT || 3000);
+
 module.exports = {
   context: __dirname,
 
   entry: [
-    'webpack-dev-server/client?http://127.0.0.1:8080/',
+    'webpack-dev-server/client?http://127.0.0.1:' + webpackPort + '/',
     './static/src/js/index',
     './static/src/scss/styles.scss'
   ],
@@ -15,7 +17,7 @@ module.exports = {
   output: {
     path: path.resolve('./static/bundles/'),
     filename: "[name].js",
-    publicPath: 'http://127.0.0.1:8080/static/bundles/'
+    publicPath: 'http://127.0.0.1:' + webpackPort + '/static/bundles/'
   },
 
   plugins: [

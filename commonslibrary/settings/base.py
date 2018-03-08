@@ -50,11 +50,16 @@ DEFAULT_APPS = [
 ]
 
 THIRD_PARTY_APPS = [
+    'ckeditor',
     'raven.contrib.django.raven_compat',
+    'sorl.thumbnail',
     'webpack_loader',
 ]
 
-PROJECT_APPS = []
+PROJECT_APPS = [
+    'directory.apps.DirectoryConfig',
+    'accounts.apps.AccountsConfig',
+]
 
 INSTALLED_APPS = DEFAULT_APPS + THIRD_PARTY_APPS + PROJECT_APPS
 
@@ -123,10 +128,11 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 
 WEBPACK_LOADER = {
     'DEFAULT': {
-        'CACHE': not DEBUG, 'BUNDLE_DIR_NAME': 'bundles/', 'STATS_FILE':
-            os.path.join(BASE_DIR, 'webpack-stats.json'),
-        'IGNORE': ['.+\.hot-update.js', '.+\.map']
-    }
+        'CACHE': not DEBUG,
+        'BUNDLE_DIR_NAME': 'bundles/',
+        'STATS_FILE': os.path.join(BASE_DIR, 'webpack-stats.json'),
+        'IGNORE': [r'.+\.hot-update.js', r'.+\.map'],
+    },
 }
 
 # File uploads
@@ -236,11 +242,21 @@ LOGGING = {
             'level': 'DEBUG',
             'propagate': False,
         },
+        'sorl.thumbnail': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+            'propagate': False,
+        },
     },
 }
 
 # Sites framework
 SITE_ID = 1
+
+# Thumbnail generation
+THUMBNAIL_PREFIX = 'thumbs/'
+THUMBNAIL_PRESERVE_FORMAT = True
+THUMBNAIL_QUALITY = 100
 
 # Cloud storage
 CONTENTFILES_PREFIX = 'commonslibrary'
@@ -248,3 +264,18 @@ CONTENTFILES_SSL = True
 
 # Improved cookie security
 CSRF_COOKIE_HTTPONLY = True
+
+AUTH_USER_MODEL = 'accounts.User'
+
+# yapf: disable
+CKEDITOR_CONFIGS = {
+    'default': {
+        'skin': 'moono-lisa',
+        'toolbar_Basic': [['Source', '-', 'Bold', 'Italic']],
+        'toolbar': [{
+            'name': 'basicstyles',
+            'items': ['Bold', 'Italic', 'Underline', 'Strike', 'Image', 'Link'],
+        }],
+    }
+}
+# yapf: enable
