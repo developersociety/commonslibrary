@@ -12,6 +12,7 @@ admin.site.site_header = 'Commons Library'
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^accounts/', include('accounts.urls', namespace='accounts')),
 ]
 
 # Make it easier to see a 404 page under debug

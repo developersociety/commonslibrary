@@ -51,6 +51,7 @@ DEFAULT_APPS = [
 
 THIRD_PARTY_APPS = [
     'ckeditor',
+    'crispy_forms',
     'raven.contrib.django.raven_compat',
 ]
 
