@@ -9,7 +9,8 @@ export class Search extends React.Component {
   constructor () {
     super()
     this.state = {
-      searchOptions: searchData
+      searchOptions: searchData,
+      searchQuery: ''
     }
 
     // handler binds
@@ -19,6 +20,10 @@ export class Search extends React.Component {
 
   handleChange(event) {
     let query = event.target.value;
+
+    this.setState({
+      searchQuery: query
+    });
 
     if (query.length > 2) {
       // fake API call, replace with real one
@@ -41,8 +46,9 @@ export class Search extends React.Component {
     let tags = this.searchTags.state.selectedOptions;
     let groups = this.searchGroups.state.selectedOptions;
     let people = this.searchPeople.state.selectedOptions;
+    let query = this.state.searchQuery
 
-    console.log(tags, groups, people)
+    console.log(tags, groups, people, query)
   }
 
   render() {
