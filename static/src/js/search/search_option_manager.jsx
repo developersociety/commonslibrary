@@ -25,8 +25,6 @@ export class SearchOptionManager extends React.Component {
     return inList;
   }
 
-  returnAvailableOptions
-
   handleOptionSelection(option) {
     let prevSelected = this.state.selectedOptions;
     let index = prevSelected.indexOf(option);
