@@ -11,33 +11,38 @@ export class SearchOptionManager extends React.Component {
     }
 
     // handler binds
-    this.inSelectedOptions = this.inSelectedOptions.bind(this);
+    this.checkSelected = this.checkSelected.bind(this);
     this.handleOptionSelection = this.handleOptionSelection.bind(this);
   }
 
-  inSelectedOptions(option) {
-    let inList = false
-    this.state.selectedOptions.map(selectedOption => {
+  checkSelected(option) {
+    let inSelected = false
+    let inSelectedIndex = -1
+    this.state.selectedOptions.map((selectedOption, index) => {
       if (JSON.stringify(selectedOption) === JSON.stringify(option)) {
-        inList = true;
+        inSelected = true;
+        inSelectedIndex = index;
       }
     })
-    return inList;
+    return {
+      selected: inSelected,
+      index: inSelectedIndex
+    }
   }
 
   handleOptionSelection(option) {
     let prevSelected = this.state.selectedOptions;
-    let index = prevSelected.indexOf(option);
+    let checkSelected = this.checkSelected(option);
 
     // if not in state add, else remove
-    if(index === -1) {
+    if(!checkSelected.selected) {
       this.setState(newState => {
         newState.selectedOptions.push(option)
         return { selectedOptions: newState.selectedOptions }
       })
     } else {
       this.setState(newState => {
-        newState.selectedOptions.splice(index, 1)
+        newState.selectedOptions.splice(checkSelected.index, 1)
         return { selectedOptions: newState.selectedOptions }
       })
     }
@@ -46,7 +51,7 @@ export class SearchOptionManager extends React.Component {
   render() {
     let searchOptions = []
     this.props.searchOptions.map(tag => {
-      if (!this.inSelectedOptions(tag.option)) {
+      if (!this.checkSelected(tag.option).selected) {
         searchOptions.push(tag)
       }
     })

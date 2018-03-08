@@ -41,6 +41,8 @@ export class Search extends React.Component {
     let tags = this.searchTags.state.selectedOptions;
     let groups = this.searchGroups.state.selectedOptions;
     let people = this.searchPeople.state.selectedOptions;
+
+    console.log(tags, groups, people)
   }
 
   render() {
