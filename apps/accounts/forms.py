@@ -1,6 +1,8 @@
 from django import forms
 from django.contrib.auth import password_validation
-from django.contrib.auth.forms import UserCreationForm as BaseUserCreationForm
+from django.contrib.auth.forms import (
+    AuthenticationForm as BaseAuthenticatonForm, UserCreationForm as BaseUserCreationForm
+)
 
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
@@ -67,3 +69,11 @@ class UserRegistrationForm(forms.ModelForm):
                 )
         password_validation.validate_password(confirm_password)
         return confirm_password
+
+
+class LoginForm(BaseAuthenticatonForm):
+
+    def __init__(self, request=None, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.add_input(Submit('submit', 'Submit'))
