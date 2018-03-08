@@ -11,8 +11,21 @@ export class SearchOptionManager extends React.Component {
     }
 
     // handler binds
+    this.inSelectedOptions = this.inSelectedOptions.bind(this);
     this.handleOptionSelection = this.handleOptionSelection.bind(this);
   }
+
+  inSelectedOptions(option) {
+    let inList = false
+    this.state.selectedOptions.map(selectedOption => {
+      if (JSON.stringify(selectedOption) === JSON.stringify(option)) {
+        inList = true;
+      }
+    })
+    return inList;
+  }
+
+  returnAvailableOptions
 
   handleOptionSelection(option) {
     let prevSelected = this.state.selectedOptions;
@@ -33,7 +46,13 @@ export class SearchOptionManager extends React.Component {
   }
 
   render() {
-    console.log('starting render ' + this.props.type)
+    let searchOptions = []
+    this.props.searchOptions.map(tag => {
+      if (!this.inSelectedOptions(tag.option)) {
+        searchOptions.push(tag)
+      }
+    })
+
     return (
       <div className="tag-list">
         {this.state.selectedOptions.map(tag =>
@@ -45,17 +64,12 @@ export class SearchOptionManager extends React.Component {
             handleOptionSelection={this.handleOptionSelection} />
 
         )}
-        {this.props.searchOptions.map(tag => {
-          if (!this.state.selectedOptions.includes(tag.option)) {
-            console.log(tag.option, this.state.selectedOptions)
-            return (
-              <SearchOption
-                key={tag.option.id}
-                option={tag.option}
-                handleOptionSelection={this.handleOptionSelection} />
-            )
-          }
-        })}
+        {searchOptions.map(tag =>
+            <SearchOption
+              key={tag.option.id}
+              option={tag.option}
+              handleOptionSelection={this.handleOptionSelection} />
+        )}
       </div>
     )
   }
