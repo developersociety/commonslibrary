@@ -12,6 +12,8 @@
     {% if BROWSERSYNC_URL %}
       <script src="{{ BROWSERSYNC_URL }}" async></script>
     {% endif %}
+    {% block extra_head %}
+    {% endblock extra_head %}
   </head>
   <body>
     {% include 'includes/icon_sprite.html' %}
@@ -23,7 +25,6 @@
     {% endblock main_content %}
 
     <div id="react-app"></div>
-    {% render_bundle 'main' 'js' %}
 
     <footer class="page-footer">
       <h4>Commons library</h4>
@@ -40,5 +41,8 @@
       </p>
     </footer>
 
+    {% block extra_scripts %}
+      {% render_bundle 'main' 'js' %}
+    {% endblock extra_scripts %}
   </body>
 </html>

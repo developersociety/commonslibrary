@@ -42,7 +42,7 @@ $color-text: #4A4A4A !default;
 $color-background: #000000 !default;
 $color-line: #E5E5E5 !default;
 
-$color-accent: #50E3C2 !default;
+$color-accent: var(--page-brand, #50E3C2) !default;
 
 // Size
 $width-gap: 1.5rem;
