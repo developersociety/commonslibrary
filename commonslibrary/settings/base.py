@@ -51,6 +51,7 @@ DEFAULT_APPS = [
 
 THIRD_PARTY_APPS = [
     'ckeditor',
+    'mptt',
     'raven.contrib.django.raven_compat',
     'sorl.thumbnail',
     'webpack_loader',
