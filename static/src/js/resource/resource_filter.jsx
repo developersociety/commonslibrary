@@ -21,7 +21,7 @@ export class ResourceFilter extends React.Component {
     }));
 
     // fake API call, replace with real one
-    fetch('http://127.0.0.1:8080/static/src/js/data_sample/' + filter + '.json')
+    fetch('http://127.0.0.1:8001/static/src/js/data_sample/' + filter + '.json')
       .then(response => response.json())
       .then(newData => this.props.updateResourceList(newData));
   }

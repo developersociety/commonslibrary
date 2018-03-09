@@ -27,7 +27,7 @@ export class Search extends React.Component {
 
     if (query.length > 2) {
       // fake API call, replace with real one
-      fetch('http://127.0.0.1:8080/static/src/js/data_sample/new_search.json')
+      fetch('http://127.0.0.1:8001/static/src/js/data_sample/new_search.json')
         .then(response => response.json())
         .then(newData => {
           this.setState({
