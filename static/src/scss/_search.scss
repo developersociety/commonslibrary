@@ -74,29 +74,12 @@
 }
 
 .search-filter {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-gap: 2px;
+    @extend %grid-template;
+
     padding-top: 2px;
     font-family: $base-font-headline;
     font-size: 1.25rem;
     text-transform: uppercase;
     background: rgba($color-background, 0.05);
     min-width: 0;
-
-    @media all and (min-width: 541px) {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    @media all and (min-width: 801px) {
-        grid-template-columns: repeat(3, 1fr);
-    }
-
-    @media all and (min-width: 1261px) {
-        grid-template-columns: repeat(4, 1fr);
-    }
-
-    @media all and (min-width: 1521px) {
-        grid-template-columns: repeat(5, 1fr);
-    }
 }
