@@ -1,8 +1,24 @@
 .resources-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
     grid-gap: 2px;
     background: $color-line;
+    grid-template-columns: 1fr;
+
+    @media all and (min-width: 541px) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media all and (min-width: 801px) {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    @media all and (min-width: 1261px) {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    @media all and (min-width: 1521px) {
+        grid-template-columns: repeat(5, 1fr);
+    }
 }
 
 .resources-filter {
