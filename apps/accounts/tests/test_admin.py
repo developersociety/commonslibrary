@@ -17,8 +17,11 @@ class UserAdminTest(TestCase):
         self.superuser = UserFactory.create(is_superuser=True)
 
         self.organisation = OrganisationFactory.create()
+        self.organisation_1 = OrganisationFactory.create()
+
         self.user_with_org = UserFactory.create(is_staff=True)
         self.user_with_org.organisations.add(self.organisation)
+        self.user_with_org.organisations.add(self.organisation_1)
 
         self.user_with_org_1 = UserFactory.create(is_staff=True)
         self.user_with_org_1.organisations.add(self.organisation)
@@ -40,8 +43,8 @@ class UserAdminTest(TestCase):
         self.assertTrue(self.user_with_org.has_perm(permission_string))
 
     def test_permissions_delete_organisation(self):
-        self.user_with_org.organisations.remove(self.organisation)
-        self.user_admin.add_remove_permissions(self.user_with_org)
+        self.user_with_org_1.organisations.remove(self.organisation)
+        self.user_admin.add_remove_permissions(self.user_with_org_1)
 
         self.assertFalse(self.user_with_org.user_permissions.exists())
 
