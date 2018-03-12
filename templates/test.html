@@ -9,51 +9,6 @@
   </style>
 {% endblock extra_head %}
 
-{% block header_content %}
-  <header class="page-head">
-    <nav class="page-navigation">
-      <ul class="main-navigation">
-        <li class="main-navigation__item">
-          <a href="#">
-            Commons library
-          </a>
-        </li>
-        <li class="main-navigation__item active">
-          <a href="#">
-            <svg class="icon">
-              <use xlink:href="#explore"></use>
-            </svg>
-            Explore
-          </a>
-        </li>
-        <li class="main-navigation__item">
-          <a href="#">
-            <svg class="icon">
-              <use xlink:href="#directory"></use>
-            </svg>
-            Directory
-          </a>
-        </li>
-        <li class="main-navigation__item inverse">
-          <a href="#">
-            <svg class="icon">
-              <use xlink:href="#create"></use>
-            </svg>
-            Submit resource
-          </a>
-        </li>
-        <li class="main-navigation__account">
-          {% if request.user.is_authenticated %}
-            <a href="#">Logout</a>
-          {% else %}
-            <a href="#">Register</a>
-          {% endif %}
-        </li>
-      </ul>
-    </nav>
-  </header>
-{% endblock header_content %}
-
 {% block main_content %}
   <div class="featured-resources">
     <div class="resources-grid">

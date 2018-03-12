@@ -3,6 +3,9 @@
 {% load crispy_forms_tags %}
 
 
-{% block content %}
-  {% crispy form %}
-{% endblock content %}
+{% block main_content %}
+  <div class="form-holder">
+    <h2 class="form-title">Apply for account</h2>
+    {% crispy form %}
+  </div>
+{% endblock main_content %}
