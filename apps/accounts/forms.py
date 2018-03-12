@@ -10,11 +10,22 @@ from crispy_forms.layout import Submit
 from .models import User
 
 
-class UserCreationForm(BaseUserCreationForm):
+class AdminUserCreationForm(BaseUserCreationForm):
 
     class Meta:
         model = User
         fields = ('email',)
+
+
+class AdminUserChangeForm(BaseUserChangeForm):
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        user = self.request.user
+        if user.is_staff and not user.is_superuser:
+            # Sometimes is not there if it's set to readonly field in admin.py
+            if 'approved_organisations' in self.fields:
+                self.fields['approved_organisations'].queryset = user.approved_organisations.all()
 
 
 class UserRegistrationForm(forms.ModelForm):
@@ -38,6 +49,12 @@ class UserRegistrationForm(forms.ModelForm):
             'email', 'password', 'confirm_password', 'first_name', 'last_name',
             'chosen_organisations', 'photo', 'phone', 'address'
         )
+        labels = {
+            'chosen_organisations': 'Groups',
+        }
+        help_texts = {
+            'chosen_organisations': '',
+        }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -69,14 +86,3 @@ class UserRegistrationForm(forms.ModelForm):
                 )
         password_validation.validate_password(confirm_password)
         return confirm_password
-
-
-class UserChangeForm(BaseUserChangeForm):
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        user = self.request.user
-        if user.is_staff and not user.is_superuser:
-            # Sometimes is not there if it's set to readonly field in admin.py
-            if 'approved_organisations' in self.fields:
-                self.fields['approved_organisations'].queryset = user.approved_organisations.all()

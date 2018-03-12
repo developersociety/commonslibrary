@@ -21,7 +21,7 @@ class UserRegistrationTestView(WebTest):
         form['email'] = email
         form['password'] = 'test123'
         form['confirm_password'] = 'test123'
-        form['organisations'] = self.organisation.id
+        form['chosen_organisations'] = self.organisation.id
 
         response = form.submit()
 
@@ -31,4 +31,4 @@ class UserRegistrationTestView(WebTest):
         self.assertTrue(User.objects.filter(email=email).exists())
         self.assertFalse(user.is_active)
         # Organisation is always required.
-        self.assertTrue(user.organisations.count() > 0)
+        self.assertTrue(user.chosen_organisations.count() > 0)
