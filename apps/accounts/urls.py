@@ -26,7 +26,6 @@ urlpatterns = [
         ),
         name='password-reset',
     ),
-
     url(
         r'^reset/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
         views.PasswordResetConfirmView.as_view(
@@ -35,15 +34,11 @@ urlpatterns = [
         ),
         name='password-reset-confirm'
     ),
-
     url(
         r'^password-reset/done/$',
-        views.PasswordResetDoneView.as_view(
-            template_name='accounts/password_reset_done.html'
-        ),
+        views.PasswordResetDoneView.as_view(template_name='accounts/password_reset_done.html'),
         name='password-reset-done'
     ),
-
     url(
         r'^reset/done/$',
         views.PasswordResetCompleteView.as_view(
