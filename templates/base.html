@@ -12,9 +12,38 @@
     {% if BROWSERSYNC_URL %}
       <script src="{{ BROWSERSYNC_URL }}" async></script>
     {% endif %}
+    {% block extra_head %}
+    {% endblock extra_head %}
   </head>
   <body>
-    {% block content %}
-    {% endblock content %}
+    {% include 'includes/icon_sprite.html' %}
+
+    {% block header_content %}
+      {% include 'includes/header.html' %}
+    {% endblock header_content %}
+
+    <main class="main-content">
+      {% block main_content %}
+      {% endblock main_content %}
+    </main>
+
+    <footer class="page-footer">
+      <h4>Commons library</h4>
+      <nav class="page-navigation">
+        <ul class="footer-navigation">
+          <li><a href="#">Legal</a></li>
+          <li><a href="#">Privacy</a></li>
+          <li><a href="#">Terms</a></li>
+          <li><a href="#">Cookies</a></li>
+        </ul>
+      </nav>
+      <p>
+        <small>&copy; 2018 All rights reserved.</small>
+      </p>
+    </footer>
+
+    {% block extra_scripts %}
+      {% render_bundle 'main' 'js' %}
+    {% endblock extra_scripts %}
   </body>
 </html>

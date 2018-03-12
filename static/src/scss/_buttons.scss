@@ -1,0 +1,15 @@
+.button,
+.btn {
+    display: inline-block;
+    padding: $width-gap;
+    font-family: $base-font-headline;
+    text-transform: uppercase;
+    border: none;
+    background: $color-accent-fixed;
+    font-size: 1.25rem;
+    cursor: pointer;
+
+    &:hover {
+        background: darken($color-accent-fixed, 5%);
+    }
+}

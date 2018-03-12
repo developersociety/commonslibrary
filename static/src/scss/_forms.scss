@@ -1,0 +1,64 @@
+.main-content form {
+    width: 100%;
+    max-width: 680px;
+    margin: auto;
+
+    input:not([type=checkbox]):not([type=radio]):not([type=submit]):not([type=file]),
+    textarea,
+    select {
+        width: 100%;
+        padding: $width-gap;
+        border: 3px solid $color-line;
+        font-family: inherit;
+        font-size: 1.25em;
+    }
+
+    label {
+        @extend %flex-row;
+
+        width: 100%;
+        justify-content: space-between;
+        align-items: baseline;
+        margin-bottom: $width-gap/2;
+        font-size: 1.25em;
+        font-family: $base-font-headline;
+        text-transform: uppercase;
+    }
+
+    input[type=button],
+    button {
+        @extend .button;
+    }
+}
+
+.form-holder {
+    width: 100%;
+    max-width: 680px;
+    margin: auto;
+}
+
+.form-title {
+    padding-bottom: $width-gap;
+    border-bottom: 3px solid $color-line;
+    margin-bottom: $width-gap;
+}
+
+.required-label {
+    margin-left: $width-gap;
+    font-size: 0.675em;
+    color: $color-accent;
+}
+
+.control-group {
+
+    + .control-group {
+        margin-top: $width-gap;
+    }
+}
+
+.form-actions {
+    @extend %flex-row;
+
+    margin-top: $width-gap;
+    justify-content: flex-end;
+}
