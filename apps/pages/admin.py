@@ -28,14 +28,10 @@ class PageAdmin(admin.ModelAdmin):
     date_hierarchy = 'created_at'
     fieldsets = [
         ('Page', {
-            'fields': (
-                'title', 'url', 'category', 'author',
-            ),
+            'fields': ('title', 'url', 'category', 'author'),
         }),
         ('Content', {
-            'fields': (
-                'content',
-            ),
+            'fields': ('content'),
         }),
         ('Meta', {
             'classes': ('collapse',),
