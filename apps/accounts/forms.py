@@ -1,6 +1,8 @@
 from django import forms
 from django.contrib.auth import password_validation
-from django.contrib.auth.forms import UserCreationForm as BaseUserCreationForm
+from django.contrib.auth.forms import (
+    UserChangeForm as BaseUserChangeForm, UserCreationForm as BaseUserCreationForm
+)
 
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
@@ -67,3 +69,14 @@ class UserRegistrationForm(forms.ModelForm):
                 )
         password_validation.validate_password(confirm_password)
         return confirm_password
+
+
+class UserChangeForm(BaseUserChangeForm):
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        user = self.request.user
+        if user.is_staff and not user.is_superuser:
+            # Sometimes is not there if it's set to readonly field in admin.py
+            if 'approved_organisations' in self.fields:
+                self.fields['approved_organisations'].queryset = user.approved_organisations.all()
