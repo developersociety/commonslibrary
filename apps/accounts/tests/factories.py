@@ -19,4 +19,9 @@ class UserFactory(factory.django.DjangoModelFactory):
             is_superuser = kwargs.pop('is_superuser')
             if is_superuser:
                 return manager.create_superuser(*args, **kwargs)
+
+        if 'is_staff' in kwargs:
+            is_staff = kwargs.pop('is_staff')
+            if is_staff:
+                return manager.create_staff(*args, **kwargs)
         return manager.create_user(*args, **kwargs)
