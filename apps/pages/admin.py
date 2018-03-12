@@ -21,7 +21,7 @@ class CategoryAdmin(DjangoMpttAdmin, MPTTModelAdmin):
 
 @admin.register(Page)
 class PageAdmin(admin.ModelAdmin):
-    list_display = ('title', 'author', 'category', 'created_by', 'created_at',)
+    list_display = ('title', 'author', 'category', 'url', 'created_by', 'created_at',)
     list_filter = ('category',)
     readonly_fields = ('id', 'created_by', 'updated_by',)
     search_fields = ['title', 'content', 'author']

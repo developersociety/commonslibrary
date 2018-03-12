@@ -76,6 +76,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sites.middleware.CurrentSiteMiddleware',
+    'pages.middleware.PageFallbackMiddleware',
 ]
 
 ROOT_URLCONF = 'commonslibrary.urls'

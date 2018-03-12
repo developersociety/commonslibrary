@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.db import models
+from django.core.urlresolvers import reverse
 
 from ckeditor.fields import RichTextField
 from mptt.models import MPTTModel, TreeForeignKey
@@ -48,3 +49,6 @@ class Page(models.Model):
 
     def __str__(self):
         return "{url} -- {title}".format(url=self.url, title=self.title)
+
+    def get_absolute_url(self):
+        return reverse('pages:page-detail', kwargs={'url': self.url.lstrip('/')})
