@@ -31,7 +31,7 @@ class PageAdmin(admin.ModelAdmin):
             'fields': ('title', 'url', 'category', 'author',),
         }),
         ('Content', {
-            'fields': ('content'),
+            'fields': ('content',),
         }),
         ('Meta', {
             'classes': ('collapse',),
