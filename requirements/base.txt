@@ -2,6 +2,7 @@ Django==1.11.11
 Pillow==4.3.0
 dj-database-url==0.4.1
 django-ckeditor==5.4.0
+django-crispy-forms==1.7.1
 django-mptt==0.9.0
 olefile==0.45.1
 psycopg2==2.7.3.2

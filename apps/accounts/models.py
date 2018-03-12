@@ -23,7 +23,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     )
     is_active = models.BooleanField(
         'active',
-        default=True,
+        default=False,
         help_text=(
             'Designates whether this user should be treated as '
             'active. Unselect this instead of deleting accounts.'
@@ -31,7 +31,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     )
     date_joined = models.DateTimeField('date joined', default=timezone.now)
     photo = ImageField('Profile picture', upload_to='uploads/accounts/images/%Y/%m/%d', blank=True)
-    phone = models.CharField(max_length=32, blank=True)
+    phone = models.CharField('Phone Number', max_length=32, blank=True)
     chosen_organisations = models.ManyToManyField(
         Organisation, blank=True, help_text='Organisations chosen on the registration.'
     )

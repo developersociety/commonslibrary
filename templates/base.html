@@ -15,6 +15,10 @@
   </head>
   <body>
     <div id="react-app"></div>
+
+    {% block content %}
+    {% endblock content %}
+
     {% render_bundle 'main' 'js' %}
   </body>
 </html>
