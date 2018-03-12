@@ -13,15 +13,14 @@ module.exports = {
 
   output: {
     path: path.resolve('./static/dist/'),
-    filename: "[name].js",
-    publicPath: '../'
+    filename: "[name]-[hash].js"
   },
 
   plugins: [
     new BundleTracker({filename: './webpack-production-stats.json'}),
     new webpack.optimize.UglifyJsPlugin(),
     new ExtractTextPlugin({
-      filename: 'css/[name].css',
+      filename: '[name]-[hash].css',
       allChunks: true,
     })
   ],
@@ -52,7 +51,7 @@ module.exports = {
         test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/,
         loader: 'file-loader',
         options: {
-          name: 'assets/[name].[ext]'
+          name: 'assets/[name]-[hash].[ext]'
         }
       }
     ]
