@@ -21,7 +21,10 @@ export class Resource extends React.Component {
         <div className="resource-summary">{this.props.resource.summary}</div>
         <footer className="resource-footer">
           <div className="resource-user">
-            <div className="resource-user__org">{this.props.resource.group}</div>
+            <div
+                className="resource-user__org"
+                style={{background: 'url(' + this.props.resource.group + ') left center/contain no-repeat'}}>
+            </div>
             <p className="resource-user__name">{this.props.resource.user}</p>
           </div>
           <ResourceAction

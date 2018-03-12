@@ -13,6 +13,7 @@ admin.site.site_header = 'Commons Library'
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^group/', TemplateView.as_view(template_name='group.html')),
     url(r'^test/', TemplateView.as_view(template_name='test.html')),
 ]
 
