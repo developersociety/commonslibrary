@@ -12,9 +12,37 @@
     {% if BROWSERSYNC_URL %}
       <script src="{{ BROWSERSYNC_URL }}" async></script>
     {% endif %}
+    {% block extra_head %}
+    {% endblock extra_head %}
   </head>
   <body>
+    {% include 'includes/icon_sprite.html' %}
+
+    {% block header_content %}
+    {% endblock header_content %}
+
+    {% block main_content %}
+    {% endblock main_content %}
+
     <div id="react-app"></div>
-    {% render_bundle 'main' 'js' %}
+
+    <footer class="page-footer">
+      <h4>Commons library</h4>
+      <nav class="page-navigation">
+        <ul class="footer-navigation">
+          <li><a href="#">Legal</a></li>
+          <li><a href="#">Privacy</a></li>
+          <li><a href="#">Terms</a></li>
+          <li><a href="#">Cookies</a></li>
+        </ul>
+      </nav>
+      <p>
+        <small>&copy; 2018 All rights reserved.</small>
+      </p>
+    </footer>
+
+    {% block extra_scripts %}
+      {% render_bundle 'main' 'js' %}
+    {% endblock extra_scripts %}
   </body>
 </html>
