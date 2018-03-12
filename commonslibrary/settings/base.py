@@ -52,6 +52,7 @@ DEFAULT_APPS = [
 THIRD_PARTY_APPS = [
     'ckeditor',
     'crispy_forms',
+    'django_mptt_admin',
     'mptt',
     'raven.contrib.django.raven_compat',
     'sorl.thumbnail',
@@ -61,6 +62,7 @@ THIRD_PARTY_APPS = [
 PROJECT_APPS = [
     'directory.apps.DirectoryConfig',
     'accounts.apps.AccountsConfig',
+    'pages.apps.PagesConfig',
 ]
 
 INSTALLED_APPS = DEFAULT_APPS + THIRD_PARTY_APPS + PROJECT_APPS
@@ -276,7 +278,9 @@ CKEDITOR_CONFIGS = {
         'toolbar_Basic': [['Source', '-', 'Bold', 'Italic']],
         'toolbar': [{
             'name': 'basicstyles',
-            'items': ['Bold', 'Italic', 'Underline', 'Strike', 'Image', 'Link'],
+            'items': [
+                'Bold', 'Italic', 'Underline', 'Strike', 'Image', 'Link', 'Source',
+            ],
         }],
     }
 }
