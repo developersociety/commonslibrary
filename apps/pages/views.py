@@ -1,7 +1,7 @@
+from django.conf import settings
+from django.http import Http404, HttpResponsePermanentRedirect
 from django.shortcuts import get_object_or_404
 from django.views.generic.detail import DetailView
-from django.http import Http404, HttpResponsePermanentRedirect
-from django.conf import settings
 
 from .models import Page
 

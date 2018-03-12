@@ -1,6 +1,6 @@
 from django.conf import settings
-from django.db import models
 from django.core.urlresolvers import reverse
+from django.db import models
 
 from ckeditor.fields import RichTextField
 from mptt.models import MPTTModel, TreeForeignKey
