@@ -13,15 +13,14 @@ module.exports = {
 
   output: {
     path: path.resolve('./static/dist/'),
-    filename: "[name].js",
-    publicPath: '../'
+    filename: "[name].js"
   },
 
   plugins: [
     new BundleTracker({filename: './webpack-production-stats.json'}),
     new webpack.optimize.UglifyJsPlugin(),
     new ExtractTextPlugin({
-      filename: 'css/[name].css',
+      filename: '[name].css',
       allChunks: true,
     })
   ],

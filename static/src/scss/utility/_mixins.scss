@@ -1,0 +1,10 @@
+@mixin psuedo-overlay($psuedo, $psuedo-color, $psuedo-opacity) {
+    &:#{$psuedo} {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 0; right: 0; bottom: 0; left: 0;
+        background: $psuedo-color;
+        opacity: $psuedo-opacity;
+    }
+}
