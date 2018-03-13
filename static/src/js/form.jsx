@@ -60,7 +60,6 @@ class FileUploader extends React.Component {
 
     const fileStats = this.getFileStats();
     let fileClear = '';
-    let fileSelected = '';
 
     if (this.props.inputClear) {
       fileClear = <label for={this.props.inputClear.is} onChange={this.handleClear}></label>
