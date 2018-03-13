@@ -55,11 +55,13 @@ class UserRegistrationForm(forms.ModelForm):
         help_texts = {
             'chosen_organisations': '',
         }
+        widgets = {
+            'address': forms.TextInput(),
+        }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        self.fields['address'].widget = forms.TextInput()
         self.fields['chosen_organisations'].widget = forms.CheckboxSelectMultiple()
         self.fields['chosen_organisations'].required = True
 
