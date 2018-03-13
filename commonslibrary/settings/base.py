@@ -52,14 +52,17 @@ DEFAULT_APPS = [
 THIRD_PARTY_APPS = [
     'ckeditor',
     'crispy_forms',
+    'django_mptt_admin',
+    'mptt',
     'raven.contrib.django.raven_compat',
     'sorl.thumbnail',
     'webpack_loader',
 ]
 
 PROJECT_APPS = [
-    'directory.apps.DirectoryConfig',
     'accounts.apps.AccountsConfig',
+    'directory.apps.DirectoryConfig',
+    'tags.apps.TagsConfig',
 ]
 
 INSTALLED_APPS = DEFAULT_APPS + THIRD_PARTY_APPS + PROJECT_APPS
