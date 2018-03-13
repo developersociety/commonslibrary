@@ -37,7 +37,7 @@ class FileUploader extends React.Component {
       return (
         <div className="file-uploader__stats">
           <span className="file-name">{this.state.currentFile.name}, </span>
-          <span className="file-size">{this.state.currentFile.size}</span>
+          <span className="file-size">{Math.floor(this.state.currentFile.size/1024)}kb</span>
         </div>
       )
     } else if (this.props.inputFile !== null) {
