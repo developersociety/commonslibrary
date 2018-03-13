@@ -8,12 +8,12 @@ from .models import Category, Page
 
 @admin.register(Category)
 class CategoryAdmin(DjangoMpttAdmin, MPTTModelAdmin):
-    list_display = ('title', 'parent',)
+    list_display = ('title',)
     search_fields = ['title']
     prepopulated_fields = {'slug': ('title',)}
     fieldsets = [
         ('Category', {
-            'fields': ('title', 'slug', 'parent', 'description',),
+            'fields': ('title', 'slug', 'description',),
         }),
     ]
     mptt_level_indent = 25
