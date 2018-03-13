@@ -6,10 +6,15 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 module.exports = {
   context: __dirname,
 
-  entry: [
-    './static/src/js/index',
-    './static/src/scss/styles.scss'
-  ],
+  entry: {
+    main: [
+        './static/src/js/index',
+        './static/src/scss/styles.scss'
+    ],
+    form: [
+        './static/src/js/form',
+    ]
+  },
 
   output: {
     path: path.resolve('./static/dist/'),
