@@ -1,7 +1,5 @@
 .main-content form {
     width: 100%;
-    max-width: 680px;
-    margin: auto;
 
     input:not([type=checkbox]):not([type=radio]):not([type=submit]):not([type=file]),
     textarea,
@@ -11,6 +9,19 @@
         border: 3px solid $color-line;
         font-family: inherit;
         font-size: 1.25em;
+        outline: none;
+
+        &:focus {
+            border-color: $color-text;
+        }
+    }
+
+    .error {
+        input:not([type=checkbox]):not([type=radio]):not([type=submit]):not([type=file]),
+        textarea,
+        select {
+            border-color: $color-error;
+        }
     }
 
     label {
@@ -29,18 +40,31 @@
     button {
         @extend .button;
     }
+
+    .checkbox {
+        justify-content: flex-start;
+        align-items: flex-start;
+        cursor: pointer;
+        user-select: none;
+        font-family: $base-font;
+        text-transform: none;
+        font-size: 1.5rem;
+        margin-bottom: 0;
+    }
 }
 
 .form-holder {
     width: 100%;
-    max-width: 680px;
-    margin: auto;
+    max-width: 730px;
+    margin: $width-gap*2 auto;
+    padding: 0 $width-gap;
 }
 
 .form-title {
     padding-bottom: $width-gap;
     border-bottom: 3px solid $color-line;
     margin-bottom: $width-gap;
+    font-weight: 400;
 }
 
 .required-label {
@@ -56,9 +80,90 @@
     }
 }
 
+.file-group {
+    margin: $width-gap 0;
+    padding: $width-gap 0;
+    border-top: 3px solid $color-line;
+    border-bottom: 3px solid $color-line;
+}
+
+.file-uploader {
+    @extend %flex-row;
+
+    align-items: center;
+
+    label.button {
+        width: auto;
+        margin: 0 $width-gap 0 0;
+        flex-shrink: 0;
+    }
+}
+
+.file-size {
+    color: rgba($color-text, 0.6);
+}
+
 .form-actions {
     @extend %flex-row;
 
     margin-top: $width-gap;
     justify-content: flex-end;
+}
+
+.help-block {
+    margin-top: $width-gap/2;
+    font-size: 1.125rem;
+    color: rgba($color-text, 0.6);
+
+    .multiselect + & {
+        margin-top: $width-gap/4;
+    }
+}
+
+.error-block {
+    color: $color-error;
+}
+
+.checkbox-field {
+    @extend %flex-row;
+
+    input {
+        @extend .sr__text;
+    }
+
+    .icon {
+        display: none;
+        width: 1.5rem;
+        height: 1.5rem;
+        transform: scale(1.25);
+    }
+
+    input:checked + .checkbox .icon {
+        display: inline-block;
+    }
+}
+
+.checkbox-status {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 1.5rem;
+    height: 1.5rem;
+    margin: 0.25rem 0.5rem 0 0;
+    border: 3px solid $color-line;
+}
+
+.multiselect {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.multiselect-option {
+    width: 100%;
+    margin-bottom: $width-gap/4;
+
+    @media all and (min-width: 481px) {
+        width: 50%;
+    }
 }

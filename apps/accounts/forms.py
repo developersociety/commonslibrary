@@ -5,7 +5,7 @@ from django.contrib.auth.forms import (
 )
 
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Submit
+from crispy_forms.layout import ButtonHolder, Div, Field, Layout, Submit
 
 from .models import User
 
@@ -53,7 +53,7 @@ class UserRegistrationForm(forms.ModelForm):
             'chosen_organisations': 'Groups',
         }
         help_texts = {
-            'chosen_organisations': '',
+            'chosen_organisations': 'Check all of the options that apply to you',
         }
 
     def __init__(self, *args, **kwargs):
@@ -64,7 +64,24 @@ class UserRegistrationForm(forms.ModelForm):
         self.fields['chosen_organisations'].required = True
 
         self.helper = FormHelper()
-        self.helper.add_input(Submit('submit', 'Submit'))
+        self.helper.layout = Layout(
+            'email',
+            'password',
+            'confirm_password',
+            'first_name',
+            'last_name',
+            'chosen_organisations',
+            Div(
+                Field('photo', css_class="sr__input"),
+                Div(css_class='file-mount'),
+                css_class='file-group'
+            ),
+            'phone',
+            'address',
+            ButtonHolder(
+                Submit('submit', 'Apply for access', css_class='submit'), css_class='form-actions'
+            ),
+        )
 
     def save(self, commit=True):
         password = self.cleaned_data['confirm_password']

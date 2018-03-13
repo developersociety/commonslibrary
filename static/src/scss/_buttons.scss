@@ -12,4 +12,12 @@
     &:hover {
         background: darken($color-accent-fixed, 5%);
     }
+
+    &.input {
+        background: $color-line;
+
+        &:hover {
+            background: darken($color-line, 5%);
+        }
+    }
 }

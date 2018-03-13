@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 
+{% load render_bundle from webpack_loader %}
 {% load crispy_forms_tags %}
 
 
@@ -9,3 +10,7 @@
     {% crispy form %}
   </div>
 {% endblock main_content %}
+
+{% block extra_scripts %}
+  {% render_bundle 'form' %}
+{% endblock extra_scripts %}
