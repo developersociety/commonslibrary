@@ -1,14 +1,14 @@
 from django.conf import settings
-from django.core.urlresolvers import reverse
 from django.db import models
+from django.urls import get_script_prefix
+from django.utils.encoding import iri_to_uri
 
 from ckeditor.fields import RichTextField
-from mptt.models import MPTTModel
 
 from .validators import validate_page_url
 
 
-class Category(MPTTModel):
+class Category(models.Model):
     title = models.CharField(max_length=64, unique=True)
     slug = models.SlugField(max_length=64, unique=True)
     description = models.TextField(blank=True)
@@ -45,4 +45,4 @@ class Page(models.Model):
         return "{url} -- {title}".format(url=self.url, title=self.title)
 
     def get_absolute_url(self):
-        return reverse('pages:page-detail', kwargs={'url': self.url.lstrip('/')})
+        return iri_to_uri(get_script_prefix().rstrip('/') + self.url)
