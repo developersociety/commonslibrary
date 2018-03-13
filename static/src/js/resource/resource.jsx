@@ -22,7 +22,7 @@ export class Resource extends React.Component {
         <footer className="resource-footer">
           <div className="resource-user">
             <div
-                className="resource-user__org"
+                className="resource-user__group"
                 style={{background: 'url(' + this.props.resource.group + ') left center/contain no-repeat'}}>
             </div>
             <p className="resource-user__name">{this.props.resource.user}</p>

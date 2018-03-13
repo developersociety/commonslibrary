@@ -96,9 +96,9 @@
     margin: 0;
 }
 
-.resource-user__org {
-    width: 1.5rem;
-    height: 1.5rem;
+.resource-user__group {
+    @extend .group-logo;
+
     margin-bottom: 0.5rem;
 }
 
