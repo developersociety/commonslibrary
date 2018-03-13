@@ -1,9 +1,11 @@
+from django.conf import settings
 from django.urls import reverse
 
 import factory
 from django_webtest import WebTest
 
 from accounts.models import User
+from accounts.tests.factories import UserFactory
 from directory.tests.factories import OrganisationFactory
 
 
@@ -32,3 +34,18 @@ class UserRegistrationTestView(WebTest):
         self.assertFalse(user.is_active)
         # Organisation is always required.
         self.assertTrue(user.chosen_organisations.count() > 0)
+
+
+class UserLoginTestView(WebTest):
+
+    def setUp(self):
+        self.user = UserFactory.create(password='test123')
+
+    def test_user_login(self):
+        form = self.app.get(reverse('accounts:login')).form
+        form['username'] = self.user.email
+        form['password'] = 'test123'
+
+        response = form.submit()
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.url, settings.LOGIN_REDIRECT_URL)
