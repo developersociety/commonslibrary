@@ -2,12 +2,11 @@ from django.conf import settings
 from django.db import models
 
 from ckeditor.fields import RichTextField
-from mptt.models import MPTTModel
 
 from .validators import validate_page_url
 
 
-class Category(MPTTModel):
+class Category(models.Model):
     title = models.CharField(max_length=64, unique=True)
     slug = models.SlugField(max_length=64, unique=True)
     description = models.TextField(blank=True)
