@@ -6,7 +6,7 @@ from django.contrib.auth.forms import (
 )
 
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Submit
+from crispy_forms.layout import HTML, Layout, Submit
 
 from .models import User
 
@@ -97,3 +97,11 @@ class LoginForm(BaseAuthenticatonForm):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.add_input(Submit('submit', 'Submit'))
+        self.helper.layout = Layout(
+            'username', 'password',
+            HTML(
+                """
+                {% if next %}<input type="hidden" name="next" value="{{ next }}">{% endif %}
+                """
+            )
+        )
