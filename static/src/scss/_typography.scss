@@ -1,37 +1,33 @@
 body {
-    font-family: $base-font, sans-serif;
+    font-family: $base-font;
+    color: $color-text;
+    line-height: $base-line-height;
 }
 
-//// HEADLINES
-
-// loop through heading size variable and assign sizes
-@each $heading, $font-properties in $headline-scale {
-  #{$heading}, .#{$heading} {
-    font-size: nth($font-properties, 1);
-    line-height: nth($font-properties, 2);
-    margin-top: nth($font-properties, 3) * 1;
-    margin-bottom: nth($font-properties, 4) * 1;
-  }
+h1 {
+    font-size: 4.875em;
 }
 
-h1, .h1,
-h2, .h2,
-h3, .h3,
-h4, .h4,
-h5, .h5,
-h6, .h6 {
-    font-weight: normal;
+h2 {
+    font-size: 2.5em;
 }
 
-
-//// COMMON
-
-a {
-    color: inherit;
+h3 {
+    font-size: 1.6875em;
 }
 
-hr {
-    border: none;
-    height: $width-gap * 0.125;
-    background: $color-text;
+h4 {
+    font-size: 1.25em;
+    text-transform: uppercase;
+    font-family: $base-font-headline;
+}
+
+h5 {
+    font-size: 0.875em;
+    text-transform: uppercase;
+    font-family: $base-font-headline;
+}
+
+p {
+    margin: 1rem 0;
 }

@@ -1,0 +1,11 @@
+.group__summary {
+
+}
+
+.group__logo {
+    grid-column: auto / span 1;
+}
+
+.group__details {
+    grid-column: auto / -1
+}
