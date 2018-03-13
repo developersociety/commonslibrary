@@ -1,0 +1,36 @@
+{
+  "tags": [
+    {
+      "option": {
+        "id": 5,
+        "name": "fddgf",
+        "slug": "fddgf"
+      }
+    },
+    {
+      "option": {
+        "id": 6,
+        "name": "test6",
+        "slug": "test_6"
+      }
+    },
+    {
+      "option": {
+        "id": 7,
+        "name": "test3",
+        "slug": "test_3"
+      }
+    },
+    {
+      "option": {
+        "id": 8,
+        "name": "test4",
+        "slug": "test_4"
+      }
+    }
+  ],
+  "groups": [
+  ],
+  "people": [
+  ]
+}

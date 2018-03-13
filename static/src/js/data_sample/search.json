@@ -1,0 +1,84 @@
+{
+  "tags": [
+    {
+      "option": {
+        "id": 1,
+        "name": "test",
+        "slug": "test"
+      }
+    },
+    {
+      "option": {
+        "id": 2,
+        "name": "test 2",
+        "slug": "test_2"
+      }
+    },
+    {
+      "option": {
+        "id": 3,
+        "name": "test3",
+        "slug": "test_3"
+      }
+    },
+    {
+      "option": {
+        "id": 4,
+        "name": "test4",
+        "slug": "test_4"
+      }
+    }
+  ],
+  "groups": [
+    {
+      "option": {
+        "id": 1,
+        "name": "DEV_"
+      }
+    },
+    {
+      "option": {
+        "id": 2,
+        "name": "Oxfam"
+      }
+    },
+    {
+      "option": {
+        "id": 3,
+        "name": "Save"
+      }
+    },
+    {
+      "option": {
+        "id": 4,
+        "name": "Act"
+      }
+    }
+  ],
+  "people": [
+    {
+      "option": {
+        "id": 1,
+        "name": "Richard Peters"
+      }
+    },
+    {
+      "option": {
+        "id": 2,
+        "name": "Paul Evans"
+      }
+    },
+    {
+      "option": {
+        "id": 3,
+        "name": "Edvinas Jurevicius"
+      }
+    },
+    {
+      "option": {
+        "id": 4,
+        "name": "Steve Hawkes"
+      }
+    }
+  ]
+}
