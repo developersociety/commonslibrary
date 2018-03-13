@@ -2,21 +2,15 @@ from django.conf import settings
 from django.db import models
 
 from ckeditor.fields import RichTextField
-from mptt.models import MPTTModel, TreeForeignKey
+from mptt.models import MPTTModel
+
+from .validators import validate_page_url
 
 
 class Category(MPTTModel):
     title = models.CharField(max_length=64, unique=True)
     slug = models.SlugField(max_length=64, unique=True)
     description = models.TextField(blank=True)
-    parent = TreeForeignKey(
-        'self',
-        null=True,
-        blank=True,
-        related_name='children',
-        db_index=True,
-        limit_choices_to=models.Q(level=0) | models.Q(level=1)
-    )
 
     class Meta:
         verbose_name_plural = 'Categories'
@@ -32,7 +26,7 @@ class Page(models.Model):
         blank=True,
     )
     author = models.CharField(max_length=256, blank=True)
-    url = models.CharField(max_length=128, db_index=True)
+    url = models.CharField(max_length=128, db_index=True, validators=[validate_page_url])
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
     created_by = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='pages_created'
