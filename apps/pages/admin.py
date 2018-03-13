@@ -13,7 +13,6 @@ class CategoryAdmin(admin.ModelAdmin):
             'fields': ('title', 'slug', 'description',),
         }),
     ]
-    mptt_level_indent = 25
 
 
 @admin.register(Page)
