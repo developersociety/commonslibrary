@@ -1,5 +1,7 @@
 from django.conf import settings
 from django.db import models
+from django.urls import get_script_prefix
+from django.utils.encoding import iri_to_uri
 
 from ckeditor.fields import RichTextField
 
@@ -41,3 +43,6 @@ class Page(models.Model):
 
     def __str__(self):
         return "{url} -- {title}".format(url=self.url, title=self.title)
+
+    def get_absolute_url(self):
+        return iri_to_uri(get_script_prefix().rstrip('/') + self.url)
