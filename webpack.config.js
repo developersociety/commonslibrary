@@ -16,7 +16,7 @@ module.exports = {
     ],
     registration: [
         'webpack-dev-server/client?http://127.0.0.1:' + webpackPort + '/',
-        './static/src/js/form'
+        './static/src/js/accounts/registration'
     ]
   },
 

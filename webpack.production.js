@@ -12,7 +12,7 @@ module.exports = {
         './static/src/scss/styles.scss'
     ],
     registration: [
-        './static/src/js/form',
+        './static/src/js/accounts/registration'
     ]
   },
 
