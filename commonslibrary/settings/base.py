@@ -62,6 +62,7 @@ THIRD_PARTY_APPS = [
 PROJECT_APPS = [
     'accounts.apps.AccountsConfig',
     'directory.apps.DirectoryConfig',
+    'pages.apps.PagesConfig',
     'tags.apps.TagsConfig',
 ]
 
@@ -76,6 +77,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sites.middleware.CurrentSiteMiddleware',
+    'pages.middleware.PageFallbackMiddleware',
 ]
 
 ROOT_URLCONF = 'commonslibrary.urls'
@@ -278,7 +280,9 @@ CKEDITOR_CONFIGS = {
         'toolbar_Basic': [['Source', '-', 'Bold', 'Italic']],
         'toolbar': [{
             'name': 'basicstyles',
-            'items': ['Bold', 'Italic', 'Underline', 'Strike', 'Image', 'Link'],
+            'items': [
+                'Bold', 'Italic', 'Underline', 'Strike', 'Image', 'Link', 'Source',
+            ],
         }],
     }
 }
