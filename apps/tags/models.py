@@ -12,7 +12,8 @@ class Tag(MPTTModel):
         blank=True,
         related_name='children',
         db_index=True,
-        limit_choices_to=models.Q(level=0) | models.Q(level=1)
+        limit_choices_to=models.Q(level=0) | models.Q(level=1),
+        on_delete=models.SET_NULL,
     )
 
     def __str__(self):
