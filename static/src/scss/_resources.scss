@@ -157,14 +157,25 @@
 .resource-title,
 .resource-subtitle {
     color: #ffffff;
-    border-left: $width-gap*2 solid $color-background;
-    padding: $width-gap/2 0;
+    padding: $width-gap/2 0 $width-gap/2 $width-gap*2;
+    line-height: 1;
+    overflow: hidden;
+    position: relative;
 
     h1,
     h3 {
         background: $color-background;
-        padding: $width-gap/2 0;
         display: inline;
+        padding: calc(#{$width-gap/2} + 1px) 0;
+    }
+
+    &:before {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 0; bottom: 0; left: 0;
+        width: $width-gap*2;
+        background: $color-background;
     }
 
     span {
@@ -175,6 +186,7 @@
 
 .resource-title {
     max-width: 920px;
+    margin-bottom: $width-gap;
 }
 
 .resource-subtitle {
