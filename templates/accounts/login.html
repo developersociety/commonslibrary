@@ -2,4 +2,6 @@
 
 {% block content %}
   {% crispy form %}
+
+  <p>Forgot password? <a href="{% url 'accounts:password-reset' %}">Click here</a></p>
 {% endblock content %}

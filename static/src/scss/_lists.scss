@@ -1,0 +1,16 @@
+.icon-list__row {
+    @extend %flex-row;
+
+    min-width: 0;
+    font-size: 1.25rem;
+
+    a { color: inherit; }
+
+    + .icon-list__row { margin-top: 0.5rem; }
+
+    .icon {
+        flex-shrink: 0;
+        margin-right: 0.5rem;
+    }
+
+}

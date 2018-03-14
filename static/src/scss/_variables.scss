@@ -19,7 +19,7 @@
 }
 @font-face {
     font-family: 'National';
-    src: url("../fonts/national-light-webfont.woff2") format('woff2'), url("../fonts/national-light.woff") format('woff');
+    src: url("../fonts/national-light.woff2") format('woff2'), url("../fonts/national-light.woff") format('woff');
     font-weight: 300;
     font-style: normal
 }
@@ -44,8 +44,8 @@ $color-line: #E5E5E5 !default;
 $color-help: #B4B4B4 !default;
 $color-error: #FF206E !default;
 
-$color-accent: var(--page-org, #50E3C2) !default;
 $color-accent-fixed: #50E3C2 !default;
+$color-accent: var(--page-group, #50E3C2) !default;
 
 // Size
 $width-gap: 1.5rem;
