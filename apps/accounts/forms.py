@@ -1,11 +1,12 @@
 from django import forms
 from django.contrib.auth import password_validation
 from django.contrib.auth.forms import (
-    UserChangeForm as BaseUserChangeForm, UserCreationForm as BaseUserCreationForm
+    AuthenticationForm as BaseAuthenticatonForm, UserChangeForm as BaseUserChangeForm,
+    UserCreationForm as BaseUserCreationForm
 )
 
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import ButtonHolder, Div, Field, Layout, Submit
+from crispy_forms.layout import HTML, ButtonHolder, Div, Field, Layout, Submit
 
 from .models import User
 
@@ -55,11 +56,13 @@ class UserRegistrationForm(forms.ModelForm):
         help_texts = {
             'chosen_organisations': 'Check all of the options that apply to you',
         }
+        widgets = {
+            'address': forms.TextInput(),
+        }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        self.fields['address'].widget = forms.TextInput()
         self.fields['chosen_organisations'].widget = forms.CheckboxSelectMultiple()
         self.fields['chosen_organisations'].required = True
 
@@ -103,3 +106,19 @@ class UserRegistrationForm(forms.ModelForm):
                 )
         password_validation.validate_password(confirm_password)
         return confirm_password
+
+
+class LoginForm(BaseAuthenticatonForm):
+
+    def __init__(self, request=None, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.add_input(Submit('submit', 'Submit'))
+        self.helper.layout = Layout(
+            'username', 'password',
+            HTML(
+                """
+                {% if next %}<input type="hidden" name="next" value="{{ next }}">{% endif %}
+                """
+            )
+        )

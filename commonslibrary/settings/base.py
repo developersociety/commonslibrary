@@ -52,6 +52,8 @@ DEFAULT_APPS = [
 THIRD_PARTY_APPS = [
     'ckeditor',
     'crispy_forms',
+    'django_mptt_admin',
+    'mptt',
     'raven.contrib.django.raven_compat',
     'sorl.thumbnail',
     'webpack_loader',
@@ -60,6 +62,7 @@ THIRD_PARTY_APPS = [
 PROJECT_APPS = [
     'directory.apps.DirectoryConfig',
     'accounts.apps.AccountsConfig',
+    'pages.apps.PagesConfig',
 ]
 
 INSTALLED_APPS = DEFAULT_APPS + THIRD_PARTY_APPS + PROJECT_APPS
@@ -73,6 +76,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sites.middleware.CurrentSiteMiddleware',
+    'pages.middleware.PageFallbackMiddleware',
 ]
 
 ROOT_URLCONF = 'commonslibrary.urls'
@@ -275,7 +279,9 @@ CKEDITOR_CONFIGS = {
         'toolbar_Basic': [['Source', '-', 'Bold', 'Italic']],
         'toolbar': [{
             'name': 'basicstyles',
-            'items': ['Bold', 'Italic', 'Underline', 'Strike', 'Image', 'Link'],
+            'items': [
+                'Bold', 'Italic', 'Underline', 'Strike', 'Image', 'Link', 'Source',
+            ],
         }],
     }
 }
