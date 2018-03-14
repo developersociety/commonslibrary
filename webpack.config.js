@@ -14,7 +14,7 @@ module.exports = {
         './static/src/js/index',
         './static/src/scss/styles.scss'
     ],
-    form: [
+    registration: [
         'webpack-dev-server/client?http://127.0.0.1:' + webpackPort + '/',
         './static/src/js/form'
     ]

@@ -11,7 +11,7 @@ module.exports = {
         './static/src/js/index',
         './static/src/scss/styles.scss'
     ],
-    form: [
+    registration: [
         './static/src/js/form',
     ]
   },
