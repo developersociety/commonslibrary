@@ -4,16 +4,16 @@ from django.contrib.auth.models import Permission
 from django.contrib.contenttypes.models import ContentType
 from django.db.models import Q
 
-from .forms import UserChangeForm, UserCreationForm
+from .forms import AdminUserChangeForm, AdminUserCreationForm
 from .models import User
 
 
 @admin.register(User)
 class UserAdmin(BaseUserAdmin):
-    form = UserChangeForm
+    form = AdminUserChangeForm
+    add_form = AdminUserCreationForm
     list_display = ('email', 'first_name', 'last_name', 'is_staff', 'is_superuser',)
     ordering = ('-date_joined',)
-    add_form = UserCreationForm
     filter_horizontal = ('chosen_organisations', 'approved_organisations',)
     add_fieldsets = [
         (
