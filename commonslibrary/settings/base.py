@@ -64,6 +64,7 @@ PROJECT_APPS = [
     'directory.apps.DirectoryConfig',
     'pages.apps.PagesConfig',
     'tags.apps.TagsConfig',
+    'resources.apps.ResourcesConfig',
 ]
 
 INSTALLED_APPS = DEFAULT_APPS + THIRD_PARTY_APPS + PROJECT_APPS

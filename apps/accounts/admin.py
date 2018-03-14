@@ -4,6 +4,8 @@ from django.contrib.auth.models import Permission
 from django.contrib.contenttypes.models import ContentType
 from django.db.models import Q
 
+from resources.models import Resource
+
 from .forms import AdminUserChangeForm, AdminUserCreationForm
 from .models import User
 
@@ -46,7 +48,8 @@ class UserAdmin(BaseUserAdmin):
         response = super().response_change(request, obj)
 
         if obj.is_staff and not obj.is_superuser:
-            self.add_remove_permissions(obj)
+            self.add_remove_permissions(obj, User, 'change_user')
+            self.add_remove_permissions(obj, Resource, 'change_resource')
 
         return response
 
@@ -60,10 +63,10 @@ class UserAdmin(BaseUserAdmin):
             ).exclude(is_superuser=True).distinct()
         return qs
 
-    def add_remove_permissions(self, obj):
-        content_type = ContentType.objects.get_for_model(User)
+    def add_remove_permissions(self, obj, model, codename):
+        content_type = ContentType.objects.get_for_model(model)
         try:
-            permission = Permission.objects.get(content_type=content_type, codename='change_user')
+            permission = Permission.objects.get(content_type=content_type, codename=codename)
         except Permission.DoesNotExist:
             pass
         else:
