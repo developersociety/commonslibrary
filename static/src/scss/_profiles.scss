@@ -128,4 +128,13 @@
     }
 }
 
+.profile-name,
+.profile-group {
+    display: inline-block;
+    clear: left;
+    padding: $width-gap/6 $width-gap/4;
+    background: $color-text;
+    color: #ffffff;
+    margin: 0.25rem 0 0 0;
+}
 
