@@ -18,7 +18,7 @@ class Resource(models.Model):
     tags = models.ManyToManyField(
         Tag,
         limit_choices_to=models.Q(level=1) | models.Q(level=2),
-        blank=True
+        blank=True,
     )
     image = ImageField(
         'Background Image',

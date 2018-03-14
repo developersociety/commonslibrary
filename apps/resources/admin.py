@@ -26,10 +26,12 @@ class ResourceAdmin(admin.ModelAdmin):
         ('Counts', {
             'fields': ('likes', 'tried', 'hits'),
         }),
-        ('Meta', {
-            'classes': ('collapse',),
-            'fields': ('id', 'updated_by', 'created_by', 'updated_at', 'created_at'),
-        }),
+        (
+            'Meta', {
+                'classes': ('collapse',),
+                'fields': ('id', 'updated_by', 'created_by', 'updated_at', 'created_at'),
+            }
+        ),
     ]
 
     def has_add_permission(self, request):

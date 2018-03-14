@@ -6,7 +6,6 @@ from django.test import RequestFactory, TestCase
 from accounts.admin import UserAdmin
 from accounts.models import User
 from directory.tests.factories import OrganisationFactory
-
 from resources.admin import ResourceAdmin
 from resources.models import Resource
 from resources.tests.factories import ResourceFactory
