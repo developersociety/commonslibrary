@@ -35,6 +35,11 @@
 
 .profile-image {
 
+    &.small {
+        width: 5rem;
+        height: 5rem;
+    }
+
     @media all and (min-width: 801px) {
         width: calc(100% - #{$width-gap*2});
         height: calc(100% - #{$width-gap*2});

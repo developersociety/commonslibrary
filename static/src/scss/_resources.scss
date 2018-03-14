@@ -128,3 +128,130 @@
 .resource-tried {
     margin-left: 1rem;
 }
+
+
+//// Resource detail page
+
+.resource-holder {
+
+    @media all and (min-width: 801px) {
+        position: relative;
+        padding-left: 22.5rem;
+    }
+}
+
+.resource-header {
+    position: relative;
+    padding: $width-gap*3 0;
+}
+
+.resource-header__background {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 100vw;
+    z-index: -10;
+}
+
+.resource-title,
+.resource-subtitle {
+    color: #ffffff;
+    border-left: $width-gap*2 solid $color-background;
+    padding: $width-gap/2 0;
+
+    h1,
+    h3 {
+        background: $color-background;
+        padding: $width-gap/2 0;
+        display: inline;
+    }
+
+    span {
+        position: relative;
+        left: -$width-gap;
+    }
+}
+
+.resource-title {
+    max-width: 920px;
+}
+
+.resource-subtitle {
+    font-weight: 400;
+    max-width: 640px;
+    line-height: 1.3;
+}
+
+.resource-detail__content {
+    background: #ffffff;
+}
+
+.resource-sidebar {
+    @extend %meta;
+
+    font-family: $base-font-headline;
+    font-weight: 600;
+    text-transform: uppercase;
+    background: #fff;
+
+    .icon-list__row {
+        font-size: 1rem;
+        padding: $width-gap/2 $width-gap;
+
+        + .icon-list__row {
+            border-top: 2px solid $color-line;
+            margin-top: 0;
+        }
+    }
+
+    .icon-list__content {
+        padding-top: 0.3rem;
+    }
+
+    @media all and (min-width: 801px) {
+        width: 22.5rem;
+        position: absolute;
+        top: 15rem; left: 0;
+    }
+}
+
+.resource-sidebar__actions {
+    @extend %flex-row;
+}
+
+
+.resource-action__button {
+    @extend %flex-row;
+
+    width: 50%;
+    background: $color-accent;
+    padding: $width-gap/2 $width-gap;
+    color: $color-background;
+    text-decoration: none;
+    align-items: center;
+
+    span {
+        @extend %flex-column;
+
+        font-family: $base-font-headline;
+        font-size: 1.25rem;
+        line-height: 1;
+        font-weight: 600;
+
+        strong {
+            @extend %meta;
+        }
+    }
+
+    .icon {
+        width: 2rem;
+        height: 2rem;
+        margin-right: $width-gap/4;
+    }
+
+    + .resource-action__button {
+        border-left: 2px solid rgba($color-background, 0.05);
+    }
+}
+

@@ -9,10 +9,14 @@
     align-items: center;
     padding: $width-gap/2;
     background: $color-background;
+    font-family: $base-font-headline;
+    text-transform: uppercase;
+    font-weight: 600;
     color: #ffffff;
     margin: 0 0.25rem 0.25rem 0;
     user-select: none;
     cursor: pointer;
+    text-decoration: none;
 
     &.active {
         background: #ffffff;

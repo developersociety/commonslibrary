@@ -6,11 +6,20 @@
 
     a { color: inherit; }
 
+    .tag {
+        padding: $width-gap/6 $width-gap/4;
+        background: $color-text;
+        color: #ffffff;
+    }
+
     + .icon-list__row { margin-top: 0.5rem; }
 
     .icon {
         flex-shrink: 0;
         margin-right: 0.5rem;
+        width: 2rem;
+        height: 2rem;
+        vertical-align: top;
     }
 
 }
