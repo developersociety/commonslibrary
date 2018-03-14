@@ -77,8 +77,8 @@
 
     .profile-summary__group span {
         display: inline-block;
+        padding: $width-gap/6 $width-gap/4;
         background: $color-text;
-        padding: $width-gap/4;
         color: #ffffff;
     }
 
