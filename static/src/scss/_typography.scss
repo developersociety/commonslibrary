@@ -31,3 +31,10 @@ h5 {
 p {
     margin: 1rem 0;
 }
+
+hr {
+    border: none;
+    height: 3px;
+    background: $color-line;
+    width: 100%;
+}

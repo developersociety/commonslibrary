@@ -134,7 +134,7 @@
 
 .resource-holder {
 
-    @media all and (min-width: 801px) {
+    @media all and (min-width: 1261px) {
         position: relative;
         padding-left: 22.5rem;
     }
@@ -157,7 +157,7 @@
 .resource-title,
 .resource-subtitle {
     color: #ffffff;
-    padding: $width-gap/2 0 $width-gap/2 $width-gap*2;
+    padding: $width-gap/2 $width-gap $width-gap/2 $width-gap*2;
     line-height: 1;
     overflow: hidden;
     position: relative;
@@ -185,13 +185,13 @@
 }
 
 .resource-title {
-    max-width: 920px;
+    max-width: 1261px;
     margin-bottom: $width-gap;
 }
 
 .resource-subtitle {
     font-weight: 400;
-    max-width: 640px;
+    max-width: 800px;
     line-height: 1.3;
 }
 
@@ -221,7 +221,7 @@
         padding-top: 0.3rem;
     }
 
-    @media all and (min-width: 801px) {
+    @media all and (min-width: 1261px) {
         width: 22.5rem;
         position: absolute;
         top: 15rem; left: 0;
