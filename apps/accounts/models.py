@@ -85,7 +85,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def get_latest_resource(self):
         try:
-            resource = self.resources_created.approved().latest('created_at')
+            resource = self.resources_created.approved().latest('-created_at')
         except Resource.DoesNotExist:
             resource = None
         return resource
