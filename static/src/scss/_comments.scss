@@ -1,6 +1,11 @@
 .comments {
+    padding-bottom: $width-gap;
     border-top: 3px solid $color-line;
     border-bottom: 3px solid $color-line;
+
+    &:last-child {
+        border-bottom: none;
+    }
 }
 
 .comments-title {

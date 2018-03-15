@@ -5,25 +5,32 @@ body {
 }
 
 h1 {
-    font-size: 4.875em;
+    font-size: 4.875rem;
+    line-height: 1;
+    font-weight: 400;
 }
 
 h2 {
-    font-size: 2.5em;
+    font-size: 2.5rem;
+    line-height: 1.2;
+    font-weight: 400;
 }
 
 h3 {
-    font-size: 1.6875em;
+    font-size: 1.6875rem;
+    line-height: 1.2;
+    font-weight: 400;
 }
 
 h4 {
-    font-size: 1.25em;
+    font-size: 1.25rem;
     text-transform: uppercase;
     font-family: $base-font-headline;
+    margin-bottom: $width-gap;
 }
 
 h5 {
-    font-size: 0.875em;
+    font-size: 0.875rem;
     text-transform: uppercase;
     font-family: $base-font-headline;
 }
@@ -37,4 +44,5 @@ hr {
     height: 3px;
     background: $color-line;
     width: 100%;
+    margin: $width-gap 0;
 }
