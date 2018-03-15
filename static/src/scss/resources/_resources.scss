@@ -226,7 +226,7 @@
         padding: $width-gap/2 $width-gap;
 
         + .icon-list__row {
-            border-top: 3px solid $color-line;
+            border-top: 3px solid rgba($color-line, 0.5);
             margin-top: 0;
         }
     }
