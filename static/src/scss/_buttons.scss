@@ -8,6 +8,7 @@
     background: $color-accent-fixed;
     font-size: 1.25rem;
     cursor: pointer;
+    user-select: none;
 
     &:hover {
         background: darken($color-accent-fixed, 5%);

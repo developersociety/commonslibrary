@@ -123,6 +123,7 @@
     @extend %flex-column;
 
     align-items: center;
+    user-select: none;
 }
 
 .resource-tried {
