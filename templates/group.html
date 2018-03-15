@@ -1,6 +1,5 @@
 {% extends "base.html" %}
 
-{% load thumbnail %}
 {% load staticfiles %}
 
 
@@ -60,11 +59,7 @@
 {% block main_content %}
   <div class="profile-summary">
     <div class="profile-summary__image">
-      {% thumbnail '' '800' as thumb %}
-        <div class="profile-image" style="background: url({ thumb.url }) center center/contain no-repeat"></div>
-      {% empty %}
-        <div class="profile-image" style="background: url({% static 'src/img/logo.png' %}) center center/contain no-repeat"></div>
-      {% endthumbnail %}
+      <div class="profile-image" style="background: url({% static 'src/img/logo.png' %}) center center/contain no-repeat"></div>
     </div>
     <div class="profile-summary__details">
       <h1 class="profile-title">Developer Society</h1>
