@@ -1,4 +1,4 @@
-from django.conf.urls import url
+from django.urls import url
 from django.contrib.auth import views
 from django.core.urlresolvers import reverse_lazy
 

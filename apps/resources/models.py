@@ -28,6 +28,8 @@ class Resource(models.Model):
     organisation = models.ForeignKey(
         Organisation,
         help_text='Of the groups you belong to, which one owns this resource?',
+        on_delete=models.SET_NULL,
+        null=True,
     )
     privacy = models.ManyToManyField(
         Organisation,
