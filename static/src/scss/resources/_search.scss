@@ -38,6 +38,25 @@
 .search-filter__people {
     padding: $width-gap 1rem;
     background: $color-accent;
+
+    .search-filter__type .icon { display: none; }
+
+    @media all and (max-width: 540px) {
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: baseline;
+
+        .search-filter__type {
+            color: $color-background;
+
+            span { display: none; }
+
+            .icon {
+                display: inline-block;
+                margin-right: $width-gap/2;
+            }
+        }
+    }
 }
 
 .search-filter__type {
@@ -51,7 +70,7 @@
     grid-column: auto / span 2;
 }
 
-@media all and (max-width: 1261px) {
+@media all and (max-width: 1260px) {
     .search-filter__tags {
         grid-column: 1 / -1;
     }
@@ -65,7 +84,7 @@
 .search-filter__people {
     grid-column: auto / span auto;
 
-    @media all and (min-width: 801px) and (max-width: 1261px) {
+    @media all and (min-width: 801px) and (max-width: 1260px) {
         grid-column: auto / span 2;
     }
 
