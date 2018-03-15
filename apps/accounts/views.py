@@ -27,8 +27,7 @@ class UserDetailView(LoginRequiredMixin, DetailView):
         return context
 
     def get_object(self, queryset=None):
-        if self.request.user.is_authenticated:
-            return self.request.user
+        return self.request.user
 
 
 class UserUpdateView(LoginRequiredMixin, UpdateView):
@@ -37,8 +36,7 @@ class UserUpdateView(LoginRequiredMixin, UpdateView):
     success_url = reverse_lazy('accounts:user-update')
 
     def get_object(self, queryset=None):
-        if self.request.user.is_authenticated():
-            return self.request.user
+        return self.request.user
 
     def form_valid(self, form):
         messages.success(
