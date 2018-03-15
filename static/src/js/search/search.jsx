@@ -81,7 +81,7 @@ export class Search extends React.Component {
             <div className="search-filter__type">
               <span>Groups</span>
               <svg className="icon">
-                <use xlinkHref="#network"></use>
+                <use xlinkHref="#groups"></use>
               </svg>
             </div>
             <SearchOptionManager
