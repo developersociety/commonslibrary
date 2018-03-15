@@ -71,7 +71,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         ).filter(
             tried=self,
         ).order_by(
-            '-most_tried'
+            '-most_tried',
         ).first()
 
     def get_most_liked_resource(self):
@@ -80,7 +80,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         ).filter(
             likes=self,
         ).order_by(
-            '-most_liked'
+            '-most_liked',
         ).first()
 
     def get_latest_resource(self):

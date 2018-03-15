@@ -2,7 +2,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import Http404
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView
-from django.db.models import Count, Sum
 
 from .forms import UserRegistrationForm
 from .models import User
