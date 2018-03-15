@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+
+{% load thumbnail %}
+{% load staticfiles %}
+
+
+{% block extra_head %}
+  <style>
+    body {
+      --page-org: red;
+    }
+  </style>
+{% endblock extra_head %}
+
+{% block header_content %}
+  <header class="page-head">
+    <nav class="page-navigation">
+      <ul class="main-navigation">
+        <li class="main-navigation__item">
+          <a href="#">
+            Commons library
+          </a>
+        </li>
+        <li class="main-navigation__item active">
+          <a href="#">
+            <svg class="icon">
+              <use xlink:href="#explore"></use>
+            </svg>
+            Explore
+          </a>
+        </li>
+        <li class="main-navigation__item">
+          <a href="#">
+            <svg class="icon">
+              <use xlink:href="#directory"></use>
+            </svg>
+            Directory
+          </a>
+        </li>
+        <li class="main-navigation__item inverse">
+          <a href="#">
+            <svg class="icon">
+              <use xlink:href="#create"></use>
+            </svg>
+            Submit resource
+          </a>
+        </li>
+        <li class="main-navigation__account">
+          {% if request.user.is_authenticated %}
+            <a href="#">Logout</a>
+          {% else %}
+            <a href="#">Register</a>
+          {% endif %}
+        </li>
+      </ul>
+    </nav>
+  </header>
+{% endblock header_content %}
+
+{% block main_content %}
+  <div class="profile-summary">
+    <div class="profile-summary__image">
+      {% thumbnail '' '800' as thumb %}
+        <div class="profile-image" style="background: url({ thumb.url }) center center/contain no-repeat"></div>
+      {% empty %}
+        <div class="profile-image" style="background: url({% static 'src/img/logo.png' %}) center center/contain no-repeat"></div>
+      {% endthumbnail %}
+    </div>
+    <div class="profile-summary__details">
+      <h1 class="profile-title">Developer Society</h1>
+      <div class="profile-details">
+        <div class="icon-list">
+          <div class="icon-list__row">
+            <svg class="icon">
+              <use xlink:href="#phone"></use>
+            </svg>
+            <div class="contact-detail__value">
+              +44 (0) 333 344 7800
+            </div>
+          </div>
+          <div class="icon-list__row">
+            <svg class="icon">
+              <use xlink:href="#email"></use>
+            </svg>
+            <div class="contact-detail__value">
+              <a href="#">www.dev.ngo</a>
+            </div>
+          </div>
+          <div class="icon-list__row">
+            <svg class="icon">
+              <use xlink:href="#map"></use>
+            </svg>
+            <div class="contact-detail__value">
+              191 Fazeley Street, Fazeley studios, Digbeth, Birmingham, B5 5SE
+            </div>
+          </div>
+        </div>
+        <div class="profile-stats">
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima voluptatum perspiciatis eveniet mollitia earum, exercitationem nostrum eligendi quisquam fugiat hic.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock main_content %}
