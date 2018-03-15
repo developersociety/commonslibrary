@@ -1,6 +1,5 @@
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import Http404
 from django.urls import reverse_lazy
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView
@@ -29,10 +28,7 @@ class UserDetailView(LoginRequiredMixin, DetailView):
 
     def get_object(self, queryset=None):
         if self.request.user.is_authenticated:
-            obj = self.request.user
-        else:
-            raise Http404('You have to be logged in before accessing this page.')
-        return obj
+            return self.request.user
 
 
 class UserUpdateView(LoginRequiredMixin, UpdateView):
@@ -42,10 +38,7 @@ class UserUpdateView(LoginRequiredMixin, UpdateView):
 
     def get_object(self, queryset=None):
         if self.request.user.is_authenticated():
-            obj = self.request.user
-        else:
-            raise Http404('You have be logged in before accessing this page.')
-        return obj
+            return self.request.user
 
     def form_valid(self, form):
         messages.success(
