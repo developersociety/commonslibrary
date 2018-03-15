@@ -1,8 +1,8 @@
 from django import forms
 from django.contrib.auth import password_validation
 from django.contrib.auth.forms import (
-    AuthenticationForm as BaseAuthenticatonForm, UserChangeForm as BaseUserChangeForm,
-    UserCreationForm as BaseUserCreationForm
+    AuthenticationForm as BaseAuthenticatonForm, PasswordResetForm as BasePasswordResetForm,
+    UserChangeForm as BaseUserChangeForm, UserCreationForm as BaseUserCreationForm
 )
 
 from crispy_forms.helper import FormHelper
@@ -130,3 +130,11 @@ class LoginForm(BaseAuthenticatonForm):
                 """
             )
         )
+
+
+class PasswordResetForm(BasePasswordResetForm):
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_tag = False
