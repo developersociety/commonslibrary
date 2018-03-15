@@ -37,8 +37,12 @@ class Resource(models.Model):
     )
     is_approved = models.BooleanField(default=False)
 
-    likes = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True, related_name='+')
-    tried = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True, related_name='+')
+    likes = models.ManyToManyField(
+        settings.AUTH_USER_MODEL, blank=True, related_name='resources_likes'
+    )
+    tried = models.ManyToManyField(
+        settings.AUTH_USER_MODEL, blank=True, related_name='resources_tried'
+    )
     hits = models.PositiveIntegerField('How many times page been hit?', default=0)
 
     created_by = models.ForeignKey(
