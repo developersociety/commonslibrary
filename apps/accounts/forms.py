@@ -4,7 +4,6 @@ from django.contrib.auth.forms import (
     AuthenticationForm as BaseAuthenticatonForm, UserChangeForm as BaseUserChangeForm,
     UserCreationForm as BaseUserCreationForm
 )
-from django.urls import reverse
 
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import HTML, ButtonHolder, Div, Field, Layout, Submit
