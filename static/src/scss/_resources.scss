@@ -219,13 +219,14 @@
     font-weight: 600;
     text-transform: uppercase;
     background: #fff;
+    display: none;
 
     .icon-list__row {
         font-size: 1rem;
         padding: $width-gap/2 $width-gap;
 
         + .icon-list__row {
-            border-top: 2px solid $color-line;
+            border-top: 3px solid $color-line;
             margin-top: 0;
         }
     }
@@ -235,13 +236,14 @@
     }
 
     @media all and (min-width: 1261px) {
+        display: block;
         width: 22.5rem;
         position: absolute;
         top: 15rem; left: 0;
     }
 }
 
-.resource-sidebar__actions {
+.resource-detail__actions {
     @extend %flex-row;
 }
 

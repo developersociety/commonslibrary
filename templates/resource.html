@@ -5,13 +5,33 @@
 
 
 {% block header_content %}
+  <div class="resource-detail__actions hide-desktop">
+    <a href="#" class="resource-action__button">
+      <svg class="icon">
+        <use xlink:href="#liked"></use>
+      </svg>
+      <span>
+        58
+        <strong>Liked</strong>
+      </span>
+    </a>
+    <a href="#" class="resource-action__button">
+      <svg class="icon">
+        <use xlink:href="#tried"></use>
+      </svg>
+      <span>
+        298
+        <strong>Tried</strong>
+      </span>
+    </a>
+  </div>
   {% include "includes/header.html" %}
 {% endblock header_content %}
 
 {% block main_content %}
   <main class="resource-holder">
     <aside class="resource-sidebar" id="resource_sidebar">
-      <div class="resource-sidebar__actions">
+      <div class="resource-detail__actions">
         <a href="#" class="resource-action__button">
           <svg class="icon">
             <use xlink:href="#liked"></use>
@@ -51,7 +71,7 @@
               <p>6 February 2018 14:27</p>
             </div>
           </div>
-          <div class="icon-list__row">
+          <div class="icon-list__row" id="resource_tags">
             <svg class="icon">
               <use xlink:href="#tag"></use>
             </svg>
@@ -66,7 +86,7 @@
               </div>
             </div>
           </div>
-          <div class="icon-list__row">
+          <div class="icon-list__row" id="comment_stats">
             <svg class="icon">
               <use xlink:href="#comment"></use>
             </svg>
