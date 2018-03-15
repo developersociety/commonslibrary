@@ -1,9 +1,11 @@
+from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import Http404
+from django.urls import reverse_lazy
 from django.views.generic.detail import DetailView
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView
 
-from .forms import UserRegistrationForm
+from .forms import UserRegistrationForm, UserUpdateForm
 from .models import User
 
 
@@ -31,3 +33,23 @@ class UserDetailView(LoginRequiredMixin, DetailView):
         else:
             raise Http404('You have to be logged in before accessing this page.')
         return obj
+
+
+class UserUpdateView(LoginRequiredMixin, UpdateView):
+    model = User
+    form_class = UserUpdateForm
+    success_url = reverse_lazy('accounts:user-update')
+
+    def get_object(self, queryset=None):
+        if self.request.user.is_authenticated():
+            obj = self.request.user
+        else:
+            raise Http404('You have be logged in before accessing this page.')
+        return obj
+
+    def form_valid(self, form):
+        messages.success(
+            self.request,
+            'The user profile was successfully. You may edit it again below.',
+        )
+        return super().form_valid(form)
