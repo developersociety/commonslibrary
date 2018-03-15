@@ -1,8 +1,7 @@
 {% load render_bundle from webpack_loader %}
+{% load staticfiles %}
 
 <!DOCTYPE html>
-
-{% load staticfiles %}
 
 <html lang="en">
   <head>
@@ -27,25 +26,7 @@
       {% endblock main_content %}
     </main>
 
-    <div id="react-app"></div>
-
-    {% block content %}
-    {% endblock content %}
-
-    <footer class="page-footer">
-      <h4>Commons library</h4>
-      <nav class="page-navigation">
-        <ul class="footer-navigation">
-          <li><a href="#">Legal</a></li>
-          <li><a href="#">Privacy</a></li>
-          <li><a href="#">Terms</a></li>
-          <li><a href="#">Cookies</a></li>
-        </ul>
-      </nav>
-      <p>
-        <small>&copy; 2018 All rights reserved.</small>
-      </p>
-    </footer>
+    {% include 'includes/footer.html' %}
 
     {% block extra_scripts %}
       {% render_bundle 'main' 'js' %}

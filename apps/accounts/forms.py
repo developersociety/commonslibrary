@@ -4,6 +4,7 @@ from django.contrib.auth.forms import (
     AuthenticationForm as BaseAuthenticatonForm, UserChangeForm as BaseUserChangeForm,
     UserCreationForm as BaseUserCreationForm
 )
+from django.urls import reverse
 
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import HTML, ButtonHolder, Div, Field, Layout, Submit
@@ -113,9 +114,17 @@ class LoginForm(BaseAuthenticatonForm):
     def __init__(self, request=None, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
-        self.helper.add_input(Submit('submit', 'Submit'))
         self.helper.layout = Layout(
-            'username', 'password',
+            'username',
+            'password',
+            ButtonHolder(
+                HTML(
+                    """
+                    <a href="{% url 'accounts:password-reset' %}">Problems logging in?</a>
+                    """
+                ),
+                Submit('submit', 'Submit', css_class='submit'), css_class='form-actions'
+            ),
             HTML(
                 """
                 {% if next %}<input type="hidden" name="next" value="{{ next }}">{% endif %}

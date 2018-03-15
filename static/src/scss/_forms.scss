@@ -57,8 +57,10 @@
 .form-holder {
     width: 100%;
     max-width: 730px;
-    margin: $width-gap*2 auto;
+    margin: $width-gap*2.5 auto;
     padding: 0 $width-gap;
+
+    a { color: inherit; }
 }
 
 .form-title {
@@ -111,8 +113,21 @@
 .form-actions {
     @extend %flex-row;
 
-    margin-top: $width-gap;
+    margin-top: $width-gap/2;
     justify-content: flex-end;
+    align-items: center;
+
+    a {
+        margin-right: auto;
+        font-size: 1.25rem;
+    }
+}
+
+.form-holder__footer {
+    padding: $width-gap 0;
+    font-size: 1.25rem;
+    border-top: 3px solid $color-line;
+    margin-top: $width-gap;
 }
 
 .help-block {

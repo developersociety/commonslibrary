@@ -16,7 +16,9 @@ urlpatterns = [
         ),
         name='login'
     ),
-    url(r'^logout/$', views.LogoutView.as_view(), name='logout'),
+    url(r'^logout/$', views.LogoutView.as_view(
+            template_name='accounts/logout.html',
+        ), name='logout'),
     url(
         r'^password-reset/$',
         views.PasswordResetView.as_view(

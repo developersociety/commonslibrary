@@ -2,7 +2,7 @@
   <nav class="page-navigation">
     <ul class="main-navigation">
       <li class="main-navigation__item">
-        <a href="#">
+        <a href="/">
           Commons library
         </a>
       </li>
@@ -14,29 +14,39 @@
           Explore
         </a>
       </li>
-      <li class="main-navigation__item">
-        <a href="#">
-          <svg class="icon">
-            <use xlink:href="#directory"></use>
-          </svg>
-          Directory
-        </a>
-      </li>
-      <li class="main-navigation__item inverse">
-        <a href="#">
-          <svg class="icon">
-            <use xlink:href="#create"></use>
-          </svg>
-          Submit resource
-        </a>
-      </li>
-      <li class="main-navigation__account">
-        {% if request.user.is_authenticated %}
-          <a href="#">Logout</a>
-        {% else %}
-          <a href="#">Register</a>
-        {% endif %}
-      </li>
+      {% if user.is_authenticated %}
+        <li class="main-navigation__item">
+          <a href="#">
+            <svg class="icon">
+              <use xlink:href="#directory"></use>
+            </svg>
+            Directory
+          </a>
+        </li>
+        <li class="main-navigation__item inverse">
+          <a href="#">
+            <svg class="icon">
+              <use xlink:href="#create"></use>
+            </svg>
+            Submit resource
+          </a>
+        </li>
+        <li class="main-navigation__account">
+          <a href="{% url 'accounts:logout' %}">Logout</a>
+        </li>
+      {% else %}
+        <li class="main-navigation__item">
+          <a href="{% url 'accounts:login' %}">
+            <svg class="icon">
+              <use xlink:href="#private"></use>
+            </svg>
+            Login
+          </a>
+        </li>
+        <li class="main-navigation__account">
+          <a href="{% url 'accounts:registration' %}">Register</a>
+        </li>
+      {% endif %}
     </ul>
   </nav>
 </header>
