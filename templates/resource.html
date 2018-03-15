@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 
+{% load render_bundle from webpack_loader %}
 {% load staticfiles %}
 
 
@@ -9,7 +10,7 @@
 
 {% block main_content %}
   <main class="resource-holder">
-    <aside class="resource-sidebar">
+    <aside class="resource-sidebar" id="resource_sidebar">
       <div class="resource-sidebar__actions">
         <a href="#" class="resource-action__button">
           <svg class="icon">
@@ -156,3 +157,7 @@
   </main>
   <article></article>
 {% endblock main_content %}
+
+{% block extra_scripts %}
+  {% render_bundle 'resource' %}
+{% endblock extra_scripts %}
