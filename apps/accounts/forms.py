@@ -115,15 +115,15 @@ class LoginForm(BaseAuthenticatonForm):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.layout = Layout(
-            'username',
-            'password',
+            'username', 'password',
             ButtonHolder(
                 HTML(
                     """
                     <a href="{% url 'accounts:password-reset' %}">Problems logging in?</a>
                     """
                 ),
-                Submit('submit', 'Submit', css_class='submit'), css_class='form-actions'
+                Submit('submit', 'Submit', css_class='submit'),
+                css_class='form-actions'
             ),
             HTML(
                 """
