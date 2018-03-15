@@ -5,7 +5,7 @@ from .models import Resource
 
 @admin.register(Resource)
 class ResourceAdmin(admin.ModelAdmin):
-    list_display = ('title', 'abstract', 'likes', 'tried', 'hits', 'created_by', 'created_at')
+    list_display = ('title', 'abstract', 'hits', 'created_by', 'created_at')
     readonly_fields = (
         'abstract', 'id', 'created_by', 'updated_by', 'created_at', 'updated_at', 'likes', 'tried',
         'hits', 'privacy', 'organisation', 'tags', 'image',
