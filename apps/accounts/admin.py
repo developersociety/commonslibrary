@@ -5,6 +5,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.db.models import Q
 
 from resources.models import Resource
+from directory.models import Organisation
 
 from .forms import AdminUserChangeForm, AdminUserCreationForm
 from .models import User
@@ -49,6 +50,7 @@ class UserAdmin(BaseUserAdmin):
         if obj.is_staff and not obj.is_superuser:
             self.add_remove_permissions(obj, User, 'change_user')
             self.add_remove_permissions(obj, Resource, 'change_resource')
+            self.add_remove_permissions(obj, Organisation, 'change_organisation')
 
         return response
 

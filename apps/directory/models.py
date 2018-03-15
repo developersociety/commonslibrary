@@ -2,10 +2,12 @@ from django.conf import settings
 from django.db import models
 
 from ckeditor.fields import RichTextField
+from colorfield.fields import ColorField
 
 
 class Organisation(models.Model):
     title = models.CharField(max_length=256, unique=True)
+    colour = ColorField(default='#50E3C2')
     url = models.URLField(blank=True)
     telephone = models.CharField(max_length=16, blank=True)
     address = RichTextField(blank=True)

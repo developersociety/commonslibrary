@@ -57,6 +57,7 @@ THIRD_PARTY_APPS = [
     'raven.contrib.django.raven_compat',
     'sorl.thumbnail',
     'webpack_loader',
+    'colorfield',
 ]
 
 PROJECT_APPS = [
