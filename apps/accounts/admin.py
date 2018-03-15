@@ -4,8 +4,8 @@ from django.contrib.auth.models import Permission
 from django.contrib.contenttypes.models import ContentType
 from django.db.models import Q
 
-from resources.models import Resource
 from directory.models import Organisation
+from resources.models import Resource
 
 from .forms import AdminUserChangeForm, AdminUserCreationForm
 from .models import User
