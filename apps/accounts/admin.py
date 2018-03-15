@@ -15,6 +15,7 @@ class UserAdmin(BaseUserAdmin):
     form = AdminUserChangeForm
     add_form = AdminUserCreationForm
     list_display = ('email', 'first_name', 'last_name', 'is_staff', 'is_superuser',)
+    search_fields = ('phone', 'first_name', 'last_name', 'email')
     ordering = ('-date_joined',)
     filter_horizontal = ('chosen_organisations', 'approved_organisations',)
     add_fieldsets = [
@@ -39,8 +40,6 @@ class UserAdmin(BaseUserAdmin):
 
     def get_readonly_fields(self, request, obj=None):
         readonly_fields = ['chosen_organisations']
-        if obj is not None and obj.is_staff:
-            readonly_fields.append('approved_organisations')
         return readonly_fields
 
     def response_change(self, request, obj):

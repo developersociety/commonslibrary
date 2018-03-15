@@ -31,3 +31,19 @@ class ResourceFactory(factory.django.DjangoModelFactory):
         if extracted:
             for privacy in extracted:
                 self.privarcy.add(privacy)
+
+    @factory.post_generation
+    def tried(self, created, extracted, **kwargs):
+        if not created:
+            return
+        if extracted:
+            for user in extracted:
+                self.tried.add(user)
+
+    @factory.post_generation
+    def likes(self, created, extracted, **kwargs):
+        if not created:
+            return
+        if extracted:
+            for user in extracted:
+                self.likes.add(user)

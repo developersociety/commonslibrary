@@ -3,7 +3,7 @@ from django.contrib.auth import views
 from django.urls import reverse_lazy
 
 from .forms import LoginForm
-from .views import UserCreateView
+from .views import UserCreateView, UserDetailView
 
 app_name = 'accounts'
 urlpatterns = [
@@ -46,4 +46,5 @@ urlpatterns = [
         ),
         name='password-reset-complete',
     ),
+    url(r'^profile/$', UserDetailView.as_view(), name='user-detail'),
 ]

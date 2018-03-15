@@ -7,6 +7,8 @@ from sorl.thumbnail import ImageField
 from directory.models import Organisation
 from tags.models import Tag
 
+from .managers import ResourceManager
+
 
 class Resource(models.Model):
     title = models.CharField(max_length=256, unique=True)
@@ -55,6 +57,8 @@ class Resource(models.Model):
     )
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    objects = ResourceManager()
 
     class Meta:
         ordering = ('-created_at',)

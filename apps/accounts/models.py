@@ -6,6 +6,7 @@ from django.utils import timezone
 from sorl.thumbnail import ImageField
 
 from directory.models import Organisation
+from resources.models import Resource
 
 from .managers import UserManager
 
@@ -63,3 +64,28 @@ class User(AbstractBaseUser, PermissionsMixin):
         Returns the short name for the user.
         """
         return self.first_name
+
+    def get_most_tried_resource(self):
+        return Resource.objects.approved().annotate(
+            most_tried=models.Count('tried'),
+        ).filter(
+            tried=self,
+        ).order_by(
+            '-most_tried'
+        ).first()
+
+    def get_most_liked_resource(self):
+        return Resource.objects.approved().annotate(
+            most_liked=models.Count('likes'),
+        ).filter(
+            likes=self,
+        ).order_by(
+            '-most_liked'
+        ).first()
+
+    def get_latest_resource(self):
+        try:
+            resource = self.resources_created.approved().latest('created_at')
+        except Resource.DoesNotExist:
+            resource = None
+        return resource
