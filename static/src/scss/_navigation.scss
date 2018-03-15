@@ -11,7 +11,7 @@
         display: block;
         color: inherit;
         text-decoration: none;
-        padding: $width-gap;
+        padding: $width-gap*.75 $width-gap;
     }
 
     @media all and (min-width: 541px) {

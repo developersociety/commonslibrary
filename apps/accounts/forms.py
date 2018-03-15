@@ -118,10 +118,10 @@ class LoginForm(BaseAuthenticatonForm):
             ButtonHolder(
                 HTML(
                     """
-                    <a href="{% url 'accounts:password-reset' %}">Problems logging in?</a>
+                    <a href="{% url 'accounts:password-reset' %}">Forgot your password?</a>
                     """
                 ),
-                Submit('submit', 'Submit', css_class='submit'),
+                Submit('submit', 'Login', css_class='submit'),
                 css_class='form-actions'
             ),
             HTML(
