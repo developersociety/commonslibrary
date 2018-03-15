@@ -26,7 +26,7 @@ class UserDetailView(LoginRequiredMixin, DetailView):
         return context
 
     def get_object(self, queryset=None):
-        if self.request.user.is_authenticated():
+        if self.request.user.is_authenticated:
             obj = self.request.user
         else:
             raise Http404('You have to be logged in before accessing this page.')
