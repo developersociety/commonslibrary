@@ -87,6 +87,11 @@
     }
 }
 
+.profile-title {
+    padding: $width-gap $width-gap 0 $width-gap;
+    margin-bottom: 0;
+}
+
 .profile-summary__title,
 .profile-image__title {
     margin: 0;

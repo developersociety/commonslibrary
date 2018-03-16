@@ -30,6 +30,8 @@
         color: #ffffff;
         font-size: 1.6875em;
 
+        &:hover { background: lighten($color-background, 10%); }
+
         .icon {
             width: 2.5rem;
             height: 2.5rem;
