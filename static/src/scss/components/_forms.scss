@@ -192,3 +192,17 @@
         width: 50%;
     }
 }
+
+.alert-error {
+
+    ul {
+        @extend %reset-box;
+
+        list-style: none;
+        margin-bottom: $width-gap;
+        color: $color-error;
+        font-size: 1.25rem;
+        border-left: 3px solid $color-error;
+        padding-left: $width-gap;
+    }
+}
