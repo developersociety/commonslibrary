@@ -1,6 +1,11 @@
 from django.views.generic.detail import DetailView
+from django.views.generic.list import ListView
 
 from .models import Organisation
+
+
+class OrganisationListView(ListView):
+    model = Organisation
 
 
 class OrganisationDetailView(DetailView):

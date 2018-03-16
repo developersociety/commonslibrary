@@ -1,0 +1,9 @@
+{% for object in object_list %}
+  <p>Resources added: {{ object.resource_set.approved.count }}</p>
+  {% for user in object.approved_organisations.all %}
+    {{ user }}
+    {{ user.resources_created.count }}
+    {{ user.resources_likes.count }}
+    {{ user.resources_tried.count }}
+  {% endfor %}
+{% endfor %}
