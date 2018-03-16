@@ -96,12 +96,14 @@
 
 .resource-user__name {
     margin: 0;
+    font-weight: 600;
 }
 
 .resource-user__group {
     @extend .group-logo;
 
-    margin-bottom: 0.5rem;
+    margin-bottom: $width-gap/6;
+    font-size: 0;
 }
 
 .resource-actions {
@@ -116,7 +118,7 @@
     .icon {
         width: 1.5rem;
         height: 1.5rem;
-        margin-bottom: 0.5rem;
+        margin-bottom: $width-gap/6;
     }
 }
 

@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% load crispy_forms_tags %}
+
+
+{% block main_content %}
+  <div class="form-feedback">
+    <h4>You are now logged out. See you again soon.</h4>
+
+    <p>Want to log back in? <a href="{% url 'accounts:login' %}">Click here</a></p>
+  </div>
+{% endblock main_content %}

@@ -1,6 +1,7 @@
 .page-footer {
     padding: $width-gap $width-gap $width-gap*3;
     background: $color-background;
+    box-shadow: 0 100vh 0 100vh $color-background;
     color: #ffffff;
 
     h4 { margin: 0; }

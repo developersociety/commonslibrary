@@ -2,18 +2,18 @@
     background: $color-accent;
 }
 
-.search-form {
+.search-bar form.search-form {
     @extend %flex-row;
 
     input {
         width: 100%;
         background: none;
-        border: none;
         padding: $width-gap*1.5 $width-gap;
         outline: none;
-        font-size: 1.675rem;
         line-height: inherit;
         color: $color-background;
+        border: none !important;
+        font-size: 1.675rem !important;
 
         &::placeholder {
             color: inherit;
@@ -25,11 +25,17 @@
 
         background: $color-background;
         border: none;
-        width: 4rem;
         align-items: center;
         justify-content: center;
         color: #ffffff;
         font-size: 1.6875em;
+
+        &:hover { background: lighten($color-background, 10%); }
+
+        .icon {
+            width: 2.5rem;
+            height: 2.5rem;
+        }
     }
 }
 
