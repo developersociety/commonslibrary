@@ -27,12 +27,6 @@
 @import 'global/navigation';
 @import 'global/page';
 
-// Component styles
-@import 'components/icons';
-@import 'components/lists';
-@import 'components/accordion';
-@import 'components/buttons';
-@import 'components/forms';
 
 // Resources styles
 @import 'resources/comments';
@@ -44,3 +38,9 @@
 @import 'profiles/profiles';
 @import 'profiles/group';
 
+// Component styles
+@import 'components/icons';
+@import 'components/lists';
+@import 'components/accordion';
+@import 'components/buttons';
+@import 'components/forms';
