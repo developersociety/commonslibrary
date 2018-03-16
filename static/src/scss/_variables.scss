@@ -1,8 +1,14 @@
 // Font imports
 @font-face {
     font-family: 'Brandon';
-    src: url("../fonts/brandon.woff2") format('woff2'), url("../fonts/national-regular.woff") format('woff');
+    src: url("../fonts/brandon.woff2") format('woff2'), url("../fonts/brandon.woff") format('woff');
     font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Brandon';
+    src: url("../fonts/brandon-bold.woff2") format('woff2'), url("../fonts/brandon-bold.woff") format('woff');
+    font-weight: 600;
     font-style: normal;
 }
 @font-face {

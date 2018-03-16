@@ -1,9 +1,9 @@
 from django.conf.urls import url
 from django.contrib.auth import views
-from django.core.urlresolvers import reverse_lazy
+from django.urls import reverse_lazy
 
 from .forms import LoginForm, PasswordResetForm, SetPasswordForm
-from .views import UserCreateView
+from .views import UserCreateView, UserDetailView, UserUpdateView
 
 app_name = 'accounts'
 urlpatterns = [
@@ -53,5 +53,14 @@ urlpatterns = [
             template_name='accounts/password_reset_complete.html'
         ),
         name='password-reset-complete',
+    ),
+    url(r'^profile/$', UserDetailView.as_view(), name='user-detail'),
+    url(r'^update/$', UserUpdateView.as_view(), name='user-update'),
+    url(
+        r'^password-change/$',
+        views.PasswordChangeView.as_view(
+            template_name='accounts/password_change.html',
+        ),
+        name='password-change',
     ),
 ]

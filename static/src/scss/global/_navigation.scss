@@ -4,11 +4,13 @@
     list-style: none;
     font-family: $base-font-headline;
     font-size: 1.25rem;
+    font-weight: 600;
     text-transform: uppercase;
     color: #ffffff;
 
     a {
-        display: block;
+        @extend %flex-row;
+
         color: inherit;
         text-decoration: none;
         padding: $width-gap*.75 $width-gap;

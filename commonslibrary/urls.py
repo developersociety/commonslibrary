@@ -17,6 +17,7 @@ urlpatterns = [
     url(r'^accounts/', include('accounts.urls')),
     url(r'^test/', TemplateView.as_view(template_name='test.html')),
     url(r'^profile/', TemplateView.as_view(template_name='profile.html')),
+    url(r'^resource/', TemplateView.as_view(template_name='resource.html')),
 ]
 
 # Make it easier to see a 404 page under debug

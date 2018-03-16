@@ -13,6 +13,9 @@ module.exports = {
     ],
     registration: [
         './static/src/js/accounts/registration'
+    ],
+    resource: [
+        './static/src/js/resource/resource_detail'
     ]
   },
 

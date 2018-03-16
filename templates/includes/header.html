@@ -6,7 +6,7 @@
           Commons library
         </a>
       </li>
-      <li class="main-navigation__item">
+      <li class="main-navigation__item active">
         <a href="#">
           <svg class="icon">
             <use xlink:href="#explore"></use>
@@ -35,7 +35,7 @@
           <a href="{% url 'accounts:logout' %}">Logout</a>
         </li>
       {% else %}
-      <li class="main-navigation__item {% if request.path == '/accounts/login/' %} active{% endif %}">
+        <li class="main-navigation__item {% if request.path == '/accounts/login/' %} active{% endif %}">
           <a href="{% url 'accounts:login' %}">
             <svg class="icon">
               <use xlink:href="#private"></use>
