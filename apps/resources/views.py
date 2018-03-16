@@ -2,8 +2,8 @@ from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import CreateView
 
-from .models import Resource
 from .forms import ResourceForm
+from .models import Resource
 
 
 class ResourceCreateView(LoginRequiredMixin, CreateView):
