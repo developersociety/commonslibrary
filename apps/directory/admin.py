@@ -10,9 +10,11 @@ class OrganisationAdmin(admin.ModelAdmin):
     search_fields = ['title']
     date_hierarchy = 'created_at'
     fieldsets = [
-        ('Organisation', {
-            'fields': ('title', 'slug', 'colour', 'url', 'email', 'telephone', 'logo',),
-        }),
+        (
+            'Organisation', {
+                'fields': ('title', 'slug', 'colour', 'url', 'email', 'telephone', 'logo'),
+            }
+        ),
         ('Texts', {
             'fields': ('address', 'description',),
         }),
