@@ -11,7 +11,7 @@ class OrganisationAdmin(admin.ModelAdmin):
     date_hierarchy = 'created_at'
     fieldsets = [
         ('Organisation', {
-            'fields': ('title', 'url', 'email', 'telephone', 'logo',),
+            'fields': ('title', 'colour', 'url', 'email', 'telephone', 'logo',),
         }),
         ('Texts', {
             'fields': ('address', 'description',),
@@ -23,6 +23,15 @@ class OrganisationAdmin(admin.ModelAdmin):
             }
         ),
     ]
+
+    def get_queryset(self, request):
+        """ Only display resources which belongs for the requested user. """
+        qs = super().get_queryset(request)
+        if not request.user.is_superuser and request.user.approved_organisations.exists():
+            qs = qs.filter(
+                id__in=request.user.approved_organisations.values_list('id', flat=True),
+            ).distinct()
+        return qs
 
     def save_model(self, request, obj, form, change):
         """ Assign user to the object created_by and updated_by. """
