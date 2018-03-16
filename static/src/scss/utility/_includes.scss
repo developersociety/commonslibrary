@@ -7,6 +7,7 @@
     text-transform: uppercase;
     font-family: $base-font-headline;
     font-size: 0.875rem;
+    font-weight: 600;
 }
 
 %flex-row {
@@ -21,7 +22,7 @@
 
 %grid-template {
     display: grid;
-    grid-gap: 2px;
+    grid-gap: 3px;
     grid-template-columns: 1fr;
 
     @media all and (min-width: 541px) {

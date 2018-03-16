@@ -1,0 +1,61 @@
+.comments {
+    padding-bottom: $width-gap;
+    border-top: 3px solid $color-line;
+    border-bottom: 3px solid $color-line;
+
+    &:last-child {
+        border-bottom: none;
+    }
+}
+
+.comments-title {
+    @extend %flex-row;
+
+    align-items: center;
+    padding: $width-gap/2 $width-gap;
+
+    h4 { margin: 0 0 0 $width-gap/2; }
+
+    .icon {
+        width: 2rem;
+        height: 2rem;
+    }
+}
+
+.comment-profile {
+    @extend .profile-summary__group;
+}
+
+.comment {
+    padding: $width-gap;
+    border-top: 3px solid $color-line;
+    max-width: 730px;
+}
+
+.comment-header {
+    @extend %flex-row;
+
+    align-items: flex-top;
+    margin-bottom: $width-gap/2;
+
+    a {
+        color: inherit;
+        font-family: $base-font-headline;
+        text-transform: uppercase;
+        text-decoration: none;
+    }
+
+    .profile-summary__group {
+        margin: 0 $width-gap/2 0 0 ;
+    }
+}
+
+.comment-actions {
+    margin-left: auto;
+    font-weight: 600;
+}
+
+.comment-content {
+    font-size: 1.25rem;
+    line-height: 1.6;
+}
