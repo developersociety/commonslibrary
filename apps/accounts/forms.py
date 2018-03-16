@@ -1,12 +1,13 @@
 from django import forms
 from django.contrib.auth import password_validation
-from django.contrib.auth.forms import (
-    AuthenticationForm as BaseAuthenticatonForm, UserChangeForm as BaseUserChangeForm,
+from django.contrib.auth.forms import (  # yapf: disable
+    AuthenticationForm as BaseAuthenticatonForm, PasswordResetForm as BasePasswordResetForm,
+    SetPasswordForm as BaseSetPasswordForm, UserChangeForm as BaseUserChangeForm,
     UserCreationForm as BaseUserCreationForm
 )
 
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import HTML, Layout, Submit
+from crispy_forms.layout import HTML, ButtonHolder, Div, Field, Layout, Submit
 
 from .models import User
 
@@ -54,7 +55,7 @@ class UserRegistrationForm(forms.ModelForm):
             'chosen_organisations': 'Groups',
         }
         help_texts = {
-            'chosen_organisations': '',
+            'chosen_organisations': 'Check all of the options that apply to you',
         }
         widgets = {
             'address': forms.TextInput(),
@@ -67,7 +68,24 @@ class UserRegistrationForm(forms.ModelForm):
         self.fields['chosen_organisations'].required = True
 
         self.helper = FormHelper()
-        self.helper.add_input(Submit('submit', 'Submit'))
+        self.helper.layout = Layout(
+            'email',
+            'password',
+            'confirm_password',
+            'first_name',
+            'last_name',
+            'chosen_organisations',
+            Div(
+                Field('photo', css_class="sr__input"),
+                Div(css_class='file-mount'),
+                css_class='file-group'
+            ),
+            'phone',
+            'address',
+            ButtonHolder(
+                Submit('submit', 'Apply for access', css_class='submit'), css_class='form-actions'
+            ),
+        )
 
     def save(self, commit=True):
         password = self.cleaned_data['confirm_password']
@@ -96,15 +114,39 @@ class LoginForm(BaseAuthenticatonForm):
     def __init__(self, request=None, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
-        self.helper.add_input(Submit('submit', 'Submit'))
         self.helper.layout = Layout(
             'username', 'password',
+            ButtonHolder(
+                HTML(
+                    """
+                    <a href="{% url 'accounts:password-reset' %}">Forgot your password?</a>
+                    """
+                ),
+                Submit('submit', 'Login', css_class='submit'),
+                css_class='form-actions'
+            ),
             HTML(
                 """
                 {% if next %}<input type="hidden" name="next" value="{{ next }}">{% endif %}
                 """
             )
         )
+
+
+class PasswordResetForm(BasePasswordResetForm):
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_tag = False
+
+
+class SetPasswordForm(BaseSetPasswordForm):
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_tag = False
 
 
 class UserUpdateForm(forms.ModelForm):

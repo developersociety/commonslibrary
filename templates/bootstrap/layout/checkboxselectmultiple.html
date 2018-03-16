@@ -1,0 +1,24 @@
+{% load crispy_forms_filters %}
+{% load l10n %}
+
+<div class="controls"{% if flat_attrs %} {{ flat_attrs|safe }}{% endif %}>
+
+  <div class="multiselect">
+    {% for choice in field.field.choices %}
+      <div class="checkbox-field multiselect-option">
+        <input type="checkbox"{% if choice.0 in field.value or choice.0|stringformat:"s" in field.value or choice.0|stringformat:"s" == field.value|default_if_none:""|stringformat:"s" %} checked="checked"{% endif %} name="{{ field.html_name }}" id="id_{{ field.id_for_label }}_{{ forloop.counter }}" value="{{ choice.0|unlocalize }}" {{ field.field.widget.attrs|flatatt }}>
+        <label class="checkbox{% if inline_class %} {{ inline_class }}{% endif %}" for="id_{{ field.id_for_label }}_{{ forloop.counter }}">
+          <div class="checkbox-status">
+            <svg class="icon">
+              <use xlink:href="#tried"></use>
+            </svg>
+          </div>
+          <span>{{ choice.1|unlocalize }}</span>
+        </label>
+      </div>
+    {% endfor %}
+  </div>
+
+  {% include 'bootstrap/layout/field_errors_block.html' %}
+  {% include 'bootstrap/layout/help_text.html' %}
+</div>
