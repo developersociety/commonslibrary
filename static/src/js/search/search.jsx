@@ -66,21 +66,36 @@ export class Search extends React.Component {
 
         <div className="search-filter">
           <div className="search-filter__tags">
-            <p className="search-filter__type">Tags</p>
+            <div className="search-filter__type">
+              <span>Tags</span>
+              <svg className="icon">
+                <use xlinkHref="#tag"></use>
+              </svg>
+            </div>
             <SearchOptionManager
               ref={(searchTags) => {this.searchTags = searchTags;}}
               searchOptions={this.state.searchOptions.tags}
               type="tags"/>
           </div>
           <div className="search-filter__groups">
-            <p className="search-filter__type">Groups</p>
+            <div className="search-filter__type">
+              <span>Groups</span>
+              <svg className="icon">
+                <use xlinkHref="#groups"></use>
+              </svg>
+            </div>
             <SearchOptionManager
               ref={(searchGroups) => {this.searchGroups = searchGroups;}}
               searchOptions={this.state.searchOptions.groups}
               type="groups"/>
           </div>
           <div className="search-filter__people">
-            <p className="search-filter__type">People</p>
+            <div className="search-filter__type">
+              <span>People</span>
+              <svg className="icon">
+                <use xlinkHref="#directory"></use>
+              </svg>
+            </div>
             <SearchOptionManager
               ref={(searchPeople) => {this.searchPeople = searchPeople;}}
               searchOptions={this.state.searchOptions.people}

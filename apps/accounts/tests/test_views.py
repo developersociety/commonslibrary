@@ -49,3 +49,17 @@ class UserLoginTestView(WebTest):
         response = form.submit()
         self.assertEqual(response.status_code, 302)
         self.assertEqual(response.url, settings.LOGIN_REDIRECT_URL)
+
+
+class UserUpdateTestView(WebTest):
+
+    def setUp(self):
+        self.user = UserFactory.create(first_name='test123', password='test123')
+
+    def test_update_view(self):
+        form = self.app.get(reverse('accounts:user-update'), user=self.user).form
+        form['first_name'] = 'test'
+        response = form.submit()
+        self.assertEqual(response.status_code, 302)
+        user = User.objects.get(email=self.user.email)
+        self.assertEqual(user.first_name, 'test')

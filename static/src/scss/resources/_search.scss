@@ -38,19 +38,51 @@
 .search-filter__people {
     padding: $width-gap 1rem;
     background: $color-accent;
+
+    .search-filter__type .icon { display: none; }
+
+    @media all and (max-width: 540px) {
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: flex-start;
+        padding: $width-gap/4;
+
+        .tag-list { padding-top: $width-gap/4; }
+
+        .search-filter__type {
+            color: $color-background;
+
+            span { display: none; }
+
+            .icon {
+                display: inline-block;
+                margin-right: $width-gap/2;
+            }
+        }
+    }
 }
 
 .search-filter__type {
     color: #ffffff;
     margin-bottom: $width-gap/4;
     padding-left: 0.5rem;
+    font-weight: 600;
+
+    .icon {
+        width: 2.5rem;
+        height: 2.5rem;
+    }
+
+    @media all and (max-width: 540px) {
+        padding-left: 0;
+    }
 }
 
 .search-filter__tags {
     grid-column: auto / span 2;
 }
 
-@media all and (max-width: 1261px) {
+@media all and (max-width: 1260px) {
     .search-filter__tags {
         grid-column: 1 / -1;
     }
@@ -64,7 +96,7 @@
 .search-filter__people {
     grid-column: auto / span auto;
 
-    @media all and (min-width: 801px) and (max-width: 1261px) {
+    @media all and (min-width: 801px) and (max-width: 1260px) {
         grid-column: auto / span 2;
     }
 
@@ -76,10 +108,17 @@
 .search-filter {
     @extend %grid-template;
 
-    padding-top: 2px;
+    padding-top: 3px;
     font-family: $base-font-headline;
     font-size: 1.25rem;
     text-transform: uppercase;
     background: rgba($color-background, 0.05);
     min-width: 0;
+
+    @media all and (max-width: 540px) {
+        grid-gap: 0;
+        background: none;
+        padding: $width-gap/4 0;
+        border-top: 3px solid rgba($color-background, 0.05);
+    }
 }
