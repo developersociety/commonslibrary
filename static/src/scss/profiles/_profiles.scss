@@ -27,6 +27,7 @@
     margin-top: $width-gap/4;
     font-family: $base-font-headline;
     text-transform: uppercase;
+    font-weight: 600;
 
     .group-logo {
         margin-right: $width-gap/2;
@@ -34,6 +35,11 @@
 }
 
 .profile-image {
+
+    &.small {
+        width: 5rem;
+        height: 5rem;
+    }
 
     @media all and (min-width: 801px) {
         width: calc(100% - #{$width-gap*2});
@@ -71,8 +77,8 @@
 
     .profile-summary__group span {
         display: inline-block;
+        padding: $width-gap/6 $width-gap/4;
         background: $color-text;
-        padding: $width-gap/4;
         color: #ffffff;
     }
 
@@ -96,7 +102,7 @@
 
 
 .profile-stats {
-    padding: $width-gap $width-gap $width-gap calc(#{$width-gap} + 2px);
+    padding: $width-gap $width-gap $width-gap calc(#{$width-gap} + 3px);
     font-size: 1.6875rem;
 }
 
@@ -122,4 +128,18 @@
     }
 }
 
+.profile-name,
+.profile-group {
+    display: inline-block;
+    clear: left;
+    padding: $width-gap/6 $width-gap/4;
+    background: $color-text;
+    color: #ffffff;
+    margin: 0;
+
+    @media all and (min-width: 1261px) {
+        margin: 0.25rem 0 0 0;
+    }
+
+}
 
