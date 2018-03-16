@@ -10,12 +10,13 @@ class ResourceAdmin(admin.ModelAdmin):
         'abstract', 'id', 'created_by', 'updated_by', 'created_at', 'updated_at', 'likes', 'tried',
         'hits', 'privacy', 'organisation', 'tags', 'image',
     )
+    prepopulated_fields = {'slug': ('title',)}
     filter_horizontal = ('tags', 'privacy')
     search_fields = ['title', 'abstract', 'created_by', 'updated_by']
     date_hierarchy = 'created_at'
     fieldsets = [
         ('Resource', {
-            'fields': ('title', 'abstract', 'tags', 'is_approved'),
+            'fields': ('title', 'slug', 'abstract', 'tags', 'is_approved'),
         }),
         ('Content', {
             'fields': ('content', 'image'),

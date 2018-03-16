@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.db import models
+from django.urls import reverse
 
 from ckeditor.fields import RichTextField
 from sorl.thumbnail import ImageField
@@ -11,6 +12,7 @@ from .managers import ResourceManager
 
 class Resource(models.Model):
     title = models.CharField(max_length=256, unique=True)
+    slug = models.SlugField(unique=True, null=True)
     abstract = models.TextField(
         max_length=140,
         help_text='This text will appear in search results',
@@ -64,3 +66,6 @@ class Resource(models.Model):
 
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return reverse('resources:resource-detail', kwargs={'slug': self.slug})

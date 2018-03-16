@@ -1,4 +1,5 @@
 from django import forms
+from django.utils.text import slugify
 
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
@@ -19,3 +20,9 @@ class ResourceForm(forms.ModelForm):
         self.fields['privacy'].queryset = user.approved_organisations.all()
         self.helper = FormHelper()
         self.helper.add_input(Submit('submit', 'Submit'))
+
+    def save(self, commit=True):
+        instance = super().save(commit=False)
+        instance.slug = slugify(self.title)
+        instance.save()
+        return instance

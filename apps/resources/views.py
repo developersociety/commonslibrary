@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView
 
 from .forms import ResourceForm
@@ -7,7 +8,7 @@ from .models import Resource
 
 
 class ResourceCreateView(LoginRequiredMixin, CreateView):
-    model = Resource
+    queryset = Resource.objects.approved()
     form_class = ResourceForm
     success_url = '/'
 
@@ -24,3 +25,11 @@ class ResourceCreateView(LoginRequiredMixin, CreateView):
         kwargs = super().get_form_kwargs()
         kwargs.update({'user': self.request.user})
         return kwargs
+
+
+class ResourceDetailView(DetailView):
+    model = Resource
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
