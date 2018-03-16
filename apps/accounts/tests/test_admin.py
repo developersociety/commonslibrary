@@ -14,6 +14,7 @@ class UserAdminTest(TestCase):
 
     def setUp(self):
         self.user_admin = UserAdmin(User, AdminSite())
+
         self.superuser = UserFactory.create(is_superuser=True)
 
         self.organisation = OrganisationFactory.create()
@@ -27,11 +28,11 @@ class UserAdminTest(TestCase):
         self.user_with_org_1.approved_organisations.add(self.organisation)
 
     def test_permissions_with_no_organisation(self):
-        self.user_admin.add_remove_permissions(self.superuser)
+        self.user_admin.add_remove_permissions(self.superuser, User, 'change_user')
         self.assertFalse(self.superuser.user_permissions.exists())
 
     def test_permissions_with_organisation(self):
-        self.user_admin.add_remove_permissions(self.user_with_org)
+        self.user_admin.add_remove_permissions(self.user_with_org, User, 'change_user')
         content_type = ContentType.objects.get_for_model(User)
         permission = Permission.objects.get(content_type=content_type, codename='change_user')
         permission_string = '{app_label}.{permission}'.format(
@@ -44,7 +45,7 @@ class UserAdminTest(TestCase):
 
     def test_permissions_delete_organisation(self):
         self.user_with_org_1.approved_organisations.remove(self.organisation)
-        self.user_admin.add_remove_permissions(self.user_with_org_1)
+        self.user_admin.add_remove_permissions(self.user_with_org_1, User, 'change_user')
 
         self.assertFalse(self.user_with_org.user_permissions.exists())
 
