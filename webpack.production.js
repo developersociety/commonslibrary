@@ -11,6 +11,9 @@ module.exports = {
         './static/src/js/index',
         './static/src/scss/styles.scss'
     ],
+    registration: [
+        './static/src/js/accounts/registration'
+    ],
     resource: [
         './static/src/js/resource/resource_detail'
     ]

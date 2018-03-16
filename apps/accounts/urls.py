@@ -2,7 +2,7 @@ from django.conf.urls import url
 from django.contrib.auth import views
 from django.urls import reverse_lazy
 
-from .forms import LoginForm
+from .forms import LoginForm, PasswordResetForm, SetPasswordForm
 from .views import UserCreateView, UserDetailView, UserUpdateView
 
 app_name = 'accounts'
@@ -16,19 +16,27 @@ urlpatterns = [
         ),
         name='login'
     ),
-    url(r'^logout/$', views.LogoutView.as_view(), name='logout'),
+    url(
+        r'^logout/$',
+        views.LogoutView.as_view(
+            template_name='accounts/logout.html',
+        ),
+        name='logout'
+    ),
     url(
         r'^password-reset/$',
         views.PasswordResetView.as_view(
-            template_name='accounts/password_reset_form.html',
             email_template_name='accounts/emails/password_reset_email.html',
+            form_class=PasswordResetForm,
             success_url=reverse_lazy('accounts:password-reset-done'),
+            template_name='accounts/password_reset_form.html',
         ),
         name='password-reset',
     ),
     url(
         r'^reset/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
         views.PasswordResetConfirmView.as_view(
+            form_class=SetPasswordForm,
             template_name='accounts/password_reset_confirm.html',
             success_url=reverse_lazy('accounts:password-reset-complete'),
         ),

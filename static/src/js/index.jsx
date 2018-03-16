@@ -7,13 +7,13 @@ import { Resource } from './resource/resource';
 import { ResourceFilter } from './resource/resource_filter';
 
 
-const ResourceData = require('./data_sample/resources.json');
+const resourceData = require('./data_sample/resources.json');
 
 class ResourceList extends React.Component {
   constructor () {
     super()
     this.state = {
-      resources: ResourceData
+      resources: resourceData
     }
 
     // handler binds

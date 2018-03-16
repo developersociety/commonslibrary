@@ -14,6 +14,10 @@ module.exports = {
         './static/src/js/index',
         './static/src/scss/styles.scss'
     ],
+    registration: [
+        'webpack-dev-server/client?http://127.0.0.1:' + webpackPort + '/',
+        './static/src/js/accounts/registration'
+    ],
     resource: [
         'webpack-dev-server/client?http://127.0.0.1:' + webpackPort + '/',
         './static/src/js/resource/resource_detail'
@@ -37,7 +41,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.jsx?$/,
+        test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         loader: 'babel-loader'
       },

@@ -13,12 +13,10 @@
 
         color: inherit;
         text-decoration: none;
-        padding: $width-gap;
         align-items: center;
-    }
+        padding: $width-gap*.75 $width-gap;
 
-    .icon {
-        margin-right: $width-gap/4;
+        .icon { margin-right: $width-gap/4; }
     }
 
     @media all and (min-width: 541px) {
