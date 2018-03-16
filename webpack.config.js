@@ -8,11 +8,17 @@ const webpackPort = parseInt(process.env.WEBPACK_PORT || 3000);
 module.exports = {
   context: __dirname,
 
-  entry: [
-    'webpack-dev-server/client?http://127.0.0.1:' + webpackPort + '/',
-    './static/src/js/index',
-    './static/src/scss/styles.scss'
-  ],
+  entry: {
+    main: [
+        'webpack-dev-server/client?http://127.0.0.1:' + webpackPort + '/',
+        './static/src/js/index',
+        './static/src/scss/styles.scss'
+    ],
+    resource: [
+        'webpack-dev-server/client?http://127.0.0.1:' + webpackPort + '/',
+        './static/src/js/resource/resource_detail'
+    ]
+  },
 
   output: {
     path: path.resolve('./static/bundles/'),

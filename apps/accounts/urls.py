@@ -3,7 +3,7 @@ from django.contrib.auth import views
 from django.urls import reverse_lazy
 
 from .forms import LoginForm
-from .views import UserCreateView, UserDetailView
+from .views import UserCreateView, UserDetailView, UserUpdateView
 
 app_name = 'accounts'
 urlpatterns = [
@@ -47,4 +47,12 @@ urlpatterns = [
         name='password-reset-complete',
     ),
     url(r'^profile/$', UserDetailView.as_view(), name='user-detail'),
+    url(r'^update/$', UserUpdateView.as_view(), name='user-update'),
+    url(
+        r'^password-change/$',
+        views.PasswordChangeView.as_view(
+            template_name='accounts/password_change.html',
+        ),
+        name='password-change',
+    ),
 ]
