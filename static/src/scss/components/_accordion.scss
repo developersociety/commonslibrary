@@ -1,8 +1,8 @@
 .accordion {
-    margin: $width-gap 0;
-    padding: 0;
-    max-width: none;
+    margin: $width-gap*2 0;
     border-top: 3px solid $color-line;
+    max-width: none;
+    padding: 0;
 }
 
 .accordion-option {

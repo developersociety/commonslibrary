@@ -1,0 +1,25 @@
+.button,
+.btn {
+    display: inline-block;
+    padding: $width-gap;
+    font-family: $base-font-headline;
+    text-transform: uppercase;
+    border: none;
+    background: $color-accent-fixed;
+    font-size: 1.25rem;
+    font-weight: 600;
+    cursor: pointer;
+    user-select: none;
+
+    &:hover {
+        background: darken($color-accent-fixed, 5%);
+    }
+
+    &.input {
+        background: $color-line;
+
+        &:hover {
+            background: darken($color-line, 5%);
+        }
+    }
+}
