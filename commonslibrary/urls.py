@@ -15,6 +15,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^group/', TemplateView.as_view(template_name='group.html')),
     url(r'^accounts/', include('accounts.urls')),
+    url(r'^directory/', include('directory.urls')),
     url(r'^test/', TemplateView.as_view(template_name='test.html')),
     url(r'^profile/', TemplateView.as_view(template_name='profile.html')),
     url(r'^resource/', TemplateView.as_view(template_name='resource.html')),

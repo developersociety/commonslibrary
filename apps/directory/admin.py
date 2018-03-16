@@ -10,9 +10,11 @@ class OrganisationAdmin(admin.ModelAdmin):
     search_fields = ['title']
     date_hierarchy = 'created_at'
     fieldsets = [
-        ('Organisation', {
-            'fields': ('title', 'colour', 'url', 'email', 'telephone', 'logo',),
-        }),
+        (
+            'Organisation', {
+                'fields': ('title', 'slug', 'colour', 'url', 'email', 'telephone', 'logo'),
+            }
+        ),
         ('Texts', {
             'fields': ('address', 'description',),
         }),
@@ -23,6 +25,7 @@ class OrganisationAdmin(admin.ModelAdmin):
             }
         ),
     ]
+    prepopulated_fields = {'slug': ('title',)}
 
     def get_queryset(self, request):
         """ Only display resources which belongs for the requested user. """
