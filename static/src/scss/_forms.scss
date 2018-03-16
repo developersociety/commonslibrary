@@ -54,13 +54,18 @@
     }
 }
 
-.form-holder {
+.form-holder,
+.form-feedback {
     width: 100%;
     max-width: 730px;
     margin: $width-gap*2.5 auto;
     padding: 0 $width-gap;
 
     a { color: inherit; }
+}
+
+.form-feedback {
+    font-size: 1.25rem;
 }
 
 .form-title {
