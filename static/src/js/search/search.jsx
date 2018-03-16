@@ -3,6 +3,7 @@ import React from 'react';
 import { SearchOptionManager } from './search_option_manager';
 
 const searchData = require('../data_sample/search.json');
+const newSearchData = require('../data_sample/new_search.json');
 
 
 export class Search extends React.Component {
@@ -27,13 +28,9 @@ export class Search extends React.Component {
 
     if (query.length > 2) {
       // fake API call, replace with real one
-      fetch('http://127.0.0.1:8001/static/src/js/data_sample/new_search.json')
-        .then(response => response.json())
-        .then(newData => {
-          this.setState({
-            searchOptions: newData
-          })
-        })
+      this.setState({
+        searchOptions: newSearchData
+      })
     } else {
       this.setState({
         searchOptions: searchData

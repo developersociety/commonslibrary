@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth import password_validation
-from django.contrib.auth.forms import (
+from django.contrib.auth.forms import (  # yapf: disable
     AuthenticationForm as BaseAuthenticatonForm, PasswordResetForm as BasePasswordResetForm,
     SetPasswordForm as BaseSetPasswordForm, UserChangeForm as BaseUserChangeForm,
     UserCreationForm as BaseUserCreationForm
