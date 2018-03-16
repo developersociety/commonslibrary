@@ -4,7 +4,6 @@ from django.db import models
 from ckeditor.fields import RichTextField
 from sorl.thumbnail import ImageField
 
-from directory.models import Organisation
 from tags.models import Tag
 
 from .managers import ResourceManager
@@ -28,13 +27,13 @@ class Resource(models.Model):
         blank=True,
     )
     organisation = models.ForeignKey(
-        Organisation,
+        'directory.Organisation',
         help_text='Of the groups you belong to, which one owns this resource?',
         on_delete=models.SET_NULL,
         null=True,
     )
     privacy = models.ManyToManyField(
-        Organisation,
+        'directory.Organisation',
         help_text='Of the groups you belong to, which should this resource be visible to?',
         related_name='resources_privacy',
         blank=True,

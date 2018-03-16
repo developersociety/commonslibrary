@@ -1,14 +1,18 @@
 from django.conf import settings
 from django.db import models
+from django.urls import reverse
 
 from ckeditor.fields import RichTextField
 from colorfield.fields import ColorField
+
+from resources.models import Resource
 
 
 class Organisation(models.Model):
     title = models.CharField(max_length=256, unique=True)
     colour = ColorField(default='#50E3C2')
     url = models.URLField(blank=True)
+    slug = models.SlugField(unique=True, null=True)
     telephone = models.CharField(max_length=16, blank=True)
     address = RichTextField(blank=True)
     description = RichTextField(blank=True)
@@ -28,3 +32,30 @@ class Organisation(models.Model):
 
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return reverse('directory:organisation-detail', kwargs={'slug': self.slug})
+
+    def get_total_private_resources_count(self):
+        return self.resources_privacy.approved().count()
+
+    def get_most_tried_resource(self):
+        return self.resource_set.approved().annotate(
+            most_tried=models.Count('tried'),
+        ).order_by(
+            '-most_tried',
+        ).first()
+
+    def get_most_liked_resource(self):
+        return self.resource_set.approved().annotate(
+            most_liked=models.Count('likes'),
+        ).order_by(
+            '-most_liked',
+        ).first()
+
+    def get_latest_resource(self):
+        try:
+            resource = self.resource_set.approved().earliest('created_at')
+        except Resource.DoesNotExist:
+            resource = None
+        return resource

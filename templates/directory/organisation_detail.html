@@ -1,0 +1,10 @@
+<p>{{ organisation.get_total_private_resources_count }}</p>
+
+
+{% for resource in object.resource_set.approved %}
+  <p>{{ resource }}</p>
+{% endfor %}
+
+<p>{{ object.get_latest_resource }}</p>
+<p>{{ object.get_most_liked_resource }}</p>
+<p>{{ object.get_most_tried_resource }}</p>
