@@ -26,10 +26,12 @@
 
 .resource-filter__option {
     margin-left: 0.75rem;
+    cursor: pointer;
+    user-select: none;
 
     .icon {
-        width: 1.5rem;
-        height: 1.5rem;
+        width: 1.75rem;
+        height: 1.75rem;
     }
 
     &.active {
