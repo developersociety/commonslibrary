@@ -22,6 +22,7 @@ export class Search extends React.Component {
   }
 
   handleSelection(optionStep) {
+    // track number of selected search options
     this.setState(prevState => ({
       searchOptionsSelected: prevState.searchOptionsSelected + optionStep
     })
