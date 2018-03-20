@@ -1,12 +1,23 @@
 .directory-group {
-  @extend %grid-template;
-
   background: $color-line;
 
   + .directory-group {
     border-top: 3px solid $color-line;
   }
 
+  @media all and (min-width: 801px) {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 3px;
+  }
+
+  @media all and (min-width: 1261px) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  @media all and (min-width: 1521px) {
+    grid-template-columns: repeat(5, 1fr);
+  }
 }
 .directory-group__profile {
   background: #ffffff;
@@ -22,11 +33,8 @@
 }
 .directory-group__people {
 
-  @media all and (min-width: 541px) {
+  @media all and (min-width: 681px) {
     grid-column: 2 / -1;
-  }
-
-  @media all and (min-width: 801px) {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 3px;
@@ -46,7 +54,21 @@
 }
 
 .directory-person {
+  @extend %flex-row;
+
   background: #ffffff;
+
+
+  @media all and (max-width: 680px) {
+    + .directory-person {
+      margin-top: 3px;
+    }
+  }
+}
+
+.directory-person__image {
+  width: 7.1875rem;
+  min-height: 100%;
 }
 
 .directory-person__name {

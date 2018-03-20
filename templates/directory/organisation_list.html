@@ -32,7 +32,7 @@
         <div class="directory-group__people">
           {% for user in object.approved_organisations.all %}
             <div class="directory-person">
-              {% thumbnail user.photo '750' as 'thumb' %}
+              {% thumbnail user.photo '750' as thumb %}
                 <div class="directory-person__image" style="background: url({{ thumb.url }}) center center/cover no-repeat"></div>
               {% endthumbnail %}
               <div class="directory-person__detail">
