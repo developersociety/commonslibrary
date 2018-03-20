@@ -5,7 +5,7 @@
     border-top: 3px solid $color-line;
   }
 
-  @media all and (min-width: 801px) {
+  @media all and (min-width: 921px) {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 3px;
@@ -15,7 +15,7 @@
     grid-template-columns: repeat(4, 1fr);
   }
 
-  @media all and (min-width: 1521px) {
+  @media all and (min-width: 1581px) {
     grid-template-columns: repeat(5, 1fr);
   }
 }
@@ -32,6 +32,7 @@
 
 }
 .directory-group__people {
+  margin-top: 3px;
 
   @media all and (min-width: 681px) {
     grid-column: 2 / -1;
@@ -40,16 +41,19 @@
     grid-gap: 3px;
   }
 
+  @media all and (min-width: 921px) {
+    margin-top: 0;
+  }
+
   @media all and (min-width: 1261px) {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
   }
 
-  @media all and (min-width: 1521px) {
+  @media all and (min-width: 1581px) {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
   }
-
 
 }
 
