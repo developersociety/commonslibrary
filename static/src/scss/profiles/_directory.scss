@@ -1,9 +1,19 @@
+.directory-intro {
+  padding: $width-gap;
+
+  h1,
+  h3 {
+    margin: 0;
+  }
+
+  h3 {
+    margin-top: $width-gap/2;
+  }
+}
+
 .directory-group {
   background: $color-line;
-
-  + .directory-group {
-    border-top: 3px solid $color-line;
-  }
+  border-top: 3px solid $color-line;
 
   @media all and (min-width: 921px) {
     display: grid;
@@ -19,18 +29,41 @@
     grid-template-columns: repeat(5, 1fr);
   }
 }
+
 .directory-group__profile {
   background: #ffffff;
+  padding: $width-gap;
 
 }
+
+.directory-group__identity {
+  @extend %flex-row;
+}
+
 .directory-group__image {
-
-
+  width: 6rem;
+  height: 6rem;
+  margin-right: $width-gap;
+  flex-shrink: 0;
 }
+
 .directory-group__name {
 
+  h3,
+  p {
+    margin: 0;
+  }
 
+  p { margin-top: 0.25rem; }
+
+  a {
+    @extend %meta;
+
+    text-decoration: none;
+    color: inherit;
+  }
 }
+
 .directory-group__people {
   margin-top: 3px;
 
@@ -57,11 +90,24 @@
 
 }
 
+.directory-group__stats {
+  @extend %flex-row;
+
+  align-items: center;
+  font-size: 1.25rem;
+
+  .icon {
+    width: 2.25rem;
+    height: 2.25rem;
+    margin-right: 0.25rem;
+    flex-shrink: 0;
+  }
+}
+
 .directory-person {
   @extend %flex-row;
 
   background: #ffffff;
-
 
   @media all and (max-width: 680px) {
     + .directory-person {
@@ -73,6 +119,7 @@
 .directory-person__image {
   width: 7.1875rem;
   min-height: 100%;
+  flex-shrink: 0;
 }
 
 .directory-person__name {
