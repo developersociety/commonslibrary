@@ -1,9 +1,67 @@
-{% for object in object_list %}
-  <p>Resources added: {{ object.resource_set.approved.count }}</p>
-  {% for user in object.approved_organisations.all %}
-    {{ user }}
-    {{ user.resources_created.count }}
-    {{ user.resources_likes.count }}
-    {{ user.resources_tried.count }}
-  {% endfor %}
-{% endfor %}
+{% extends 'base.html' %}
+
+{% load thumbnail %}
+
+{% block main_content %}
+  <div class="directory">
+    <div class="directory-intro">
+      <h1>Commons Directory</h1>
+      <h3>Meet everyone around the world using the commons.</h3>
+    </div>
+    {% for object in object_list %}
+      <div class="directory-group">
+        <div class="directory-group__profile">
+          <div class="directory-group__identity">
+            {% thumbnail object.logo '750' as 'thumb' %}
+              <div class="directory-group__image" style="background: url({{ thumb.url }}) center center/contain no-repeat"></div>
+            {% endthumbnail %}
+            <div class="directory-group__name">
+              <h3>{{ object.title }}</h3>
+              <p><a href="{{ object.url }}" target="_blank">{{ object.get_short_url }}</a></p>
+            </div>
+          </div>
+          <p class="directory-group__stats">
+            <svg class="icon">
+              <use xlink:href="#create"></use>
+            </svg>
+            {% with object.resource_set.approved.count as resource_count %}
+              {{ resource_count }} resource{{ resource_count|pluralize }} added.
+            {% endwith %}
+          </p>
+        </div>
+        <div class="directory-group__people">
+          {% for user in object.approved_organisations.all %}
+            <div class="directory-person">
+              {% thumbnail user.photo '750' as 'thumb' %}
+                <div class="directory-person__image" style="background: url({{ thumb.url }}) center center/cover no-repeat"></div>
+              {% endthumbnail %}
+              <div class="directory-person__detail">
+                <div class="directory-person__name">{{ user.get_full_name }}</div>
+                <div class="directory-perons__stats">
+                  <span>
+                    <svg class="icon">
+                      <use xlink:href="#create"></use>
+                    </svg>
+                    {{ user.resources_created.count }}
+                  </span>
+                  <span>
+                    <svg class="icon">
+                      <use xlink:href="#liked"></use>
+                    </svg>
+                    {{ user.resources_likes.count }}
+                  </span>
+                  <span>
+                    <svg class="icon">
+                      <use xlink:href="#tried"></use>
+                    </svg>
+                    {{ user.resources_tried.count }}
+                  </span>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock main_content %}

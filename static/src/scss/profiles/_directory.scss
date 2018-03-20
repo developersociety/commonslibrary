@@ -1,0 +1,79 @@
+.directory-group {
+  @extend %grid-template;
+
+  background: $color-line;
+
+  + .directory-group {
+    border-top: 3px solid $color-line;
+  }
+
+}
+.directory-group__profile {
+  background: #ffffff;
+
+}
+.directory-group__image {
+
+
+}
+.directory-group__name {
+
+
+}
+.directory-group__people {
+
+  @media all and (min-width: 541px) {
+    grid-column: 2 / -1;
+  }
+
+  @media all and (min-width: 801px) {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 3px;
+  }
+
+  @media all and (min-width: 1261px) {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @media all and (min-width: 1521px) {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+
+}
+
+.directory-person {
+  background: #ffffff;
+}
+
+.directory-person__name {
+  margin: $width-gap 0 0 $width-gap;
+  font-size: 1.6875rem;
+}
+
+.directory-perons__stats {
+  @extend %flex-row;
+  @extend %meta;
+
+  margin-top: $width-gap/2;
+  padding: 0 $width-gap $width-gap $width-gap;
+
+  .icon {
+    width: 1.75rem;
+    height: 1.75rem;
+    margin-bottom: 0.25rem;
+  }
+
+  span {
+    display: inline-flex;
+    flex-flow: column nowrap;
+    align-items: center;
+
+    + span {
+      margin-left: $width-gap/2;
+    }
+  }
+}
