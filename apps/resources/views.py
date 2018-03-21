@@ -10,6 +10,7 @@ from .models import Resource
 class ResourceCreateView(LoginRequiredMixin, CreateView):
     queryset = Resource.objects.approved()
     form_class = ResourceForm
+    template_name = 'resources/resource_form.html'
     success_url = '/'
 
     def form_valid(self, form):

@@ -7,9 +7,13 @@
         width: 100%;
         padding: $width-gap;
         border: 3px solid $color-line;
+        border-radius: 0;
         font-family: inherit;
         font-size: 1.25em;
         outline: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
 
         &:focus {
             border-color: $color-text;

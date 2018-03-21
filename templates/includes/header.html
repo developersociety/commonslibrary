@@ -15,8 +15,8 @@
         </a>
       </li>
       {% if user.is_authenticated %}
-        <li class="main-navigation__item">
-          <a href="#">
+        <li class="main-navigation__item {% if request.path == '/directory/' %} active{% endif %}">
+          <a href="{% url 'directory:organisation-list' %}">
             <svg class="icon">
               <use xlink:href="#directory"></use>
             </svg>
@@ -24,7 +24,7 @@
           </a>
         </li>
         <li class="main-navigation__item inverse">
-          <a href="#">
+          <a href="{% url 'resources:resource-create' %}">
             <svg class="icon">
               <use xlink:href="#create"></use>
             </svg>
