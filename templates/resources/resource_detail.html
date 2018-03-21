@@ -1,5 +1,108 @@
 {% extends 'base.html' %}
 
-{% block content %}
-  {{ object }}
-{% endblock content %}
+{% load render_bundle from webpack_loader %}
+{% load thumbnail %}
+
+
+{% block main_content %}
+  <main class="resource-holder">
+    <aside class="resource-sidebar" id="resource_sidebar">
+      <div class="resource-detail__actions">
+        <a href="#" class="resource-action__button">
+          <svg class="icon">
+            <use xlink:href="#liked"></use>
+          </svg>
+          <span>
+            {{ resource.likes.count }}
+            <strong>Liked</strong>
+          </span>
+        </a>
+        <a href="#" class="resource-action__button">
+          <svg class="icon">
+            <use xlink:href="#tried"></use>
+          </svg>
+          <span>
+            {{ resource.tried.count }}
+            <strong>Tried</strong>
+          </span>
+        </a>
+      </div>
+      <div class="resource-meta">
+        <div class="icon-list">
+          <div class="icon-list__row">
+            <svg class="icon">
+              <use xlink:href="#directory"></use>
+            </svg>
+            <div class="icon-list__content">
+              {% thumbnail resource.created_by.photo '500' as thumb %}
+                <div class="profile-image small" style="background: url({{ thumb.url }}) center center/cover no-repeat"></div>
+              {% endthumbnail %}
+              <p class="profile-name">{{ resource.created_by }}</p>
+              <p class="profile-group">{{ resource.organisation }}</p>
+            </div>
+          </div>
+          <div class="icon-list__row">
+            <svg class="icon">
+              <use xlink:href="#calendar"></use>
+            </svg>
+            <div class="icon-list__content">
+              <p>{{ resource.created_at|date:'j F Y H:i' }}</p>
+            </div>
+          </div>
+          {% if resource.tags %}
+            <div class="icon-list__row" id="resource_tags">
+              <svg class="icon">
+                <use xlink:href="#tag"></use>
+              </svg>
+              <div class="icon-list__content">
+                <div class="tag-list">
+                  {% for tag in resource.tags.all %}
+                    <a href="#" class="tag">{{ tag }}</a>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+          {% endif %}
+          <div class="icon-list__row" id="comment_stats">
+            <svg class="icon">
+              <use xlink:href="#comment"></use>
+            </svg>
+            <div class="icon-list__content">
+              24 comments
+              3 People
+            </div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <article class="resource-detail">
+      <header class="resource-header">
+        {% thumbnail resource.image '1200' as thumb %}
+          <div class="resource-header__background" style="background: url({{ thumb.url }}) center center/cover no-repeat"></div>
+        {% endthumbnail %}
+        <div class="resource-title">
+          <h1>
+            <span>{{ resource.title }} consectetur adipisicing elit. Nemo, adipisci.</span>
+          </h1>
+        </div>
+        <div class="resource-subtitle">
+          <h3>
+            <span>{{ resource.abstract }}</span>
+          </h3>
+        </div>
+      </header>
+      <div class="resource-content">
+        <div class="resource-content__body">
+          {{ resource.content|safe }}
+        </div>
+      </div>
+  </main>
+
+
+{% endblock main_content %}
+
+{% block extra_scripts %}
+  {% render_bundle 'resource' %}
+{% endblock extra_scripts %}
+
