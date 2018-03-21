@@ -4,7 +4,6 @@ from django.utils.text import slugify
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import ButtonHolder, Div, Field, Layout, Submit
 
-
 from .models import Resource
 
 
@@ -14,9 +13,7 @@ class ResourceForm(forms.ModelForm):
         model = Resource
         fields = ('title', 'abstract', 'content', 'tags', 'image', 'organisation', 'privacy')
 
-        labels = {
-            'organisation': 'Group'
-        }
+        labels = {'organisation': 'Group'}
 
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user')
