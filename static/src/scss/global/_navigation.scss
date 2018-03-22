@@ -16,7 +16,11 @@
         align-items: center;
         padding: $width-gap*.75 $width-gap;
 
-        .icon { margin-right: $width-gap/4; }
+        .icon {
+            margin-right: $width-gap/6;
+            width: 2.25rem;
+            height: 2.25rem;
+        }
     }
 
     @media all and (min-width: 541px) {

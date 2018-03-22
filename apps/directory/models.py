@@ -1,3 +1,5 @@
+from urllib.parse import urlparse
+
 from django.conf import settings
 from django.db import models
 from django.urls import reverse
@@ -35,6 +37,9 @@ class Organisation(models.Model):
 
     def get_absolute_url(self):
         return reverse('directory:organisation-detail', kwargs={'slug': self.slug})
+
+    def get_short_url(self):
+        return urlparse(self.url).netloc[4:]
 
     def get_total_private_resources_count(self):
         return self.resources_privacy.approved().count()

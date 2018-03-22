@@ -1,10 +1,13 @@
-<p>{{ organisation.get_total_private_resources_count }}</p>
+{% extends 'base.html' %}
 
 
-{% for resource in object.resource_set.approved %}
-  <p>{{ resource }}</p>
-{% endfor %}
+{% block main_content %}
+  <p>{{ organisation.get_total_private_resources_count }}</p>
 
-<p>{{ object.get_latest_resource }}</p>
-<p>{{ object.get_most_liked_resource }}</p>
-<p>{{ object.get_most_tried_resource }}</p>
+  <p>{{ object.get_latest_resource }}</p>
+  <p>{{ object.get_most_liked_resource }}</p>
+  <p>{{ object.get_most_tried_resource }}</p>
+  {% for person in people %}
+    {{ person.get_full_name }}
+  {% endfor %}
+{% endblock main_content %}

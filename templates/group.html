@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 
+{% load render_bundle from webpack_loader %}
 {% load staticfiles %}
 
 
@@ -54,3 +55,8 @@
 
   <div id="react-app"></div>
 {% endblock main_content %}
+
+{% block extra_scripts %}
+  {% render_bundle 'main' 'js' %}
+{% endblock extra_scripts %}
+
