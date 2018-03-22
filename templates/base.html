@@ -7,6 +7,7 @@
   <head>
     {% render_bundle 'main' 'css' %}
     <title>{% block title %}{{ request.site.name }}{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
     {% if BROWSERSYNC_URL %}
       <script src="{{ BROWSERSYNC_URL }}" async></script>

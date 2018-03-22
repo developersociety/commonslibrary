@@ -16,9 +16,17 @@
     grid-column: auto / span 1;
     background: #fff;
 
+    .profile-image {
+        margin: $width-gap/2 0 0 $width-gap;
+    }
+
     @media all and (min-width: 801px) {
         align-items: center;
         justify-content: center;
+
+        .profile-image {
+            margin: 0;
+        }
     }
 }
 
@@ -37,8 +45,8 @@
 }
 
 .profile-image {
-    width: 8.75rem;
-    height: 8.75rem;
+    width: 5rem;
+    height: 5rem;
     flex-shrink: 0;
 
     &.small {
@@ -112,8 +120,12 @@
 
 
 .profile-description {
-    padding: $width-gap $width-gap $width-gap calc(#{$width-gap} + 3px);
-    font-size: 1.6875rem;
+    padding: 0 $width-gap $width-gap calc(#{$width-gap} + 3px);
+
+    @media all and (min-width: 801px) {
+        padding: $width-gap $width-gap $width-gap calc(#{$width-gap} + 3px);
+        font-size: 1.6875rem;
+    }
 }
 
 .profile-stats {
