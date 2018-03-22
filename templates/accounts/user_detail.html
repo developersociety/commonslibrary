@@ -28,7 +28,7 @@
             {% thumbnail organisation.logo '250' as thumb %}
               <div class="group-logo" style="background: url({{ thumb.url }}) center center/contain no-repeat"></div>
             {% endthumbnail %}
-            <span>{{ organisation.title }}</span>
+            <span><a href="{% url 'directory:organisation-detail' organisation.slug %}">{{ organisation.title }}</a></span>
           </div>
         {% endfor %}
       </div>
@@ -41,7 +41,7 @@
             {% thumbnail organisation.logo '250' as thumb %}
               <div class="group-logo" style="background: url({{ thumb.url }}) center center/contain no-repeat"></div>
             {% endthumbnail %}
-            <span>{{ organisation.title }}</span>
+            <span><a href="{% url 'directory:organisation-detail' organisation.slug %}">{{ organisation.title }}</a></span>
           </div>
         {% endfor %}
       </div>
