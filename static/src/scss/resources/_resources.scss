@@ -107,6 +107,7 @@
     background-color: rgba($color-background, 0.125);
     background-blend-mode: multiply;
     background-size: cover;
+    background-position: center center;
     color: #ffffff;
 }
 
@@ -226,8 +227,15 @@
     max-width: 730px;
 }
 
-.resource-content__body {
+.resource-content {
     background: #ffffff;
+
+    @media all and (min-width: 1261px) {
+        min-height: 25rem;
+    }
+}
+
+.resource-content__body {
     font-size: 1.25rem;
     padding: $width-gap 0 $width-gap*2.5 0;
     line-height: 1.6;

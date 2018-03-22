@@ -1,6 +1,7 @@
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from django.contrib.postgres.fields import CIEmailField
 from django.db import models
+from django.urls import reverse
 from django.utils import timezone
 
 from sorl.thumbnail import ImageField
