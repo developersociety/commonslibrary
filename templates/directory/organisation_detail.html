@@ -1,13 +1,89 @@
 {% extends 'base.html' %}
 
+{% load thumbnail %}
+
+{% block extra_head %}
+  {% if organisation.colour %}
+    <style>
+      body {
+        --page-group: {{ organisation.colour }};
+      }
+    </style>
+  {% endif %}
+{% endblock extra_head %}
 
 {% block main_content %}
-  <p>{{ organisation.get_total_private_resources_count }}</p>
+  <div class="profile-summary">
+    <div class="profile-summary__image">
+      {% thumbnail organisation.logo '1000' as thumb %}
+          <div class="profile-image" style="background: url({{ thumb.url }}) center center/contain no-repeat"></div>
+      {% endthumbnail %}
+      <div class="profile-image__details">
+        <h3 class="profile-image__title">{{ organisation.title }}</h3>
+        {{ organisation.description|linebreaks }}
+      </div>
+    </div>
+    <div class="profile-summary__details">
+      <div class="profile-summary__identity">
+        <h1 class="profile-title">{{ organisation.title }}</h1>
+      </div>
+      <div class="profile-details">
+        <div class="icon-list">
+          {% if organisation.telephone %}
+            <div class="icon-list__row">
+              <svg class="icon">
+                <use xlink:href="#phone"></use>
+              </svg>
+              <div class="contact-detail__value">
+                {{ organisation.telephone }}
+              </div>
+            </div>
+          {% endif %}
+          {% if organisation.url %}
+            <div class="icon-list__row">
+              <svg class="icon">
+                <use xlink:href="#email"></use>
+              </svg>
+              <div class="contact-detail__value">
+                <a href="{{ organisation.url }}" target="_blank">{{ organisation.get_short_url }}</a>
+              </div>
+            </div>
+          {% endif %}
+          {% if organisation.address %}
+            <div class="icon-list__row">
+              <svg class="icon">
+                <use xlink:href="#map"></use>
+              </svg>
+              <div class="contact-detail__value">
+                {{ organisation.address|linebreaks }}
+              </div>
+            </div>
+          {% endif %}
+        </div>
+        <div class="profile-description">
+          {% if organisation.description %}
+            <p class="profile-description">{{ organisation.description }}</p>
+          {% endif %}
+          <p class="profile-stats">
+            <svg class="icon">
+              <use xlink:href="#private"></use>
+            </svg>
+            {{ organisation.get_total_private_resources_count }} private resources.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
 
-  <p>{{ object.get_latest_resource }}</p>
-  <p>{{ object.get_most_liked_resource }}</p>
-  <p>{{ object.get_most_tried_resource }}</p>
-  {% for person in people %}
-    {{ person.get_full_name }}
-  {% endfor %}
+  <div class="resources">
+    <div class="resources-filter">
+      <span>{{ organisation.resource_set.all.count }} Resources</span>
+    </div>
+    <div class="resources-grid">
+      {% for resource in organisation.resource_set.all %}
+        {% include "includes/resource.html" with organisation=organisation %}
+      {% endfor %}
+    </div>
+  </div>
 {% endblock main_content %}
+

@@ -2,9 +2,11 @@
     @extend %grid-template;
 
     background: $color-line;
+    min-height: 20rem;
 
     @media all and (max-width: 800px) {
         display: block;
+        min-height: auto;
     }
 }
 
@@ -35,6 +37,9 @@
 }
 
 .profile-image {
+    width: 8.75rem;
+    height: 8.75rem;
+    flex-shrink: 0;
 
     &.small {
         width: 5rem;
@@ -106,9 +111,13 @@
 }
 
 
-.profile-stats {
+.profile-description {
     padding: $width-gap $width-gap $width-gap calc(#{$width-gap} + 3px);
     font-size: 1.6875rem;
+}
+
+.profile-stats {
+    font-size: 1.25rem;
 }
 
 .profile-details {

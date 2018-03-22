@@ -43,5 +43,5 @@ class ResourceForm(forms.ModelForm):
     def save(self, commit=True):
         self.instance.created_by = self.user
         self.instance.updated_by = self.user
-        self.instance.slug = slugify(self.title)
+        self.instance.slug = slugify(self.instance.title)
         return super().save(commit=commit)
