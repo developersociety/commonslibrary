@@ -16,7 +16,9 @@ export class ResourceFilterOption extends React.Component {
       <span
         className={this.props.className}
         onClick={this.filterClick}>
-        {this.props.filter}
+        <svg className="icon">
+            <use xlinkHref={"#" + this.props.filter}></use>
+        </svg>
       </span>
     );
   }

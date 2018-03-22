@@ -40,11 +40,13 @@ export class SearchOptionManager extends React.Component {
         newState.selectedOptions.push(option)
         return { selectedOptions: newState.selectedOptions }
       })
+      this.props.handleSelection(1);
     } else {
       this.setState(newState => {
         newState.selectedOptions.splice(checkSelected.index, 1)
         return { selectedOptions: newState.selectedOptions }
       })
+      this.props.handleSelection(-1);
     }
   }
 
