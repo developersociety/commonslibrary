@@ -144,9 +144,17 @@
     flex-shrink: 0;
     padding: $width-gap;
 
+    + .icon-list {
+        padding-top: 0;
+    }
+
 
     @media all and (min-width: 1261px) {
         width: calc(100% / 3);
+
+        + .icon-list {
+            padding-top: $width-gap;
+        }
     }
 
     @media all and (min-width: 1521px) {
