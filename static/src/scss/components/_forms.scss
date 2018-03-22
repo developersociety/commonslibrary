@@ -210,3 +210,13 @@
         padding-left: $width-gap;
     }
 }
+
+// editor
+
+.django-ckeditor-widget {
+    width: 100%;
+}
+
+#cke_id_content {
+    width: 100% !important;
+}
