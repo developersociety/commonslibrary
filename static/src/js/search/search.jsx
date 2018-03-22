@@ -10,14 +10,23 @@ export class Search extends React.Component {
   constructor () {
     super()
     this.state = {
-      searchOptions: searchData,
-      searchQuery: ''
+      searchOptions: null,
+      searchQuery: '',
+      searchOptionsSelected: 0
     }
 
     // handler binds
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleSelection = this.handleSelection.bind(this);
   }
+
+  handleSelection(optionStep) {
+    // track number of selected search options
+    this.setState(prevState => ({
+      searchOptionsSelected: prevState.searchOptionsSelected + optionStep
+    })
+  )}
 
   handleChange(event) {
     let query = event.target.value;
@@ -47,6 +56,8 @@ export class Search extends React.Component {
   }
 
   render() {
+    const showSearch = this.state.searchOptions !== null || this.state.searchOptionsSelected > 0;
+
     return(
       <div className="search-bar">
         <form onSubmit={this.handleSubmit} className="search-form">
@@ -61,44 +72,49 @@ export class Search extends React.Component {
           </button>
         </form>
 
-        <div className="search-filter">
-          <div className="search-filter__tags">
-            <div className="search-filter__type">
-              <span>Tags</span>
-              <svg className="icon">
-                <use xlinkHref="#tag"></use>
-              </svg>
+        {showSearch == true &&
+          <div className="search-filter">
+            <div className="search-filter__tags">
+              <div className="search-filter__type">
+                <span>Tags</span>
+                <svg className="icon">
+                  <use xlinkHref="#tag"></use>
+                </svg>
+              </div>
+              <SearchOptionManager
+                ref={(searchTags) => {this.searchTags = searchTags;}}
+                searchOptions={this.state.searchOptions.tags}
+                type="tags"
+                handleSelection={this.handleSelection}/>
             </div>
-            <SearchOptionManager
-              ref={(searchTags) => {this.searchTags = searchTags;}}
-              searchOptions={this.state.searchOptions.tags}
-              type="tags"/>
-          </div>
-          <div className="search-filter__groups">
-            <div className="search-filter__type">
-              <span>Groups</span>
-              <svg className="icon">
-                <use xlinkHref="#groups"></use>
-              </svg>
+            <div className="search-filter__groups">
+              <div className="search-filter__type">
+                <span>Groups</span>
+                <svg className="icon">
+                  <use xlinkHref="#groups"></use>
+                </svg>
+              </div>
+              <SearchOptionManager
+                ref={(searchGroups) => {this.searchGroups = searchGroups;}}
+                searchOptions={this.state.searchOptions.groups}
+                type="groups"
+                handleSelection={this.handleSelection}/>
             </div>
-            <SearchOptionManager
-              ref={(searchGroups) => {this.searchGroups = searchGroups;}}
-              searchOptions={this.state.searchOptions.groups}
-              type="groups"/>
-          </div>
-          <div className="search-filter__people">
-            <div className="search-filter__type">
-              <span>People</span>
-              <svg className="icon">
-                <use xlinkHref="#directory"></use>
-              </svg>
+            <div className="search-filter__people">
+              <div className="search-filter__type">
+                <span>People</span>
+                <svg className="icon">
+                  <use xlinkHref="#directory"></use>
+                </svg>
+              </div>
+              <SearchOptionManager
+                ref={(searchPeople) => {this.searchPeople = searchPeople;}}
+                searchOptions={this.state.searchOptions.people}
+                type="people"
+                handleSelection={this.handleSelection}/>
             </div>
-            <SearchOptionManager
-              ref={(searchPeople) => {this.searchPeople = searchPeople;}}
-              searchOptions={this.state.searchOptions.people}
-              type="people"/>
           </div>
-        </div>
+        }
       </div>
     )
   }
