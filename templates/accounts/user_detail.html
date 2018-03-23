@@ -106,6 +106,14 @@
     </div>
   </div>
 
+  <div class="resources featured-resource">
+    <div class="resources-grid">
+      {% include "includes/resource.html" with resource=user.get_latest_resource resource_category="latest" %}
+      {% include "includes/resource.html" with resource=user.get_most_liked_resource resource_category="Most Liked" %}
+      {% include "includes/resource.html" with resource=user.get_most_tried_resource resource_category="Most Tried" %}
+    </div>
+  </div>
+
   <div class="resources">
     <div class="resources-filter">
       <span>{{ object.resources_created.approved.count }} Resources</span>

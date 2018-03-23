@@ -77,9 +77,9 @@
 
   <div class="resources featured-resource">
     <div class="resources-grid">
-      {% include "includes/resource.html" with resource=user.get_latest_resource organisation=organisation resource_category="latest" %}
-      {% include "includes/resource.html" with resource=user.get_most_liked_resource organisation=organisation resource_category="Most Liked" %}
-      {% include "includes/resource.html" with resource=user.get_most_tried_resource organisation=organisation resource_category="Most Tried" %}
+      {% include "includes/resource.html" with resource=organisation.get_latest_resource resource_category="latest" %}
+      {% include "includes/resource.html" with resource=organisation.get_most_liked_resource resource_category="Most Liked" %}
+      {% include "includes/resource.html" with resource=organisation.get_most_tried_resource resource_category="Most Tried" %}
     </div>
   </div>
 

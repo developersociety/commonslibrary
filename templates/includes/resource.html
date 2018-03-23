@@ -2,7 +2,7 @@
 
 
 {% if resource %}
-  <div class="resource {% if resource.image %}with-image {% endif %}{% if organisation in resource.privacy.all %}private{% endif %}">
+  <div class="resource {% if resource.image %}with-image {% endif %}{% if resource.privacy.all.count != 0 %}private{% endif %}">
     {% thumbnail resource.image '1000' as thumb %}
       <header class='resource-image' style="background-image: url({{ thumb.url }})">
         {% if resource_category %}
