@@ -13,6 +13,10 @@
     }
 }
 
+.explore-type {
+    margin-bottom: $width-gap/2;
+}
+
 .explore-list {
     @extend %reset-box;
 
