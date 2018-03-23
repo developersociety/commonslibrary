@@ -75,13 +75,21 @@
     </div>
   </div>
 
+  <div class="resources featured-resource">
+    <div class="resources-grid">
+      {% include "includes/resource.html" with resource=user.get_latest_resource organisation=organisation resource_category="latest" %}
+      {% include "includes/resource.html" with resource=user.get_most_liked_resource organisation=organisation resource_category="Most Liked" %}
+      {% include "includes/resource.html" with resource=user.get_most_tried_resource organisation=organisation resource_category="Most Tried" %}
+    </div>
+  </div>
+
   <div class="resources">
     <div class="resources-filter">
       <span>{{ organisation.resource_set.all.count }} Resources</span>
     </div>
     <div class="resources-grid">
       {% for resource in organisation.resource_set.all %}
-        {% include "includes/resource.html" with organisation=organisation %}
+        {% include "includes/resource.html" with resource=resource organisation=organisation %}
       {% endfor %}
     </div>
   </div>
