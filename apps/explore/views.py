@@ -1,9 +1,9 @@
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 
-from tags.models import Tag
 from accounts.models import User
 from directory.models import Organisation
+from tags.models import Tag
 
 
 class ExploreView(ListView):

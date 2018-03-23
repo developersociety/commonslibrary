@@ -1,8 +1,9 @@
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 
-from .models import Organisation
 from accounts.models import User
+
+from .models import Organisation
 
 
 class OrganisationListView(ListView):
@@ -15,6 +16,7 @@ class OrganisationDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         return context
+
 
 class OrganisationUserView(DetailView):
     model = User
