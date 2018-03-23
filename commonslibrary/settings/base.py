@@ -63,7 +63,6 @@ THIRD_PARTY_APPS = [
 PROJECT_APPS = [
     'accounts.apps.AccountsConfig',
     'directory.apps.DirectoryConfig',
-    'markdownx',
     'pages.apps.PagesConfig',
     'tags.apps.TagsConfig',
     'resources.apps.ResourcesConfig',
