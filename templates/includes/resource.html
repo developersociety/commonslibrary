@@ -11,6 +11,9 @@
       </header>
     {% endthumbnail %}
     <div class="resource-summary">
+      {% if not resource.image and resource_category %}
+        <p class="resource-category">{{ resource_category }}</p>
+      {% endif %}
       <a href="{{ resource.get_absolute_url }}">{{ resource.title }}</a>
     </div>
     <footer class="resource-footer">
