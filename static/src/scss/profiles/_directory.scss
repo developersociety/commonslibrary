@@ -65,6 +65,10 @@
   a {
     color: inherit;
     text-decoration: none;
+
+    &:hover {
+      color: $color-accent;
+    }
   }
 }
 
@@ -129,6 +133,15 @@
 .directory-person__name {
   margin: $width-gap 0 0 $width-gap;
   font-size: 1.6875rem;
+
+  a {
+    color: inherit;
+    text-decoration: none;
+
+    &:hover {
+      color: $color-accent;
+    }
+  }
 }
 
 .directory-perons__stats {

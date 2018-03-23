@@ -19,7 +19,11 @@
           <div class="resource-user__group" style="background: url({{ thumb.url }}) left center/contain no-repeat">
           </div>
         {% endthumbnail %}
-        <p class="resource-user__name">{{ resource.created_by.get_full_name }}</p>
+        <p class="resource-user__name">
+          <a href="{% url 'directory:organisation-user' resource.created_by.pk %}">
+            {{ resource.created_by.get_full_name }}
+          </a>
+        </p>
       </div>
       <div class="resource-actions">
         <span class="resource-liked">
