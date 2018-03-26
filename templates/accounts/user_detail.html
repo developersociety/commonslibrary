@@ -1,21 +1,128 @@
-<p>Phone: {{ object.phone }}</p>
+{% extends 'base.html' %}
 
-<h4>Organisations</h4>
-{% for organisation in user.approved_organisations.all %}
-  <p>{{ organisation.title }}</p>
-{% endfor %}
+{% load thumbnail %}
 
 
-<p>email: {{ object.email }}</p>
-<p>address: {{ object.address }}</p>
-<p>resources created count: {{ resources_created }}</p>
-<p>resources liked count: {{ resources_liked }}</p>
-<p>resources tried count: {{ resources_tried }}</p>
-<p>lates resource created: {{ object.get_latest_resource }}</p>
-<p>most liked resource: {{ object.get_most_liked_resource }}</p>
-<p>most tried resource: {{ object.get_most_tried_resource }}</p>
+{% block extra_head %}
+  {% if organisation.colour %}
+    <style>
+      body {
+        --page-group: {{ organisation.colour }};
+      }
+    </style>
+  {% endif %}
+{% endblock extra_head %}
 
-<h4>All the resurces<h4>
-{% for resource in object.resources_created.approved %}
-  {{ resource }}
-{% endfor %}
+{% block main_content %}
+  <div class="profile-summary">
+    <div class="profile-summary__image">
+      {% thumbnail user.photo '1200' as thumb %}
+        <div class="profile-image__full" style="background: url({{ thumb.url }}) center center/cover no-repeat">
+        </div>
+      {% endthumbnail %}
+      <div class="profile-image__details">
+        <h3 class="profile-image__title">{{ user.get_full_name }}</h3>
+
+        {% for organisation in user.approved_organisations.all %}
+          <div class="profile-summary__group">
+            {% thumbnail organisation.logo '250' as thumb %}
+              <div class="group-logo" style="background: url({{ thumb.url }}) center center/contain no-repeat"></div>
+            {% endthumbnail %}
+            <span><a href="{% url 'directory:organisation-detail' organisation.slug %}">{{ organisation.title }}</a></span>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+    <div class="profile-summary__details">
+      <div class="profile-summary__identity">
+        <h1 class="profile-summary__title">{{ user.get_full_name }}</h1>
+        {% for organisation in user.approved_organisations.all %}
+          <div class="profile-summary__group">
+            {% thumbnail organisation.logo '250' as thumb %}
+              <div class="group-logo" style="background: url({{ thumb.url }}) center center/contain no-repeat"></div>
+            {% endthumbnail %}
+            <span><a href="{% url 'directory:organisation-detail' organisation.slug %}">{{ organisation.title }}</a></span>
+          </div>
+        {% endfor %}
+      </div>
+      <div class="profile-details">
+        <div class="icon-list">
+          {% if user.phone %}
+            <div class="icon-list__row">
+              <svg class="icon">
+                <use xlink:href="#phone"></use>
+              </svg>
+              <div class="contact-detail__value">
+                {{ user.phone }}
+              </div>
+            </div>
+          {% endif %}
+          <div class="icon-list__row">
+            <svg class="icon">
+              <use xlink:href="#email"></use>
+            </svg>
+            <div class="contact-detail__value">
+              <a href="#">{{ user.email }}</a>
+            </div>
+          </div>
+          {% if user.address %}
+            <div class="icon-list__row">
+              <svg class="icon">
+                <use xlink:href="#map"></use>
+              </svg>
+              <div class="contact-detail__value">
+                {{ user.address|linebreaks }}
+              </div>
+            </div>
+          {% endif %}
+        </div>
+        <div class="icon-list">
+          <div class="icon-list__row">
+            <svg class="icon">
+              <use xlink:href="#create"></use>
+            </svg>
+            <div class="profile-detail__value">
+              {{ resources_created }} resources added
+            </div>
+          </div>
+          <div class="icon-list__row">
+            <svg class="icon">
+              <use xlink:href="#liked"></use>
+            </svg>
+            <div class="profile-detail__value">
+              {{ resources_liked }} resources liked
+            </div>
+          </div>
+          <div class="icon-list__row">
+            <svg class="icon">
+              <use xlink:href="#tried"></use>
+            </svg>
+            <div class="profile-detail__value">
+              {{ resources_liked }} resources tried
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="resources featured-resource">
+    <div class="resources-grid">
+      {% include "includes/resource.html" with resource=user.get_latest_resource resource_category="latest" %}
+      {% include "includes/resource.html" with resource=user.get_most_liked_resource resource_category="Most Liked" %}
+      {% include "includes/resource.html" with resource=user.get_most_tried_resource resource_category="Most Tried" %}
+    </div>
+  </div>
+
+  <div class="resources">
+    <div class="resources-filter">
+      <span>{{ object.resources_created.approved.count }} Resources</span>
+    </div>
+    <div class="resources-grid">
+      {% for resource in object.resources_created.approved %}
+        {% include "includes/resource.html" %}
+      {% endfor %}
+    </div>
+  </div>
+{% endblock main_content %}
+

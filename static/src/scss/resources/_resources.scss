@@ -50,6 +50,30 @@
 
     background: #ffffff;
 
+    a {
+        color: inherit;
+        text-decoration: none;
+    }
+
+    &.private {
+        position: relative;
+
+        &:before {
+            content: '';
+            display: inline-block;
+            width: 2rem;
+            height: 2rem;
+            background: url(../icons/private.svg) center center/contain no-repeat;
+            position: absolute;
+            top: $width-gap/2;
+            right: $width-gap/2;
+        }
+
+        &.with-image:before {
+            filter: invert(100%);
+        }
+    }
+
     @media all and (min-width: 541px) {
         min-height: 20rem;
     }
@@ -66,10 +90,15 @@
     font-size: 1.6875rem;
     padding-bottom: 0;
 
-    .with-image & {
-
-        font-size: 1.25rem;
+    .private & {
+        padding-right: $width-gap*2.25;
     }
+
+    .with-image & {
+        font-size: 1.25rem;
+        padding-right: $width-gap;
+    }
+
 }
 
 .resource-image {
@@ -80,6 +109,7 @@
     background-color: rgba($color-background, 0.125);
     background-blend-mode: multiply;
     background-size: cover;
+    background-position: center center;
     color: #ffffff;
 }
 
@@ -152,12 +182,16 @@
 }
 
 .resource-header__background {
+    @include psuedo-overlay('after', $color-background, 0.25);
+
     position: absolute;
     top: 0;
     right: 0;
     bottom: 0;
     width: 100vw;
     z-index: -10;
+    background-color: $color-accent;
+
 }
 
 .resource-title,
@@ -199,8 +233,15 @@
     max-width: 730px;
 }
 
-.resource-content__body {
+.resource-content {
     background: #ffffff;
+
+    @media all and (min-width: 1261px) {
+        min-height: 25rem;
+    }
+}
+
+.resource-content__body {
     font-size: 1.25rem;
     padding: $width-gap 0 $width-gap*2.5 0;
     line-height: 1.6;
@@ -249,6 +290,10 @@
 
 .resource-detail__actions {
     @extend %flex-row;
+
+    @media all and (max-width: 1060px) {
+        margin-top: 1.9375rem;
+    }
 }
 
 

@@ -1,17 +1,15 @@
 <header class="page-head">
   <nav class="page-navigation">
+    <a href="/" class="page-navigation__home">
+      Commons library
+    </a>
     <ul class="main-navigation">
-      <li class="main-navigation__item">
-        <a href="/">
-          Commons library
-        </a>
-      </li>
       <li class="main-navigation__item">
         <a href="#">
           <svg class="icon">
             <use xlink:href="#explore"></use>
           </svg>
-          Explore
+          <span class="item-text">Explore</span>
         </a>
       </li>
       {% if user.is_authenticated %}
@@ -20,7 +18,7 @@
             <svg class="icon">
               <use xlink:href="#directory"></use>
             </svg>
-            Directory
+            <span class="item-text">Directory</span>
           </a>
         </li>
         <li class="main-navigation__item inverse">
@@ -28,7 +26,7 @@
             <svg class="icon">
               <use xlink:href="#create"></use>
             </svg>
-            Submit resource
+            <span class="item-text">Submit resource</span>
           </a>
         </li>
         <li class="main-navigation__account">

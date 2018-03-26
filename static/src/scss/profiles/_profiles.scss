@@ -2,9 +2,11 @@
     @extend %grid-template;
 
     background: $color-line;
+    min-height: 20rem;
 
     @media all and (max-width: 800px) {
         display: block;
+        min-height: auto;
     }
 }
 
@@ -14,9 +16,17 @@
     grid-column: auto / span 1;
     background: #fff;
 
+    .profile-image {
+        margin: $width-gap/2 0 0 $width-gap;
+    }
+
     @media all and (min-width: 801px) {
         align-items: center;
         justify-content: center;
+
+        .profile-image {
+            margin: 0;
+        }
     }
 }
 
@@ -29,12 +39,20 @@
     text-transform: uppercase;
     font-weight: 600;
 
+    a {
+        color: inherit;
+        text-decoration: none;
+    }
+
     .group-logo {
         margin-right: $width-gap/2;
     }
 }
 
 .profile-image {
+    width: 5rem;
+    height: 5rem;
+    flex-shrink: 0;
 
     &.small {
         width: 5rem;
@@ -106,9 +124,17 @@
 }
 
 
+.profile-description {
+    padding: 0 $width-gap $width-gap calc(#{$width-gap} + 3px);
+
+    @media all and (min-width: 1261px) {
+        padding: $width-gap $width-gap $width-gap calc(#{$width-gap} + 3px);
+        font-size: 1.6875rem;
+    }
+}
+
 .profile-stats {
-    padding: $width-gap $width-gap $width-gap calc(#{$width-gap} + 3px);
-    font-size: 1.6875rem;
+    font-size: 1.25rem;
 }
 
 .profile-details {
@@ -123,9 +149,17 @@
     flex-shrink: 0;
     padding: $width-gap;
 
+    + .icon-list {
+        padding-top: 0;
+    }
+
 
     @media all and (min-width: 1261px) {
         width: calc(100% / 3);
+
+        + .icon-list {
+            padding-top: $width-gap;
+        }
     }
 
     @media all and (min-width: 1521px) {

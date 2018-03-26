@@ -16,7 +16,7 @@
               <div class="directory-group__image" style="background: url({{ thumb.url }}) center center/contain no-repeat"></div>
             {% endthumbnail %}
             <div class="directory-group__name">
-              <h3>{{ object.title }}</h3>
+              <h3><a href="{% url 'directory:organisation-detail' object.slug %}">{{ object.title }}</a></h3>
               <p><a href="{{ object.url }}" target="_blank">{{ object.get_short_url }}</a></p>
             </div>
           </div>
@@ -36,7 +36,9 @@
                 <div class="directory-person__image" style="background: url({{ thumb.url }}) center center/cover no-repeat"></div>
               {% endthumbnail %}
               <div class="directory-person__detail">
-                <div class="directory-person__name">{{ user.get_full_name }}</div>
+                <div class="directory-person__name">
+                  {{ user.get_full_name }}
+                </div>
                 <div class="directory-perons__stats">
                   <span>
                     <svg class="icon">

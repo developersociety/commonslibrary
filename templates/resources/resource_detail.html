@@ -43,7 +43,7 @@
           </div>
           <div class="icon-list__row">
             <svg class="icon">
-              <use xlink:href="#calendar"></use>
+              <use xlink:href="#date"></use>
             </svg>
             <div class="icon-list__content">
               <p>{{ resource.created_at|date:'j F Y H:i' }}</p>
@@ -80,6 +80,8 @@
       <header class="resource-header">
         {% thumbnail resource.image '1200' as thumb %}
           <div class="resource-header__background" style="background: url({{ thumb.url }}) center center/cover no-repeat"></div>
+        {% empty %}
+          <div class="resource-header__background"></div>
         {% endthumbnail %}
         <div class="resource-title">
           <h1>
