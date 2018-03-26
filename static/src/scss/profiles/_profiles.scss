@@ -179,6 +179,16 @@
     @media all and (min-width: 1261px) {
         margin: 0.25rem 0 0 0;
     }
+}
 
+.profile-name {
+
+    @media all and (min-width: 1261px) {
+        margin-top: 0;
+
+        .profile-image + & {
+            margin-top: 0.25rem;
+        }
+    }
 }
 
