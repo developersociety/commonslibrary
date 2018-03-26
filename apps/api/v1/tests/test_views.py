@@ -1,8 +1,7 @@
 from django.urls import reverse
 
 from rest_framework import status
-from rest_framework.test import APIClient
-from rest_framework.test import APITestCase
+from rest_framework.test import APIClient, APITestCase
 
 from accounts.tests.factories import UserFactory
 from directory.tests.factories import OrganisationFactory
