@@ -17,7 +17,7 @@ class ResourceTests(APITestCase):
         ResourceFactory.create(is_approved=False)
         self.organisation = OrganisationFactory.create()
         self.user = UserFactory.create(
-            is_staff=True, approved_organisations=[self.organisation], password='test123',
+            is_staff=True, approved_organisations=[self.organisation], password='test123'
         )
         ResourceFactory.create(privacy=[self.organisation], is_approved=True)
 
