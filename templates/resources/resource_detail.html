@@ -4,6 +4,30 @@
 {% load thumbnail %}
 
 
+{% block header_content %}
+  <div class="resource-detail__actions hide-desktop">
+    <a href="#" class="resource-action__button">
+      <svg class="icon">
+        <use xlink:href="#liked"></use>
+      </svg>
+      <span>
+        {{ resource.likes.count }}
+        <strong>Liked</strong>
+      </span>
+    </a>
+    <a href="#" class="resource-action__button">
+      <svg class="icon">
+        <use xlink:href="#tried"></use>
+      </svg>
+      <span>
+        {{ resource.tried.count }}
+        <strong>Tried</strong>
+      </span>
+    </a>
+  </div>
+  {{ block.super }}
+{% endblock header_content %}
+
 {% block main_content %}
   <main class="resource-holder">
     <aside class="resource-sidebar" id="resource_sidebar">

@@ -37,7 +37,7 @@
               {% endthumbnail %}
               <div class="directory-person__detail">
                 <div class="directory-person__name">
-                  {{ user.get_full_name }}
+                  <a href="{% url 'directory:organisation-user' user.pk %}">{{ user.get_full_name }}</a>
                 </div>
                 <div class="directory-perons__stats">
                   <span>
