@@ -294,10 +294,6 @@
 
 .resource-detail__actions {
     @extend %flex-row;
-
-    @media all and (max-width: 1060px) {
-        margin-top: 1.9375rem;
-    }
 }
 
 
