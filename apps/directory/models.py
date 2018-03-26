@@ -6,6 +6,7 @@ from django.urls import reverse
 
 from ckeditor.fields import RichTextField
 from colorfield.fields import ColorField
+from sorl.thumbnail import ImageField
 
 from resources.models import Resource
 
@@ -18,7 +19,7 @@ class Organisation(models.Model):
     telephone = models.CharField(max_length=16, blank=True)
     address = RichTextField(blank=True)
     description = RichTextField(blank=True)
-    logo = models.ImageField(blank=True)
+    logo = ImageField(blank=True, upload_to='uploads/directory/organisation/%Y/%m/%d')
     email = models.EmailField(blank=True)
     created_by = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='organisations_created'
