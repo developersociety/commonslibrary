@@ -1,5 +1,6 @@
 from rest_framework import serializers
 
+from directory.models import Organisation
 from resources.models import Resource
 
 
@@ -23,3 +24,10 @@ class ResourceSerializer(serializers.ModelSerializer):
 
     def get_url(self, obj):
         return obj.get_absolute_url()
+
+
+class OrganisationSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Organisation
+        fields = ('title',)

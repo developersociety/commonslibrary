@@ -31,3 +31,14 @@ class ResourceTests(APITestCase):
         response = client.get(self.url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data), 2)
+
+
+class OrganisationTests(APITestCase):
+
+    def setUp(self):
+        OrganisationFactory.create()
+
+    def test_get_list(self):
+        url = reverse('organisation-list')
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)

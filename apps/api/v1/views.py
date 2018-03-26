@@ -3,9 +3,10 @@ from django.db.models import Q
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters, viewsets
 
+from directory.models import Organisation
 from resources.models import Resource
 
-from .serializers import ResourceSerializer
+from .serializers import OrganisationSerializer, ResourceSerializer
 
 
 class ResourceViewSet(viewsets.ReadOnlyModelViewSet):
@@ -27,3 +28,10 @@ class ResourceViewSet(viewsets.ReadOnlyModelViewSet):
         else:
             qs = Resource.objects.approved().filter(privacy__isnull=True)
         return qs
+
+
+class OrganisationViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = Organisation.objects.all()
+    serializer_class = OrganisationSerializer
+    filter_backends = (filters.SearchFilter,)
+    search_fields = ('title',)
