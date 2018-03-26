@@ -30,7 +30,7 @@ class ResourceFactory(factory.django.DjangoModelFactory):
             return
         if extracted:
             for privacy in extracted:
-                self.privarcy.add(privacy)
+                self.privacy.add(privacy)
 
     @factory.post_generation
     def tried(self, created, extracted, **kwargs):

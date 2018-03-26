@@ -51,16 +51,19 @@ DEFAULT_APPS = [
 
 THIRD_PARTY_APPS = [
     'ckeditor',
+    'colorfield',
     'crispy_forms',
+    'django_filters',
     'django_mptt_admin',
     'mptt',
     'raven.contrib.django.raven_compat',
+    'rest_framework',
     'sorl.thumbnail',
     'webpack_loader',
-    'colorfield',
 ]
 
 PROJECT_APPS = [
+    'api.v1.apps.ApiConfig',
     'accounts.apps.AccountsConfig',
     'directory.apps.DirectoryConfig',
     'pages.apps.PagesConfig',
@@ -289,3 +292,13 @@ CKEDITOR_CONFIGS = {
     }
 }
 # yapf: enable
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend',),
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
+    ],
+}

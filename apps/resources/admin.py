@@ -45,6 +45,16 @@ class ResourceAdmin(admin.ModelAdmin):
             qs = qs.filter(organisation__in=request.user.approved_organisations.all()).distinct()
         return qs
 
+    def get_readonly_fields(self, request, obj=None):
+        readonly_fields = [
+            'abstract', 'id', 'created_by', 'updated_by', 'created_at', 'updated_at', 'likes',
+            'tried', 'hits', 'organisation', 'tags',
+        ]
+        user = request.user
+        if obj.organisation not in user.approved_organisations.all():
+            readonly_fields.append('privacy')
+        return readonly_fields
+
     def get_list_filter(self, request):
         """
         Returns a sequence containing the fields to be displayed as filters in

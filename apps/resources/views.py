@@ -8,7 +8,6 @@ from .models import Resource
 
 
 class ResourceCreateView(LoginRequiredMixin, CreateView):
-    queryset = Resource.objects.approved()
     form_class = ResourceForm
     template_name = 'resources/resource_form.html'
     success_url = '/'
@@ -33,4 +32,6 @@ class ResourceDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        self.object.hits += 1
+        self.object.save()
         return context

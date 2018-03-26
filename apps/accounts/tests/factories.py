@@ -25,3 +25,11 @@ class UserFactory(factory.django.DjangoModelFactory):
             if is_staff:
                 return manager.create_staff(*args, **kwargs)
         return manager.create_user(*args, **kwargs)
+
+    @factory.post_generation
+    def approved_organisations(self, created, extracted, **kwargs):
+        if not created:
+            return
+        if extracted:
+            for organisation in extracted:
+                self.approved_organisations.add(organisation)
