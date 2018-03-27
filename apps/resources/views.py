@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models import F
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView
 
@@ -32,6 +33,6 @@ class ResourceDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        self.object.hits += 1
+        self.object.hits = F('hits') + 1
         self.object.save()
         return context
