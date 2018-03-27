@@ -54,3 +54,14 @@ class TagTests(APITestCase):
         url = reverse('tag-list')
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+
+class UserTests(APITestCase):
+
+    def setUp(self):
+        UserFactory.create()
+
+    def test_get_list(self):
+        url = reverse('user-list')
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)

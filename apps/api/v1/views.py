@@ -3,11 +3,12 @@ from django.db.models import Q
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters, viewsets
 
+from accounts.models import User
 from directory.models import Organisation
 from resources.models import Resource
 from tags.models import Tag
 
-from .serializers import OrganisationSerializer, ResourceSerializer, TagSerializer
+from .serializers import OrganisationSerializer, ResourceSerializer, TagSerializer, UserSerializer
 
 
 class ResourceViewSet(viewsets.ReadOnlyModelViewSet):
@@ -62,3 +63,10 @@ class TagViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = TagSerializer
     filter_backends = (filters.SearchFilter,)
     search_fields = ('id', 'title',)
+
+
+class UserViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = User.objects.filter(is_active=True)
+    serializer_class = UserSerializer
+    filter_backends = (filters.SearchFilter,)
+    search_fields = ('id', 'first_name', 'last_name')
