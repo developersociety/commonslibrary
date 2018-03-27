@@ -25,10 +25,10 @@ export class ResourceFilter extends React.Component {
   handleClick(filter, e) {
     this.setState(prevState => ({
       activeFilter: filter,
-      order: prevState.activeFilter == filter ? !prevState.reverse : false
+      reverse: !prevState.reverse
     }));
 
-    this.props.updateResourceOrder(filter)
+    this.props.updateResourceOrder(filter, this.state.reverse)
   }
 
   render() {
