@@ -12,10 +12,13 @@ class ResourceViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Resource.objects.approved()
     serializer_class = ResourceSerializer
     filter_backends = (DjangoFilterBackend, filters.SearchFilter)
-    filter_fields = ('id', 'title', 'abstract', 'content', 'organisation', 'privacy',)
-    search_fields = ('abstract',)
+    filter_fields = (
+        'id', 'title', 'abstract', 'content', 'created_by', 'organisation', 'privacy',
+    )
+    search_fields = ('title', 'abstract')
 
     def get_queryset(self):
+        print(self.request.META.get('REMOTE_USER'))
         user = self.request.user
         if user.is_authenticated():
             if user.is_superuser:

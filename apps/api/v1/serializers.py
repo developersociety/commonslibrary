@@ -1,3 +1,5 @@
+from django.urls import reverse
+
 from rest_framework import serializers
 from sorl.thumbnail import get_thumbnail
 
@@ -11,6 +13,7 @@ class ResourceSerializer(serializers.ModelSerializer):
     tried_count = serializers.SerializerMethodField()
     url = serializers.SerializerMethodField()
     created_by = serializers.SerializerMethodField()
+    created_by_link = serializers.SerializerMethodField()
     organisation_logo = serializers.SerializerMethodField()
     is_private = serializers.SerializerMethodField()
 
@@ -18,7 +21,7 @@ class ResourceSerializer(serializers.ModelSerializer):
         model = Resource
         fields = (
             'id', 'title', 'image', 'abstract', 'organisation', 'likes_count', 'tried_count',
-            'hits', 'url', 'created_by', 'organisation_logo', 'is_private',
+            'hits', 'url', 'created_by', 'created_by_link', 'organisation_logo', 'is_private',
         )
 
     def get_likes_count(self, obj):
@@ -32,6 +35,9 @@ class ResourceSerializer(serializers.ModelSerializer):
 
     def get_created_by(self, obj):
         return obj.created_by.get_full_name()
+
+    def get_created_by_link(self, obj):
+        return reverse('directory:organisation-user', kwargs={'pk': obj.created_by.pk})
 
     def get_image(self, obj):
         thumb = get_thumbnail(obj.image, '800', quality=99)
