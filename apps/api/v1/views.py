@@ -19,23 +19,29 @@ class ResourceViewSet(viewsets.ReadOnlyModelViewSet):
         if user.is_authenticated():
             if user.is_superuser:
                 qs = Resource.objects.approved().select_related(
-                    'organisation', 'created_by'
+                    'organisation',
+                    'created_by',
                 ).prefetch_related(
-                    'likes', 'tried'
+                    'likes',
+                    'tried',
                 )
             elif user.approved_organisations.exists():
                 qs = Resource.objects.select_related(
-                    'organisation', 'created_by'
+                    'organisation',
+                    'created_by',
                 ).prefetch_related(
-                    'likes', 'tried'
+                    'likes',
+                    'tried',
                 ).filter(
-                    Q(is_approved=True) | Q(privacy__in=user.approved_organisations.all())
+                    Q(is_approved=True) | Q(privacy__in=user.approved_organisations.all()),
                 ).distinct()
         else:
             qs = Resource.objects.approved().select_related(
-                'organisation', 'created_by',
+                'organisation',
+                'created_by',
             ).prefetch_related(
-                'likes', 'tried'
+                'likes',
+                'tried',
             ).filter(
                 privacy__isnull=True,
             )
