@@ -1,9 +1,9 @@
 from rest_framework import serializers
 from sorl.thumbnail import get_thumbnail
 
-from tags.models import Tag
 from directory.models import Organisation
 from resources.models import Resource
+from tags.models import Tag
 
 
 class ResourceSerializer(serializers.ModelSerializer):
