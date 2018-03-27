@@ -2,23 +2,19 @@ import React from 'react';
 
 import { ResourceFilterOption } from './resource_filter_option';
 
-const alphabeticalData = require('../data_sample/alphabetical.json');
-const dateData = require('../data_sample/date.json');
-const likedData = require('../data_sample/liked.json');
-const triedData = require('../data_sample/tried.json');
-
-const dataOrders = {
-    'date': dateData,
-    'alphabetical': alphabeticalData,
-    'liked': likedData,
-    'tried': triedData
+const api = '/api/v1/resources/?format=json'
+const filterOptions = {
+  'created_at': 'date',
+  'title': 'alphabetical',
+  'likes_count': 'liked',
+  'tried_count': 'tried'
 }
 
 export class ResourceFilter extends React.Component {
   constructor() {
     super();
     this.state = {
-      activeFilter: 'date',
+      activeFilter: 'created_at',
       reserve: false
     }
 
@@ -32,15 +28,12 @@ export class ResourceFilter extends React.Component {
       order: prevState.activeFilter == filter ? !prevState.reverse : false
     }));
 
-    // fake API call, replace with real one
-    let newData = dataOrders[filter];
-
-    this.props.updateResourceList(newData);
+    this.props.updateResourceOrder(filter)
   }
 
   render() {
     const active = this.state.activeFilter;
-    const sortOptions = ['date', 'alphabetical', 'liked', 'tried']
+    const sortOptions = ['created_at', 'title', 'likes_count', 'tried_count']
 
     return (
       <div className="resources-filter">
@@ -51,6 +44,7 @@ export class ResourceFilter extends React.Component {
             <ResourceFilterOption
               key={index}
               filter={option}
+              icon={filterOptions[option]}
               className={'resource-filter__option ' + (active == option ? 'active' : '')}
               handleClick={this.handleClick}/>
           )}

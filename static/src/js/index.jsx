@@ -16,21 +16,32 @@ class ResourceList extends React.Component {
     }
 
     // handler binds
-    this.updateResourceList = this.updateResourceList.bind(this);
+    this.updateResourceOrder = this.updateResourceOrder.bind(this);
   }
 
   componentDidMount() {
-    fetch(api)
+    fetch(api, {
+        method: 'get',
+        credentials: 'same-origin'
+      })
       .then(response => response.json())
       .then(data => this.setState({
         resources: data
       }))
   }
 
-  updateResourceList(newResourceList) {
-    this.setState({
-      resources: newResourceList
-    })
+  updateResourceOrder(filter) {
+    fetch(api + '&ordering=' + filter, {
+        method: 'get',
+        credentials: 'same-origin'
+      })
+      .then(response => response.json())
+      .then(data => {
+        this.setState({
+          resources: data
+        })
+      })
+
   }
 
   render() {
@@ -39,7 +50,7 @@ class ResourceList extends React.Component {
         <Search />
         <ResourceFilter
           resourceCount={this.state.resources.length}
-          updateResourceList={this.updateResourceList}/>
+          updateResourceOrder={this.updateResourceOrder}/>
         <div className="resources-grid">
           {this.state.resources.map((resource, index) =>
             <Resource
