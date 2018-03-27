@@ -5,8 +5,9 @@ from rest_framework import filters, viewsets
 
 from directory.models import Organisation
 from resources.models import Resource
+from tags.models import Tag
 
-from .serializers import OrganisationSerializer, ResourceSerializer
+from .serializers import OrganisationSerializer, ResourceSerializer, TagSerializer
 
 
 class ResourceViewSet(viewsets.ReadOnlyModelViewSet):
@@ -52,5 +53,12 @@ class ResourceViewSet(viewsets.ReadOnlyModelViewSet):
 class OrganisationViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Organisation.objects.all()
     serializer_class = OrganisationSerializer
+    filter_backends = (filters.SearchFilter,)
+    search_fields = ('id', 'title',)
+
+
+class TagViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = Tag.objects.all()
+    serializer_class = TagSerializer
     filter_backends = (filters.SearchFilter,)
     search_fields = ('id', 'title',)

@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from sorl.thumbnail import get_thumbnail
 
+from tags.models import Tag
 from directory.models import Organisation
 from resources.models import Resource
 
@@ -52,4 +53,11 @@ class OrganisationSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Organisation
+        fields = ('id', 'title',)
+
+
+class TagSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Tag
         fields = ('id', 'title',)
