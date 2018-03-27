@@ -14,6 +14,9 @@ export class Resource extends React.Component {
         </header>
       );
     }
+    if (this.props.resource.is_private) {
+        resourceClass = resourceClass + ' private' ;
+    }
 
     return (
       <div className={resourceClass}>
