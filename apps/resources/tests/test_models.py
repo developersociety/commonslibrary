@@ -1,17 +1,19 @@
 from django.test import TestCase
 
 from accounts.tests.factories import UserFactory
-from directory.tests.factories import OrganisationFactory
-from resources.models import Resource
+# from directory.tests.factories import OrganisationFactory
+# from resources.models import Resource
 from resources.tests.factories import ResourceFactory
 
 
-class ResourceManagerTestCase(TestCase):
+class ResourceModelTestCase(TestCase):
 
-    def setUp(self):
-        self.organisation = OrganisationFactory.create()
-        self.user = UserFactory.create(approved_organisations=[self.organisation])
-        ResourceFactory.objects.create(is_approved=True, privacy=self.organisation)
-
-    def test_anonymous_approved_resources(self):
-        self.assertEqaul(Resource.objects.approved().count(), 1)
+    def test_get_carousel_resources(self):
+        ResourceFactory.create(
+            title='first', likes=UserFactory.create_batch(size=10), is_approved=True
+        )
+        ResourceFactory.create(
+            title='second', tried=UserFactory.create_batch(size=5), hits=20, is_approved=True
+        )
+        # resources = Resource.get_carousel_resources()
+        # TODO

@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.db import models
+from django.db.models.functions import Cast
 from django.urls import reverse
 
 from ckeditor.fields import RichTextField
@@ -74,6 +75,37 @@ class Resource(models.Model):
         return organisation in self.privacy.all()
 
     @staticmethod
-    def get_carousel_resources(user):
-        approved_resources = Resource.objects.approved(user)
-        return approved_resources
+    def get_carousel_resources(user=None):
+        resources = Resource.objects.approved(user=user).annotate(
+            popular_count=(
+                Cast(models.Count('tried'), models.PositiveIntegerField()) +
+                Cast(models.Count('likes'), models.PositiveIntegerField()) + models.F('hits')
+            )
+        ).order_by('-popular_count', '-created_by')[:5]
+        return resources
+
+    @staticmethod
+    def get_latest(user=None):
+        try:
+            resource = Resource.objects.approved(user=user).earliest('created_at')
+        except Resource.DoesNotExist:
+            resource = None
+        return resource
+
+    @staticmethod
+    def get_most_liked(user=None, limit=1):
+        resources = Resource.objects.approved(user=user).annotate(
+            most_liked=models.Count('likes')
+        ).order_by(
+            '-most_liked',
+        )[:limit]
+        return resources
+
+    @staticmethod
+    def get_most_tried(user=None, limit=1):
+        resources = Resource.objects.approved(user=user).annotate(
+            most_tried=models.Count('tried')
+        ).order_by(
+            '-most_tried',
+        )[:limit]
+        return resources

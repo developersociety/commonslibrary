@@ -65,3 +65,11 @@ class Organisation(models.Model):
         except Resource.DoesNotExist:
             resource = None
         return resource
+
+    @staticmethod
+    def get_most_published(self):
+        return Organisation.objects.annotate(
+            most_published=models.Count('resource'),
+        ).order_by(
+            '-most_published',
+        )

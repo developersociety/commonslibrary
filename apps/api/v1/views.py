@@ -1,6 +1,5 @@
 from distutils.util import strtobool
 
-from django.db.models import Q
 from django.http.response import Http404
 
 from django_filters.rest_framework import DjangoFilterBackend
@@ -27,7 +26,7 @@ class ResourceViewSet(viewsets.ReadOnlyModelViewSet):
         user = self.request.user
         if user.is_authenticated():
             if user.is_superuser:
-                qs = Resource.objects.approved().select_related(
+                qs = Resource.objects.approved(user).select_related(
                     'organisation',
                     'created_by',
                 ).prefetch_related(
@@ -35,14 +34,12 @@ class ResourceViewSet(viewsets.ReadOnlyModelViewSet):
                     'tried',
                 )
             elif user.approved_organisations.exists():
-                qs = Resource.objects.select_related(
+                qs = Resource.objects.approved(user).select_related(
                     'organisation',
                     'created_by',
                 ).prefetch_related(
                     'likes',
                     'tried',
-                ).filter(
-                    Q(is_approved=True) | Q(privacy__in=user.approved_organisations.all()),
                 ).distinct()
         else:
             qs = Resource.objects.approved().select_related(
