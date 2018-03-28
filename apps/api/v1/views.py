@@ -53,4 +53,4 @@ class OrganisationViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Organisation.objects.all()
     serializer_class = OrganisationSerializer
     filter_backends = (filters.SearchFilter,)
-    search_fields = ('title',)
+    search_fields = ('id', 'title',)
