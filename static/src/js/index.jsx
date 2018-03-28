@@ -6,18 +6,25 @@ import { Search } from './search/search';
 import { Resource } from './resource/resource';
 import { ResourceFilter } from './resource/resource_filter';
 
-
-const resourceData = require('./data_sample/resources.json');
+const api = '/api/v1/resources/?format=json'
 
 class ResourceList extends React.Component {
   constructor () {
     super()
     this.state = {
-      resources: resourceData
+      resources: []
     }
 
     // handler binds
     this.updateResourceList = this.updateResourceList.bind(this);
+  }
+
+  componentDidMount() {
+    fetch(api)
+      .then(response => response.json())
+      .then(data => this.setState({
+        resources: data
+      }))
   }
 
   updateResourceList(newResourceList) {
@@ -36,8 +43,8 @@ class ResourceList extends React.Component {
         <div className="resources-grid">
           {this.state.resources.map((resource, index) =>
             <Resource
-              key={resource.resource.id}
-              resource={resource.resource}
+              key={resource.id}
+              resource={resource}
             />
           )}
         </div>

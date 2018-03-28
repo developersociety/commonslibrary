@@ -7,6 +7,7 @@ from resources.models import Resource
 
 class ResourceSerializer(serializers.ModelSerializer):
     organisation = serializers.CharField(source='organisation.title', read_only=True)
+    image = serializers.SerializerMethodField()
     likes_count = serializers.SerializerMethodField()
     tried_count = serializers.SerializerMethodField()
     url = serializers.SerializerMethodField()
@@ -17,8 +18,8 @@ class ResourceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Resource
         fields = (
-            'id', 'title', 'abstract', 'organisation', 'likes_count', 'tried_count', 'hits', 'url',
-            'created_by', 'organisation_logo', 'is_private',
+            'id', 'title', 'image', 'abstract', 'organisation', 'likes_count', 'tried_count',
+            'hits', 'url', 'created_by', 'organisation_logo', 'is_private',
         )
 
     def get_likes_count(self, obj):
@@ -32,6 +33,11 @@ class ResourceSerializer(serializers.ModelSerializer):
 
     def get_created_by(self, obj):
         return obj.created_by.get_full_name()
+
+    def get_image(self, obj):
+        thumb = get_thumbnail(obj.image, '800', quality=99)
+        if thumb:
+            return thumb.url
 
     def get_organisation_logo(self, obj):
         thumb = get_thumbnail(obj.organisation.logo, '150', quality=99)
