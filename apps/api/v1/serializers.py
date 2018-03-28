@@ -3,8 +3,10 @@ from django.urls import reverse
 from rest_framework import serializers
 from sorl.thumbnail import get_thumbnail
 
+from accounts.models import User
 from directory.models import Organisation
 from resources.models import Resource
+from tags.models import Tag
 
 
 class ResourceSerializer(serializers.ModelSerializer):
@@ -59,3 +61,21 @@ class OrganisationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Organisation
         fields = ('id', 'title',)
+
+
+class TagSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Tag
+        fields = ('id', 'title',)
+
+
+class UserSerializer(serializers.ModelSerializer):
+    full_name = serializers.SerializerMethodField()
+
+    class Meta:
+        model = User
+        fields = ('id', 'full_name',)
+
+    def get_full_name(self, obj):
+        return obj.get_full_name()
