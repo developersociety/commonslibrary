@@ -72,3 +72,8 @@ class Resource(models.Model):
 
     def private_for_organisation(self, organisation):
         return organisation in self.privacy.all()
+
+    @staticmethod
+    def get_carousel_resources(user):
+        approved_resources = Resource.objects.approved(user)
+        return approved_resources
