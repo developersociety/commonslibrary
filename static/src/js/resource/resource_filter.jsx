@@ -33,19 +33,18 @@ export class ResourceFilter extends React.Component {
 
   render() {
     const active = this.state.activeFilter;
-    const sortOptions = ['created_at', 'title', 'likes_count', 'tried_count']
 
     return (
       <div className="resources-filter">
         <span>{this.props.resourceCount} Resources</span>
         <div className="resource-filter__controls">
           <p>Sort by</p>
-          {sortOptions.map((option, index) =>
+          {Object.keys(filterOptions).map((index, option) =>
             <ResourceFilterOption
-              key={index}
-              filter={option}
-              icon={filterOptions[option]}
-              className={'resource-filter__option ' + (active == option ? 'active' : '')}
+              key={option}
+              filter={index}
+              icon={filterOptions[index]}
+              className={'resource-filter__option ' + (active == index ? 'active' : '')}
               handleClick={this.handleClick}/>
           )}
         </div>
