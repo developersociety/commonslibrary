@@ -70,11 +70,14 @@ export class SearchOptionManager extends React.Component {
 
         )}
         {searchOptions.map(tag =>
-            <SearchOption
-              key={tag.id}
-              option={tag}
-              handleOptionSelection={this.handleOptionSelection} />
+          <SearchOption
+            key={tag.id}
+            option={tag}
+            handleOptionSelection={this.handleOptionSelection} />
         )}
+        {(this.state.selectedOptions.length == 0 && searchOptions.length == 0) &&
+          <div className="tag inactive">None selected</div>
+        }
       </div>
     )
   }

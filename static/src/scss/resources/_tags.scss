@@ -30,6 +30,12 @@
         color: $color-accent;
     }
 
+    &.inactive {
+        background: none;
+        color: rgba($color-text, 0.5);
+        padding-left: 0.5rem;
+    }
+
     @media all and (max-width: 540px) {
         padding: $width-gap/6 $width-gap/4;
         font-size: 1rem;
