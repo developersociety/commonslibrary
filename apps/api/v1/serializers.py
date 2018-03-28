@@ -71,11 +71,11 @@ class TagSerializer(serializers.ModelSerializer):
 
 
 class UserSerializer(serializers.ModelSerializer):
-    full_name = serializers.SerializerMethodField()
+    title = serializers.SerializerMethodField()
 
     class Meta:
         model = User
-        fields = ('id', 'full_name',)
+        fields = ('id', 'title',)
 
-    def get_full_name(self, obj):
+    def get_title(self, obj):
         return obj.get_full_name()

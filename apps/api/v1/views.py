@@ -57,18 +57,18 @@ class OrganisationViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Organisation.objects.all()
     serializer_class = OrganisationSerializer
     filter_backends = (filters.SearchFilter,)
-    search_fields = ('id', 'title',)
+    search_fields = ('id', '^title',)
 
 
 class TagViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Tag.objects.all()
     serializer_class = TagSerializer
     filter_backends = (filters.SearchFilter,)
-    search_fields = ('id', 'title',)
+    search_fields = ('id', '^title',)
 
 
 class UserViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = User.objects.filter(is_active=True)
     serializer_class = UserSerializer
     filter_backends = (filters.SearchFilter,)
-    search_fields = ('id', 'first_name', 'last_name')
+    search_fields = ('id', '^first_name', '^last_name')

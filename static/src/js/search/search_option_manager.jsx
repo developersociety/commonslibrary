@@ -53,7 +53,7 @@ export class SearchOptionManager extends React.Component {
   render() {
     let searchOptions = []
     this.props.searchOptions.map(tag => {
-      if (!this.checkSelected(tag.option).selected) {
+      if (!this.checkSelected(tag).selected) {
         searchOptions.push(tag)
       }
     })
@@ -71,8 +71,8 @@ export class SearchOptionManager extends React.Component {
         )}
         {searchOptions.map(tag =>
             <SearchOption
-              key={tag.option.id}
-              option={tag.option}
+              key={tag.id}
+              option={tag}
               handleOptionSelection={this.handleOptionSelection} />
         )}
       </div>
