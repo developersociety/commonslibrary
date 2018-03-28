@@ -3,6 +3,7 @@ from django.urls import reverse
 from rest_framework import serializers
 from sorl.thumbnail import get_thumbnail
 
+from directory.models import Organisation
 from resources.models import Resource
 
 
@@ -51,3 +52,10 @@ class ResourceSerializer(serializers.ModelSerializer):
 
     def get_is_private(self, obj):
         return obj.privacy.exists()
+
+
+class OrganisationSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Organisation
+        fields = ('id', 'title',)
