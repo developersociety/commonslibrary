@@ -32,8 +32,6 @@ export class ResourceFilter extends React.Component {
   }
 
   render() {
-    const active = this.state.activeFilter;
-
     return (
       <div className="resources-filter">
         <span>{this.props.resourceCount} Resources</span>
@@ -44,7 +42,7 @@ export class ResourceFilter extends React.Component {
               key={index}
               filter={filter}
               icon={filterOptions[filter]}
-              className={'resource-filter__option ' + (active == filter ? 'active' : '')}
+              active={this.state.activeFilter}
               handleClick={this.handleClick}/>
           )}
         </div>
