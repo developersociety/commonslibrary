@@ -32,6 +32,7 @@
 
     &.inactive {
         opacity: 0.125;
+        cursor: initial;
     }
 
     @media all and (max-width: 540px) {

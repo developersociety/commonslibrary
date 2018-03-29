@@ -2,6 +2,10 @@
     @extend %grid-template;
 
     background: $color-line;
+
+    @media all and (min-width: 541px) {
+        min-height: 20rem;
+    }
 }
 
 .resources-filter {

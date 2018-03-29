@@ -110,20 +110,24 @@ export class Search extends React.Component {
 
     // Add search queries to object
     const searchCriteria = {
-      search: query,
       tags: tagQuery,
       organisation: organisationQuery,
       created_by: peopleQuery
     }
 
-    // Create search query string from selected options
     let searchQuery = '';
-    {Object.keys(searchCriteria).map((query, index) => {
-      if (searchCriteria[query] != '') {
-        searchQuery += ('&' + query + '=' + searchCriteria[query])
-      }
-    })}
 
+    if (query != '' && tags.length == 0 && organisations.length == 0 && people.length == 0) {
+      searchQuery = '&search=' + query;
+    } else {
+      let searchQuery = '';
+      {Object.keys(searchCriteria).map((query, index) => {
+        if (searchCriteria[query] != '') {
+          searchQuery += ('&' + query + '=' + searchCriteria[query])
+        }
+      })}
+    }
+    // Create search query string from selected options
     this.props.updateResourceQuery(searchQuery);
   }
 
