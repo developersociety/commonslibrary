@@ -14,6 +14,8 @@ class ResourceSerializer(serializers.ModelSerializer):
     image = serializers.SerializerMethodField()
     likes_count = serializers.SerializerMethodField()
     tried_count = serializers.SerializerMethodField()
+    user_liked = serializers.SerializerMethodField()
+    user_tried = serializers.SerializerMethodField()
     url = serializers.SerializerMethodField()
     created_by = serializers.SerializerMethodField()
     created_by_link = serializers.SerializerMethodField()
@@ -25,6 +27,7 @@ class ResourceSerializer(serializers.ModelSerializer):
         fields = (
             'id', 'title', 'image', 'abstract', 'organisation', 'likes_count', 'tried_count',
             'hits', 'url', 'created_by', 'created_by_link', 'organisation_logo', 'is_private',
+            'user_liked', 'user_tried',
         )
 
     def get_likes_count(self, obj):
@@ -32,6 +35,12 @@ class ResourceSerializer(serializers.ModelSerializer):
 
     def get_tried_count(self, obj):
         return obj.tried.count()
+
+    def get_user_liked(self, obj):
+        return self.context['request'].user in obj.likes.all()
+
+    def get_user_tried(self, obj):
+        return self.context['request'].user in obj.tried.all()
 
     def get_url(self, obj):
         return obj.get_absolute_url()

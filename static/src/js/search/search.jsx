@@ -188,6 +188,12 @@ export class Search extends React.Component {
               handleSelection={this.handleSelection}/>
           </div>
         </div>
+
+        {this.state.searchQuery.length > 0 &&
+          <div className="search-prompt">
+            <p>Click blocks to add them to your search, or just hit return for a keyword search.</p>
+          </div>
+        }
       </div>
     )
   }

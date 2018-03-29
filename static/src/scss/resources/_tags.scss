@@ -31,9 +31,7 @@
     }
 
     &.inactive {
-        background: none;
-        color: rgba($color-text, 0.5);
-        padding-left: 0.5rem;
+        opacity: 0.125;
     }
 
     @media all and (max-width: 540px) {
