@@ -5,8 +5,9 @@ from django.http.response import Http404
 
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters, status, viewsets
+from rest_framework.decorators import detail_route
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
-
 from accounts.models import User
 from directory.models import Organisation
 from resources.models import Resource
@@ -19,9 +20,9 @@ from .serializers import OrganisationSerializer, ResourceSerializer, TagSerializ
 class ResourceViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = ResourceSerializer
     filter_backends = (DjangoFilterBackend, filters.SearchFilter)
-    permission_classes = (ResourcePermission,)
     filter_fields = ('organisation', 'privacy',)
     search_fields = ('title', 'abstract',)
+    permission_classes = (AllowAny,)
 
     def get_queryset(self):
         user = self.request.user
@@ -56,30 +57,25 @@ class ResourceViewSet(viewsets.ReadOnlyModelViewSet):
             )
         return qs
 
-    def update(self, request, pk=None):
-        try:
-            obj = self.get_object()
-        except Http404:
-            # Using 406 as the 404 causes middleware issues for the pages.
-            response = Response(status=status.HTTP_406_NOT_ACCEPTABLE)
+    @detail_route(methods=['put'], permission_classes=[IsAuthenticated])
+    def tried(self, request, pk=None):
+        obj = self.get_object()
+        like = strtobool(request.data.get('tried'))
+        if like:
+            obj.tried.add(request.user)
         else:
-            if 'like' in request.data:
-                like = strtobool(request.data.get('like'))
-                if like:
-                    obj.likes.add(request.user)
-                else:
-                    obj.likes.remove(request.user)
-                response = Response(status=status.HTTP_202_ACCEPTED)
-            elif 'tried' in request.data:
-                tried = strtobool(request.data.get('tried'))
-                if tried:
-                    obj.tried.add(request.user)
-                else:
-                    obj.tried.remove(request.user)
-                response = Response(status=status.HTTP_202_ACCEPTED)
-            else:
-                response = Response(status=status.HTTP_403_FORBIDDEN)
-        return response
+            obj.tried.remove(request.user)
+        return Response(status=status.HTTP_202_ACCEPTED)
+
+    @detail_route(methods=['put'], permission_classes=[IsAuthenticated])
+    def like(self, request, pk=None):
+        obj = self.get_object()
+        like = strtobool(request.data.get('like'))
+        if like:
+            obj.likes.add(request.user)
+        else:
+            obj.likes.remove(request.user)
+        return Response(status=status.HTTP_202_ACCEPTED)
 
 
 class OrganisationViewSet(viewsets.ReadOnlyModelViewSet):

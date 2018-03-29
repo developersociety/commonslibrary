@@ -14,7 +14,8 @@ class ResourceTests(APITestCase):
     def setUp(self):
         self.url = reverse('resource-list')
         self.resource_1 = ResourceFactory.create(is_approved=True)
-        self.update_url = reverse('resource-detail', kwargs={'pk': self.resource_1.id})
+        self.like_url = reverse('resource-like', kwargs={'pk': self.resource_1.id})
+        self.tried_url = reverse('resource-tried', kwargs={'pk': self.resource_1.id})
         self.organisation = OrganisationFactory.create()
         self.user = UserFactory.create(
             is_staff=True, approved_organisations=[self.organisation], password='test123'
@@ -36,26 +37,26 @@ class ResourceTests(APITestCase):
         self.assertEqual(len(response.data), 2)
 
     def test_update_with_anonymous(self):
-        response = self.client.put(self.update_url, {'like': 'true'}, format='json')
+        response = self.client.put(self.like_url, {'like': 'true'}, format='json')
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
     def test_update_likes_with_auth(self):
-        response = self.logged_in_client.put(self.update_url, {'like': 'true'}, format='json')
+        response = self.logged_in_client.put(self.like_url, {'like': 'true'}, format='json')
 
         self.assertEqual(response.status_code, status.HTTP_202_ACCEPTED)
         self.assertTrue(self.user in self.resource_1.likes.all())
 
-        response = self.logged_in_client.put(self.update_url, {'like': 'false'}, format='json')
+        response = self.logged_in_client.put(self.like_url, {'like': 'false'}, format='json')
         self.assertEqual(response.status_code, status.HTTP_202_ACCEPTED)
         self.assertFalse(self.user in self.resource_1.likes.all())
 
     def test_update_tries_with_auth(self):
-        response = self.logged_in_client.put(self.update_url, {'tried': 'true'}, format='json')
+        response = self.logged_in_client.put(self.tried_url, {'tried': 'true'}, format='json')
 
         self.assertEqual(response.status_code, status.HTTP_202_ACCEPTED)
         self.assertTrue(self.user in self.resource_1.tried.all())
 
-        response = self.logged_in_client.put(self.update_url, {'tried': 'false'}, format='json')
+        response = self.logged_in_client.put(self.tried_url, {'tried': 'false'}, format='json')
         self.assertEqual(response.status_code, status.HTTP_202_ACCEPTED)
         self.assertFalse(self.user in self.resource_1.tried.all())
 
