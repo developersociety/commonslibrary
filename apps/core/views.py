@@ -2,10 +2,10 @@ from django.views.generic import TemplateView
 
 from resources.models import Resource
 
-from .mixins import ArticlesViewMixin
+from .mixins import ResourcesViewMixin
 
 
-class HomeView(TemplateView, ArticlesViewMixin):
+class HomeView(TemplateView, ResourcesViewMixin):
     template_name = 'core/home.html'
 
     def get_context_data(self, **kwargs):
@@ -14,5 +14,5 @@ class HomeView(TemplateView, ArticlesViewMixin):
         return context
 
 
-class SearchView(TemplateView, ArticlesViewMixin):
+class SearchView(TemplateView, ResourcesViewMixin):
     template_name = 'core/search.html'

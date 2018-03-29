@@ -2,7 +2,8 @@ from directory.models import Organisation
 from resources.models import Resource
 
 
-class ArticlesViewMixin(object):
+class ResourcesViewMixin(object):
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data()
         context['latest_resource'] = Resource.get_latest(self.request.user)
