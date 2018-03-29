@@ -1,7 +1,10 @@
+from datetime import timedelta
+
 from django.conf import settings
 from django.db import models
 from django.db.models.functions import Cast
 from django.urls import reverse
+from django.utils import timezone
 
 from ckeditor.fields import RichTextField
 from sorl.thumbnail import ImageField
@@ -75,13 +78,16 @@ class Resource(models.Model):
         return organisation in self.privacy.all()
 
     @staticmethod
-    def get_carousel_resources(user=None):
-        resources = Resource.objects.approved(user=user).annotate(
+    def get_carousel_resources(user=None, limit=5):
+        """ Get most popular resources for the last 7 days. """
+        resources = Resource.objects.approved(user=user).filter(
+            created_at__gte=timezone.now() - timedelta(days=7)
+        ).annotate(
             popular_count=(
                 Cast(models.Count('tried'), models.PositiveIntegerField()) +
                 Cast(models.Count('likes'), models.PositiveIntegerField()) + models.F('hits')
             )
-        ).order_by('-popular_count', '-created_by')[:5]
+        ).order_by('-popular_count')[:limit]
         return resources
 
     @staticmethod

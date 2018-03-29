@@ -6,7 +6,7 @@ from resources.models import Resource
 
 
 class ResourceFactory(factory.django.DjangoModelFactory):
-    title = factory.Sequence(lambda n: '{id}{job}'.format(id=n, job=factory.Faker('job')))
+    title = factory.Sequence(lambda n: '{id}'.format(id=n))
     abstract = factory.Faker('job')
     content = factory.Faker('job')
     organisation = factory.SubFactory(OrganisationFactory)

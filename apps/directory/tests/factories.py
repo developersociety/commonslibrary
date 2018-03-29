@@ -5,7 +5,7 @@ from directory.models import Organisation
 
 
 class OrganisationFactory(factory.django.DjangoModelFactory):
-    title = factory.Sequence(lambda n: '{id}{job}'.format(id=n, job=factory.Faker('job')))
+    title = factory.Sequence(lambda n: '{id}'.format(id=n))
     created_by = factory.SubFactory(UserFactory)
     updated_by = factory.LazyAttribute(lambda a: a.created_by)
 

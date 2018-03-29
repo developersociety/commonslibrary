@@ -24,33 +24,13 @@ class ResourceViewSet(viewsets.ReadOnlyModelViewSet):
 
     def get_queryset(self):
         user = self.request.user
-        if user.is_authenticated():
-            if user.is_superuser:
-                qs = Resource.objects.approved(user).select_related(
-                    'organisation',
-                    'created_by',
-                ).prefetch_related(
-                    'likes',
-                    'tried',
-                )
-            elif user.approved_organisations.exists():
-                qs = Resource.objects.approved(user).select_related(
-                    'organisation',
-                    'created_by',
-                ).prefetch_related(
-                    'likes',
-                    'tried',
-                ).distinct()
-        else:
-            qs = Resource.objects.approved().select_related(
-                'organisation',
-                'created_by',
-            ).prefetch_related(
-                'likes',
-                'tried',
-            ).filter(
-                privacy__isnull=True,
-            )
+        qs = Resource.objects.approved(user).select_related(
+            'organisation',
+            'created_by',
+        ).prefetch_related(
+            'likes',
+            'tried',
+        )
         return qs
 
     def update(self, request, pk=None):
