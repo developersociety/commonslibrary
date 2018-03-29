@@ -1,8 +1,10 @@
+from datetime import timedelta
 from urllib.parse import urlparse
 
 from django.conf import settings
 from django.db import models
 from django.urls import reverse
+from django.utils import timezone
 
 from ckeditor.fields import RichTextField
 from colorfield.fields import ColorField
@@ -27,7 +29,7 @@ class Organisation(models.Model):
     updated_by = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='organisations_updated'
     )
-    created_at = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateTimeField(default=timezone.now)
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
@@ -67,9 +69,12 @@ class Organisation(models.Model):
         return resource
 
     @staticmethod
-    def get_most_published(self):
-        return Organisation.objects.annotate(
+    def get_most_published_this_week():
+        return Organisation.objects.filter(
+            resource__created_at__gte=timezone.now() - timedelta(days=7),
+            resource__is_approved=True,
+        ).annotate(
             most_published=models.Count('resource'),
         ).order_by(
             '-most_published',
-        )
+        ).first()
