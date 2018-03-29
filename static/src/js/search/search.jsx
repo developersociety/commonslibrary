@@ -75,6 +75,7 @@ export class Search extends React.Component {
       searchQuery: query
     });
 
+    // If query longer that 2, fetch data and set state
     if (query.length > 2) {
       this.fetchTagsData(query)
       this.fetchOrganisationsData(query)
