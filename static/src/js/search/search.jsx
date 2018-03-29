@@ -100,7 +100,10 @@ export class Search extends React.Component {
 
   render() {
     // Only show search if options are available or selected in previous search
-    const showSearch = this.state.searchQuery.length > 2 || this.state.searchOptionsSelected > 0;
+    const showSearch = this.searchOptionsSelected > 0
+        || this.state.searchTagsOptions.length > 0
+        || this.state.searchOrganisationsOptions.length > 0
+        || this.state.searchPeopleOptions.length > 0;
 
     return(
       <div className="search-bar">

@@ -13,22 +13,13 @@ const filterOptions = {
 export class ResourceFilter extends React.Component {
   constructor() {
     super();
-    this.state = {
-      activeFilter: 'created_at',
-      reserve: false
-    }
 
     // handler binds
     this.handleClick = this.handleClick.bind(this);
   }
 
   handleClick(filter, e) {
-    this.setState(prevState => ({
-      activeFilter: filter,
-      reverse: !prevState.reverse
-    }));
-
-    this.props.updateResourceOrder(filter, this.state.reverse)
+    this.props.updateResourceOrder(filter)
   }
 
   render() {
@@ -42,7 +33,7 @@ export class ResourceFilter extends React.Component {
               key={index}
               filter={filter}
               icon={filterOptions[filter]}
-              active={this.state.activeFilter}
+              active={this.props.ordering}
               handleClick={this.handleClick}/>
           )}
         </div>
