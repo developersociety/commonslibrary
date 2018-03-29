@@ -6,7 +6,7 @@ from tags.models import Tag
 
 
 class TagFactory(factory.django.DjangoModelFactory):
-    title = factory.Sequence(lambda n: '{id}{job}'.format(id=n, job=factory.Faker('job')))
+    title = factory.Sequence(lambda n: 'Tag {}'.format(n))
     slug = factory.LazyAttribute(lambda a: slugify(a.title))
 
     class Meta:
