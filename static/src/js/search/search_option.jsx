@@ -23,7 +23,7 @@ export class SearchOption extends React.Component {
       <div
         className={activeClass}
         onClick={this.optionClick}>
-        {this.props.option.name}
+        {this.props.option.title}
         {optionIcon}
       </div>
     )
