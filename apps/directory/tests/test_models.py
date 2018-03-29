@@ -4,7 +4,6 @@ from django.test import TestCase
 from django.utils import timezone
 
 from directory.models import Organisation
-from resources.models import Resource
 from resources.tests.factories import ResourceFactory
 
 from .factories import OrganisationFactory

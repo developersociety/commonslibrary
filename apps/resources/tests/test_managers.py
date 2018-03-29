@@ -11,7 +11,8 @@ class ResourceManagerTestCase(TestCase):
     def setUp(self):
         self.organisation = OrganisationFactory.create()
         self.organisation_1 = OrganisationFactory.create()
-        self.superuser = UserFactory.create(approved_organisations=[self.organisation])
+        self.user = UserFactory.create(approved_organisations=[self.organisation])
+        self.superuser = UserFactory.create(is_superuser=True)
 
     def test_anonymours_user_resources(self):
         ResourceFactory.create(privacy=[self.organisation], is_approved=True)
@@ -24,4 +25,12 @@ class ResourceManagerTestCase(TestCase):
         ResourceFactory.create(privacy=[self.organisation_1], is_approved=True)
         ResourceFactory.create_batch(size=2, is_approved=True)
         ResourceFactory.create(is_approved=False)
-        self.assertEqual(Resource.objects.approved(self.superuser).count(), 3)
+        self.assertEqual(Resource.objects.approved(self.user).count(), 3)
+
+    def test_superuser_resources(self):
+        ResourceFactory.create(privacy=[self.organisation, self.organisation_1], is_approved=True)
+        ResourceFactory.create(privacy=[self.organisation_1], is_approved=True)
+        ResourceFactory.create_batch(size=2, is_approved=True)
+        ResourceFactory.create(is_approved=False)
+
+        self.assertEqual(Resource.objects.approved(self.superuser).count(), 4)

@@ -70,6 +70,7 @@ class Organisation(models.Model):
 
     @staticmethod
     def get_most_published_this_week():
+        """ Returns the organisation which published most resources this week. """
         return Organisation.objects.filter(
             resource__created_at__gte=timezone.now() - timedelta(days=7),
             resource__is_approved=True,
