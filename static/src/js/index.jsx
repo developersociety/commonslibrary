@@ -64,6 +64,12 @@ class ResourceList extends React.Component {
   }
 
   render() {
+    let resourceGridClass = 'resources-grid ';
+
+    if (this.state.resources.length == 0) {
+      resourceGridClass += 'no-resources';
+    }
+
     return(
       <div className="resources">
         <Search
@@ -74,7 +80,7 @@ class ResourceList extends React.Component {
           ordering={this.state.ordering}
           updateResourceOrder={this.updateResourceOrder}
           />
-        <div className="resources-grid">
+        <div className={resourceGridClass}>
           {this.state.resources.map((resource, index) =>
             <Resource
               key={resource.id}
