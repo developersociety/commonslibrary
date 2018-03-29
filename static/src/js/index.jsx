@@ -12,7 +12,8 @@ class ResourceList extends React.Component {
   constructor () {
     super()
     this.state = {
-      resources: []
+      resources: [],
+      ordering: 'created_at'
     }
 
     // handler binds
@@ -38,7 +39,8 @@ class ResourceList extends React.Component {
       .then(response => response.json())
       .then(data => {
         this.setState({
-          resources: data
+          resources: data,
+          ordering: filter
         })
       })
 
@@ -50,6 +52,7 @@ class ResourceList extends React.Component {
         <Search />
         <ResourceFilter
           resourceCount={this.state.resources.length}
+          ordering={this.state.ordering}
           updateResourceOrder={this.updateResourceOrder}/>
         <div className="resources-grid">
           {this.state.resources.map((resource, index) =>
