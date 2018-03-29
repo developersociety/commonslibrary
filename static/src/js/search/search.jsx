@@ -22,6 +22,7 @@ export class Search extends React.Component {
     this.fetchPeopleData = this.fetchPeopleData.bind(this);
   }
 
+  // Get tags data from API based on query
   fetchTagsData(query) {
     fetch('/api/v1/tags' + '?search=' + query, {
         method: 'get',
@@ -35,6 +36,7 @@ export class Search extends React.Component {
       })
   }
 
+  // Get organisations data from API based on query
   fetchOrganisationsData(query) {
     fetch('/api/v1/organisations' + '?search=' + query, {
         method: 'get',
@@ -48,6 +50,7 @@ export class Search extends React.Component {
       })
   }
 
+  // Get people data from API based on query
   fetchPeopleData(query) {
     fetch('/api/v1/users' + '?search=' + query, {
         method: 'get',
@@ -61,13 +64,14 @@ export class Search extends React.Component {
       })
   }
 
-  // track number of selected search options
+  // Track number of selected search options
   handleSelection(increment) {
     this.setState(prevState => ({
       searchOptionsSelected: prevState.searchOptionsSelected + increment
     })
   )}
 
+  // Watch input field for changes
   handleChange(event) {
     let query = event.target.value;
 
