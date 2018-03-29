@@ -10,9 +10,7 @@ class ResourceFilter(FilterSet):
     organisation = django_filters.filters.ModelMultipleChoiceFilter(
         queryset=Organisation.objects.all()
     )
-    created_by = django_filters.filters.ModelMultipleChoiceFilter(
-        queryset=User.objects.all()
-    )
+    created_by = django_filters.filters.ModelMultipleChoiceFilter(queryset=User.objects.all())
 
     class Meta:
         model = Resource
