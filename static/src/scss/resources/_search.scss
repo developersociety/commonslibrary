@@ -121,6 +121,10 @@
     background: rgba($color-background, 0.05);
     min-width: 0;
 
+    &.show-false {
+        display: none;
+    }
+
     @media all and (max-width: 540px) {
         grid-gap: 0;
         background: none;

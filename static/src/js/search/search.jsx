@@ -61,10 +61,10 @@ export class Search extends React.Component {
       })
   }
 
-  handleSelection(optionStep) {
-    // track number of selected search options
+  // track number of selected search options
+  handleSelection(increment) {
     this.setState(prevState => ({
-      searchOptionsSelected: prevState.searchOptionsSelected + optionStep
+      searchOptionsSelected: prevState.searchOptionsSelected + increment
     })
   )}
 
@@ -75,7 +75,7 @@ export class Search extends React.Component {
       searchQuery: query
     });
 
-    // If query longer that 2, fetch data and set state
+    // If query longer that 2, fetch data from API and set state
     if (query.length > 2) {
       this.fetchTagsData(query)
       this.fetchOrganisationsData(query)
@@ -92,15 +92,40 @@ export class Search extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    let tags = this.searchTags.state.selectedOptions;
-    let groups = this.searchOrganisations.state.selectedOptions;
-    let people = this.searchPeople.state.selectedOptions;
-    let query = this.state.searchQuery
+
+    // Get current selected tags from child state
+    const tags = this.searchTags.state.selectedOptions;
+    const organisations = this.searchOrganisations.state.selectedOptions;
+    const people = this.searchPeople.state.selectedOptions;
+    const query = this.state.searchQuery;
+
+    // map through selected options add prefix if more than one value
+    let tagQuery = tags.map(tag => tag.id).join('&tags=');
+    let organisationQuery = organisations.map(organisations => organisations.id).join('&organisation=');
+    let peopleQuery = people.map(people => people.id).join('&created_by=');
+
+    // Add search queries to object
+    const searchCriteria = {
+      search: query,
+      tags: tagQuery,
+      organisation: organisationQuery,
+      created_by: peopleQuery
+    }
+
+    // Create search query string from selected options
+    let searchQuery = '';
+    {Object.keys(searchCriteria).map((query, index) => {
+      if (searchCriteria[query] != '') {
+        searchQuery += ('&' + query + '=' + searchCriteria[query])
+      }
+    })}
+
+    this.props.updateResourceQuery(searchQuery);
   }
 
   render() {
     // Only show search if options are available or selected in previous search
-    const showSearch = this.searchOptionsSelected > 0
+    const showSearch = this.state.searchOptionsSelected > 0
         || this.state.searchTagsOptions.length > 0
         || this.state.searchOrganisationsOptions.length > 0
         || this.state.searchPeopleOptions.length > 0;
@@ -119,49 +144,46 @@ export class Search extends React.Component {
           </button>
         </form>
 
-        {showSearch == true &&
-          <div className="search-filter">
-
-            <div className="search-filter__tags">
-              <div className="search-filter__type">
-                <span>Tags</span>
-                <svg className="icon">
-                  <use xlinkHref="#tag"></use>
-                </svg>
-              </div>
-              <SearchOptionManager
-                ref={(searchTags) => {this.searchTags = searchTags;}}
-                searchOptions={this.state.searchTagsOptions}
-                handleSelection={this.handleSelection}/>
+        <div className={"search-filter show-" + showSearch}>
+          <div className="search-filter__tags">
+            <div className="search-filter__type">
+              <span>Tags</span>
+              <svg className="icon">
+                <use xlinkHref="#tag"></use>
+              </svg>
             </div>
-
-            <div className="search-filter__groups">
-              <div className="search-filter__type">
-                <span>Groups</span>
-                <svg className="icon">
-                  <use xlinkHref="#groups"></use>
-                </svg>
-              </div>
-              <SearchOptionManager
-                ref={(searchOrganisations) => {this.searchOrganisations = searchOrganisations;}}
-                searchOptions={this.state.searchOrganisationsOptions}
-                handleSelection={this.handleSelection}/>
-            </div>
-
-            <div className="search-filter__people">
-              <div className="search-filter__type">
-                <span>People</span>
-                <svg className="icon">
-                  <use xlinkHref="#directory"></use>
-                </svg>
-              </div>
-              <SearchOptionManager
-                ref={(searchPeople) => {this.searchPeople = searchPeople;}}
-                searchOptions={this.state.searchPeopleOptions}
-                handleSelection={this.handleSelection}/>
-            </div>
+            <SearchOptionManager
+              ref={(searchTags) => {this.searchTags = searchTags;}}
+              searchOptions={this.state.searchTagsOptions}
+              handleSelection={this.handleSelection}/>
           </div>
-        }
+
+          <div className="search-filter__groups">
+            <div className="search-filter__type">
+              <span>Groups</span>
+              <svg className="icon">
+                <use xlinkHref="#groups"></use>
+              </svg>
+            </div>
+            <SearchOptionManager
+              ref={(searchOrganisations) => {this.searchOrganisations = searchOrganisations;}}
+              searchOptions={this.state.searchOrganisationsOptions}
+              handleSelection={this.handleSelection}/>
+          </div>
+
+          <div className="search-filter__people">
+            <div className="search-filter__type">
+              <span>People</span>
+              <svg className="icon">
+                <use xlinkHref="#directory"></use>
+              </svg>
+            </div>
+            <SearchOptionManager
+              ref={(searchPeople) => {this.searchPeople = searchPeople;}}
+              searchOptions={this.state.searchPeopleOptions}
+              handleSelection={this.handleSelection}/>
+          </div>
+        </div>
       </div>
     )
   }
