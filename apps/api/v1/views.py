@@ -8,15 +8,14 @@ from directory.models import Organisation
 from resources.models import Resource
 from tags.models import Tag
 
+from .filters import ResourceFilter
 from .serializers import OrganisationSerializer, ResourceSerializer, TagSerializer, UserSerializer
 
 
 class ResourceViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = ResourceSerializer
     filter_backends = (DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter)
-    filter_fields = (
-        'id', 'title', 'abstract', 'content', 'created_by', 'organisation', 'privacy',
-    )
+    filter_class = ResourceFilter
     search_fields = ('title', 'abstract',)
 
     def get_queryset(self):
