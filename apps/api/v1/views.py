@@ -1,19 +1,18 @@
 from distutils.util import strtobool
 
 from django.db.models import Q
-from django.http.response import Http404
 
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters, status, viewsets
 from rest_framework.decorators import detail_route
-from rest_framework.permissions import IsAuthenticated, AllowAny
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
+
 from accounts.models import User
 from directory.models import Organisation
 from resources.models import Resource
 from tags.models import Tag
 
-from .permissions import ResourcePermission
 from .serializers import OrganisationSerializer, ResourceSerializer, TagSerializer, UserSerializer
 
 
