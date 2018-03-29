@@ -6,7 +6,7 @@ import { Search } from './search/search';
 import { Resource } from './resource/resource';
 import { ResourceFilter } from './resource/resource_filter';
 
-let api = '/api/v1/resources/?format=json'
+const api = '/api/v1/resources/?format=json'
 
 class ResourceList extends React.Component {
   constructor () {
