@@ -12,12 +12,18 @@ export class ResourceFilterOption extends React.Component {
   }
 
   render() {
+    let filterClass = 'resource-filter__option';
+
+    if (this.props.active === this.props.filter) {
+        filterClass = filterClass + ' active'
+    }
+
     return (
       <span
-        className={this.props.className}
+        className={filterClass}
         onClick={this.filterClick}>
         <svg className="icon">
-            <use xlinkHref={"#" + this.props.filter}></use>
+            <use xlinkHref={"#" + this.props.icon}></use>
         </svg>
       </span>
     );

@@ -30,6 +30,11 @@
         color: $color-accent;
     }
 
+    &.inactive {
+        opacity: 0.125;
+        cursor: initial;
+    }
+
     @media all and (max-width: 540px) {
         padding: $width-gap/6 $width-gap/4;
         font-size: 1rem;

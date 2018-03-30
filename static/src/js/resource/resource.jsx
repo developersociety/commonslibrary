@@ -14,6 +14,9 @@ export class Resource extends React.Component {
         </header>
       );
     }
+    if (this.props.resource.is_private) {
+        resourceClass = resourceClass + ' private' ;
+    }
 
     return (
       <div className={resourceClass}>
@@ -27,7 +30,11 @@ export class Resource extends React.Component {
                 className="resource-user__group"
                 style={{background: 'url(' + this.props.resource.organisation_logo + ') left center/contain no-repeat'}}>
             </div>
-            <p className="resource-user__name">{this.props.resource.created_by}</p>
+            <p className="resource-user__name">
+              <a href={this.props.resource.created_by_link}>
+                {this.props.resource.created_by}
+              </a>
+            </p>
           </div>
           <ResourceAction
             likes={this.props.resource.likes_count}
