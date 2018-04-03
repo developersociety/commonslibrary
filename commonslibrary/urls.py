@@ -8,7 +8,7 @@ from django.http import HttpResponseServerError
 from django.template import TemplateDoesNotExist, loader
 from django.views.generic import TemplateView
 
-from core.views import HomeView, SearchView, ExploreView
+from core.views import ExploreView, HomeView, SearchView
 
 admin.site.site_title = 'Commons Library'
 admin.site.site_header = 'Commons Library'
