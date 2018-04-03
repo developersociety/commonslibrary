@@ -2,8 +2,8 @@ from django.urls import reverse
 
 from django_webtest import WebTest
 
-from pages.tests.factories import PageFactory
 from accounts.tests.factories import UserFactory
+from pages.tests.factories import PageFactory
 
 
 class UserDetailTestView(WebTest):
