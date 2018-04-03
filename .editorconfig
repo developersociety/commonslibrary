@@ -23,6 +23,9 @@ indent_size = 2
 indent_size = 2
 insert_final_newline = ignore
 
+[*.jsx]
+index_size = 2
+
 # Third party files which may have a wide variety of standards
 [**/static/vendor/**]
 indent_style = ignore

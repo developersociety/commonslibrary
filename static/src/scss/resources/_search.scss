@@ -121,10 +121,21 @@
     background: rgba($color-background, 0.05);
     min-width: 0;
 
+    &.show-false {
+        display: none;
+    }
+
     @media all and (max-width: 540px) {
         grid-gap: 0;
         background: none;
         padding: $width-gap/4 0;
         border-top: 3px solid rgba($color-background, 0.05);
     }
+}
+
+.search-prompt {
+    font-size: 1.25rem;
+    text-align: center;
+    padding: $width-gap/4 $width-gap/2;
+    background: rgba($color-background, 0.05);
 }

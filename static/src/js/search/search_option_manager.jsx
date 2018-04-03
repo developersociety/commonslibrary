@@ -52,11 +52,15 @@ export class SearchOptionManager extends React.Component {
 
   render() {
     let searchOptions = []
+    let searchOptionsAvailable = false
     this.props.searchOptions.map(tag => {
-      if (!this.checkSelected(tag.option).selected) {
+      if (!this.checkSelected(tag).selected) {
         searchOptions.push(tag)
       }
     })
+    if(this.state.selectedOptions.length == 0 && searchOptions.length == 0) {
+        searchOptionsAvailable = true
+    }
 
     return (
       <div className="tag-list">
@@ -70,11 +74,14 @@ export class SearchOptionManager extends React.Component {
 
         )}
         {searchOptions.map(tag =>
-            <SearchOption
-              key={tag.option.id}
-              option={tag.option}
-              handleOptionSelection={this.handleOptionSelection} />
+          <SearchOption
+            key={tag.id}
+            option={tag}
+            handleOptionSelection={this.handleOptionSelection} />
         )}
+        {searchOptionsAvailable &&
+          <div className="tag inactive">None selected</div>
+        }
       </div>
     )
   }
