@@ -30,6 +30,8 @@ class UserRegistrationTestView(WebTest):
         user = User.objects.get(email=email)
 
         self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.location, '/accounts/thank-you/')
+
         self.assertTrue(User.objects.filter(email=email).exists())
         self.assertFalse(user.is_active)
         # Organisation is always required.
