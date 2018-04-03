@@ -13,7 +13,7 @@ class PageDetailView(DetailView):
     slug_field = 'url'
 
     def get_object(self, queryset=None):
-        url = self.kwargs.get(self.slug_url_kwarg)
+        url = self.kwargs.get(self.slug_url_kwarg) or self.request.path
         if not url.startswith('/'):
             url = '/' + url
 

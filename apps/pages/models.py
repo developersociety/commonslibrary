@@ -28,7 +28,7 @@ class Page(models.Model):
     )
     author = models.CharField(max_length=256, blank=True)
     url = models.CharField(max_length=128, db_index=True, validators=[validate_page_url])
-    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
+    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True)
     created_by = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='pages_created'
     )
