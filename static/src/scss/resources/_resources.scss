@@ -27,6 +27,10 @@
     }
 }
 
+.featured-resources {
+    border-top: 3px solid $color-line;
+}
+
 .resources-filter {
     @extend %flex-row;
     @extend %meta;

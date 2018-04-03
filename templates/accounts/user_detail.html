@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 
+{% load render_bundle from webpack_loader %}
 {% load thumbnail %}
 
 
@@ -114,15 +115,10 @@
     </div>
   </div>
 
-  <div class="resources">
-    <div class="resources-filter">
-      <span>{{ object.resources_created.approved.count }} Resources</span>
-    </div>
-    <div class="resources-grid">
-      {% for resource in object.resources_created.approved %}
-        {% include "includes/resource.html" %}
-      {% endfor %}
-    </div>
-  </div>
+  <div id="react-app" data-user="{{ user.pk }}"></div>
 {% endblock main_content %}
+
+{% block extra_scripts %}
+  {% render_bundle 'main' 'js' %}
+{% endblock extra_scripts %}
 
