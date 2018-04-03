@@ -1,5 +1,5 @@
 from django.conf import settings
-from django.http import Http404, HttpResponseNotAllowed
+from django.http import Http404
 from django.utils.deprecation import MiddlewareMixin
 
 from .views import PageDetailView
@@ -13,7 +13,7 @@ class PageFallbackMiddleware(MiddlewareMixin):
         try:
             try:
                 return PageDetailView.as_view()(request, url=request.path_info).render()
-            except HttpResponseNotAllowed:
+            except AttributeError:
                 return response
         # Return the original response if any errors happened. Because this
         # is a middleware, we can't assume the errors will be caught elsewhere.
