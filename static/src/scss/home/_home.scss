@@ -1,22 +1,16 @@
 .home-intro__wrapper {
     width: 100%;
     overflow: hidden;
-}
-
-.home-intro {
-    display: grid;
-    grid-template-columns: repeat(5, 100vw);
-
-
-    @media all and (min-width: 1061px) {
-        grid-template-columns: 50vw repeat(4, 75vw);
-    }
+    background: $color-background;
 }
 
 .home-intro__slide {
     @extend %flex-column;
 
     padding: $width-gap;
+    min-height: 22rem;
+    width: 100%;
+    background: #ffffff;
 
     &.inverted {
         background: $color-background;
@@ -30,6 +24,14 @@
 
     .resource-footer {
         padding: $width-gap 0 0 0;
+    }
+
+    @media all and (min-width: 1061px) {
+        width: 75%;
+
+        &.small {
+            width: 50%;
+        }
     }
 }
 
@@ -47,4 +49,9 @@
             margin: 0 0.25rem 0 0;
         }
     }
+}
+
+@keyframes slide {
+    0% { transform: translateX(0%); }
+    100% { transform: translateX(-100%); }
 }
