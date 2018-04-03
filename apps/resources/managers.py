@@ -6,7 +6,7 @@ class ResourceManager(models.Manager):
 
     def approved(self, user=None):
         if user:
-            if user.is_authenticated():
+            if user.is_authenticated:
                 if user.is_superuser:
                     qs = self.filter(is_approved=True)
                 else:

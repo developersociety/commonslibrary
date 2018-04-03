@@ -13,6 +13,7 @@ class ResourceTests(APITestCase):
 
     def setUp(self):
         self.url = reverse('resource-list')
+
         self.resource_1 = ResourceFactory.create(is_approved=True)
         self.like_url = reverse('resource-like', kwargs={'pk': self.resource_1.id})
         self.tried_url = reverse('resource-tried', kwargs={'pk': self.resource_1.id})
@@ -26,7 +27,6 @@ class ResourceTests(APITestCase):
 
         ResourceFactory.create(is_approved=False)
         ResourceFactory.create(privacy=[self.organisation], is_approved=True)
-        self.resource_1 = ResourceFactory.create(is_approved=True)
 
         self.url = reverse('resource-list')
         self.update_url = reverse('resource-detail', kwargs={'pk': self.resource_1.id})
