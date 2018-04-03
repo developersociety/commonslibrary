@@ -142,6 +142,9 @@
 
 .resource-category {
     @extend %meta;
+    @extend %flex-row;
+
+    justify-content: space-between;
 }
 
 .resource-footer {
@@ -156,6 +159,11 @@
 .resource-user__name {
     margin: 0;
     font-weight: 600;
+
+    a {
+        color: inherit;
+        text-decoration: none;
+    }
 }
 
 .resource-user__group {
@@ -170,7 +178,6 @@
 
     margin-left: auto;
     user-select: none;
-    cursor: pointer;
 
     .true { color: $color-accent; }
 
