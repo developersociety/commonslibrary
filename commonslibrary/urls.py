@@ -8,7 +8,7 @@ from django.http import HttpResponseServerError
 from django.template import TemplateDoesNotExist, loader
 from django.views.generic import TemplateView
 
-from core.views import HomeView
+from core.views import HomeView, SearchView
 
 admin.site.site_title = 'Commons Library'
 admin.site.site_header = 'Commons Library'
@@ -16,6 +16,7 @@ admin.site.site_header = 'Commons Library'
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', HomeView.as_view(), name='home'),
+    url(r'^search/$', SearchView.as_view(), name='search'),
     url(r'^group/', TemplateView.as_view(template_name='group.html')),
     url(r'^accounts/', include('accounts.urls')),
     url(r'^directory/', include('directory.urls')),
