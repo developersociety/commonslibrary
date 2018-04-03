@@ -7,6 +7,8 @@ import { Resource } from './resource/resource';
 import { ResourceFilter } from './resource/resource_filter';
 
 const api = '/api/v1/resources/?format=json'
+const fixedOrganisation = document.getElementById('react-app').dataset.organisation;
+const fixedUser = document.getElementById('react-app').dataset.user;
 
 class ResourceList extends React.Component {
   constructor () {
@@ -24,7 +26,24 @@ class ResourceList extends React.Component {
   }
 
   componentDidMount() {
-    this.updateResourceList()
+    // if fixed Org or user then use that in initial query
+    if (fixedOrganisation !== undefined) {
+      this.setState(
+        {
+          query: '&organisation=' + fixedOrganisation
+        },
+        this.updateResourceList
+      )
+    } else if (fixedUser !== undefined) {
+      this.setState(
+        {
+          query: '&created_by=' + fixedUser
+        },
+        this.updateResourceList
+      )
+    } else {
+      this.updateResourceList()
+    }
   }
 
   // Update resourse list order query from filter
@@ -74,6 +93,8 @@ class ResourceList extends React.Component {
       <div className="resources">
         <Search
           updateResourceQuery={this.updateResourceQuery}
+          fixedOrganisation={fixedOrganisation}
+          fixedUser={fixedUser}
           />
         <ResourceFilter
           resourceCount={this.state.resources.length}
