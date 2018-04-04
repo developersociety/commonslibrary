@@ -9,7 +9,7 @@
       <div class="explore-tags">
         <h4 class="explore-type">Tags</h4>
         <ul class="explore-list">
-          {% recursetree tag_list %}
+          {% recursetree tags %}
             <li>
               {{ node.title }}
               {% if not node.is_leaf_node %}
