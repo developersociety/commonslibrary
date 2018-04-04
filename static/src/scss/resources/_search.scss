@@ -45,6 +45,8 @@
     padding: $width-gap 1rem;
     background: $color-accent;
 
+    .tag { cursor: pointer; }
+
     .search-filter__type .icon { display: none; }
 
     &.shown-false {
