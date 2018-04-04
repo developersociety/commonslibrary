@@ -128,6 +128,7 @@
             {{ comment.created_by.photo }}
             {{ comment.created_by.get_full_name }}
             {{ comment.body }}
+            {% if self.request.user != comment.created_buy %}<a href="{% url 'resources:resource-report-comment' resource.slug comment.id %}">Report</a>{% endif %}
           </p>
         {% endfor %}
       </div>

@@ -45,17 +45,19 @@ class ResourceDetailView(DetailView, CreateView):
         self.object.save()
         return context
 
-    def form_invalid(self, form):
-        # To prevent from crashing form_invalid should pass resource object instead of comment
-        # empty one.
-        self.object = self.get_object()
-        return super().form_invalid(form)
-
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
         kwargs['initial'].update({'created_by': self.request.user})
         kwargs['initial'].update({'resource': self.object})
         return kwargs
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        form = self.get_form()
+        if form.is_valid():
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
 
     def form_valid(self, form):
         response = super().form_valid(form)

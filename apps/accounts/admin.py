@@ -4,6 +4,7 @@ from django.contrib.auth.models import Group, Permission
 from django.contrib.contenttypes.models import ContentType
 from django.db.models import Q
 
+from comments.models import Comment, Report
 from directory.models import Organisation
 from resources.models import Resource
 
@@ -53,6 +54,8 @@ class UserAdmin(BaseUserAdmin):
             self.add_remove_permissions(obj, User, 'change_user')
             self.add_remove_permissions(obj, Resource, 'change_resource')
             self.add_remove_permissions(obj, Organisation, 'change_organisation')
+            self.add_remove_permissions(obj, Comment, 'change_comment')
+            self.add_remove_permissions(obj, Report, 'change_report')
 
         return response
 
