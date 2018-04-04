@@ -23,8 +23,5 @@ class CommentForm(forms.ModelForm):
             'body',
             'created_by',
             'resource',
-            ButtonHolder(
-                Submit('submit', 'Submit', css_class='submit'),
-                css_class='form-actions'
-            ),
+            ButtonHolder(Submit('submit', 'Submit', css_class='submit'), css_class='form-actions'),
         )
