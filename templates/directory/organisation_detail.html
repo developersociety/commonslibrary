@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 
+{% load render_bundle from webpack_loader %}
 {% load thumbnail %}
 
 {% block extra_head %}
@@ -75,23 +76,19 @@
     </div>
   </div>
 
-  <div class="resources featured-resource">
-    <div class="resources-grid">
-      {% include "includes/resource.html" with resource=organisation.get_latest_resource resource_category="latest" %}
-      {% include "includes/resource.html" with resource=organisation.get_most_liked_resource resource_category="Most Liked" %}
-      {% include "includes/resource.html" with resource=organisation.get_most_tried_resource resource_category="Most Tried" %}
+  {% if organisation.get_latest_resource or organisation.get_most_liked_resource or organisation.get_most_tried_resource %}
+    <div class="resources featured-resources">
+      <div class="resources-grid">
+        {% include "includes/resource.html" with resource=organisation.get_latest_resource resource_category="latest" %}
+        {% include "includes/resource.html" with resource=organisation.get_most_liked_resource resource_category="Most Liked" %}
+        {% include "includes/resource.html" with resource=organisation.get_most_tried_resource resource_category="Most Tried" %}
+      </div>
     </div>
-  </div>
+  {% endif %}
 
-  <div class="resources">
-    <div class="resources-filter">
-      <span>{{ organisation.resource_set.all.count }} Resources</span>
-    </div>
-    <div class="resources-grid">
-      {% for resource in organisation.resource_set.all %}
-        {% include "includes/resource.html" with resource=resource organisation=organisation %}
-      {% endfor %}
-    </div>
-  </div>
+  <div id="react-app" data-organisation="{{ organisation.pk }}"></div>
 {% endblock main_content %}
 
+{% block extra_scripts %}
+  {% render_bundle 'main' 'js' %}
+{% endblock extra_scripts %}
