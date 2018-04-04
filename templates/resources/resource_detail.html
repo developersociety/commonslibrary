@@ -122,14 +122,9 @@
         <div class="resource-detail__stats hide-large-desktop">
           <div class="icon-list">
             <div class="icon-list__row">
-              {% thumbnail resource.organisation.logo '250' as thumb %}
-                <span class="icon" style="background: url({{ thumb.url }} center center/contain no-repeat"></span>
-              {% empty %}
-                <span class="icon"></span>
-              {% endthumbnail %}
               <div class="icon-list__content">
-                <p class="tag small">{{ resource.created_by.get_full_name }}</p><br/>
-                <p class="tag small">{{ resource.organisation }}</p>
+                <a href="{% url 'directory:organisation-user' resource.created_by.id %}" class="tag small">{{ resource.created_by.get_full_name }}</a><br/>
+                <a href="{% url 'directory:organisation-detail' resource.organisation.slug %}" class="tag small">{{ resource.organisation }}</a>
               </div>
             </div>
             <div class="icon-list__row">
