@@ -6,7 +6,7 @@ from pages.tests.factories import PageFactory
 class PageDetailTestView(WebTest):
 
     def setUp(self):
-        self.page = PageFactory.create(is_active=True)
+        self.page = PageFactory.create()
 
     def test_get_object(self):
         response = self.app.get(self.page.url)
