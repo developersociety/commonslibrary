@@ -1,6 +1,10 @@
+from datetime import timedelta
+
 from django.conf import settings
 from django.db import models
+from django.db.models.functions import Cast
 from django.urls import reverse
+from django.utils import timezone
 
 from ckeditor.fields import RichTextField
 from sorl.thumbnail import ImageField
@@ -56,7 +60,7 @@ class Resource(models.Model):
     updated_by = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='resources_updated'
     )
-    created_at = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateTimeField(default=timezone.now)
     updated_at = models.DateTimeField(auto_now=True)
 
     objects = ResourceManager()
@@ -72,3 +76,42 @@ class Resource(models.Model):
 
     def private_for_organisation(self, organisation):
         return organisation in self.privacy.all()
+
+    @staticmethod
+    def get_carousel_resources(user=None, limit=5):
+        """ Get most popular resources for the last 7 days. """
+        resources = Resource.objects.approved(user=user).filter(
+            created_at__gte=timezone.now() - timedelta(days=7)
+        ).annotate(
+            popular_count=(
+                Cast(models.Count('tried'), models.PositiveIntegerField()) +
+                Cast(models.Count('likes'), models.PositiveIntegerField()) + models.F('hits')
+            )
+        ).order_by('-popular_count')[:limit]
+        return resources
+
+    @staticmethod
+    def get_latest(user=None):
+        try:
+            resource = Resource.objects.approved(user=user).earliest('created_at')
+        except Resource.DoesNotExist:
+            resource = None
+        return resource
+
+    @staticmethod
+    def get_most_liked(user=None, limit=1):
+        resources = Resource.objects.approved(user=user).annotate(
+            most_liked=models.Count('likes')
+        ).order_by(
+            '-most_liked',
+        )[:limit]
+        return resources
+
+    @staticmethod
+    def get_most_tried(user=None, limit=1):
+        resources = Resource.objects.approved(user=user).annotate(
+            most_tried=models.Count('tried')
+        ).order_by(
+            '-most_tried',
+        )[:limit]
+        return resources
