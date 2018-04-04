@@ -13,7 +13,10 @@
     background: #ffffff;
     color: inherit;
     text-decoration: none;
-    border-right: 3px solid $color-line;
+
+    &:nth-of-type(n+2) {
+        border-left: 3px solid $color-line;
+    }
 
     &.inverted {
         background: $color-background;
