@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 
+{% load crispy_forms_tags %}
 {% load render_bundle from webpack_loader %}
 {% load thumbnail %}
 
@@ -122,7 +123,21 @@
         <div class="resource-content__body">
           {{ resource.content|safe }}
         </div>
+        {% for comment in resource.comment_set.all %}
+          <p>
+            {{ comment.created_by.photo }}
+            {{ comment.created_by.get_full_name }}
+            {{ comment.body }}
+          </p>
+        {% endfor %}
       </div>
+
+      {% if user.is_authenticated %}
+        <div class="form-holder">
+          {% crispy form %}
+        </div>
+      {% endif %}
+
   </main>
 
 
