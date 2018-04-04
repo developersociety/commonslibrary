@@ -45,11 +45,11 @@
         </div>
       </footer>
     </div>
-    <div class="resource-focused">
+    <a href="{{ resource.get_absolute_url }}" class="resource-focused">
       {% if resource_category %}
         <p class="resource-category">{{ resource_category }}</p>
       {% endif %}
-      <a href="{{ resource.get_absolute_url }}">{{ resource.abstract }}</a>
+      {{ resource.abstract }}
       <div class="resource-meta">
         <div class="icon-list">
           <div class="icon-list__row">
@@ -76,6 +76,6 @@
           {% endif %}
         </div>
       </div>
-    </div>
+    </a>
   </div>
 {% endif %}

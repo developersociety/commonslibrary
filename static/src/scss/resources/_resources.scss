@@ -118,7 +118,6 @@
     .resource-focused {
         display: none;
         background: $color-background;
-        color: #ffffff;
         padding: $width-gap;
     }
 
@@ -143,6 +142,8 @@
 
         .resource-focused {
             @extend %flex-column;
+
+            color: #ffffff;
         }
     }
 
