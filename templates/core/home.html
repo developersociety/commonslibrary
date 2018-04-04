@@ -54,6 +54,14 @@
     </div>
   </div>
 
+  <div class="resources featured-resource">
+    <div class="resources-grid">
+      {% include "includes/resource.html" with resource=latest_resource resource_category="Latest" %}
+      {% include "includes/resource.html" with resource=most_liked.first resource_category="Most Liked" %}
+      {% include "includes/resource.html" with resource=most_tried.first resource_category="Most Tried" %}
+    </div>
+  </div>
+
   <div id="react-app"></div>
 {% endblock main_content %}
 
