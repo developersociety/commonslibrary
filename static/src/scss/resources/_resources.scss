@@ -121,7 +121,7 @@
     }
 
     .resource-meta {
-        margin-top: $width-gap*1.5;
+        margin-top: auto;
 
         .icon-list__row {
             align-items: flex-start;
@@ -135,10 +135,6 @@
 
     @media all and (min-width: 541px) {
         min-height: 20rem;
-
-        .resource-meta {
-            margin-top: auto;
-        }
 
         &:focus,
         &:hover {
