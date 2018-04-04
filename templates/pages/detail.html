@@ -1,1 +1,9 @@
-{{ object.content }}
+{% extends "base.html" %}
+
+{% block main_content %}
+  <div class="form-feedback">
+    <h1>{{ object.title }}</h1>
+    {{ object.content|safe }}
+  </div>
+{% endblock main_content %}
+
