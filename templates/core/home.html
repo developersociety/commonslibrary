@@ -13,13 +13,12 @@
         <h3>Welcome to the Commons Library, your source of Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestiae incidunt hic possimus consequuntur quae dignissimos nostrum, ipsa quo, fuga error.</h3>
       </div>
       {% for resource in carousel_resources %}
-        <div class="home-intro__slide">
+        <a href="{% url 'resources:resource-detail' resource.pk %}" class="home-intro__slide">
           <p class="resource-category">
             Today's featured resources
             <span>1/{{ carousel_resources.count }}</span>
           </p>
           <h1 class="slide-title">
-            <a href="{% url 'resources:resource-detail' resource.pk %}"></a>
             {{ resource.title }}
           </h1>
           <footer class="resource-footer inline-stats">
@@ -29,9 +28,7 @@
                 </div>
               {% endthumbnail %}
               <p class="resource-user__name">
-                <a href="{% url 'directory:organisation-user' resource.created_by.pk %}">
-                  {{ resource.created_by.get_full_name }}
-                </a>
+                {{ resource.created_by.get_full_name }}
               </p>
             </div>
             <div class="resource-actions">
@@ -49,7 +46,7 @@
               </span>
             </div>
           </footer>
-        </div>
+        </a>
       {% endfor %}
     </div>
   </div>

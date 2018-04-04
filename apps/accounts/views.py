@@ -11,8 +11,7 @@ from .models import User
 class UserCreateView(CreateView):
     form_class = UserRegistrationForm
     template_name = 'accounts/registration.html'
-    # TODO: Temporary URL.
-    success_url = '/'
+    success_url = reverse_lazy('accounts:registration-thank-you')
 
 
 class UserDetailView(LoginRequiredMixin, DetailView):

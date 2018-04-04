@@ -7,7 +7,7 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.http import HttpResponseServerError
 from django.template import TemplateDoesNotExist, loader
 
-from core.views import HomeView, SearchView
+from core.views import ExploreView, HomeView, SearchView
 
 admin.site.site_title = 'Commons Library'
 admin.site.site_header = 'Commons Library'
@@ -16,9 +16,9 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', HomeView.as_view(), name='home'),
     url(r'^search/$', SearchView.as_view(), name='search'),
+    url(r'^explore/$', ExploreView.as_view(), name='explore'),
     url(r'^accounts/', include('accounts.urls')),
     url(r'^directory/', include('directory.urls')),
-    url(r'^explore/', include('explore.urls')),
     url(r'^resources/', include('resources.urls')),
     url(r'^api/v1/', include('api.v1.urls')),
 ]

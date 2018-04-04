@@ -2,6 +2,8 @@ from django.conf.urls import url
 from django.contrib.auth import views
 from django.urls import reverse_lazy
 
+from pages.views import PageDetailView
+
 from .forms import LoginForm, PasswordResetForm, SetPasswordForm
 from .views import UserCreateView, UserDetailView, UserUpdateView
 
@@ -63,4 +65,5 @@ urlpatterns = [
         ),
         name='password-change',
     ),
+    url(r'^thank-you/$', PageDetailView.as_view(), name='registration-thank-you'),
 ]
