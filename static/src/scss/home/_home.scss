@@ -30,14 +30,17 @@
         max-width: 730px;
     }
 
-    @media all and (min-width: 1061px) {
+    @media all and (min-width: 841px) {
         width: 75%;
+    }
 
+    @media all and (min-width: 1261px) {
         &.intro-slide {
             width: 50%;
-            padding-top: $width-gap*1.725;
+            padding-top: $width-gap*1.675;
         }
     }
+
 }
 
 .inline-stats {
