@@ -178,6 +178,10 @@
     color: #ffffff;
     margin: 0;
 
+    a {
+        text-decoration: none;
+    }
+
     @media all and (min-width: 1261px) {
         margin: 0.25rem 0 0 0;
     }
