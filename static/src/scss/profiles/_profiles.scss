@@ -127,6 +127,8 @@
 .profile-description {
     padding: 0 $width-gap $width-gap calc(#{$width-gap} + 3px);
 
+    .icon { vertical-align: middle; }
+
     @media all and (min-width: 1261px) {
         padding: $width-gap $width-gap $width-gap calc(#{$width-gap} + 3px);
         font-size: 1.6875rem;

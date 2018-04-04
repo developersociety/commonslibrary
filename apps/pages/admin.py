@@ -18,13 +18,13 @@ class CategoryAdmin(admin.ModelAdmin):
 @admin.register(Page)
 class PageAdmin(admin.ModelAdmin):
     list_display = ('title', 'author', 'category', 'url', 'created_by', 'created_at',)
-    list_filter = ('category',)
+    list_filter = ('category', 'is_active')
     readonly_fields = ('id', 'created_by', 'updated_by',)
     search_fields = ['title', 'content', 'author']
     date_hierarchy = 'created_at'
     fieldsets = [
         ('Page', {
-            'fields': ('title', 'url', 'category', 'author',),
+            'fields': ('title', 'url', 'category', 'author', 'is_active'),
         }),
         ('Content', {
             'fields': ('content',),

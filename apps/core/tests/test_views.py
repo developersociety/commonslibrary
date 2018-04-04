@@ -15,3 +15,10 @@ class SearchViewTest(WebTest):
     def test_return_code(self):
         response = self.app.get(reverse('search'))
         self.assertEqual(response.status_code, 200)
+
+
+class ExploreViewTest(WebTest):
+
+    def test_return_code(self):
+        response = self.app.get(reverse('explore'))
+        self.assertEqual(response.status_code, 200)
