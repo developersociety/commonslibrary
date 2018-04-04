@@ -98,15 +98,23 @@ export class Search extends React.Component {
     event.preventDefault();
 
     // Get current selected tags from child state
+    const query = this.state.searchQuery;
     const tags = this.searchTags.state.selectedOptions;
     const organisations = this.searchOrganisations.state.selectedOptions;
     const people = this.searchPeople.state.selectedOptions;
-    const query = this.state.searchQuery;
 
     // map through selected options add prefix if more than one value
     let tagQuery = tags.map(tag => tag.id).join('&tags=');
     let organisationQuery = organisations.map(organisations => organisations.id).join('&organisation=');
     let peopleQuery = people.map(people => people.id).join('&created_by=');
+
+    // If fixed organisation was set in template use that
+    if (this.props.fixedOrganisation !== undefined) {
+        organisationQuery = this.props.fixedOrganisation;
+    }
+    if (this.props.fixedUser !== undefined) {
+        peopleQuery = this.props.fixedUser;
+    }
 
     // Add search queries to object
     const searchCriteria = {
@@ -117,6 +125,7 @@ export class Search extends React.Component {
 
     let searchQuery = '';
 
+    // If no tags selected use search query, else loop through selected options and create query
     if (query != '' && tags.length == 0 && organisations.length == 0 && people.length == 0) {
       searchQuery = '&search=' + query;
     } else {
@@ -137,6 +146,9 @@ export class Search extends React.Component {
         || this.state.searchTagsOptions.length > 0
         || this.state.searchOrganisationsOptions.length > 0
         || this.state.searchPeopleOptions.length > 0;
+
+    const showOrganisation = this.props.fixedOrganisation == undefined;
+    const showPeople = this.props.fixedUser == undefined;
 
     return(
       <div className="search-bar">
@@ -166,7 +178,7 @@ export class Search extends React.Component {
               handleSelection={this.handleSelection}/>
           </div>
 
-          <div className="search-filter__groups">
+          <div className={'search-filter__groups shown-' + showOrganisation}>
             <div className="search-filter__type">
               <span>Groups</span>
               <svg className="icon">
@@ -179,7 +191,7 @@ export class Search extends React.Component {
               handleSelection={this.handleSelection}/>
           </div>
 
-          <div className="search-filter__people">
+          <div className={'search-filter__people shown-' + showPeople}>
             <div className="search-filter__type">
               <span>People</span>
               <svg className="icon">
