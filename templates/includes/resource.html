@@ -70,7 +70,6 @@
                 {% for tag in resource.tags.all %}
                   {{ tag }}{% if not forloop.last %}, {% endif %}
                 {% endfor %}
-                <p>{{ resource.created_at|date:'j F Y H:i' }}</p>
               </div>
             </div>
           {% endif %}

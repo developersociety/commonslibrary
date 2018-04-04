@@ -74,7 +74,7 @@
             </div>
           </div>
           {% if resource.tags %}
-            <div class="icon-list__row" id="resource_tags">
+            <div class="icon-list__row">
               <svg class="icon">
                 <use xlink:href="#tag"></use>
               </svg>
@@ -119,9 +119,50 @@
         </div>
       </header>
       <div class="resource-content">
+        <div class="resource-detail__stats hide-large-desktop">
+          <div class="icon-list">
+            <div class="icon-list__row">
+              {% thumbnail resource.organisation.logo '250' as thumb %}
+                <span class="icon" style="background: url({{ thumb.url }} center center/contain no-repeat"></span>
+              {% empty %}
+                <span class="icon"></span>
+              {% endthumbnail %}
+              <div class="icon-list__content">
+                <p class="tag small">{{ resource.created_by.get_full_name }}</p><br/>
+                <p class="tag small">{{ resource.organisation }}</p>
+              </div>
+            </div>
+            <div class="icon-list__row">
+              <svg class="icon">
+                <use xlink:href="#date"></use>
+              </svg>
+              <div class="icon-list__content">
+                <p>{{ resource.created_at|date:'j F Y H:i' }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div class="resource-content__body">
           {{ resource.content|safe }}
         </div>
+
+        {% if resource.tags %}
+          <footer class="resource-detail__stats hide-large-desktop">
+            <div class="icon-list__row">
+              <svg class="icon">
+                <use xlink:href="#tag"></use>
+              </svg>
+              <div class="icon-list__content">
+                <div class="tag-list">
+                  {% for tag in resource.tags.all %}
+                    <span class="tag">{{ tag }}</span>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+          </footer>
+        {% endif %}
       </div>
   </main>
 

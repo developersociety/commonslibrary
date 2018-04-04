@@ -261,6 +261,21 @@
     padding: $width-gap*3 0;
 }
 
+.resource-detail__stats {
+    padding: $width-gap;
+
+    .icon-list__row {
+        font-family: $base-font-headline;
+        font-weight: 600;
+        text-transform: uppercase;
+        font-size: 1rem;
+    }
+}
+
+footer.resource-detail__stats {
+    border-top: 3px solid $color-line;
+}
+
 .resource-header__background {
     @include psuedo-overlay('after', $color-background, 0.25);
 
