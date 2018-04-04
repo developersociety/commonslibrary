@@ -101,9 +101,51 @@
         }
     }
 
+    .resource-blurred,
+    .resource-focused {
+        @extend %flex-column;
+
+
+        @media all and (min-width: 541px) {
+            min-height: 20rem;
+        }
+    }
+
+    .resource-focused {
+        display: none;
+        background: $color-background;
+        color: #ffffff;
+        padding: $width-gap;
+    }
+
+    .resource-meta {
+        margin-top: auto;
+
+        .icon-list__row {
+            align-items: flex-start;
+        }
+
+       .icon-list__content {
+            @extend %meta;
+            margin-top: 0.25rem;
+        }
+    }
+
+    &:focus,
+    &:hover {
+        .resource-blurred {
+            display: none;
+        }
+
+        .resource-focused {
+            @extend %flex-column;
+        }
+    }
+
     @media all and (min-width: 541px) {
         min-height: 20rem;
     }
+
 }
 
 .resource-image,
