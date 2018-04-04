@@ -47,6 +47,11 @@
 
     .search-filter__type .icon { display: none; }
 
+    &.shown-false {
+        display: none;
+        visibility: hidden;
+    }
+
     @media all and (max-width: 540px) {
         display: flex;
         flex-flow: row nowrap;
