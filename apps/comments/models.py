@@ -21,7 +21,7 @@ class Comment(models.Model):
 
 class Report(models.Model):
     body = models.TextField()
-    comment = models.ForeignKey(Comment)
+    comment = models.ForeignKey(Comment, on_delete=models.CASCADE)
     reviewed = models.BooleanField(default=False)
     created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     created_at = models.DateTimeField(default=timezone.now)

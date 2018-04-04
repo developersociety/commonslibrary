@@ -49,6 +49,7 @@ class ResourceDetailView(DetailView, CreateView):
         kwargs = super().get_form_kwargs()
         kwargs['initial'].update({'created_by': self.request.user})
         kwargs['initial'].update({'resource': self.object})
+        kwargs['instance'] = None
         return kwargs
 
     def post(self, request, *args, **kwargs):
