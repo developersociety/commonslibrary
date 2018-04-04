@@ -1,6 +1,7 @@
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import F
+from django.urls import reverse_lazy
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView
 
@@ -11,7 +12,7 @@ from .models import Resource
 class ResourceCreateView(LoginRequiredMixin, CreateView):
     form_class = ResourceForm
     template_name = 'resources/resource_form.html'
-    success_url = '/'
+    success_url = reverse_lazy('resources:resource-thank-you')
 
     def form_valid(self, form):
         messages.success(
