@@ -26,11 +26,16 @@
         padding: $width-gap 0 0 0;
     }
 
+    h3 {
+        max-width: 730px;
+    }
+
     @media all and (min-width: 1061px) {
         width: 75%;
 
-        &.small {
+        &.intro-slide {
             width: 50%;
+            padding-top: $width-gap*1.725;
         }
     }
 }
