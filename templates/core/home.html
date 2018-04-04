@@ -1,2 +1,67 @@
-{{ carousel_resources }}
-{{ request.user }}
+{% extends "base.html" %}
+
+{% load render_bundle from webpack_loader %}
+{% load thumbnail %}
+
+{% block main_content %}
+  <div class="home-intro__wrapper">
+    <div class="home-intro">
+      <div class="home-intro__slide intro-slide inverted">
+        <h1 class="slide-title">
+          Hi there!
+        </h1>
+        <h3>Welcome to the Commons Library, your source of Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestiae incidunt hic possimus consequuntur quae dignissimos nostrum, ipsa quo, fuga error.</h3>
+      </div>
+      {% for resource in carousel_resources %}
+        <a href="{{ resource.get_absolute_url }}" class="home-intro__slide">
+          <p class="resource-category">
+            Today's featured resources
+            <span>1/{{ carousel_resources.count }}</span>
+          </p>
+          <h1 class="slide-title">
+            {{ resource.title }}
+          </h1>
+          <footer class="resource-footer inline-stats">
+            <div class="resource-user">
+              {% thumbnail resource.organisation.logo '250' as thumb %}
+                <div class="resource-user__group" style="background: url({{ thumb.url }}) left center/contain no-repeat">
+                </div>
+              {% endthumbnail %}
+              <p class="resource-user__name">
+                {{ resource.created_by.get_full_name }}
+              </p>
+            </div>
+            <div class="resource-actions">
+              <span class="resource-liked">
+                <svg class="icon">
+                  <use xlink:href="#liked"></use>
+                </svg>
+                {{ resource.likes.count }}
+              </span>
+              <span class="resource-tried">
+                <svg class="icon">
+                  <use xlink:href="#tried"></use>
+                </svg>
+                {{ resource.tried.count }}
+              </span>
+            </div>
+          </footer>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+  <div class="resources featured-resources">
+    <div class="resources-grid">
+      {% include "includes/resource.html" with resource=latest_resource resource_category="Latest" %}
+      {% include "includes/resource.html" with resource=most_liked.first resource_category="Most Liked" %}
+      {% include "includes/resource.html" with resource=most_tried.first resource_category="Most Tried" %}
+      {% include "includes/featured_org.html" with organisation=most_published %}
+    </div>
+  </div>
+
+  <div id="react-app"></div>
+{% endblock main_content %}
+
+{% block extra_scripts %}
+  {% render_bundle 'home' 'js' %}
+{% endblock extra_scripts %}

@@ -11,6 +11,11 @@ module.exports = {
         './static/src/js/index',
         './static/src/scss/styles.scss'
     ],
+    home: [
+        './static/src/js/index',
+        './static/src/js/home',
+        './static/src/scss/styles.scss'
+    ],
     registration: [
         './static/src/js/accounts/registration'
     ],

@@ -4,3 +4,10 @@
         display: none;
     }
 }
+
+.hide-large-desktop {
+
+    @media all and (min-width: 1261px) {
+        display: none;
+    }
+}
