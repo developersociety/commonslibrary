@@ -109,7 +109,6 @@
     .resource-focused {
         @extend %flex-column;
 
-
         @media all and (min-width: 541px) {
             min-height: 20rem;
         }
@@ -122,7 +121,7 @@
     }
 
     .resource-meta {
-        margin-top: auto;
+        margin-top: $width-gap*1.5;
 
         .icon-list__row {
             align-items: flex-start;
@@ -134,21 +133,25 @@
         }
     }
 
-    &:focus,
-    &:hover {
-        .resource-blurred {
-            display: none;
-        }
-
-        .resource-focused {
-            @extend %flex-column;
-
-            color: #ffffff;
-        }
-    }
-
     @media all and (min-width: 541px) {
         min-height: 20rem;
+
+        .resource-meta {
+            margin-top: auto;
+        }
+
+        &:focus,
+        &:hover {
+            .resource-blurred {
+                display: none;
+            }
+
+            .resource-focused {
+                display: flex;
+                flex-flow: column nowrap;
+                color: #ffffff;
+            }
+        }
     }
 
 }
