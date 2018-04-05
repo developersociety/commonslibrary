@@ -11,7 +11,7 @@ urlpatterns = [
     url(r'^thank-you/$', PageDetailView.as_view(), name='resource-thank-you'),
     url(r'^(?P<slug>[\w-]+)/$', ResourceDetailView.as_view(), name='resource-detail'),
     url(
-        r'^(?P<slug>[\w-]+)/(?P<id>[0-9]+)/$',
+        r'^(?P<slug>[\w-]+)/(?P<id>[0-9]+)/report-comment/$',
         ReportCommentView.as_view(),
         name='resource-report-comment',
     ),
