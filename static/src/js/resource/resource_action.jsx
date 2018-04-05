@@ -50,7 +50,7 @@ export class ResourceAction extends React.Component {
         "X-CSRFToken": this.props.csrf
       }
     }).then(response => {
-      if (response.status != 403) {
+      if (response.ok) {
         this.setState(prevState => ({
           likes: !prevState.hasLiked ? prevState.likes + 1: prevState.likes - 1,
           hasLiked: !prevState.hasLiked
@@ -69,7 +69,7 @@ export class ResourceAction extends React.Component {
         "X-CSRFToken": this.props.csrf
       }
     }).then(response => {
-      if (response.status != 403) {
+      if (response.ok) {
         this.setState(prevState => ({
           tries: !prevState.hasTried ? prevState.tries + 1: prevState.tries - 1,
           hasTried: !prevState.hasTried
