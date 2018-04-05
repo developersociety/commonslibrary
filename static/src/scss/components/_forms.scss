@@ -68,6 +68,16 @@
     a { color: inherit; }
 }
 
+.comments-form {
+    margin: 0 0 $width-gap 0;
+    border-top: 3px solid $color-line;
+    padding-top: $width-gap;
+
+    .comment-profile {
+        margin-bottom: $width-gap;
+    }
+}
+
 .form-feedback {
     font-size: 1.25rem;
 }

@@ -12,7 +12,7 @@
           <span class="item-text">Explore</span>
         </a>
       </li>
-      {% if user.is_authenticated %}
+      {% if request.user.is_authenticated %}
         <li class="main-navigation__item {% if request.path == '/directory/' %} active{% endif %}">
           <a href="{% url 'directory:organisation-list' %}">
             <svg class="icon">
