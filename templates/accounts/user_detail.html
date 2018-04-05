@@ -78,28 +78,42 @@
           {% endif %}
         </div>
         <div class="icon-list">
+
           <div class="icon-list__row">
             <svg class="icon">
               <use xlink:href="#create"></use>
             </svg>
             <div class="profile-detail__value">
-              {{ resources_created }} resources added
+              {{ resources_created }} resource{{ resources_created|pluralize }} added
             </div>
           </div>
+
+          <div class="icon-list__row">
+            <svg class="icon">
+              <use xlink:href="#comment"></use>
+            </svg>
+            <div class="profile-detail__value">
+              {% with total_comments=user.comment_set.count %}
+              {{ total_comments }} comment{{ total_comments|pluralize }} posted
+              {% endwith %}
+            </div>
+          </div>
+
           <div class="icon-list__row">
             <svg class="icon">
               <use xlink:href="#liked"></use>
             </svg>
             <div class="profile-detail__value">
-              {{ resources_liked }} resources liked
+              {{ resources_liked }} resource{{ resources_liked|pluralize }} liked
             </div>
           </div>
+
           <div class="icon-list__row">
             <svg class="icon">
               <use xlink:href="#tried"></use>
             </svg>
             <div class="profile-detail__value">
-              {{ resources_liked }} resources tried
+              {{ resources_liked }} resource{{ resources_liked|pluralize }} tried
             </div>
           </div>
         </div>

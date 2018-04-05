@@ -48,6 +48,12 @@
                   </span>
                   <span>
                     <svg class="icon">
+                      <use xlink:href="#comment"></use>
+                    </svg>
+                    {{ user.comment_set.count }}
+                  </span>
+                  <span>
+                    <svg class="icon">
                       <use xlink:href="#liked"></use>
                     </svg>
                     {{ user.resources_likes.count }}
