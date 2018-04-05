@@ -43,7 +43,8 @@ class ReportCommentView(WebTest):
         form = self.app.get(
             reverse(
                 'resources:resource-report-comment',
-                kwargs={'slug': self.comment.resource.slug, 'id': self.comment.id}),
+                kwargs={'slug': self.comment.resource.slug, 'id': self.comment.id}
+            ),
             user=self.superuser,
         ).form
 
