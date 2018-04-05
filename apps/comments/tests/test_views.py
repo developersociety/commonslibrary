@@ -1,8 +1,12 @@
+from django.urls import reverse
+
 from django_webtest import WebTest
 
 from accounts.tests.factories import UserFactory
-from comments.models import Comment
+from comments.models import Comment, Report
 from resources.tests.factories import ResourceFactory
+
+from .factories import CommentFactory
 
 
 class AddCommentTestView(WebTest):
@@ -27,3 +31,23 @@ class AddCommentTestView(WebTest):
         response = form.submit()
         self.assertEqual(response.status_code, 302)
         self.assertTrue(Comment.objects.filter(created_by=self.superuser).exists())
+
+
+class ReportCommentView(WebTest):
+
+    def setUp(self):
+        self.comment = CommentFactory.create()
+        self.superuser = UserFactory.create(password='test123')
+
+    def test_post_method(self):
+        form = self.app.get(
+            reverse(
+                'resources:resource-report-comment',
+                kwargs={'slug': self.comment.resource.slug, 'id': self.comment.id}),
+            user=self.superuser,
+        ).form
+
+        form['body'] = 'testing'
+        response = form.submit()
+        self.assertEqual(response.status_code, 302)
+        self.assertTrue(Report.objects.filter(created_by=self.superuser).exists())
