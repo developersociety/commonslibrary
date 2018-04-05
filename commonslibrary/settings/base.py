@@ -63,12 +63,13 @@ THIRD_PARTY_APPS = [
 ]
 
 PROJECT_APPS = [
-    'api.v1.apps.ApiConfig',
     'accounts.apps.AccountsConfig',
+    'api.v1.apps.ApiConfig',
+    'comments.apps.CommentsConfig',
     'directory.apps.DirectoryConfig',
     'pages.apps.PagesConfig',
-    'tags.apps.TagsConfig',
     'resources.apps.ResourcesConfig',
+    'tags.apps.TagsConfig',
 ]
 
 INSTALLED_APPS = DEFAULT_APPS + THIRD_PARTY_APPS + PROJECT_APPS

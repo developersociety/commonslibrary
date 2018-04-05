@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 
+{% load crispy_forms_tags %}
 {% load render_bundle from webpack_loader %}
 {% load thumbnail %}
 
@@ -104,7 +105,6 @@
         <div class="resource-content__body">
           {{ resource.content|safe }}
         </div>
-
         {% if resource.tags %}
           <footer class="resource-detail__stats hide-large-desktop">
             <div class="icon-list__row">
@@ -121,7 +121,27 @@
             </div>
           </footer>
         {% endif %}
+
       </div>
+
+      <div class="comments">
+        <div class="comments-title">
+          <svg class="icon">
+            <use xlink:href="#comment"></use>
+          </svg>
+          <h4>Comments</h4>
+        </div>
+        {% for comment in resource.comment_set.all %}
+          {% include "includes/comments.html" with comment=comment %}
+        {% endfor %}
+      </div>
+
+      {% if user.is_authenticated %}
+        <div class="form-holder">
+          {% crispy form %}
+        </div>
+      {% endif %}
+
   </main>
 
 

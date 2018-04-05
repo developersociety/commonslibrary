@@ -1,22 +1,19 @@
-<div class="comments">
-  <div class="comments-title">
-    <svg class="icon">
-      <use xlink:href="#comment"></use>
-    </svg>
-    <h4>Comments</h4>
-  </div>
-  <div class="comment">
-    <header class="comment-header">
-      <div class="comment-profile">
-        <div class="group-logo" style="background: url(http://static.oxfamamerica.org.s3.amazonaws.com/images/logos/oxfam_logo_vertical_green_rgb.png) center center/contain no-repeat"></div>
-        <span>Richard Peters</span>
-      </div>
-      <div class="comment-actions">
-        <a href="#">Edit</a>
-      </div>
-    </header>
-    <div class="comment-content">
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis commodi nemo libero placeat iste architecto itaque inventore, culpa qui excepturi vel laudantium possimus quam sapiente.
+{% load thumbnail %}
+
+<div class="comment">
+  <header class="comment-header">
+    <div class="comment-profile">
+      {% thumbnail comment.created_by.photo "x50" as thumb %}
+        <div class="group-logo" style="background: url({{ thumb.url }}) center center/contain no-repeat"></div>
+      {% endthumbnail %}
+      <span>{{ comment.created_by.get_full_name }}</span>
     </div>
+    <div class="comment-actions">
+      <a href="#">Edit</a>
+      {% if request.user != comment.created_by %}<a href="{% url 'resources:resource-report-comment' resource.slug comment.id %}">Report</a>{% endif %}
+    </div>
+  </header>
+  <div class="comment-content">
+    {{ comment.body|safe }}
   </div>
 </div>

@@ -1,3 +1,5 @@
+from django.utils.text import slugify
+
 import factory
 
 from accounts.tests.factories import UserFactory
@@ -7,6 +9,7 @@ from resources.models import Resource
 
 class ResourceFactory(factory.django.DjangoModelFactory):
     title = factory.Sequence(lambda n: '{id}'.format(id=n))
+    slug = factory.LazyAttribute(lambda a: slugify(a.title))
     abstract = factory.Faker('job')
     content = factory.Faker('job')
     organisation = factory.SubFactory(OrganisationFactory)
