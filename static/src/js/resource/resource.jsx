@@ -46,6 +46,7 @@ export class Resource extends React.Component {
             tries={this.props.resource.tried_count}
             userLiked={this.props.resource.user_liked}
             userTried={this.props.resource.user_tried}
+            csrf={this.props.csrf}
           />
         </footer>
       </div>

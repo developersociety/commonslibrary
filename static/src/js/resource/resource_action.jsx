@@ -4,8 +4,8 @@ export class ResourceAction extends React.Component {
   constructor (props) {
     super()
     this.state = {
-      likes: props.tries,
-      tries: props.likes,
+      likes: props.likes,
+      tries: props.tries,
       hasLiked: props.userLiked,
       hasTried: props.userTried,
     }
@@ -45,11 +45,9 @@ export class ResourceAction extends React.Component {
     const requestUrl = '/api/v1/resources/' + this.props.resource + '/like/';
     fetch(requestUrl, {
       method: 'put',
-      credentials: 'same-origin',
+      credentials: 'include',
       headers: {
-        "X-CSRFToken": this.getCSRFToken('csrftoken'),
-        "Accept": "application/json",
-        "Content-Type": "application/json"
+        "X-CSRFToken": this.props.csrf
       }
     }).then(response => {
       if (response.stats != 403) {
@@ -68,10 +66,8 @@ export class ResourceAction extends React.Component {
       method: 'put',
       credentials: 'include',
       headers: {
-        "X-CSRFToken": this.getCSRFToken('csrftoken'),
-        "Accept": "application/json",
-        "Content-Type": "application/json"
-      },
+        "X-CSRFToken": this.props.csrf
+      }
     }).then(response => {
       if (response.stats != 403) {
         this.setState(prevState => ({
