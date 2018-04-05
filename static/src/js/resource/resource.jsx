@@ -41,8 +41,11 @@ export class Resource extends React.Component {
             </p>
           </div>
           <ResourceAction
+            resource={this.props.resource.id}
             likes={this.props.resource.likes_count}
             tries={this.props.resource.tried_count}
+            userLiked={this.props.resource.user_liked}
+            userTried={this.props.resource.user_tried}
           />
         </footer>
       </div>
