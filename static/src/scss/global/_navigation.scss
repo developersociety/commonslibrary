@@ -152,6 +152,10 @@
             position: absolute;
             top: 100%; left: 50%; bottom: auto;
         }
+
+        &.inverse.active:after {
+            border-top: 0.75rem solid $color-accent;
+        }
     }
 }
 
