@@ -161,14 +161,17 @@
 
       </div>
 
-      {% for comment in resource.comment_set.all %}
-        <p>
-          {{ comment.created_by.photo }}
-          {{ comment.created_by.get_full_name }}
-          {{ comment.body }}
-          {% if request.user != comment.created_by %}<a href="{% url 'resources:resource-report-comment' resource.slug comment.id %}">Report</a>{% endif %}
-        </p>
-      {% endfor %}
+      <div class="comments">
+        <div class="comments-title">
+          <svg class="icon">
+            <use xlink:href="#comment"></use>
+          </svg>
+          <h4>Comments</h4>
+        </div>
+        {% for comment in resource.comment_set.all %}
+          {% include "includes/comments.html" with comment=comment %}
+        {% endfor %}
+      </div>
 
       {% if user.is_authenticated %}
         <div class="form-holder">
