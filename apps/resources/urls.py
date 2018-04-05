@@ -1,6 +1,6 @@
 from django.conf.urls import url
 
-from comments.views import ReportCommentView, CommentUpdateView
+from comments.views import CommentUpdateView, ReportCommentView
 from pages.views import PageDetailView
 
 from .views import ResourceCreateView, ResourceDetailView
