@@ -62,8 +62,8 @@
               {% thumbnail resource.created_by.photo '500' as thumb %}
                 <div class="profile-image small" style="background: url({{ thumb.url }}) center center/cover no-repeat"></div>
               {% endthumbnail %}
-              <p class="profile-name">{{ resource.created_by }}</p>
-              <p class="profile-group">{{ resource.organisation }}</p>
+              <p class="profile-name"><a href="{% url 'directory:organisation-user' resource.created_by.pk %}">{{ resource.created_by.get_full_name }}</a></p>
+              <p class="profile-group"><a href="{% url 'directory:organisation-detail'  resource.organisation.slug %}">{{ resource.organisation }}</a></p>
             </div>
           </div>
           <div class="icon-list__row">
@@ -75,14 +75,14 @@
             </div>
           </div>
           {% if resource.tags %}
-            <div class="icon-list__row" id="resource_tags">
+            <div class="icon-list__row">
               <svg class="icon">
                 <use xlink:href="#tag"></use>
               </svg>
               <div class="icon-list__content">
                 <div class="tag-list">
                   {% for tag in resource.tags.all %}
-                    <a href="#" class="tag">{{ tag }}</a>
+                    <span class="tag">{{ tag }}</span>
                   {% endfor %}
                 </div>
               </div>
@@ -120,17 +120,55 @@
         </div>
       </header>
       <div class="resource-content">
+        <div class="resource-detail__stats hide-large-desktop">
+          <div class="icon-list">
+            <div class="icon-list__row">
+              <div class="icon-list__content">
+                <a href="{% url 'directory:organisation-user' resource.created_by.id %}" class="tag small">{{ resource.created_by.get_full_name }}</a><br/>
+                <a href="{% url 'directory:organisation-detail' resource.organisation.slug %}" class="tag small">{{ resource.organisation }}</a>
+              </div>
+            </div>
+            <div class="icon-list__row">
+              <svg class="icon">
+                <use xlink:href="#date"></use>
+              </svg>
+              <div class="icon-list__content">
+                <p>{{ resource.created_at|date:'j F Y H:i' }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div class="resource-content__body">
           {{ resource.content|safe }}
         </div>
-        {% for comment in resource.comment_set.all %}
-          <p>
-            {{ comment.created_by.photo }}
-            {{ comment.created_by.get_full_name }}
-            {{ comment.body }}
-          </p>
-        {% endfor %}
+
+        {% if resource.tags %}
+          <footer class="resource-detail__stats hide-large-desktop">
+            <div class="icon-list__row">
+              <svg class="icon">
+                <use xlink:href="#tag"></use>
+              </svg>
+              <div class="icon-list__content">
+                <div class="tag-list">
+                  {% for tag in resource.tags.all %}
+                    <span class="tag">{{ tag }}</span>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+          </footer>
+        {% endif %}
+
       </div>
+
+      {% for comment in resource.comment_set.all %}
+        <p>
+          {{ comment.created_by.photo }}
+          {{ comment.created_by.get_full_name }}
+          {{ comment.body }}
+        </p>
+      {% endfor %}
 
       {% if user.is_authenticated %}
         <div class="form-holder">
