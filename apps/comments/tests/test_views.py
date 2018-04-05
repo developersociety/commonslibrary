@@ -52,3 +52,24 @@ class ReportCommentView(WebTest):
         response = form.submit()
         self.assertEqual(response.status_code, 302)
         self.assertTrue(Report.objects.filter(created_by=self.superuser).exists())
+
+
+class UpdateCommentViewTEst(WebTest):
+
+    def setUp(self):
+        self.superuser = UserFactory.create(password='test123')
+        self.comment = CommentFactory.create(body='test', created_by=self.superuser)
+
+    def test_post_method(self):
+        form = self.app.get(
+            reverse(
+                'resources:resource-update-comment',
+                kwargs={'slug': self.comment.resource.slug, 'id': self.comment.id}
+            ),
+            user=self.superuser,
+        ).form
+
+        form['body'] = 'test123'
+        response = form.submit()
+        self.assertEqual(response.status_code, 302)
+        self.assertTrue(Comment.objects.filter(body='test123').exists())

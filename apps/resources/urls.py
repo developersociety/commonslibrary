@@ -1,6 +1,6 @@
 from django.conf.urls import url
 
-from comments.views import ReportCommentView
+from comments.views import ReportCommentView, CommentUpdateView
 from pages.views import PageDetailView
 
 from .views import ResourceCreateView, ResourceDetailView
@@ -14,5 +14,10 @@ urlpatterns = [
         r'^(?P<slug>[\w-]+)/(?P<id>[0-9]+)/report-comment/$',
         ReportCommentView.as_view(),
         name='resource-report-comment',
+    ),
+    url(
+        r'^(?P<slug>[\w-]+)/(?P<id>[0-9]+)/update-comment/$',
+        CommentUpdateView.as_view(),
+        name='resource-update-comment',
     ),
 ]

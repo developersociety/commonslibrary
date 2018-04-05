@@ -9,8 +9,19 @@
       <span>{{ comment.created_by.get_full_name }}</span>
     </div>
     <div class="comment-actions">
-      <a href="#">Edit</a>
-      {% if request.user != comment.created_by %}<a href="{% url 'resources:resource-report-comment' resource.slug comment.id %}">Report</a>{% endif %}
+
+      {% if request.user == comment.created_by %}
+        <a href="{% url 'resources:resource-update-comment' resource.slug comment.id %}">
+          Edit
+        </a>
+      {% endif %}
+
+      {% if request.user != comment.created_by %}
+        <a href="{% url 'resources:resource-report-comment' resource.slug comment.id %}">
+          Report
+        </a>
+      {% endif %}
+
     </div>
   </header>
   <div class="comment-content">
