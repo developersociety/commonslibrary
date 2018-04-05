@@ -32,6 +32,10 @@
     max-width: 730px;
 }
 
+.no-comments {
+    font-style: italic;
+}
+
 .comment-header {
     @extend %flex-row;
 
