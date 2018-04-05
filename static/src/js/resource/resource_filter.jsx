@@ -25,7 +25,7 @@ export class ResourceFilter extends React.Component {
   render() {
     return (
       <div className="resources-filter">
-        <span>{this.props.resourceCount} Resources</span>
+        <span>{this.props.resourceCount} Resource{this.props.resourceCount != 1 ? 's' : ''}</span>
         <div className="resource-filter__controls">
           <p>Sort by</p>
           {Object.keys(filterOptions).map((filter, index) =>

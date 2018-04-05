@@ -45,10 +45,21 @@ class ResourceDetailView(DetailView, CreateView):
         self.object.save()
         return context
 
+    def form_invalid(self, form):
+        # To prevent from crashing form_invalid should pass resource object instead of comment
+        # empty one.
+        self.object = self.get_object()
+        return super().form_invalid(form)
+
+    def get_initial(self):
+        kwargs = super().get_initial()
+        kwargs.update({'created_by': self.request.user})
+        kwargs.update({'resource': self.object})
+        return kwargs
+
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
-        kwargs['initial'].update({'created_by': self.request.user})
-        kwargs['initial'].update({'resource': self.object})
+        # We want to set as None as self.object is not the instance in this case.
         kwargs['instance'] = None
         return kwargs
 
@@ -62,5 +73,5 @@ class ResourceDetailView(DetailView, CreateView):
 
     def form_valid(self, form):
         response = super().form_valid(form)
-        messages.success(self.request, 'Thank you for you comment.')
+        messages.success(self.request, 'Thank you for your comment.')
         return response

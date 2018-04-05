@@ -18,11 +18,11 @@ class PageDetailView(DetailView):
             url = '/' + url
 
         try:
-            obj = get_object_or_404(self.model, url=url)
+            obj = get_object_or_404(self.model, url=url, is_active=True)
         except Http404:
             if not url.endswith('/') and settings.APPEND_SLASH:
                 url += '/'
-                obj = get_object_or_404(self.model, url=url)
+                obj = get_object_or_404(self.model, url=url, is_active=True)
                 return HttpResponsePermanentRedirect('{slug}/'.format(slug=self.request.path))
             else:
                 raise

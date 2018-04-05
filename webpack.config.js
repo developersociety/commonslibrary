@@ -14,6 +14,12 @@ module.exports = {
         './static/src/js/index',
         './static/src/scss/styles.scss'
     ],
+    home: [
+        'webpack-dev-server/client?http://127.0.0.1:' + webpackPort + '/',
+        './static/src/js/index',
+        './static/src/js/home',
+        './static/src/scss/styles.scss'
+    ],
     registration: [
         'webpack-dev-server/client?http://127.0.0.1:' + webpackPort + '/',
         './static/src/js/accounts/registration'

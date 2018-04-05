@@ -21,10 +21,14 @@ class ReportCommentView(LoginRequiredMixin, DetailView, CreateView):
         context = super().get_context_data(**kwargs)
         return context
 
+    def get_initial(self):
+        kwargs = super().get_initial()
+        kwargs.update({'comment': self.object})
+        kwargs.update({'created_by': self.request.user})
+        return kwargs
+
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
-        kwargs['initial'].update({'comment': self.object})
-        kwargs['initial'].update({'created_by': self.request.user})
         kwargs['instance'] = None
         return kwargs
 

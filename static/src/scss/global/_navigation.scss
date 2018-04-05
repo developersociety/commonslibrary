@@ -34,8 +34,8 @@
 
         .icon {
             margin-right: $width-gap/6;
-            width: 2.25rem;
-            height: 2.25rem;
+            width: 2rem;
+            height: 2rem;
         }
     }
 
@@ -163,7 +163,7 @@
     color: $color-text;
     justify-content: center;
 
-    @media all and (max-width: 1061px) {
+    @media all and (max-width: 1060px) {
         font-size: 1.25rem;
         background: $color-background;
         color: #ffffff;

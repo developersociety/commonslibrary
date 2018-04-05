@@ -6,6 +6,7 @@ export class Resource extends React.Component {
   render() {
     let resourceClass = 'resource';
     let resourceHeader = null;
+    let resourceOrgLogo = null;
 
     if (this.props.resource.image) {
       resourceClass = resourceClass + ' with-image';
@@ -16,6 +17,9 @@ export class Resource extends React.Component {
     }
     if (this.props.resource.is_private) {
         resourceClass = resourceClass + ' private' ;
+    }
+    if (this.props.resource.organisation_logo) {
+        resourceOrgLogo = 'background: url(' + this.props.resource.organisation_logo + ') left center/contain no-repeat';
     }
 
     return (
@@ -28,7 +32,7 @@ export class Resource extends React.Component {
           <div className="resource-user">
             <div
                 className="resource-user__group"
-                style={{background: 'url(' + this.props.resource.organisation_logo + ') left center/contain no-repeat'}}>
+                style={resourceOrgLogo}>
             </div>
             <p className="resource-user__name">
               <a href={this.props.resource.created_by_link}>

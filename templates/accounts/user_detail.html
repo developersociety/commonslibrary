@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 
+{% load render_bundle from webpack_loader %}
 {% load thumbnail %}
 
 
@@ -106,23 +107,20 @@
     </div>
   </div>
 
-  <div class="resources featured-resource">
-    <div class="resources-grid">
-      {% include "includes/resource.html" with resource=user.get_latest_resource resource_category="latest" %}
-      {% include "includes/resource.html" with resource=user.get_most_liked_resource resource_category="Most Liked" %}
-      {% include "includes/resource.html" with resource=user.get_most_tried_resource resource_category="Most Tried" %}
+  {% if user.get_latest_resource or user.get_most_liked_resource or user.get_most_tried_resource %}
+    <div class="resources featured-resources">
+      <div class="resources-grid">
+        {% include "includes/resource.html" with resource=user.get_latest_resource resource_category="latest" %}
+        {% include "includes/resource.html" with resource=user.get_most_liked_resource resource_category="Most Liked" %}
+        {% include "includes/resource.html" with resource=user.get_most_tried_resource resource_category="Most Tried" %}
+      </div>
     </div>
-  </div>
+  {% endif %}
 
-  <div class="resources">
-    <div class="resources-filter">
-      <span>{{ object.resources_created.approved.count }} Resources</span>
-    </div>
-    <div class="resources-grid">
-      {% for resource in object.resources_created.approved %}
-        {% include "includes/resource.html" %}
-      {% endfor %}
-    </div>
-  </div>
+  <div id="react-app" data-user="{{ user.pk }}"></div>
 {% endblock main_content %}
+
+{% block extra_scripts %}
+  {% render_bundle 'main' 'js' %}
+{% endblock extra_scripts %}
 
