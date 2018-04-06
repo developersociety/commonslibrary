@@ -22,7 +22,6 @@
 
 %grid-template {
     display: grid;
-    grid-gap: 3px;
     grid-template-columns: 1fr;
 
     @media all and (min-width: 541px) {

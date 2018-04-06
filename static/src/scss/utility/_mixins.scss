@@ -8,3 +8,18 @@
         opacity: $psuedo-opacity;
     }
 }
+
+@mixin resource-line($query, $number) {
+    @media #{$query} {
+        &:nth-of-type(n+#{$number}):before {
+            content: '';
+            display: block;
+            height: 3px;
+            position: absolute;
+            top: 0; left: 0; right: 3px;
+            background: rgba($color-background, 0.1);
+            pointer-events: none;
+            user-select: none;
+        }
+    }
+}
