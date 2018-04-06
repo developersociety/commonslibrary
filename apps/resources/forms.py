@@ -41,7 +41,7 @@ class ResourceForm(forms.ModelForm):
             'privacy',
             ButtonHolder(
                 Submit('submit', 'Submit your resource', css_class='submit'),
-                css_class='form-actions'
+                css_class='form-actions resource-form-actions'
             ),
         )
 

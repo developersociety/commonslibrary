@@ -17,7 +17,7 @@ from .managers import ResourceManager
 
 
 class Resource(models.Model):
-    title = models.CharField(max_length=256, unique=True)
+    title = models.CharField(max_length=140, unique=True)
     slug = models.SlugField(unique=True, null=True)
     abstract = models.TextField(
         max_length=140,

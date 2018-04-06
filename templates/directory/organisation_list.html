@@ -31,13 +31,13 @@
         </div>
         <div class="directory-group__people">
           {% for user in object.approved_organisations.all %}
-            <div class="directory-person">
+            <a href="{% url 'directory:organisation-user' user.pk %}" class="directory-person">
               {% thumbnail user.photo '750' as thumb %}
                 <div class="directory-person__image" style="background: url({{ thumb.url }}) center center/cover no-repeat"></div>
               {% endthumbnail %}
               <div class="directory-person__detail">
                 <div class="directory-person__name">
-                  <a href="{% url 'directory:organisation-user' user.pk %}">{{ user.get_full_name }}</a>
+                  {{ user.get_full_name }}
                 </div>
                 <div class="directory-perons__stats">
                   <span>
@@ -66,7 +66,7 @@
                   </span>
                 </div>
               </div>
-            </div>
+            </a>
           {% endfor %}
         </div>
       </div>

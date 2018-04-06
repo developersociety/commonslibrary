@@ -12,6 +12,8 @@ from tags.models import Tag
 class ResourceSerializer(serializers.ModelSerializer):
     organisation = serializers.CharField(source='organisation.title', read_only=True)
     image = serializers.SerializerMethodField()
+    created_at = serializers.DateTimeField(format='%-d %B %Y %H:%M')
+    tags = serializers.SerializerMethodField()
     likes_count = serializers.SerializerMethodField()
     tried_count = serializers.SerializerMethodField()
     user_liked = serializers.SerializerMethodField()
@@ -25,9 +27,9 @@ class ResourceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Resource
         fields = (
-            'id', 'title', 'image', 'abstract', 'organisation', 'likes_count', 'tried_count',
-            'hits', 'url', 'created_by', 'created_by_link', 'organisation_logo', 'is_private',
-            'user_liked', 'user_tried'
+            'id', 'title', 'image', 'abstract', 'tags', 'organisation', 'likes_count',
+            'created_at', 'tried_count', 'hits', 'url', 'created_by', 'created_by_link',
+            'organisation_logo', 'is_private', 'user_liked', 'user_tried',
         )
 
     def get_likes_count(self, obj):
@@ -44,6 +46,9 @@ class ResourceSerializer(serializers.ModelSerializer):
 
     def get_url(self, obj):
         return obj.get_absolute_url()
+
+    def get_tags(self, obj):
+        return obj.tags.values('title')
 
     def get_created_by(self, obj):
         return obj.created_by.get_full_name()
