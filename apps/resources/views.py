@@ -42,7 +42,7 @@ class ResourceDetailView(DetailView, CreateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         self.object.hits = F('hits') + 1
-        self.object.save()
+        self.object.save(update_fields=['hits'])
         return context
 
     def form_invalid(self, form):
