@@ -16,10 +16,14 @@
     border-top: 3px solid $color-line;
     overflow: hidden;
 
+    + .directory-group {
+        margin-top: 0;
+        border-top: none;
+    }
+
     @media all and (min-width: 921px) {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        grid-gap: 3px;
     }
 
     @media all and (min-width: 1261px) {
@@ -42,6 +46,18 @@
         height: 3px;
         position: absolute;
         bottom: 0; left: 0; right: 0;
+        background: rgba($color-background, 0.1);
+        pointer-events: none;
+        user-select: none;
+        z-index: 10;
+    }
+
+    &:before {
+        content: '';
+        display: block;
+        width: 3px;
+        position: absolute;
+        top: 0; bottom: 3px; right: 0;
         background: rgba($color-background, 0.1);
         pointer-events: none;
         user-select: none;
