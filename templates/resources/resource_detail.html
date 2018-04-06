@@ -22,13 +22,15 @@
               <svg class="icon">
                 <use xlink:href="#private"></use>
               </svg>
-              <div class="icon-list__content">
-                <p>Private resource for
-                {% for org in resource.privacy.all %}
-                  {{ org.title }}{% if not forloop.last %}, {% endif %}
-                {% endfor %}
-                </p>
-              </div>
+              {% if resource.privacy %}
+                <div class="icon-list__content">
+                  <p>Private resource for
+                  {% for org in resource.privacy.all %}
+                    {{ org.title }}{% if not forloop.last %}, {% endif %}
+                  {% endfor %}
+                  </p>
+                </div>
+              {% endif %}
             </div>
           {% endif %}
           <div class="icon-list__row name-row">
