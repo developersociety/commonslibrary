@@ -36,11 +36,18 @@ class ResourceDetailView(DetailView, CreateView):
     form_class = CommentForm
     template_name = 'resources/resource_detail.html'
 
+    def get_queryset(self):
+        return Resource.objects.approved(user=self.request.user)
+
     def get_success_url(self):
         return self.get_object().get_absolute_url()
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['related_resources'] = self.object.get_related(user=self.request.user)
+        context['people_commented'] = self.object.comment_set.order_by().values_list(
+            'created_by', flat=True
+        ).distinct().count()
         self.object.hits = F('hits') + 1
         self.object.save()
         return context
