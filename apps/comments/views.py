@@ -18,9 +18,11 @@ class ReportCommentView(LoginRequiredMixin, DetailView, CreateView):
     def get_object(self, queryset=None):
         obj = super().get_object(queryset=queryset)
         if obj.created_by == self.request.user:
-            raise Http404('No {verbose_name}s found matching the query'.format(
-                verbose_name=self.model._meta.verbose_name
-            ))
+            raise Http404(
+                'No {verbose_name}s found matching the query'.format(
+                    verbose_name=self.model._meta.verbose_name,
+                )
+            )
         return obj
 
     def get_success_url(self):
@@ -68,9 +70,11 @@ class CommentUpdateView(LoginRequiredMixin, UpdateView):
     def get_object(self, queryset=None):
         obj = super().get_object(queryset=queryset)
         if obj.created_by != self.request.user:
-            raise Http404('No {verbose_name}s found matching the query'.format(
-                verbose_name=self.model._meta.verbose_name
-            ))
+            raise Http404(
+                'No {verbose_name}s found matching the query'.format(
+                    verbose_name=self.model._meta.verbose_name,
+                )
+            )
         return obj
 
     def form_valid(self, form):
