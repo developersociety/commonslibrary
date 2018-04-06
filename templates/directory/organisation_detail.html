@@ -86,7 +86,9 @@
     </div>
   {% endif %}
 
-  <div id="react-app" data-organisation="{{ organisation.pk }}"></div>
+  <div id="react-app" data-organisation="{{ organisation.pk }}">
+    {% csrf_token %}
+  </div>
 {% endblock main_content %}
 
 {% block extra_scripts %}

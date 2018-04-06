@@ -49,7 +49,7 @@ class ResourceDetailView(DetailView, CreateView):
             'created_by', flat=True
         ).distinct().count()
         self.object.hits = F('hits') + 1
-        self.object.save()
+        self.object.save(update_fields=['hits'])
         return context
 
     def form_invalid(self, form):

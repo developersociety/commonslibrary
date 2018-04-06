@@ -6,52 +6,15 @@
 
 
 {% block header_content %}
-  <div class="resource-detail__actions hide-desktop">
-    <a href="#" class="resource-action__button">
-      <svg class="icon">
-        <use xlink:href="#liked"></use>
-      </svg>
-      <span>
-        {{ resource.likes.count }}
-        <strong>Liked</strong>
-      </span>
-    </a>
-    <a href="#" class="resource-action__button">
-      <svg class="icon">
-        <use xlink:href="#tried"></use>
-      </svg>
-      <span>
-        {{ resource.tried.count }}
-        <strong>Tried</strong>
-      </span>
-    </a>
-  </div>
+  {% include "includes/resource_actions.html" with extra_class="hide-desktop" %}
   {{ block.super }}
 {% endblock header_content %}
 
 {% block main_content %}
-  <main class="resource-holder">
+  {% csrf_token %}
+  <main class="resource-holder" data-resource="{{ resource.id }}">
     <aside class="resource-sidebar" id="resource_sidebar">
-      <div class="resource-detail__actions">
-        <a href="#" class="resource-action__button">
-          <svg class="icon">
-            <use xlink:href="#liked"></use>
-          </svg>
-          <span>
-            {{ resource.likes.count }}
-            <strong>Liked</strong>
-          </span>
-        </a>
-        <a href="#" class="resource-action__button">
-          <svg class="icon">
-            <use xlink:href="#tried"></use>
-          </svg>
-          <span>
-            {{ resource.tried.count }}
-            <strong>Tried</strong>
-          </span>
-        </a>
-      </div>
+      {% include "includes/resource_actions.html" %}
       <div class="resource-meta">
         <div class="icon-list">
           <div class="icon-list__row">
@@ -172,14 +135,26 @@
         </div>
         {% for comment in resource.comment_set.all %}
           {% include "includes/comments.html" with comment=comment %}
+        {% empty %}
+          <div class="comment">
+            <div class="comment-content">
+                <p class="no-comments">There are currently no comments.</p>
+              </div>
+            </div>
         {% endfor %}
-      </div>
 
-      {% if user.is_authenticated %}
-        <div class="form-holder">
-          {% crispy form %}
-        </div>
-      {% endif %}
+        {% if user.is_authenticated %}
+          <div class="comments-form form-holder">
+            <div class="comment-profile">
+              {% thumbnail user.photo "x50" as thumb %}
+                <div class="group-logo" style="background: url({{ thumb.url }}) center center/contain no-repeat"></div>
+              {% endthumbnail %}
+              <span>{{ user.get_full_name }}</span>
+            </div>
+            {% crispy form %}
+          </div>
+        {% endif %}
+      </div>
 
   </main>
 

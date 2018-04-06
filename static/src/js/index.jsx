@@ -9,6 +9,8 @@ import { ResourceFilter } from './resource/resource_filter';
 const api = '/api/v1/resources/?format=json'
 const fixedOrganisation = document.getElementById('react-app').dataset.organisation;
 const fixedUser = document.getElementById('react-app').dataset.user;
+const componentHolder = document.getElementById('react-app');
+const csrf = componentHolder.querySelector('[name="csrfmiddlewaretoken"]').value
 
 class ResourceList extends React.Component {
   constructor () {
@@ -106,6 +108,7 @@ class ResourceList extends React.Component {
             <Resource
               key={resource.id}
               resource={resource}
+              csrf={csrf}
             />
           )}
         </div>

@@ -56,6 +56,7 @@ class FileUploader extends React.Component {
   }
 
   render() {
+    // remove initial DOM node
     this.props.input.remove();
 
     const fileStats = this.getFileStats();

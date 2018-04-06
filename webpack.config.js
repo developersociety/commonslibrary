@@ -20,9 +20,10 @@ module.exports = {
         './static/src/js/home',
         './static/src/scss/styles.scss'
     ],
-    registration: [
+    forms: [
         'webpack-dev-server/client?http://127.0.0.1:' + webpackPort + '/',
-        './static/src/js/accounts/registration'
+        './static/src/js/forms/forms',
+        './static/src/js/forms/tags'
     ],
     resource: [
         'webpack-dev-server/client?http://127.0.0.1:' + webpackPort + '/',

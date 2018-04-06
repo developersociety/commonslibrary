@@ -94,7 +94,7 @@
             </svg>
             <div class="profile-detail__value">
               {% with total_comments=user.comment_set.count %}
-              {{ total_comments }} comment{{ total_comments|pluralize }} posted
+                {{ total_comments }} comment{{ total_comments|pluralize }} posted
               {% endwith %}
             </div>
           </div>
@@ -131,7 +131,9 @@
     </div>
   {% endif %}
 
-  <div id="react-app" data-user="{{ user.pk }}"></div>
+  <div id="react-app" data-user="{{ user.pk }}">
+    {% csrf_token %}
+  </div>
 {% endblock main_content %}
 
 {% block extra_scripts %}

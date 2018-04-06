@@ -124,20 +124,21 @@ class Resource(models.Model):
             user=user,
         ).exclude(
             id=self.id,
-        ).values(
+        ).values_list(
             'id',
             'tags',
         )
-        for item in ids_with_tags:
-            if item['id'] in data:
-                data[item['id']].append(item['tags'])
+        for resource_id, tag in ids_with_tags:
+            if resource_id in data:
+                data[resource_id].append(tag)
             else:
-                data[item['id']] = [item['tags']]
+                data[resource_id] = [tag]
         resource_tags = set(self.tags.values_list('id', flat=True))
 
-        for item in data.items():
-            matches = set(item[1]) & resource_tags
-            results[item[0]] = len(matches)
+        for resource_id, tags in data.items():
+            matches = set(tags) & resource_tags
+            results[resource_id] = len(matches)
+
         resources_ids = sorted(results, key=results.get, reverse=True)[:limit]
         preserved = Case(* [When(pk=pk, then=pos) for pos, pk in enumerate(resources_ids)])
         resources = Resource.objects.filter(id__in=resources_ids).order_by(preserved)
