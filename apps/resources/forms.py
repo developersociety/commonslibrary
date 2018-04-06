@@ -19,6 +19,7 @@ class ResourceForm(forms.ModelForm):
         self.user = kwargs.pop('user')
         super().__init__(*args, **kwargs)
         self.fields['organisation'].queryset = self.user.approved_organisations.all()
+        self.fields['organisation'].empty_label = 'Select'
         self.fields['privacy'].queryset = self.user.approved_organisations.all()
         self.fields['privacy'].widget = forms.CheckboxSelectMultiple()
         self.helper = FormHelper()
