@@ -97,6 +97,7 @@
             position: absolute;
             top: $width-gap/2;
             right: $width-gap/2;
+            z-index: 15;
         }
 
         &.with-image:before {
