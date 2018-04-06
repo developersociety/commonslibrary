@@ -8,12 +8,15 @@
     input {
         width: 100%;
         background: none;
-        padding: $width-gap*1.5 $width-gap;
         outline: none;
         line-height: inherit;
         color: $color-background;
         border: none !important;
         font-size: 1.675rem !important;
+
+        .home-page & {
+            padding: $width-gap*1.6875 $width-gap !important;
+        }
 
         &::placeholder {
             color: inherit;
