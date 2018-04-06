@@ -13,9 +13,7 @@ class ResourceFilter(FilterSet):
     created_by = django_filters.filters.ModelMultipleChoiceFilter(queryset=User.objects.all())
     most_likes = django_filters.filters.OrderingFilter(
         # tuple-mapping retains order
-        fields=(
-            ('most_likes', 'resource'),
-        ),
+        fields=(('most_likes', 'resource'),),
 
         # labels do not need to retain order
         field_labels={
