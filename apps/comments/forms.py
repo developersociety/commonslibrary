@@ -40,12 +40,8 @@ class ReportForm(forms.ModelForm):
             'created_by': forms.HiddenInput,
             'comment': forms.HiddenInput,
         }
-        labels = {
-            'body': 'Reason'
-        }
-        help_texts = {
-            'body': 'Please describe why you are reporting this comment'
-        }
+        labels = {'body': 'Reason'}
+        help_texts = {'body': 'Please describe why you are reporting this comment'}
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
