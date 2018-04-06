@@ -177,11 +177,11 @@
             user-select: none;
         }
     }
-}
 
-@include resource-line('(min-width: 541px) and (max-width: 800px)', 3);
-@include resource-line('(min-width: 801px) and (max-width: 1260px)', 4);
-@include resource-line('(min-width: 1261px)', 5);
+    @include resource-line('(min-width: 541px) and (max-width: 800px)', 3);
+    @include resource-line('(min-width: 801px) and (max-width: 1260px)', 4);
+    @include resource-line('(min-width: 1261px)', 5);
+}
 
 .resource-image,
 .resource-summary,
