@@ -12,13 +12,14 @@ class ResourceForm(forms.ModelForm):
     class Meta:
         model = Resource
         fields = ('title', 'abstract', 'content', 'tags', 'image', 'organisation', 'privacy')
-
         labels = {'organisation': 'Group'}
 
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user')
         super().__init__(*args, **kwargs)
+        self.fields['abstract'].widget.attrs['rows'] = 3
         self.fields['organisation'].queryset = self.user.approved_organisations.all()
+        self.fields['organisation'].empty_label = 'Select'
         self.fields['privacy'].queryset = self.user.approved_organisations.all()
         self.fields['privacy'].widget = forms.CheckboxSelectMultiple()
         self.helper = FormHelper()
@@ -26,7 +27,11 @@ class ResourceForm(forms.ModelForm):
             'title',
             'abstract',
             'content',
-            'tags',
+            Div(
+                Field('tags', css_class="sr__input"),
+                Div(css_class='tag-select'),
+                css_class='tag-group'
+            ),
             Div(
                 Field('image', css_class="sr__input"),
                 Div(css_class='file-mount'),

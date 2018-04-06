@@ -5,7 +5,7 @@ from .models import Resource
 
 @admin.register(Resource)
 class ResourceAdmin(admin.ModelAdmin):
-    list_display = ('title', 'abstract', 'hits', 'created_by', 'created_at')
+    list_display = ('title', 'status', 'abstract', 'hits', 'created_by', 'created_at')
     readonly_fields = (
         'abstract', 'id', 'created_by', 'updated_by', 'created_at', 'updated_at', 'likes', 'tried',
         'hits', 'privacy', 'organisation', 'tags',
@@ -16,7 +16,7 @@ class ResourceAdmin(admin.ModelAdmin):
     date_hierarchy = 'created_at'
     fieldsets = [
         ('Resource', {
-            'fields': ('title', 'slug', 'abstract', 'tags', 'is_approved'),
+            'fields': ('title', 'slug', 'abstract', 'tags', 'status'),
         }),
         ('Content', {
             'fields': ('content', 'image'),
@@ -60,7 +60,7 @@ class ResourceAdmin(admin.ModelAdmin):
         Returns a sequence containing the fields to be displayed as filters in
         the right sidebar of the changelist page.
         """
-        list_filter = ['is_approved', 'tags']
+        list_filter = ['status', 'tags']
         if request.user.is_superuser:
             list_filter.append('organisation')
         return list_filter

@@ -4,6 +4,7 @@ from django_webtest import WebTest
 
 from accounts.tests.factories import UserFactory
 from comments.models import Comment, Report
+from resources.choices import RESOURCE_APPROVED
 from resources.tests.factories import ResourceFactory
 
 from .factories import CommentFactory
@@ -12,7 +13,7 @@ from .factories import CommentFactory
 class AddCommentTestView(WebTest):
 
     def setUp(self):
-        self.resource = ResourceFactory.create(is_approved=True)
+        self.resource = ResourceFactory.create(status=RESOURCE_APPROVED)
         self.superuser = UserFactory.create(password='test123')
 
     def test_post_comment_no_auth(self):
