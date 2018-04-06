@@ -5,6 +5,7 @@ from rest_framework.test import APIClient, APITestCase
 
 from accounts.tests.factories import UserFactory
 from directory.tests.factories import OrganisationFactory
+from resources.choices import RESOURCE_APPROVED, RESOURCE_REJECTED
 from resources.tests.factories import ResourceFactory
 from tags.tests.factories import TagFactory
 
@@ -14,7 +15,7 @@ class ResourceTests(APITestCase):
     def setUp(self):
         self.url = reverse('resource-list')
 
-        self.resource_1 = ResourceFactory.create(is_approved=True)
+        self.resource_1 = ResourceFactory.create(status=RESOURCE_APPROVED)
         self.like_url = reverse('resource-like', kwargs={'pk': self.resource_1.id})
         self.tried_url = reverse('resource-tried', kwargs={'pk': self.resource_1.id})
 
@@ -25,8 +26,8 @@ class ResourceTests(APITestCase):
         self.logged_in_client = APIClient()
         self.logged_in_client.login(username=self.user.email, password='test123')
 
-        ResourceFactory.create(is_approved=False)
-        ResourceFactory.create(privacy=[self.organisation], is_approved=True)
+        ResourceFactory.create(status=RESOURCE_REJECTED)
+        ResourceFactory.create(privacy=[self.organisation], status=RESOURCE_APPROVED)
 
         self.url = reverse('resource-list')
         self.update_url = reverse('resource-detail', kwargs={'pk': self.resource_1.id})

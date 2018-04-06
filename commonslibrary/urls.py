@@ -21,6 +21,7 @@ urlpatterns = [
     url(r'^directory/', include('directory.urls')),
     url(r'^resources/', include('resources.urls')),
     url(r'^api/v1/', include('api.v1.urls')),
+    url(r'^ckeditor/', include('ckeditor_uploader.urls')),
 ]
 
 # Make it easier to see a 404 page under debug
