@@ -27,7 +27,7 @@ class ResourceSerializer(serializers.ModelSerializer):
         fields = (
             'id', 'title', 'image', 'abstract', 'organisation', 'likes_count', 'tried_count',
             'hits', 'url', 'created_by', 'created_by_link', 'organisation_logo', 'is_private',
-            'user_liked', 'user_tried',
+            'user_liked', 'user_tried'
         )
 
     def get_likes_count(self, obj):
