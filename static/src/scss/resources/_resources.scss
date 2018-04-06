@@ -512,3 +512,33 @@ footer.resource-detail__stats {
     }
 }
 
+
+.related-resources {
+
+}
+
+.related-resources__title {
+    padding: $width-gap/2 $width-gap;
+    margin: 0;
+}
+
+.related-resources__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+
+    @media all and (min-width: 541px) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media all and (min-width: 801px) {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    @media all and (min-width: 1261px) {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    @media all and (min-width: 1521px) {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+

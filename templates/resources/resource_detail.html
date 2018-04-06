@@ -194,6 +194,22 @@
         {% endif %}
       </div>
 
+      {% if related_resources %}
+        <div class="related-resources">
+          <h4 class="related-resources__title">
+            <svg class="icon">
+              <use xlink:href="#network"></use>
+            </svg>
+            <span>Related resources</span>
+          </h4>
+          <div class="related-resources__grid">
+            {% for resource in related_resources %}
+              {% include "includes/resource.html" %}
+            {% endfor %}
+          </div>
+        </div>
+      {% endif %}
+
   </main>
 
 
