@@ -3,6 +3,7 @@ from django.test import TestCase
 from accounts.tests.factories import UserFactory
 from resources.models import Resource
 from resources.tests.factories import ResourceFactory
+from tags.tests.factories import TagFactory
 
 
 class ResourceModelTestCase(TestCase):
@@ -16,3 +17,16 @@ class ResourceModelTestCase(TestCase):
         )
         resources = Resource.get_carousel_resources(limit=1)
         self.assertIn(second, resources)
+
+    def test_get_related_resources(self):
+        resource = ResourceFactory.create(is_approved=True, tags=TagFactory.create_batch(10))
+        tag = resource.tags.all()[0]
+        tag_1 = resource.tags.all()[1]
+        tag_2 = resource.tags.all()[2]
+        resource_2 = ResourceFactory.create(is_approved=True, tags=[tag])
+        resource_3 = ResourceFactory.create(is_approved=True, tags=[tag_1, tag_2])
+        resource_4 = ResourceFactory.create(is_approved=True, tags=[tag, tag_1, tag_2])
+        resources = resource.get_related()
+        self.assertEqual(resource_4.id, resources[0].id)
+        self.assertEqual(resource_3.id, resources[1].id)
+        self.assertEqual(resource_2.id, resources[2].id)
