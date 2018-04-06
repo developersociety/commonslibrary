@@ -472,6 +472,10 @@ footer.resource-detail__stats {
         text-align: right;
         text-decoration: none;
 
+        &:hover {
+            color: $color-background;
+        }
+
         .icon {
             margin-right: 0;
             pointer-events: none;
