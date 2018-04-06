@@ -9,7 +9,7 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('resources', '0003_change_crated_at_default_to_timezone'),
+        ('resources', '0004_resources_statuses'),
     ]
 
     operations = [
