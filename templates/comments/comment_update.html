@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+{% load render_bundle from webpack_loader %}
+
+
+{% block main_content %}
+  <div class="form-holder">
+    <h1>Update comment</h1>
+    {% crispy form %}
+  </div>
+{% endblock main_content %}
+
+{% block extra_scripts %}
+  {% render_bundle 'registration' %}
+{% endblock extra_scripts %}
