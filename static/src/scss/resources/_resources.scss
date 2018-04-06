@@ -32,7 +32,7 @@
     @extend %meta;
 
     grid-column: 1 / -1;
-    padding: $width-gap*0.75 $width-gap;
+    padding: $width-gap/4 $width-gap;
     background: $color-background;
     color: #ffffff;
     align-items: center;
