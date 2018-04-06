@@ -13,7 +13,7 @@ const tag_fields = document.querySelectorAll('.tag-group');
     })
 
     const taggleField = new Taggle(field.querySelector('.tag-select'), {
-        source: options,
+        allowedTags: options,
         placeholder: 'type to search for tags',
         onTagAdd: function(event, tag) {
             [...select.options].map(option => {
