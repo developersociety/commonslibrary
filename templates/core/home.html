@@ -59,7 +59,9 @@
     </div>
   </div>
 
-  <div id="react-app"></div>
+  <div id="react-app">
+    {% csrf_token %}
+  </div>
 {% endblock main_content %}
 
 {% block extra_scripts %}

@@ -411,6 +411,23 @@ footer.resource-detail__stats {
         }
     }
 
+    .js-resource-action {
+        margin-left: auto;
+        display: inline-block;
+        color: #ffffff;
+        text-align: right;
+        text-decoration: none;
+
+        .icon {
+            margin-right: 0;
+            pointer-events: none;
+        }
+    }
+
+    &.true .add { display: none; }
+
+    &.false .remove { display: none; }
+
     .icon {
         width: 2rem;
         height: 2rem;
