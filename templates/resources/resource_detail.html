@@ -56,8 +56,10 @@
               <use xlink:href="#comment"></use>
             </svg>
             <div class="icon-list__content">
-              24 comments
-              3 People
+              {% with total_comments=resource.comment_set.count %}
+              {{ total_comments }} comment{{ total_comments|pluralize }}
+              {% endwith %}
+              {{ people_commented }} People
             </div>
           </div>
         </div>

@@ -94,7 +94,7 @@
             </svg>
             <div class="profile-detail__value">
               {% with total_comments=user.comment_set.count %}
-              {{ total_comments }} comment{{ total_comments|pluralize }} posted
+                {{ total_comments }} comment{{ total_comments|pluralize }} posted
               {% endwith %}
             </div>
           </div>

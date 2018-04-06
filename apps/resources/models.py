@@ -2,6 +2,7 @@ from datetime import timedelta
 
 from django.conf import settings
 from django.db import models
+from django.db.models import Case, When
 from django.db.models.functions import Cast
 from django.urls import reverse
 from django.utils import timezone
@@ -114,4 +115,31 @@ class Resource(models.Model):
         ).order_by(
             '-most_tried',
         )[:limit]
+        return resources
+
+    def get_related(self, user=None, limit=3):
+        data = {}
+        results = {}
+        ids_with_tags = Resource.objects.approved(
+            user=user,
+        ).exclude(
+            id=self.id,
+        ).values_list(
+            'id',
+            'tags',
+        )
+        for resource_id, tag in ids_with_tags:
+            if resource_id in data:
+                data[resource_id].append(tag)
+            else:
+                data[resource_id] = [tag]
+        resource_tags = set(self.tags.values_list('id', flat=True))
+
+        for resource_id, tags in data.items():
+            matches = set(tags) & resource_tags
+            results[resource_id] = len(matches)
+
+        resources_ids = sorted(results, key=results.get, reverse=True)[:limit]
+        preserved = Case(* [When(pk=pk, then=pos) for pos, pk in enumerate(resources_ids)])
+        resources = Resource.objects.filter(id__in=resources_ids).order_by(preserved)
         return resources
