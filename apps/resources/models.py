@@ -7,7 +7,7 @@ from django.db.models.functions import Cast
 from django.urls import reverse
 from django.utils import timezone
 
-from ckeditor.fields import RichTextField
+from ckeditor_uploader.fields import RichTextUploadingField
 from sorl.thumbnail import ImageField
 
 from tags.models import Tag
@@ -22,7 +22,7 @@ class Resource(models.Model):
         max_length=140,
         help_text='This text will appear in search results',
     )
-    content = RichTextField()
+    content = RichTextUploadingField()
     tags = models.ManyToManyField(
         Tag,
         limit_choices_to=models.Q(level=1) | models.Q(level=2),

@@ -51,6 +51,7 @@ DEFAULT_APPS = [
 
 THIRD_PARTY_APPS = [
     'ckeditor',
+    'ckeditor_uploader',
     'colorfield',
     'crispy_forms',
     'django_filters',
@@ -292,6 +293,7 @@ CKEDITOR_CONFIGS = {
         }],
     }
 }
+CKEDITOR_UPLOAD_PATH = 'ckeditor_uploads/'
 # yapf: enable
 
 REST_FRAMEWORK = {
