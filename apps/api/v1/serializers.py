@@ -48,7 +48,7 @@ class ResourceSerializer(serializers.ModelSerializer):
         return obj.get_absolute_url()
 
     def get_tags(self, obj):
-        return obj.tags.values()
+        return obj.tags.values('title')
 
     def get_created_by(self, obj):
         return obj.created_by.get_full_name()
