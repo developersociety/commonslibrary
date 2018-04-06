@@ -1,6 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http.response import HttpResponseForbidden
+from django.http import Http404
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView
 
@@ -15,11 +15,13 @@ class ReportCommentView(LoginRequiredMixin, DetailView, CreateView):
     slug_field = 'id'
     template_name = 'comments/report_form.html'
 
-    def get(self, request, *args, **kwargs):
-        response = super().get(request, *args, **kwargs)
-        if self.object.created_by == self.request.user:
-            return HttpResponseForbidden()
-        return response
+    def get_object(self, queryset=None):
+        obj = super().get_object(queryset=queryset)
+        if obj.created_by == self.request.user:
+            raise Http404('No {verbose_name}s found matching the query'.format(
+                verbose_name=self.model._meta.verbose_name
+            ))
+        return obj
 
     def get_success_url(self):
         return self.object.comment.resource.get_absolute_url()
@@ -63,11 +65,13 @@ class CommentUpdateView(LoginRequiredMixin, UpdateView):
     def get_success_url(self):
         return self.object.resource.get_absolute_url()
 
-    def get(self, request, *args, **kwargs):
-        response = super().get(request, *args, **kwargs)
-        if self.object.created_by != self.request.user:
-            return HttpResponseForbidden()
-        return response
+    def get_object(self, queryset=None):
+        obj = super().get_object(queryset=queryset)
+        if obj.created_by != self.request.user:
+            raise Http404('No {verbose_name}s found matching the query'.format(
+                verbose_name=self.model._meta.verbose_name
+            ))
+        return obj
 
     def form_valid(self, form):
         messages.success(self.request, 'Your comment has been updated.')
