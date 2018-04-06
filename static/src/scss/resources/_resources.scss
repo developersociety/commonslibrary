@@ -147,14 +147,13 @@
 
         &:focus,
         &:hover {
-            .resource-blurred {
-                display: none;
-            }
 
             .resource-focused {
                 display: flex;
                 flex-flow: column nowrap;
                 color: #ffffff;
+                position: absolute;
+                top: 0; right: 0; bottom: 0; left: 0;
             }
         }
 
