@@ -1,6 +1,8 @@
 from django.db import models
 from django.db.models import Q
 
+from .choices import RESOURCE_APPROVED
+
 
 class ResourceManager(models.Manager):
 
@@ -8,13 +10,13 @@ class ResourceManager(models.Manager):
         if user:
             if user.is_authenticated:
                 if user.is_superuser:
-                    qs = self.filter(is_approved=True)
+                    qs = self.filter(status=RESOURCE_APPROVED)
                 else:
-                    qs = self.filter(is_approved=True).filter(
+                    qs = self.filter(status=RESOURCE_APPROVED).filter(
                         Q(privacy__isnull=True) | Q(privacy__in=user.approved_organisations.all())
                     ).distinct()
             else:
-                qs = self.filter(is_approved=True, privacy__isnull=True)
+                qs = self.filter(status=RESOURCE_APPROVED, privacy__isnull=True)
         else:
-            qs = self.filter(is_approved=True, privacy__isnull=True)
+            qs = self.filter(status=RESOURCE_APPROVED, privacy__isnull=True)
         return qs

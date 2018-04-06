@@ -10,6 +10,7 @@ from ckeditor.fields import RichTextField
 from colorfield.fields import ColorField
 from sorl.thumbnail import ImageField
 
+from resources.choices import RESOURCE_APPROVED
 from resources.models import Resource
 
 
@@ -73,7 +74,7 @@ class Organisation(models.Model):
         """ Returns the organisation which published most resources this week. """
         return Organisation.objects.filter(
             resource__created_at__gte=timezone.now() - timedelta(days=7),
-            resource__is_approved=True,
+            resource__status=RESOURCE_APPROVED,
         ).annotate(
             most_published=models.Count('resource'),
         ).order_by(

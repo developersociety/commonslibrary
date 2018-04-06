@@ -12,6 +12,7 @@ from sorl.thumbnail import ImageField
 
 from tags.models import Tag
 
+from . import choices
 from .managers import ResourceManager
 
 
@@ -45,8 +46,9 @@ class Resource(models.Model):
         related_name='resources_privacy',
         blank=True,
     )
-    is_approved = models.BooleanField(default=False)
-
+    status = models.IntegerField(
+        choices=choices.RESOURCES_STATUSES, default=choices.RESOURCE_WAITING_FOR_APPROVAL
+    )
     likes = models.ManyToManyField(
         settings.AUTH_USER_MODEL, blank=True, related_name='resources_likes'
     )
