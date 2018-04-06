@@ -4,6 +4,7 @@ from django.test import TestCase
 from django.utils import timezone
 
 from directory.models import Organisation
+from resources.choices import RESOURCE_APPROVED
 from resources.tests.factories import ResourceFactory
 
 from .factories import OrganisationFactory
@@ -19,7 +20,7 @@ class OrganisationTestCase(TestCase):
             size=30,
             organisation=self.organisation,
             created_at=timezone.now() - timedelta(days=30),
-            is_approved=True,
+            status=RESOURCE_APPROVED,
         )
         organisation = Organisation.get_most_published_this_week()
 
@@ -30,12 +31,12 @@ class OrganisationTestCase(TestCase):
         ResourceFactory.create_batch(
             size=30,
             organisation=self.organisation,
-            is_approved=True,
+            status=RESOURCE_APPROVED,
         )
         ResourceFactory.create_batch(
             size=40,
             organisation=self.organisation_2,
-            is_approved=True,
+            status=RESOURCE_APPROVED,
         )
         organisation = Organisation.get_most_published_this_week()
 
