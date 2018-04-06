@@ -15,6 +15,7 @@ class CommentForm(forms.ModelForm):
             'created_by': forms.HiddenInput,
             'resource': forms.HiddenInput,
         }
+        labels = {'body': False}
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -23,7 +24,10 @@ class CommentForm(forms.ModelForm):
             'body',
             'created_by',
             'resource',
-            ButtonHolder(Submit('submit', 'Submit', css_class='submit'), css_class='form-actions'),
+            ButtonHolder(
+                Submit('submit', 'Post your comment', css_class='submit'),
+                css_class='form-actions'
+            ),
         )
 
 

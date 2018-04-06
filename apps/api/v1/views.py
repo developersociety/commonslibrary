@@ -1,5 +1,3 @@
-from distutils.util import strtobool
-
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters, status, viewsets
 from rest_framework.decorators import detail_route
@@ -36,21 +34,19 @@ class ResourceViewSet(viewsets.ReadOnlyModelViewSet):
     @detail_route(methods=['put'], permission_classes=[IsAuthenticated])
     def tried(self, request, pk=None):
         obj = self.get_object()
-        like = strtobool(request.data.get('tried'))
-        if like:
-            obj.tried.add(request.user)
-        else:
+        if request.user in obj.tried.all():
             obj.tried.remove(request.user)
+        else:
+            obj.tried.add(request.user)
         return Response(status=status.HTTP_202_ACCEPTED)
 
     @detail_route(methods=['put'], permission_classes=[IsAuthenticated])
     def like(self, request, pk=None):
         obj = self.get_object()
-        like = strtobool(request.data.get('like'))
-        if like:
-            obj.likes.add(request.user)
-        else:
+        if request.user in obj.likes.all():
             obj.likes.remove(request.user)
+        else:
+            obj.likes.add(request.user)
         return Response(status=status.HTTP_202_ACCEPTED)
 
 
