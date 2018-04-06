@@ -290,9 +290,12 @@ CKEDITOR_CONFIGS = {
                 'Bold', 'Italic', 'Underline', 'Strike', 'Liststyle', 'Styles', 'Image', 'Link',
                 'Source', 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-',
                 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'Format', 'Font',
-                'FontSize'
+                'FontSize', 'Youtube',
             ],
         }],
+        'extraPlugins': ','.join([
+            'youtube',
+        ])
     }
 }
 # yapf: enable
