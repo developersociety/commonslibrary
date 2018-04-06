@@ -6,7 +6,7 @@ from django.db import models
 from django.urls import reverse
 from django.utils import timezone
 
-from ckeditor.fields import RichTextField
+from ckeditor_uploader.fields import RichTextUploadingField
 from colorfield.fields import ColorField
 from sorl.thumbnail import ImageField
 
@@ -19,8 +19,8 @@ class Organisation(models.Model):
     url = models.URLField(blank=True)
     slug = models.SlugField(unique=True, null=True)
     telephone = models.CharField(max_length=16, blank=True)
-    address = RichTextField(blank=True)
-    description = RichTextField(blank=True)
+    address = RichTextUploadingField(blank=True)
+    description = RichTextUploadingField(blank=True)
     logo = ImageField(blank=True, upload_to='uploads/directory/organisation/%Y/%m/%d')
     email = models.EmailField(blank=True)
     created_by = models.ForeignKey(
