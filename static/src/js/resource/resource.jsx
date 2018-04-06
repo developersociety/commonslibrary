@@ -59,7 +59,9 @@ export class Resource extends React.Component {
         </div>
         <div className="resource-focused">
           <div className="resource-list-abstract">
-            {this.props.resource.abstract}
+            <p className="resource-abstract">
+              {this.props.resource.abstract}
+            </p>
           </div>
           <div className="resource-meta">
             <div className="icon-list">
