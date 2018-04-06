@@ -6,7 +6,7 @@ from accounts.models import User
 class UserFactory(factory.django.DjangoModelFactory):
     first_name = factory.Faker('first_name')
     last_name = factory.Faker('last_name')
-    email = factory.Faker('email')
+    email = factory.Sequence(lambda n: 'email{}@test.com'.format(n))
     password = 'test123'
 
     class Meta:

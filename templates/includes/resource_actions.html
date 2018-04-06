@@ -1,0 +1,40 @@
+<div class="resource-detail__actions {{ extra_class }}">
+  <div class="resource-action__button {% if request.user in resource.likes.all %}true{% else %}false{% endif %}" data-type="like">
+    <svg class="icon">
+      <use xlink:href="#liked"></use>
+    </svg>
+    <span>
+      <div class="js-count">{{ resource.likes.count }}</div>
+      <strong>Liked</strong>
+    </span>
+    {% if request.user.is_authenticated %}
+      <a href="#" class="js-resource-action">
+        <svg class="icon add">
+          <use xlink:href="#add"></use>
+        </svg>
+        <svg class="icon remove">
+          <use xlink:href="#minus"></use>
+        </svg>
+      </a>
+    {% endif %}
+  </div>
+  <div class="resource-action__button {% if request.user in resource.tried.all %}true{% else %}false{% endif %}" data-type="tried">
+    <svg class="icon">
+      <use xlink:href="#tried"></use>
+    </svg>
+    <span>
+      <div class="js-count">{{ resource.tried.count }}</div>
+      <strong>Tried</strong>
+    </span>
+    {% if request.user.is_authenticated %}
+      <a href="#" class="js-resource-action">
+        <svg class="icon add">
+          <use xlink:href="#add"></use>
+        </svg>
+        <svg class="icon remove">
+          <use xlink:href="#minus"></use>
+        </svg>
+      </a>
+    {% endif %}
+  </div>
+</div>
