@@ -102,8 +102,8 @@ class Resource(models.Model):
         return resource
 
     @staticmethod
-    def get_most_liked(user=None, limit=1):
-        resources = Resource.objects.approved(user=user).annotate(
+    def get_most_liked(user=None, exclude=None, limit=1):
+        resources = Resource.objects.approved(user=user).exclude(id=exclude).annotate(
             most_liked=models.Count('likes')
         ).order_by(
             '-most_liked',
@@ -111,8 +111,8 @@ class Resource(models.Model):
         return resources
 
     @staticmethod
-    def get_most_tried(user=None, limit=1):
-        resources = Resource.objects.approved(user=user).annotate(
+    def get_most_tried(user=None, exclude=None, limit=1):
+        resources = Resource.objects.approved(user=user).exclude(id=exclude).annotate(
             most_tried=models.Count('tried')
         ).order_by(
             '-most_tried',
