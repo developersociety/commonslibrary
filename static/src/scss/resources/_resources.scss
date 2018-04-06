@@ -76,15 +76,6 @@
     color: inherit;
     text-decoration: none;
 
-    &:after {
-        content: '';
-        display: block;
-        width: 3px;
-        position: absolute;
-        top: 0; right: 0; bottom: 0;
-        background: rgba($color-background, 0.1);
-    }
-
     &.private {
         position: relative;
 
@@ -105,6 +96,7 @@
         }
     }
 
+    &.featured-org,
     .resource-blurred,
     .resource-focused {
         @extend %flex-column;
@@ -144,6 +136,22 @@
         }
     }
 
+    @media all and (max-width: 540px) {
+
+        + .resource {
+            &:after {
+                content: '';
+                display: block;
+                height: 3px;
+                position: absolute;
+                top: 0; left:0; right: 0;
+                background: rgba($color-background, 0.1);
+                pointer-events: none;
+                user-select: none;
+            }
+        }
+    }
+
     @media all and (min-width: 541px) {
 
         &:focus,
@@ -169,12 +177,11 @@
             user-select: none;
         }
     }
-
-    @include resource-line('(max-width: 540px)', 2);
-    @include resource-line('(min-width: 541px) and (max-width: 800px)', 3);
-    @include resource-line('(min-width: 801px) and (max-width: 1260px)', 4);
-    @include resource-line('(min-width: 1261px)', 5);
 }
+
+@include resource-line('(min-width: 541px) and (max-width: 800px)', 3);
+@include resource-line('(min-width: 801px) and (max-width: 1260px)', 4);
+@include resource-line('(min-width: 1261px)', 5);
 
 .resource-image,
 .resource-summary,
@@ -367,6 +374,10 @@ footer.resource-detail__stats {
 .resource-abstract {
     font-size: 1.125rem;
     margin-top: 0;
+
+    .private & {
+        padding-right: 3rem;
+    }
 }
 
 .private .resource-list-abstract {
