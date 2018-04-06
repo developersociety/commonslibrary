@@ -14,10 +14,15 @@ export class Resource extends React.Component {
       );
     }
     if (this.props.resource.is_private) {
-        resourceClass = resourceClass + ' private' ;
+      resourceClass = resourceClass + ' private' ;
     }
     if (this.props.resource.organisation_logo) {
-        resourceOrgLogo = 'background: url(' + this.props.resource.organisation_logo + ') left center/contain no-repeat';
+      resourceOrgLogo = (
+        <div
+          className="resource-user__group"
+          style={{background: 'url(' + this.props.resource.organisation_logo + ') left center/contain no-repeat'}}>
+        </div>
+      )
     }
 
     return (
@@ -29,10 +34,7 @@ export class Resource extends React.Component {
           </div>
           <footer className="resource-footer">
             <div className="resource-user">
-              <div
-                  className="resource-user__group"
-                  style={{resourceOrgLogo}}>
-              </div>
+              {resourceOrgLogo}
               <p className="resource-user__name">
                 {this.props.resource.created_by}
               </p>
