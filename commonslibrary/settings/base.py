@@ -282,12 +282,15 @@ AUTH_USER_MODEL = 'accounts.User'
 # yapf: disable
 CKEDITOR_CONFIGS = {
     'default': {
-        'skin': 'moono-lisa',
+        'skin': 'moono',
         'toolbar_Basic': [['Source', '-', 'Bold', 'Italic']],
         'toolbar': [{
             'name': 'basicstyles',
             'items': [
-                'Bold', 'Italic', 'Underline', 'Strike', 'Image', 'Link', 'Source',
+                'Bold', 'Italic', 'Underline', 'Strike', 'Liststyle', 'Styles', 'Image', 'Link',
+                'Source', 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-',
+                'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'Format', 'Font',
+                'FontSize'
             ],
         }],
     }
