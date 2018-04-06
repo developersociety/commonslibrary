@@ -5,6 +5,50 @@
     color: #ffffff;
 
     h4 { margin: 0; }
+
+    @media all and (min-width: 741px) {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+    }
+}
+
+.footer-details {
+    width: 100%;
+    max-width: 15rem;
+    margin: $width-gap/2 $width-gap*1.5 0 0;
+}
+
+.footer-logos {
+    display: flex;
+    flex-flow: row wrap;
+    max-width: 30rem;
+    min-width: 20rem;
+    flex-shrink: 0;
+    justify-content: flex-start;
+    margin-top: $width-gap*1.5;
+
+    @media all and (min-width: 741px) {
+        justify-content: flex-end;
+        margin-top: 0;
+    }
+}
+
+.commons-library-logo {
+    width: 12rem;
+    height: 2.5rem;
+    background: url(../img/logo.png) center center/contain no-repeat;
+    margin: $width-gap/2 $width-gap 0 0;
+    flex-shrink: 0;
+}
+
+.footer-logo {
+    max-height: 2.5rem;
+    width: auto;
+    height: auto;
+    flex-shrink: 0;
+    margin: $width-gap/2 $width-gap 0 0;
+    filter: brightness(0) invert(1);
 }
 
 body {
