@@ -284,7 +284,7 @@ AUTH_USER_MODEL = 'accounts.User'
 # yapf: disable
 CKEDITOR_CONFIGS = {
     'default': {
-        'skin': 'moono',
+        'skin': 'moono-lisa',
         'toolbar_Basic': [['Source', '-', 'Bold', 'Italic']],
         'toolbar': [{
             'name': 'basicstyles',
