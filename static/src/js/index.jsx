@@ -76,6 +76,10 @@ class ResourceList extends React.Component {
       },
       this.updateResourceList
     )
+    // Scroll to a certain element
+    document.getElementById('react-app').scrollIntoView({
+      behavior: 'smooth'
+    });
   }
 
   // Call API with resource list criteria
