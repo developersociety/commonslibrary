@@ -31,7 +31,7 @@ export class SearchOptionManager extends React.Component {
   }
 
   componentDidMount() {
-    // if tag passed in initial query get and select
+    // Check if tag passed in initial query, if so get and select
     if (this.props.preselectedTag !== undefined) {
       fetch('/api/v1/tags' + '?id=' + this.props.preselectedTag, {
         method: 'get',
