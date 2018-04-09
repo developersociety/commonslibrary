@@ -7,7 +7,7 @@ from django.db.models.functions import Cast
 from django.urls import reverse
 from django.utils import timezone
 
-from ckeditor.fields import RichTextField
+from ckeditor_uploader.fields import RichTextUploadingField
 from sorl.thumbnail import ImageField
 
 from tags.models import Tag
@@ -17,13 +17,13 @@ from .managers import ResourceManager
 
 
 class Resource(models.Model):
-    title = models.CharField(max_length=256, unique=True)
+    title = models.CharField(max_length=140, unique=True)
     slug = models.SlugField(unique=True, null=True)
     abstract = models.TextField(
         max_length=140,
         help_text='This text will appear in search results',
     )
-    content = RichTextField()
+    content = RichTextUploadingField()
     tags = models.ManyToManyField(
         Tag,
         limit_choices_to=models.Q(level=1) | models.Q(level=2),
@@ -102,8 +102,8 @@ class Resource(models.Model):
         return resource
 
     @staticmethod
-    def get_most_liked(user=None, limit=1):
-        resources = Resource.objects.approved(user=user).annotate(
+    def get_most_liked(user=None, exclude=None, limit=1):
+        resources = Resource.objects.approved(user=user).exclude(id=exclude).annotate(
             most_liked=models.Count('likes')
         ).order_by(
             '-most_liked',
@@ -111,8 +111,8 @@ class Resource(models.Model):
         return resources
 
     @staticmethod
-    def get_most_tried(user=None, limit=1):
-        resources = Resource.objects.approved(user=user).annotate(
+    def get_most_tried(user=None, exclude=None, limit=1):
+        resources = Resource.objects.approved(user=user).exclude(id=exclude).annotate(
             most_tried=models.Count('tried')
         ).order_by(
             '-most_tried',

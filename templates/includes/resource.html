@@ -2,7 +2,7 @@
 
 
 {% if resource %}
-  <div class="resource {% if resource.image %}with-image {% endif %}{% if resource.privacy.all.count != 0 %}private{% endif %}">
+  <a href="{{ resource.get_absolute_url }}" class="resource {% if resource.image %}with-image {% endif %}{% if resource.privacy.all.count != 0 %}private{% endif %}">
     <div class="resource-blurred">
       {% thumbnail resource.image '1000' as thumb %}
         <header class='resource-image' style="background-image: url({{ thumb.url }})">
@@ -15,7 +15,7 @@
         {% if not resource.image and resource_category %}
           <p class="resource-category">{{ resource_category }}</p>
         {% endif %}
-        <a href="{{ resource.get_absolute_url }}">{{ resource.title }}</a>
+        <div class="resource-list-title">{{ resource.title }}</div>
       </div>
       <footer class="resource-footer">
         <div class="resource-user">
@@ -24,9 +24,7 @@
             </div>
           {% endthumbnail %}
           <p class="resource-user__name">
-            <a href="{% url 'directory:organisation-user' resource.created_by.pk %}">
-              {{ resource.created_by.get_full_name }}
-            </a>
+            {{ resource.created_by.get_full_name }}
           </p>
         </div>
         <div class="resource-actions">
@@ -45,11 +43,11 @@
         </div>
       </footer>
     </div>
-    <a href="{{ resource.get_absolute_url }}" class="resource-focused">
+    <div class="resource-focused">
       {% if resource_category %}
         <p class="resource-category">{{ resource_category }}</p>
       {% endif %}
-      {{ resource.abstract }}
+      <p class="resource-abstract">{{ resource.abstract }}</p>
       <div class="resource-meta">
         <div class="icon-list">
           <div class="icon-list__row">
@@ -75,6 +73,6 @@
           {% endif %}
         </div>
       </div>
-    </a>
-  </div>
+    </div>
+  </a>
 {% endif %}
