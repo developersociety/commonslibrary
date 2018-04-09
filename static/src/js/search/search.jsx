@@ -20,6 +20,7 @@ export class Search extends React.Component {
     this.fetchTagsData = this.fetchTagsData.bind(this);
     this.fetchOrganisationsData = this.fetchOrganisationsData.bind(this);
     this.fetchPeopleData = this.fetchPeopleData.bind(this);
+    this.searchApi = this.searchApi.bind(this);
   }
 
   // Get tags data from API based on query
@@ -68,8 +69,8 @@ export class Search extends React.Component {
   handleSelection(increment) {
     this.setState(prevState => ({
       searchOptionsSelected: prevState.searchOptionsSelected + increment
-    })
-  )}
+    }), () => this.searchApi(false))
+  }
 
   // Watch input field for changes
   handleChange(event) {
@@ -97,6 +98,10 @@ export class Search extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
 
+    this.searchApi(true)
+  }
+
+  searchApi(useKeyword) {
     // Get current selected tags from child state
     const query = this.state.searchQuery;
     const tags = this.searchTags.state.selectedOptions;
@@ -123,21 +128,26 @@ export class Search extends React.Component {
       created_by: peopleQuery
     }
 
-    let searchQuery = '';
+    let apiQuery = '';
 
     // If no tags selected use search query, else loop through selected options and create query
-    if (query != '' && tags.length == 0 && organisations.length == 0 && people.length == 0) {
-      searchQuery = '&search=' + query;
+    if (useKeyword) {
+      apiQuery = '&search=' + query;
+      {Object.keys(searchCriteria).map((query, index) => {
+        if (searchCriteria[query] != '') {
+          apiQuery += ('&' + query + '=' + searchCriteria[query])
+        }
+      })}
     } else {
       {Object.keys(searchCriteria).map((query, index) => {
         if (searchCriteria[query] != '') {
-          searchQuery += ('&' + query + '=' + searchCriteria[query])
+          apiQuery += ('&' + query + '=' + searchCriteria[query])
         }
       })}
     }
 
     // Create search query string from selected options
-    this.props.updateResourceQuery(searchQuery);
+    this.props.updateResourceQuery(apiQuery);
   }
 
   render() {

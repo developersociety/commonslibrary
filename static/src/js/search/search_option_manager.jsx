@@ -42,11 +42,12 @@ export class SearchOptionManager extends React.Component {
       })
       .then(data => {
         if (data.length == 1) {
-          this.setState(newState => {
-            newState.selectedOptions.push(data[0])
-            return { selectedOptions: newState.selectedOptions }
-          })
-          this.props.handleSelection(1);
+          let newState = this.state.selectedOptions
+
+          newState.push(data[0])
+          this.setState({
+            selectedOptions: newState
+          }, () => this.props.handleSelection(1))
         }
       })
     }
@@ -58,17 +59,19 @@ export class SearchOptionManager extends React.Component {
 
     // if not in state add, else remove
     if(!checkSelected.selected) {
-      this.setState(newState => {
-        newState.selectedOptions.push(option)
-        return { selectedOptions: newState.selectedOptions }
-      })
-      this.props.handleSelection(1);
+      let newState = this.state.selectedOptions
+
+      newState.push(option)
+      this.setState({
+        selectedOptions: newState
+      }, () => this.props.handleSelection(1))
     } else {
-      this.setState(newState => {
-        newState.selectedOptions.splice(checkSelected.index, 1)
-        return { selectedOptions: newState.selectedOptions }
-      })
-      this.props.handleSelection(-1);
+      let newState = this.state.selectedOptions
+
+      newState.splice(checkSelected.index, 1)
+      this.setState({
+        selectedOptions: newState
+      }, () => this.props.handleSelection(-1))
     }
   }
 

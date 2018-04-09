@@ -96,6 +96,10 @@
         }
     }
 
+    &.featured-org {
+        min-height: 10rem;
+    }
+
     &.featured-org,
     .resource-blurred,
     .resource-focused {
