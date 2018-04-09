@@ -6,9 +6,12 @@ import { Search } from './search/search';
 import { Resource } from './resource/resource';
 import { ResourceFilter } from './resource/resource_filter';
 
+const pageUrl = new URL(window.location.href);
+
 const api = '/api/v1/resources/?format=json'
 const fixedOrganisation = document.getElementById('react-app').dataset.organisation;
 const fixedUser = document.getElementById('react-app').dataset.user;
+const preselectedTag = pageUrl.searchParams.get('tags');
 const componentHolder = document.getElementById('react-app');
 const csrf = componentHolder.querySelector('[name="csrfmiddlewaretoken"]').value
 
@@ -40,6 +43,13 @@ class ResourceList extends React.Component {
       this.setState(
         {
           query: '&created_by=' + fixedUser
+        },
+        this.updateResourceList
+      )
+    } else if (preselectedTag !== null) {
+      this.setState(
+        {
+          query: '&tags=' + preselectedTag
         },
         this.updateResourceList
       )
@@ -97,6 +107,7 @@ class ResourceList extends React.Component {
           updateResourceQuery={this.updateResourceQuery}
           fixedOrganisation={fixedOrganisation}
           fixedUser={fixedUser}
+          preselectedTag={preselectedTag}
           />
         <ResourceFilter
           resourceCount={this.state.resources.length}

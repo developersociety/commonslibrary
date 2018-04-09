@@ -68,7 +68,7 @@
               <div class="icon-list__content">
                 <div class="tag-list">
                   {% for tag in resource.tags.all %}
-                    <span class="tag">{{ tag }}</span>
+                    <a href="{% url 'search' %}?tags={{ tag.id }}" class="tag">{{ tag }}</a>
                   {% endfor %}
                 </div>
               </div>

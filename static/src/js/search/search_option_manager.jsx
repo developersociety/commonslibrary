@@ -30,6 +30,28 @@ export class SearchOptionManager extends React.Component {
     }
   }
 
+  componentDidMount() {
+    // if tag passed in initial query get and select
+    if (this.props.preselectedTag !== undefined) {
+      fetch('/api/v1/tags' + '?id=' + this.props.preselectedTag, {
+        method: 'get',
+        credentials: 'same-origin'
+      })
+      .then(response => {
+        return response.json()
+      })
+      .then(data => {
+        if (data.length == 1) {
+          this.setState(newState => {
+            newState.selectedOptions.push(data[0])
+            return { selectedOptions: newState.selectedOptions }
+          })
+          this.props.handleSelection(1);
+        }
+      })
+    }
+  }
+
   handleOptionSelection(option) {
     let prevSelected = this.state.selectedOptions;
     let checkSelected = this.checkSelected(option);

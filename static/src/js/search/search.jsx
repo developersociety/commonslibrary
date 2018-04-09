@@ -10,7 +10,7 @@ export class Search extends React.Component {
       searchOrganisationsOptions: [],
       searchPeopleOptions: [],
       searchQuery: '',
-      searchOptionsSelected: 0
+      searchOptionsSelected: 0,
     }
 
     // handler binds
@@ -175,7 +175,8 @@ export class Search extends React.Component {
             <SearchOptionManager
               ref={(searchTags) => {this.searchTags = searchTags;}}
               searchOptions={this.state.searchTagsOptions}
-              handleSelection={this.handleSelection}/>
+              handleSelection={this.handleSelection}
+              preselectedTag={this.props.preselectedTag}/>
           </div>
 
           <div className={'search-filter__groups shown-' + showOrganisation}>

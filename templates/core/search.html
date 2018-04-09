@@ -3,7 +3,7 @@
 {% load render_bundle from webpack_loader %}
 
 {% block main_content %}
-  <div id="react-app" data-organisation="{{ organisation.pk }}">
+  <div id="react-app">
     {% csrf_token %}
   </div>
 {% endblock main_content %}
