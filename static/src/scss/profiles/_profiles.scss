@@ -3,6 +3,19 @@
 
     background: $color-line;
     min-height: 20rem;
+    position: relative;
+
+    &:after {
+        content: '';
+        display: block;
+        height: 3px;
+        position: absolute;
+        bottom: 0; left: 0; right: 3px;
+        background: rgba($color-background, 0.1);
+        pointer-events: none;
+        user-select: none;
+        z-index: 10;
+    }
 
     @media all and (max-width: 800px) {
         display: block;
@@ -15,9 +28,19 @@
 
     grid-column: auto / span 1;
     background: #fff;
+    position: relative;
 
     .profile-image {
         margin: $width-gap/2 0 0 $width-gap;
+    }
+
+    &:after {
+        content: '';
+        display: block;
+        width: 3px;
+        position: absolute;
+        top: 0; right: 0; bottom: 3px;
+        background: rgba($color-background, 0.1);
     }
 
     @media all and (min-width: 801px) {

@@ -3,7 +3,7 @@ from django.db import models
 from django.urls import get_script_prefix
 from django.utils.encoding import iri_to_uri
 
-from ckeditor.fields import RichTextField
+from ckeditor_uploader.fields import RichTextUploadingField
 
 from .validators import validate_page_url
 
@@ -23,7 +23,7 @@ class Category(models.Model):
 
 class Page(models.Model):
     title = models.CharField(max_length=256)
-    content = RichTextField(
+    content = RichTextUploadingField(
         blank=True,
     )
     author = models.CharField(max_length=256, blank=True)

@@ -2,17 +2,17 @@
 
 
 {% if organisation %}
-  <div class="resource {% if organisation.logo %}with-image {% endif %}">
+  <a href="{% url 'directory:organisation-detail' organisation.slug %}" class="resource featured-org {% if organisation.logo %}with-image {% endif %}">
     <div class="resource-summary">
       <p class="resource-category">Most published this week</p>
       {% if organisation.logo %}
         {% thumbnail organisation.logo '1000' as thumb %}
-          <header class='resource-image' style="background-image: url({{ thumb.url }})">
+          <header class='org-logo__large' style="background: url({{ thumb.url }}) center center/contain no-repeat">
           </header>
         {% endthumbnail %}
       {% else %}
-        <a href="{% url 'directory:organisation-detail' organisation.slug %}">{{ organisation.title }}</a>
+      <div class="resource-list-title">{{ organisation.title }}</div>
       {% endif %}
     </div>
-  </div>
+  </a>
 {% endif %}

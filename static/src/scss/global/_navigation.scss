@@ -59,7 +59,7 @@
 }
 
 .page-navigation__home {
-    position: absolute;
+    position: fixed;
     top: 0; left: 0;
     display: block;
     font-family: $base-font-headline;
@@ -72,6 +72,12 @@
     white-space: nowrap;
     z-index: 10000;
     width: 100%;
+
+    &:hover,
+    &:active,
+    &.active {
+        color: $color-accent;
+    }
 
     @media all and (min-width: 1061px) {
         position: static;
@@ -167,6 +173,10 @@
     color: $color-text;
     justify-content: center;
 
+    &:hover {
+        color: $color-accent;
+    }
+
     @media all and (max-width: 1060px) {
         font-size: 1.25rem;
         background: $color-background;
@@ -175,10 +185,6 @@
         flex-grow: 1;
         flex-shrink: 1;
         align-items: center;
-
-        &:hover {
-
-        }
     }
 }
 

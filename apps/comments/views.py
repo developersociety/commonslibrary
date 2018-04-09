@@ -53,7 +53,7 @@ class ReportCommentView(LoginRequiredMixin, DetailView, CreateView):
 
     def form_valid(self, form):
         response = super().form_valid(form)
-        messages.success(self.request, 'Thank you the comment was reported.')
+        messages.success(self.request, 'Thank you the comment was reported')
         return response
 
 
@@ -78,5 +78,5 @@ class CommentUpdateView(LoginRequiredMixin, UpdateView):
         return obj
 
     def form_valid(self, form):
-        messages.success(self.request, 'Your comment has been updated.')
+        messages.success(self.request, 'Your comment has been updated')
         return super().form_valid(form=form)
