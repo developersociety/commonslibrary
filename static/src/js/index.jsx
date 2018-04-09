@@ -78,7 +78,8 @@ class ResourceList extends React.Component {
     )
     // Scroll to a certain element
     document.getElementById('react-app').scrollIntoView({
-      behavior: 'smooth'
+      behavior: 'smooth',
+      block: 'start'
     });
   }
 
