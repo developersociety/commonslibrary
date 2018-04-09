@@ -290,12 +290,15 @@ CKEDITOR_CONFIGS = {
                 'Bold', 'Italic', 'Underline', 'Strike', 'Liststyle', 'Styles', 'Image', 'Link',
                 'Source', 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-',
                 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'Format', 'Font',
-                'FontSize', 'Youtube',
+                'FontSize', 'Youtube', 'MJAccordion',
             ],
         }],
-        'extraPlugins': ','.join([
-            'youtube',
-        ])
+        'extraPlugins': ','.join(['youtube', 'widget', 'lineutils', 'mjAccordion']),
+        'contentsCss': ','.join(['/static/src/admin/css/ckeditor_accordion.css']),
+        'allowedContent': True,
+        'mjAccordion_managePopupTitle': True,
+        'mjAccordion_managePopupContent': True,
+        'mj_variables_allow_html': True,
     }
 }
 # yapf: enable

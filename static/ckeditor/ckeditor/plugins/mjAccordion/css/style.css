@@ -1,0 +1,23 @@
+/*
+	Plugin	: MJ Accordion
+	Author	: Michael Janea (www.michaeljanea.com)
+	Version	: 1.6
+*/
+
+#mjAccordion {}
+	#mjAccordion_Container {height:350px; overflow:auto; margin-bottom:1em;}
+	#mjAccordion table {width:100%; border-collapse:collapse;}
+	#mjAccordion th, #mjAccordion td {padding:.5em;}
+	#mjAccordion th {font-weight:bold;}
+	#mjAccordion td {vertical-align:top;}
+	#mjAccordion input[type=text], #mjAccordion textarea {padding:.3em; border:1px solid #ddd; -webkit-border-radius:3px; border-radius:3px; -webkit-box-shadow:inset 0 2px 2px rgba(0,0,0,0.075); box-shadow:inset 0 2px 2px rgba(0,0,0,0.075); background:rgba(0, 0, 0, .01); outline:none;}
+	#mjAccordion input[type=text]:focus, #mjAccordion textarea:focus {border:1px solid #139ff7;}
+	#mjAccordion input[type=text] {width:150px;}
+	#mjAccordion textarea {resize:none; width:295px; height:100px; white-space:pre-wrap;}
+	#mjAccordion .mjAccordion_remove, #mjAccordion .mjAccordion_addNew, #mjAccordion .mjAccordion_up, #mjAccordion .mjAccordion_down, #mjAccordion .mjAccordion_move {font-weight:bold; -webkit-border-radius:3px; border-radius:3px; cursor:pointer;}
+	#mjAccordion .mjAccordion_remove {background:#A94442; padding:.3em .5em; color:#fff;}
+	#mjAccordion .mjAccordion_remove:hover {text-decoration:none;}
+	#mjAccordion .mjAccordion_addNew, #mjAccordion .mjAccordion_up, #mjAccordion .mjAccordion_down, #mjAccordion .mjAccordion_move {float:right; padding:.5em; background:#f3f3f3; border:1px solid #ddd;}
+	#mjAccordion .mjAccordion_addNew:hover {text-decoration:underline;}
+	#mjAccordion .mjAccordion_up, #mjAccordion .mjAccordion_down {float:none; padding:.13em .4em;}
+	#mjAccordion .mjAccordion_move {background:url('../icons/move.png') center center no-repeat #f3f3f3; width:11px; height:9px; cursor:move;}
