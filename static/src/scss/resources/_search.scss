@@ -40,6 +40,15 @@
             height: 2.5rem;
         }
     }
+
+    @media all and (max-width: 540px) {
+
+        input,
+        button {
+            padding: $width-gap/2 !important;
+            font-size: 1.25rem !important;
+        }
+    }
 }
 
 .search-filter__tags,
