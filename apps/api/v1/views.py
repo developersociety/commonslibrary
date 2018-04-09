@@ -26,6 +26,7 @@ class ResourceViewSet(viewsets.ReadOnlyModelViewSet):
         user = self.request.user
         qs = Resource.objects.approved(user).annotate(
             most_likes=models.Count('likes'),
+            most_tried=models.Count('tried')
         ).select_related(
             'organisation',
             'created_by',

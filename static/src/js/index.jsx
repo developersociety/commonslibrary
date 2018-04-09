@@ -20,7 +20,8 @@ class ResourceList extends React.Component {
     super()
     this.state = {
       resources: [],
-      ordering: 'created_at',
+      ordering: '&ordering=created_at',
+      activeFilter: 'created_at',
       query: ''
     }
 
@@ -60,9 +61,14 @@ class ResourceList extends React.Component {
 
   // Update resourse list order query from filter
   updateResourceOrder(filter) {
-    this.setState(
-      {
-        ordering: filter
+    let orderQuery = '&ordering=' + filter;
+
+    if (filter == 'most_likes' || filter == 'most_tried') {
+        orderQuery = '&' + filter + '=-resource'
+    }
+    this.setState({
+        ordering: orderQuery,
+        activeFilter: filter
       },
       this.updateResourceList
     )
@@ -70,8 +76,7 @@ class ResourceList extends React.Component {
 
   // Update resourse list using query from form
   updateResourceQuery(newQuery) {
-    this.setState(
-      {
+    this.setState({
         query: newQuery
       },
       this.updateResourceList
@@ -85,7 +90,7 @@ class ResourceList extends React.Component {
 
   // Call API with resource list criteria
   updateResourceList() {
-    let searchQuery = api + '&ordering=' + this.state.ordering + this.state.query;
+    let searchQuery = api + this.state.ordering + this.state.query;
 
     fetch(searchQuery, {
         method: 'get',
@@ -116,7 +121,7 @@ class ResourceList extends React.Component {
           />
         <ResourceFilter
           resourceCount={this.state.resources.length}
-          ordering={this.state.ordering}
+          activeFilter={this.state.activeFilter}
           updateResourceOrder={this.updateResourceOrder}
           />
         <div className={resourceGridClass}>
