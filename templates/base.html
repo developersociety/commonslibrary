@@ -15,7 +15,7 @@
     {% block extra_head %}
     {% endblock extra_head %}
   </head>
-  <body>
+  <body class="{% block body_class %}{% endblock body_class %}">
     {% include 'includes/icon_sprite.html' %}
 
     {% block header_content %}

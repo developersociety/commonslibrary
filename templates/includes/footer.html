@@ -1,14 +1,26 @@
+{% load thumbnail %}
+
 <footer class="page-footer">
-  <h4>Commons library</h4>
-  <nav class="page-navigation">
-    <ul class="footer-navigation">
-      <li><a href="#">Legal</a></li>
-      <li><a href="#">Privacy</a></li>
-      <li><a href="#">Terms</a></li>
-      <li><a href="#">Cookies</a></li>
-    </ul>
-  </nav>
-  <p>
-    <small>&copy; 2018 All rights reserved.</small>
-  </p>
+  <div class="footer-details">
+    <h4>Commons library</h4>
+    <nav class="page-navigation">
+      <ul class="footer-navigation">
+        <li><a href="#">Legal</a></li>
+        <li><a href="#">Privacy</a></li>
+        <li><a href="#">Terms</a></li>
+        <li><a href="#">Cookies</a></li>
+      </ul>
+    </nav>
+    <p>
+      <small>&copy; 2018 All rights reserved.</small>
+    </p>
+  </div>
+  <div class="footer-logos">
+    <div class="commons-library-logo"></div>
+    {% for org in footer_orgs %}
+      {% thumbnail org.logo '500' as thumb %}
+        <img class="footer-logo" src="{{ thumb.url }}" />
+      {% endthumbnail %}
+    {% endfor %}
+  </div>
 </footer>

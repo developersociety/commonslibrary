@@ -51,6 +51,7 @@ DEFAULT_APPS = [
 
 THIRD_PARTY_APPS = [
     'ckeditor',
+    'ckeditor_uploader',
     'colorfield',
     'crispy_forms',
     'django_filters',
@@ -178,6 +179,7 @@ TEMPLATES = [
                 'django.template.context_processors.tz',
                 'django.template.context_processors.request',
                 'django.contrib.messages.context_processors.messages',
+                'directory.context_processors.footer_orgs',
             ],
         },
     },
@@ -295,6 +297,7 @@ CKEDITOR_CONFIGS = {
         }],
     }
 }
+CKEDITOR_UPLOAD_PATH = 'ckeditor_uploads/'
 # yapf: enable
 
 REST_FRAMEWORK = {
