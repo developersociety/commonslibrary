@@ -54,6 +54,13 @@
     }
 }
 
+.reported-comment {
+    padding: $width-gap/2 $width-gap;
+    border-left: 3px solid rgba($color-line, 0.3);
+    margin-bottom: $width-gap;
+    font-style: italic;
+}
+
 .comment-actions {
     margin-left: auto;
     font-weight: 600;

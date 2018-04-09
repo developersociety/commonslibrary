@@ -80,5 +80,5 @@ class ResourceDetailView(DetailView, CreateView):
 
     def form_valid(self, form):
         response = super().form_valid(form)
-        messages.success(self.request, 'Thank you for your comment.')
+        messages.success(self.request, 'Thank you for your comment')
         return response

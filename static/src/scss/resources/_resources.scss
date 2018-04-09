@@ -23,7 +23,16 @@
     }
 
     @media all and (min-width: 541px) {
-        min-height: 20rem;
+        min-height: 50vw;
+    }
+    @media all and (min-width: 801px) {
+        min-height: #{100vw/3};
+    }
+    @media all and (min-width: 1261px) {
+        min-height: 25vw;
+    }
+    @media all and (min-width: 1521px) {
+        min-height: 20vw;
     }
 }
 
@@ -76,15 +85,6 @@
     color: inherit;
     text-decoration: none;
 
-    &:after {
-        content: '';
-        display: block;
-        width: 3px;
-        position: absolute;
-        top: 0; right: 0; bottom: 0;
-        background: rgba($color-background, 0.1);
-    }
-
     &.private {
         position: relative;
 
@@ -105,6 +105,11 @@
         }
     }
 
+    &.featured-org {
+        min-height: 10rem;
+    }
+
+    &.featured-org,
     .resource-blurred,
     .resource-focused {
         @extend %flex-column;
@@ -144,6 +149,22 @@
         }
     }
 
+    @media all and (max-width: 540px) {
+
+        + .resource {
+            &:after {
+                content: '';
+                display: block;
+                height: 3px;
+                position: absolute;
+                top: 0; left:0; right: 0;
+                background: rgba($color-background, 0.1);
+                pointer-events: none;
+                user-select: none;
+            }
+        }
+    }
+
     @media all and (min-width: 541px) {
 
         &:focus,
@@ -170,7 +191,6 @@
         }
     }
 
-    @include resource-line('(max-width: 540px)', 2);
     @include resource-line('(min-width: 541px) and (max-width: 800px)', 3);
     @include resource-line('(min-width: 801px) and (max-width: 1260px)', 4);
     @include resource-line('(min-width: 1261px)', 5);
@@ -367,6 +387,10 @@ footer.resource-detail__stats {
 .resource-abstract {
     font-size: 1.125rem;
     margin-top: 0;
+
+    .private & {
+        padding-right: 3rem;
+    }
 }
 
 .private .resource-list-abstract {
@@ -509,6 +533,36 @@ footer.resource-detail__stats {
 
     + .resource-action__button {
         border-left: 3px solid rgba($color-background, 0.05);
+    }
+}
+
+
+.related-resources {
+
+}
+
+.related-resources__title {
+    padding: $width-gap/2 $width-gap;
+    margin: 0;
+}
+
+.related-resources__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+
+    @media all and (min-width: 541px) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media all and (min-width: 801px) {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    @media all and (min-width: 1261px) {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    @media all and (min-width: 1521px) {
+        grid-template-columns: repeat(4, 1fr);
     }
 }
 

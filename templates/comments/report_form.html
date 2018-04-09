@@ -2,12 +2,21 @@
 
 {% load crispy_forms_tags %}
 {% load render_bundle from webpack_loader %}
+{% load thumbnail %}
 
 
 {% block main_content %}
   <div class="form-holder">
-    <h1>Report comment</h1>
-    <p>{{ comment.body }}</p>
+    <h2>Report comment</h2>
+    <div class="reported-comment">
+      <div class="comment-profile">
+        {% thumbnail comment.created_by.photo "x50" as thumb %}
+          <div class="group-logo" style="background: url({{ thumb.url }}) center center/contain no-repeat"></div>
+        {% endthumbnail %}
+        <span>{{ comment.created_by.get_full_name }}</span>
+      </div>
+      <p>{{ comment.body }}</p>
+    </div>
     {% crispy form %}
   </div>
 {% endblock main_content %}

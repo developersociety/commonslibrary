@@ -20,6 +20,15 @@ class ResourceFilter(FilterSet):
             'most_likes': 'Most likes',
         }
     )
+    most_tried = django_filters.filters.OrderingFilter(
+        # tuple-mapping retains order
+        fields=(('most_tried', 'resource'),),
+
+        # labels do not need to retain order
+        field_labels={
+            'most_tried': 'Most tried',
+        }
+    )
 
     class Meta:
         model = Resource
