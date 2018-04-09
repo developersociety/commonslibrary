@@ -23,7 +23,16 @@
     }
 
     @media all and (min-width: 541px) {
-        min-height: 20rem;
+        min-height: 50vw;
+    }
+    @media all and (min-width: 801px) {
+        min-height: #{100vw/3};
+    }
+    @media all and (min-width: 1261px) {
+        min-height: 25vw;
+    }
+    @media all and (min-width: 1521px) {
+        min-height: 20vw;
     }
 }
 
