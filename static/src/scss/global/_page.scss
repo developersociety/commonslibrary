@@ -51,9 +51,38 @@
     filter: brightness(0) invert(1);
 }
 
+.messages {
+    @extend %reset-box;
+
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    background: $color-accent;
+    color: $color-background;
+    z-index: 10000;
+    list-style: none;
+    padding: 1.375rem $width-gap;
+    font-family: $base-font-headline;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.25rem;
+    user-select: none;
+    will-change: transform;
+    transform: translateY(-100%);
+    animation: show-message 5s ease-out;
+}
+
 body {
 
     @media all and (max-width: 1060px) {
         padding: 1.9375rem 0 3rem 0;
     }
+}
+
+@keyframes show-message {
+  0%  { transform: translateY(-100%); }
+  10%  { transform: translateY(0); }
+  75%  { transform: translateY(0); }
+  100%  { transform: translateY(-100%); }
 }

@@ -6,8 +6,9 @@
 
 
 {% block header_content %}
-  {% include "includes/resource_actions.html" with extra_class="hide-desktop" %}
   {{ block.super }}
+  {% include "includes/resource_actions.html" with extra_class="hide-large-desktop" %}
+  {% include "includes/messages.html" %}
 {% endblock header_content %}
 
 {% block main_content %}
@@ -17,7 +18,7 @@
       {% include "includes/resource_actions.html" %}
       <div class="resource-meta">
         <div class="icon-list">
-          {% if resource.privacy %}
+          {% if resource.privacy.all %}
             <div class="icon-list__row">
               <svg class="icon">
                 <use xlink:href="#private"></use>
@@ -66,7 +67,7 @@
               <div class="icon-list__content">
                 <div class="tag-list">
                   {% for tag in resource.tags.all %}
-                    <span class="tag">{{ tag }}</span>
+                    <a href="{% url 'search' %}?tags={{ tag.id }}" class="tag">{{ tag }}</a>
                   {% endfor %}
                 </div>
               </div>
@@ -108,7 +109,7 @@
       <div class="resource-content">
         <div class="resource-detail__stats hide-large-desktop">
           <div class="icon-list">
-            {% if resource.privacy %}
+            {% if resource.privacy.all %}
               <div class="icon-list__row">
                 <svg class="icon">
                   <use xlink:href="#private"></use>
@@ -193,6 +194,22 @@
           </div>
         {% endif %}
       </div>
+
+      {% if related_resources %}
+        <div class="related-resources">
+          <h4 class="related-resources__title">
+            <svg class="icon">
+              <use xlink:href="#network"></use>
+            </svg>
+            <span>Related resources</span>
+          </h4>
+          <div class="related-resources__grid">
+            {% for resource in related_resources %}
+              {% include "includes/resource.html" %}
+            {% endfor %}
+          </div>
+        </div>
+      {% endif %}
 
   </main>
 

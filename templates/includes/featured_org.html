@@ -2,7 +2,7 @@
 
 
 {% if organisation %}
-  <a href="{% url 'directory:organisation-detail' organisation.slug %}" class="resource {% if organisation.logo %}with-image {% endif %}">
+  <a href="{% url 'directory:organisation-detail' organisation.slug %}" class="resource featured-org {% if organisation.logo %}with-image {% endif %}">
     <div class="resource-summary">
       <p class="resource-category">Most published this week</p>
       {% if organisation.logo %}
