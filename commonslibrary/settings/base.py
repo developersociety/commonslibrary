@@ -289,7 +289,9 @@ CKEDITOR_CONFIGS = {
         'toolbar': [{
             'name': 'basicstyles',
             'items': [
-                'Bold', 'Italic', 'Underline', 'Strike', 'Image', 'Link', 'Source',
+                'Format', '-', 'Bold', 'Italic', 'Underline', 'Strike', 'Styles', 'Image', 'Link',
+                'Source', 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-',
+                'JustifyLeft', 'JustifyCenter', 'JustifyRight',
             ],
         }],
     }
