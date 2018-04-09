@@ -18,20 +18,18 @@
       {% include "includes/resource_actions.html" %}
       <div class="resource-meta">
         <div class="icon-list">
-          {% if resource.privacy %}
+          {% if resource.privacy.all %}
             <div class="icon-list__row">
               <svg class="icon">
                 <use xlink:href="#private"></use>
               </svg>
-              {% if resource.privacy %}
-                <div class="icon-list__content">
-                  <p>Private resource for
-                  {% for org in resource.privacy.all %}
-                    {{ org.title }}{% if not forloop.last %}, {% endif %}
-                  {% endfor %}
-                  </p>
-                </div>
-              {% endif %}
+              <div class="icon-list__content">
+                <p>Private resource for
+                {% for org in resource.privacy.all %}
+                  {{ org.title }}{% if not forloop.last %}, {% endif %}
+                {% endfor %}
+                </p>
+              </div>
             </div>
           {% endif %}
           <div class="icon-list__row name-row">
@@ -111,7 +109,7 @@
       <div class="resource-content">
         <div class="resource-detail__stats hide-large-desktop">
           <div class="icon-list">
-            {% if resource.privacy %}
+            {% if resource.privacy.all %}
               <div class="icon-list__row">
                 <svg class="icon">
                   <use xlink:href="#private"></use>
