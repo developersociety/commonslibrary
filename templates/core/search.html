@@ -1,2 +1,13 @@
-{{ carousel_resources }}
-{{ request.user }}
+{% extends 'base.html' %}
+
+{% load render_bundle from webpack_loader %}
+
+{% block main_content %}
+  <div id="react-app">
+    {% csrf_token %}
+  </div>
+{% endblock main_content %}
+
+{% block extra_scripts %}
+  {% render_bundle 'main' 'js' %}
+{% endblock extra_scripts %}

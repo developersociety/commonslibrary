@@ -6,8 +6,9 @@
 
 
 {% block header_content %}
-  {% include "includes/resource_actions.html" with extra_class="hide-desktop" %}
   {{ block.super }}
+  {% include "includes/resource_actions.html" with extra_class="hide-large-desktop" %}
+  {% include "includes/messages.html" %}
 {% endblock header_content %}
 
 {% block main_content %}
@@ -17,7 +18,21 @@
       {% include "includes/resource_actions.html" %}
       <div class="resource-meta">
         <div class="icon-list">
-          <div class="icon-list__row">
+          {% if resource.privacy.all %}
+            <div class="icon-list__row">
+              <svg class="icon">
+                <use xlink:href="#private"></use>
+              </svg>
+              <div class="icon-list__content">
+                <p>Private resource for
+                {% for org in resource.privacy.all %}
+                  {{ org.title }}{% if not forloop.last %}, {% endif %}
+                {% endfor %}
+                </p>
+              </div>
+            </div>
+          {% endif %}
+          <div class="icon-list__row name-row">
             <svg class="icon">
               <use xlink:href="#directory"></use>
             </svg>
@@ -26,6 +41,13 @@
                 <div class="profile-image small" style="background: url({{ thumb.url }}) center center/cover no-repeat"></div>
               {% endthumbnail %}
               <p class="profile-name"><a href="{% url 'directory:organisation-user' resource.created_by.pk %}">{{ resource.created_by.get_full_name }}</a></p>
+            </div>
+          </div>
+          <div class="icon-list__row group-row">
+            {% thumbnail resource.organisation.logo '250' as thumb %}
+              <div class="icon profile-image small" style="background: url({{ thumb.url }}) center center/contain no-repeat"></div>
+            {% endthumbnail %}
+            <div class="icon-list__content">
               <p class="profile-group"><a href="{% url 'directory:organisation-detail'  resource.organisation.slug %}">{{ resource.organisation }}</a></p>
             </div>
           </div>
@@ -45,7 +67,7 @@
               <div class="icon-list__content">
                 <div class="tag-list">
                   {% for tag in resource.tags.all %}
-                    <span class="tag">{{ tag }}</span>
+                    <a href="{% url 'search' %}?tags={{ tag.id }}" class="tag">{{ tag }}</a>
                   {% endfor %}
                 </div>
               </div>
@@ -87,10 +109,27 @@
       <div class="resource-content">
         <div class="resource-detail__stats hide-large-desktop">
           <div class="icon-list">
-            <div class="icon-list__row">
+            {% if resource.privacy.all %}
+              <div class="icon-list__row">
+                <svg class="icon">
+                  <use xlink:href="#private"></use>
+                </svg>
+                <div class="icon-list__content">
+                  <p>Private resource for
+                  {% for org in resource.privacy.all %}
+                    {{ org.title }}{% if not forloop.last %}, {% endif %}
+                  {% endfor %}
+                  </p>
+                </div>
+              </div>
+            {% endif %}
+            <div class="icon-list__row group-row">
+              {% thumbnail resource.organisation.logo '250' as thumb %}
+                <div class="icon profile-image small" style="background: url({{ thumb.url }}) center center/contain no-repeat"></div>
+              {% endthumbnail %}
               <div class="icon-list__content">
-                <a href="{% url 'directory:organisation-user' resource.created_by.id %}" class="tag small">{{ resource.created_by.get_full_name }}</a><br/>
-                <a href="{% url 'directory:organisation-detail' resource.organisation.slug %}" class="tag small">{{ resource.organisation }}</a>
+                <p class="profile-name"><a href="{% url 'directory:organisation-user' resource.created_by.pk %}">{{ resource.created_by.get_full_name }}</a></p>
+                <p class="profile-group"><a href="{% url 'directory:organisation-detail'  resource.organisation.slug %}">{{ resource.organisation }}</a></p>
               </div>
             </div>
             <div class="icon-list__row">
@@ -155,6 +194,22 @@
           </div>
         {% endif %}
       </div>
+
+      {% if related_resources %}
+        <div class="related-resources">
+          <h4 class="related-resources__title">
+            <svg class="icon">
+              <use xlink:href="#network"></use>
+            </svg>
+            <span>Related resources</span>
+          </h4>
+          <div class="related-resources__grid">
+            {% for resource in related_resources %}
+              {% include "includes/resource.html" %}
+            {% endfor %}
+          </div>
+        </div>
+      {% endif %}
 
   </main>
 

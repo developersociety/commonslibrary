@@ -51,6 +51,7 @@ DEFAULT_APPS = [
 
 THIRD_PARTY_APPS = [
     'ckeditor',
+    'ckeditor_uploader',
     'colorfield',
     'crispy_forms',
     'django_filters',
@@ -178,6 +179,7 @@ TEMPLATES = [
                 'django.template.context_processors.tz',
                 'django.template.context_processors.request',
                 'django.contrib.messages.context_processors.messages',
+                'directory.context_processors.footer_orgs',
             ],
         },
     },
@@ -282,15 +284,14 @@ AUTH_USER_MODEL = 'accounts.User'
 # yapf: disable
 CKEDITOR_CONFIGS = {
     'default': {
-        'skin': 'moono',
+        'skin': 'moono-lisa',
         'toolbar_Basic': [['Source', '-', 'Bold', 'Italic']],
         'toolbar': [{
             'name': 'basicstyles',
             'items': [
-                'Bold', 'Italic', 'Underline', 'Strike', 'Liststyle', 'Styles', 'Image', 'Link',
+                'Format', '-', 'Bold', 'Italic', 'Underline', 'Strike', 'Styles', 'Image', 'Link',
                 'Source', 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-',
-                'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'Format', 'Font',
-                'FontSize', 'Youtube', 'MJAccordion',
+                'JustifyLeft', 'JustifyCenter', 'JustifyRight', '-', 'Youtube', '-', 'MJAccordion',
             ],
         }],
         'extraPlugins': ','.join(['youtube', 'widget', 'lineutils', 'mjAccordion']),
@@ -301,6 +302,7 @@ CKEDITOR_CONFIGS = {
         'mj_variables_allow_html': True,
     }
 }
+CKEDITOR_UPLOAD_PATH = 'ckeditor_uploads/'
 # yapf: enable
 
 REST_FRAMEWORK = {

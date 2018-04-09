@@ -1,3 +1,5 @@
+from django.db import models
+
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters, status, viewsets
 from rest_framework.decorators import detail_route
@@ -22,7 +24,9 @@ class ResourceViewSet(viewsets.ReadOnlyModelViewSet):
 
     def get_queryset(self):
         user = self.request.user
-        qs = Resource.objects.approved(user).select_related(
+        qs = Resource.objects.approved(user).annotate(
+            most_likes=models.Count('likes'), most_tried=models.Count('tried')
+        ).select_related(
             'organisation',
             'created_by',
         ).prefetch_related(
@@ -60,7 +64,8 @@ class OrganisationViewSet(viewsets.ReadOnlyModelViewSet):
 class TagViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Tag.objects.all()
     serializer_class = TagSerializer
-    filter_backends = (filters.SearchFilter,)
+    filter_backends = (DjangoFilterBackend, filters.SearchFilter,)
+    filter_fields = ('id',)
     search_fields = ('id', '^title',)
 
 

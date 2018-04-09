@@ -11,7 +11,25 @@ class ResourceFilter(FilterSet):
         queryset=Organisation.objects.all()
     )
     created_by = django_filters.filters.ModelMultipleChoiceFilter(queryset=User.objects.all())
+    most_likes = django_filters.filters.OrderingFilter(
+        # tuple-mapping retains order
+        fields=(('most_likes', 'resource'),),
+
+        # labels do not need to retain order
+        field_labels={
+            'most_likes': 'Most likes',
+        }
+    )
+    most_tried = django_filters.filters.OrderingFilter(
+        # tuple-mapping retains order
+        fields=(('most_tried', 'resource'),),
+
+        # labels do not need to retain order
+        field_labels={
+            'most_tried': 'Most tried',
+        }
+    )
 
     class Meta:
         model = Resource
-        fields = ('tags', 'organisation', 'created_by',)
+        fields = ('tags', 'organisation', 'created_by')

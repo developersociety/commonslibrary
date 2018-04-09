@@ -6,8 +6,8 @@ const api = '/api/v1/resources/?format=json'
 const filterOptions = {
   'created_at': 'date',
   'title': 'alphabetical',
-  'likes_count': 'liked',
-  'tried_count': 'tried'
+  'most_likes': 'liked',
+  'most_tried': 'tried'
 }
 
 export class ResourceFilter extends React.Component {
@@ -33,7 +33,7 @@ export class ResourceFilter extends React.Component {
               key={index}
               filter={filter}
               icon={filterOptions[filter]}
-              active={this.props.ordering}
+              active={this.props.activeFilter}
               handleClick={this.handleClick}/>
           )}
         </div>

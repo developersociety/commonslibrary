@@ -30,23 +30,48 @@ export class SearchOptionManager extends React.Component {
     }
   }
 
+  componentDidMount() {
+    // Check if tag passed in initial query, if so get and select
+    if (this.props.preselectedTag !== undefined) {
+      fetch('/api/v1/tags' + '?id=' + this.props.preselectedTag, {
+        method: 'get',
+        credentials: 'same-origin'
+      })
+      .then(response => {
+        return response.json()
+      })
+      .then(data => {
+        if (data.length == 1) {
+          let newState = this.state.selectedOptions
+
+          newState.push(data[0])
+          this.setState({
+            selectedOptions: newState
+          }, () => this.props.handleSelection(1))
+        }
+      })
+    }
+  }
+
   handleOptionSelection(option) {
     let prevSelected = this.state.selectedOptions;
     let checkSelected = this.checkSelected(option);
 
     // if not in state add, else remove
     if(!checkSelected.selected) {
-      this.setState(newState => {
-        newState.selectedOptions.push(option)
-        return { selectedOptions: newState.selectedOptions }
-      })
-      this.props.handleSelection(1);
+      let newState = this.state.selectedOptions
+
+      newState.push(option)
+      this.setState({
+        selectedOptions: newState
+      }, () => this.props.handleSelection(1))
     } else {
-      this.setState(newState => {
-        newState.selectedOptions.splice(checkSelected.index, 1)
-        return { selectedOptions: newState.selectedOptions }
-      })
-      this.props.handleSelection(-1);
+      let newState = this.state.selectedOptions
+
+      newState.splice(checkSelected.index, 1)
+      this.setState({
+        selectedOptions: newState
+      }, () => this.props.handleSelection(-1))
     }
   }
 
