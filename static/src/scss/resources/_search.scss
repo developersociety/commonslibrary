@@ -44,7 +44,9 @@
     @media all and (max-width: 540px) {
 
         input,
-        button {
+        button,
+        .home-page & input,
+        .home-page & button, {
             padding: $width-gap/2 !important;
             font-size: 1.25rem !important;
         }

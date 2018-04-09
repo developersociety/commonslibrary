@@ -6,8 +6,8 @@
 
 
 {% block header_content %}
-  {% include "includes/resource_actions.html" with extra_class="hide-desktop" %}
   {{ block.super }}
+  {% include "includes/resource_actions.html" with extra_class="hide-large-desktop" %}
   {% include "includes/messages.html" %}
 {% endblock header_content %}
 
