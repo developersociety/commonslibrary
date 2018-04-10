@@ -289,16 +289,16 @@ CKEDITOR_CONFIGS = {
         'toolbar': [{
             'name': 'basicstyles',
             'items': [
-                'Format', '-', 'Bold', 'Italic', 'Underline', 'Strike', 'Styles', 'Image', 'Link',
-                'Source', 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-',
+                'Format', '-', 'Bold', 'Italic', 'Underline', 'Strike', '-', 'Image', 'Link',
+                'Source', '-', 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-',
                 'JustifyLeft', 'JustifyCenter', 'JustifyRight', '-', 'Youtube', '-', 'MJAccordion',
             ],
         }],
         'extraPlugins': ','.join(['youtube', 'widget', 'lineutils', 'mjAccordion']),
         'contentsCss': ','.join(['/static/src/admin/css/ckeditor_accordion.css']),
         'allowedContent': True,
-        'mjAccordion_managePopupTitle': True,
-        'mjAccordion_managePopupContent': True,
+        'mjAccordion_managePopupTitle': False,
+        'mjAccordion_managePopupContent': False,
         'mj_variables_allow_html': True,
     }
 }
