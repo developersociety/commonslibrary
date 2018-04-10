@@ -291,8 +291,7 @@ CKEDITOR_CONFIGS = {
             'items': [
                 'Format', '-', 'Bold', 'Italic', 'Underline', 'Strike', 'Styles', 'Image', 'Link',
                 'Source', 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-',
-                'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'Format', 'Font',
-                'FontSize', 'Youtube', 'MJAccordion',
+                'JustifyLeft', 'JustifyCenter', 'JustifyRight', '-', 'Youtube', '-', 'MJAccordion',
             ],
         }],
         'extraPlugins': ','.join(['youtube', 'widget', 'lineutils', 'mjAccordion']),
