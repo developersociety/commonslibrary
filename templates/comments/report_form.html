@@ -15,7 +15,7 @@
         {% endthumbnail %}
         <span>{{ comment.created_by.get_full_name }}</span>
       </div>
-      <p>{{ comment.body|linebreaks }}</p>
+      <p>{{ comment.body|linebreaksbr }}</p>
     </div>
     {% crispy form %}
   </div>
