@@ -11,7 +11,7 @@
         <ul class="explore-list">
           {% recursetree tags %}
             <li>
-              {{ node.title }}
+              <a href="{% url 'search' %}?tags={{ node.id }}">{{ node.title }}</a>
               {% if not node.is_leaf_node %}
                 <input type="checkbox" class="sr__input explore-list__toggle" id="{{ node.pk }}_toggle">
                 <label for="{{ node.pk }}_toggle">
