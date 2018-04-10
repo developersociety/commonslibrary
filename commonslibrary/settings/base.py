@@ -297,8 +297,8 @@ CKEDITOR_CONFIGS = {
         'extraPlugins': ','.join(['youtube', 'widget', 'lineutils', 'mjAccordion']),
         'contentsCss': ','.join(['/static/src/admin/css/ckeditor_accordion.css']),
         'allowedContent': True,
-        'mjAccordion_managePopupTitle': True,
-        'mjAccordion_managePopupContent': True,
+        'mjAccordion_managePopupTitle': False,
+        'mjAccordion_managePopupContent': False,
         'mj_variables_allow_html': True,
     }
 }
