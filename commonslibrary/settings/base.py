@@ -289,8 +289,8 @@ CKEDITOR_CONFIGS = {
         'toolbar': [{
             'name': 'basicstyles',
             'items': [
-                'Format', '-', 'Bold', 'Italic', 'Underline', 'Strike', 'Styles', 'Image', 'Link',
-                'Source', 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-',
+                'Format', '-', 'Bold', 'Italic', 'Underline', 'Strike', '-', 'Image', 'Link',
+                'Source', '-', 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-',
                 'JustifyLeft', 'JustifyCenter', 'JustifyRight', '-', 'Youtube', '-', 'MJAccordion',
             ],
         }],
