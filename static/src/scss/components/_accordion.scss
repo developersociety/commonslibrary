@@ -20,6 +20,15 @@
     cursor: pointer;
     font-size: 1.6875rem;
 
+    &:after {
+        content: '';
+        display: block;
+        width: 2rem;
+        height: 2rem;
+        margin-left: auto;
+        background: url(../icons/add.svg) right center/1.5rem no-repeat;
+        opacity: 0.8;
+    }
 
     .icon {
         margin-left: $width-gap;
@@ -31,6 +40,10 @@
     .close { display: none; }
 
     h3 { margin: 0; }
+}
+
+.mj_accordion > li.active :after {
+    background: url(../icons/minus.svg) right center/1.5rem no-repeat;
 }
 
 .mj_accordion_content {
