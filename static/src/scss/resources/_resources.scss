@@ -416,7 +416,6 @@ footer.resource-detail__stats {
     ol {
         margin: $width-gap 0;
         list-style: none;
-
         li {
             position: relative;
             padding-left: $width-gap*1.5;
@@ -428,13 +427,18 @@ footer.resource-detail__stats {
         }
     }
 
-    ol li {
-        counter-increment: step-counter;
+    ol {
+        counter-reset: item;
 
-        &:before {
-            content: counter(step-counter);
-            position: absolute;
-            top: 0; left: $width-gap/2;
+        li {
+            display: block;
+
+            &:before {
+                content: counter(item);
+                counter-increment: item;
+                position: absolute;
+                top: 0; left: $width-gap/2;
+            }
         }
     }
 
