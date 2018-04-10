@@ -1,8 +1,0 @@
-.mj_accordion {padding:0; margin:0 0 .5em;}
-.mj_accordion > li {list-style:none;}
-.mj_accordion > li:first-child .mj_accordion_item {margin-top:0;}
-.mj_accordion .mj_accordion_item {cursor:pointer; color:#333; background:#f5f5f5; border:1px solid #ddd; padding:10px 15px; -webkit-border-radius:3px; border-radius:3px; font-size:16px; margin-top:.3em;}
-.mj_accordion .mj_accordion_item:hover {background:#eee;}
-.mj_accordion .mj_accordion_item.active {border-bottom:none; -webkit-border-radius:3px 3px 0 0; border-radius:3px 3px 0 0;}
-.mj_accordion .mj_accordion_content {padding:15px; border:1px solid #ddd; display:none; -webkit-border-radius:0 0 3px 3px; border-radius:0 0 3px 3px; background:#fff;}
-.mj_accordion .mj_accordion_content.active {display:block; height:inherit;}
