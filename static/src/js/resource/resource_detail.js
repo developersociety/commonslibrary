@@ -7,6 +7,7 @@ new Sticky('#resource_sidebar', {
 const csrf = document.querySelector('[name="csrfmiddlewaretoken"]').value;
 const resource = document.querySelector('.resource-holder').dataset.resource;
 const actionButtons = document.querySelectorAll('.js-resource-action');
+const accordions = document.querySelectorAll('.mj_accordion');
 
 function resourceAction(action, button) {
     const requestUrl = '/api/v1/resources/' + resource + '/' + action +'/';
@@ -44,8 +45,21 @@ function resourceAction(action, button) {
 
         resourceAction(type, button);
     })
-})
+});
 
+[...accordions].map(accordion => {
+    const accordionPanels = accordion.children;
+    const accordionToggles = accordion.querySelectorAll('.mj_accordion_item');
+
+    [...accordionToggles].map(toggle => {
+        toggle.addEventListener('click', e => {
+            const panel = e.target.parentElement;
+            const panelClass = panel.classList
+
+            panelClass.contains('active') ? panelClass.remove('active') : panelClass.add('active');
+        })
+    });
+});
 
 
 

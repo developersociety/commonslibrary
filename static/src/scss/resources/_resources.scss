@@ -411,6 +411,47 @@ footer.resource-detail__stats {
         max-width: none;
         padding: 0;
     }
+
+    ul:not(.mj_accordion),
+    ol {
+        margin: $width-gap 0;
+        list-style: none;
+        li {
+            position: relative;
+            padding-left: $width-gap*1.5;
+        }
+
+        ol,
+        ul {
+            @extend %reset-box;
+        }
+    }
+
+    ol {
+        counter-reset: item;
+
+        li {
+            display: block;
+
+            &:before {
+                content: counter(item);
+                counter-increment: item;
+                position: absolute;
+                top: 0; left: $width-gap/2;
+            }
+        }
+    }
+
+    ul:not(.mj_accordion) li {
+        &:before {
+            content: '';
+            display: inline-block;
+            position: absolute;
+            top: $width-gap*0.575; left: $width-gap/2;
+            width: $width-gap/4; height: $width-gap/4;
+            background: $color-background;
+        }
+    }
 }
 
 .resource-sidebar {

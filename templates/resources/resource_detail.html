@@ -59,7 +59,7 @@
               <p>{{ resource.created_at|date:'j F Y H:i' }}</p>
             </div>
           </div>
-          {% if resource.tags %}
+          {% if resource.tags.all %}
             <div class="icon-list__row">
               <svg class="icon">
                 <use xlink:href="#tag"></use>
@@ -146,7 +146,7 @@
         <div class="resource-content__body">
           {{ resource.content|safe }}
         </div>
-        {% if resource.tags %}
+        {% if resource.tags.all %}
           <footer class="resource-detail__stats hide-large-desktop">
             <div class="icon-list__row">
               <svg class="icon">
@@ -155,7 +155,7 @@
               <div class="icon-list__content">
                 <div class="tag-list">
                   {% for tag in resource.tags.all %}
-                    <span class="tag">{{ tag }}</span>
+                    <a href="{% url 'search' %}?tags={{ tag.id }}" class="tag">{{ tag }}</a>
                   {% endfor %}
                 </div>
               </div>
