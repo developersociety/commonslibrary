@@ -1,7 +1,7 @@
 import Sticky from 'sticky-js';
 
 new Sticky('#resource_sidebar', {
-    'stickyFor': 1260
+    'stickyFor': 1060
 });
 
 const csrf = document.querySelector('[name="csrfmiddlewaretoken"]').value;
