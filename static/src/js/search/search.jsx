@@ -15,6 +15,7 @@ export class Search extends React.Component {
 
     // handler binds
     this.handleChange = this.handleChange.bind(this);
+    this.handleKeyPress = this.handleKeyPress.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleSelection = this.handleSelection.bind(this);
     this.fetchTagsData = this.fetchTagsData.bind(this);
@@ -92,7 +93,14 @@ export class Search extends React.Component {
         searchPeopleOptions: [],
       })
     }
+  }
 
+  handleKeyPress(event) {
+    // if esc is pressed clear input
+    if (event.keyCode == 27) {
+        this.searchInput.value = '';
+        this.handleChange(event);
+    }
   }
 
   handleSubmit(event) {
@@ -166,7 +174,9 @@ export class Search extends React.Component {
           <input
             type="text"
             placeholder="Type here to search for resource"
-            onChange={this.handleChange}/>
+            onChange={this.handleChange}
+            onKeyDown={this.handleKeyPress}
+            ref={input => this.searchInput = input}/>
           <button type="submit">
             <svg className="icon">
               <use xlinkHref="#search"></use>
