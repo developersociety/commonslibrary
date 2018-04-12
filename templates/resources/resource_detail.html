@@ -6,8 +6,7 @@
 
 
 {% block header_content %}
-  {{ block.super }}
-  {% include "includes/resource_actions.html" with extra_class="hide-desktop" %}
+  {% include 'includes/header.html' with action_buttons='true' %}
   {% include "includes/messages.html" %}
 {% endblock header_content %}
 
