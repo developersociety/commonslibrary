@@ -56,6 +56,16 @@
             height: 3px;
         }
     }
+
+    @media all and (max-width: 1060px) {
+        transform: translateY(100%);
+        will-change: transform;
+        transition: transform 0.25s ease-in-out;
+
+        .shown & {
+            transform: translateY(0);
+        }
+    }
 }
 
 .page-navigation__home {
@@ -89,6 +99,16 @@
         font-size: 1.25rem;
         padding: $width-gap*.75 $width-gap;
         border-right: 3px solid rgba(#ffffff, 0.25);
+    }
+
+    @media all and (max-width: 1060px) {
+        transform: translateY(-100%);
+        will-change: transform;
+        transition: transform 0.25s ease-in-out;
+
+        .shown & {
+            transform: translateY(0);
+        }
     }
 }
 

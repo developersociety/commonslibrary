@@ -4,6 +4,11 @@ new Sticky('#resource_sidebar', {
     'stickyFor': 1060
 });
 
+let didScroll = false;
+let lastScrollTop = 0;
+let scrollDelta = 5;
+let navbarHeight = document.querySelector('.page-navigation__home').offsetHeight;
+
 const csrf = document.querySelector('[name="csrfmiddlewaretoken"]').value;
 const resource = document.querySelector('.resource-holder').dataset.resource;
 const actionButtons = document.querySelectorAll('.js-resource-action');
@@ -36,6 +41,30 @@ function resourceAction(action, button) {
     })
 }
 
+function hasScrolled() {
+    let scrollTop = window.scrollY;
+
+    if(Math.abs(lastScrollTop - scrollTop) <= scrollDelta) {
+        return
+    }
+
+    // If they scrolled down and are past the navbar, add class .nav-up.
+    // This is necessary so you never see what is "behind" the navbar.
+    if (scrollTop > lastScrollTop && scrollTop > navbarHeight){
+      // Scroll Down
+      document.querySelector('.page-head').classList.remove('shown');
+      document.querySelector('.page-head').classList.add('not-shown');
+    } else {
+      // Scroll Up
+      if(scrollTop + window.outerHeight < document.documentElement.scrollHeight) {
+          document.querySelector('.page-head').classList.remove('not-shown');
+          document.querySelector('.page-head').classList.add('shown');
+      }
+    }
+
+    lastScrollTop = scrollTop;
+}
+
 [...actionButtons].map(button => {
     button.addEventListener('click', e => {
         e.preventDefault();
@@ -61,5 +90,15 @@ function resourceAction(action, button) {
     });
 });
 
+window.addEventListener('scroll', function(e) {
+    didScroll = true;
+});
+
+window.setInterval(function() {
+    if(didScroll) {
+        hasScrolled();
+        didScroll = false;
+    }
+});
 
 
