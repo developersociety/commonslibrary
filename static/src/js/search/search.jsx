@@ -70,7 +70,7 @@ export class Search extends React.Component {
   handleSelection(increment) {
     this.setState(prevState => ({
       searchOptionsSelected: prevState.searchOptionsSelected + increment
-    }), () => this.searchApi(false))
+    }), () => this.searchApi())
   }
 
   // Watch input field for changes
@@ -106,10 +106,10 @@ export class Search extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
 
-    this.searchApi(true)
+    this.searchApi()
   }
 
-  searchApi(useKeyword) {
+  searchApi() {
     // Get current selected tags from child state
     const query = this.state.searchQuery;
     const tags = this.searchTags.state.selectedOptions;
@@ -138,21 +138,13 @@ export class Search extends React.Component {
 
     let apiQuery = '';
 
-    // If no tags selected use search query, else loop through selected options and create query
-    if (useKeyword) {
-      apiQuery = '&search=' + query;
-      {Object.keys(searchCriteria).map((query, index) => {
-        if (searchCriteria[query] != '') {
-          apiQuery += ('&' + query + '=' + searchCriteria[query])
-        }
-      })}
-    } else {
-      {Object.keys(searchCriteria).map((query, index) => {
-        if (searchCriteria[query] != '') {
-          apiQuery += ('&' + query + '=' + searchCriteria[query])
-        }
-      })}
-    }
+    // Combine all queries and execute API call
+    apiQuery = '&search=' + query;
+    {Object.keys(searchCriteria).map((query, index) => {
+      if (searchCriteria[query] != '') {
+        apiQuery += ('&' + query + '=' + searchCriteria[query])
+      }
+    })}
 
     // Create search query string from selected options
     this.props.updateResourceQuery(apiQuery);
@@ -177,6 +169,7 @@ export class Search extends React.Component {
             onChange={this.handleChange}
             onKeyDown={this.handleKeyPress}
             id="search_input"
+            autoComplete="off"
             ref={input => this.searchInput = input}/>
           <button type="submit">
             <svg className="icon">

@@ -19,7 +19,8 @@ class ResourceViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = ResourceSerializer
     filter_backends = (DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter)
     filter_class = ResourceFilter
-    search_fields = ('title', 'abstract',)
+    search_fields = ('title', 'abstract', 'created_by__first_name', 'created_by__last_name',
+        'organisation__title', 'tags__title')
     permission_classes = (AllowAny,)
 
     def get_queryset(self):
