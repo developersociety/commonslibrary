@@ -86,6 +86,8 @@ class ResourceList extends React.Component {
       behavior: 'smooth',
       block: 'start'
     });
+    // Focus input field on new search
+    document.querySelector('#search_input').focus();
   }
 
   // Call API with resource list criteria

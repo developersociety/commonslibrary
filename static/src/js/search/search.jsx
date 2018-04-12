@@ -176,6 +176,7 @@ export class Search extends React.Component {
             placeholder="Type here to search for resource"
             onChange={this.handleChange}
             onKeyDown={this.handleKeyPress}
+            id="search_input"
             ref={input => this.searchInput = input}/>
           <button type="submit">
             <svg className="icon">
