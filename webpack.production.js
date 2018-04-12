@@ -12,8 +12,7 @@ module.exports = {
         './static/src/scss/styles.scss'
     ],
     nav : [
-        'webpack-dev-server/client?http://127.0.0.1:' + webpackPort + '/',
-        './static/src/js/nav',
+        './static/src/js/nav'
     ],
     home: [
         './static/src/js/index',
