@@ -81,13 +81,13 @@ class ResourceList extends React.Component {
       },
       this.updateResourceList
     )
+    document.querySelector('#search_input').focus();
     // Scroll to a certain element
     document.getElementById('react-app').scrollIntoView({
       behavior: 'smooth',
       block: 'start'
     });
     // Focus input field on new search
-    document.querySelector('#search_input').focus();
   }
 
   // Call API with resource list criteria
