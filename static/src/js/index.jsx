@@ -11,7 +11,7 @@ const pageUrl = new URL(window.location.href);
 const api = '/api/v1/resources/?format=json'
 const fixedOrganisation = document.getElementById('react-app').dataset.organisation;
 const fixedUser = document.getElementById('react-app').dataset.user;
-const preselectedTag = pageUrl.searchParams.get('tags');
+const preselectedTag = location.search.split('tags=')[1];
 const componentHolder = document.getElementById('react-app');
 const csrf = componentHolder.querySelector('[name="csrfmiddlewaretoken"]').value
 
@@ -47,7 +47,7 @@ class ResourceList extends React.Component {
         },
         this.updateResourceList
       )
-    } else if (preselectedTag !== null) {
+    } else if (preselectedTag !== undefined) {
       this.setState(
         {
           query: '&tags=' + preselectedTag
