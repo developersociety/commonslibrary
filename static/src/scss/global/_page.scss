@@ -1,5 +1,5 @@
 .page-footer {
-    padding: $width-gap $width-gap $width-gap*3;
+    padding: $width-gap/2 $width-gap $width-gap*3;
     background: $color-background;
     box-shadow: 0 100vh 0 100vh $color-background;
     color: #ffffff;
@@ -7,6 +7,7 @@
     h4 { margin: 0; }
 
     @media all and (min-width: 741px) {
+        padding-top: 0;
         display: flex;
         flex-flow: row nowrap;
         justify-content: space-between;
@@ -16,7 +17,7 @@
 .footer-details {
     width: 100%;
     max-width: 15rem;
-    margin: $width-gap/2 $width-gap*1.5 0 0;
+    margin: $width-gap $width-gap*1.5 0 0;
 }
 
 .footer-logos {
@@ -38,7 +39,7 @@
     width: 12rem;
     height: 2.5rem;
     background: url(../img/logo.png) center center/contain no-repeat;
-    margin: $width-gap/2 $width-gap 0 0;
+    margin: $width-gap $width-gap 0 0;
     flex-shrink: 0;
 }
 
@@ -47,7 +48,7 @@
     width: auto;
     height: auto;
     flex-shrink: 0;
-    margin: $width-gap/2 $width-gap 0 0;
+    margin: $width-gap $width-gap 0 0;
     filter: brightness(0) invert(1);
 }
 
