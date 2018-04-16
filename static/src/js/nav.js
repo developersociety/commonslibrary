@@ -5,6 +5,7 @@ let scrollDelta = 5;
 function hasScrolled() {
     let scrollTop = window.scrollY;
     const navbarHeight = document.querySelector('.page-navigation__home').offsetHeight;
+    const pageHead = document.querySelector('.page-head')
 
     if(Math.abs(lastScrollTop - scrollTop) <= scrollDelta) {
         return
@@ -14,13 +15,13 @@ function hasScrolled() {
     // This is necessary so you never see what is "behind" the navbar.
     if (scrollTop > lastScrollTop && scrollTop > navbarHeight){
       // Scroll Down
-      document.querySelector('.page-head').classList.remove('shown');
-      document.querySelector('.page-head').classList.add('not-shown');
+      pageHead.classList.remove('shown');
+      pageHead.classList.add('not-shown');
     } else {
       // Scroll Up
       if(scrollTop + window.outerHeight < document.documentElement.scrollHeight) {
-          document.querySelector('.page-head').classList.remove('not-shown');
-          document.querySelector('.page-head').classList.add('shown');
+          pageHead.classList.remove('not-shown');
+          pageHead.classList.add('shown');
       }
     }
 
