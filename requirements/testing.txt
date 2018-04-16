@@ -6,6 +6,6 @@ django-webtest==1.9.2
 factory-boy==2.10.0
 flake8==3.5.0
 isort==4.2.15
-pipdeptree==0.10.1
+pipdeptree==0.12.1
 unittest-xml-reporting==2.1.1
 yapf==0.16.1
