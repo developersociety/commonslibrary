@@ -11,7 +11,7 @@ module.exports = {
         './static/src/js/index',
         './static/src/scss/styles.scss'
     ],
-    nav : [
+    nav: [
         './static/src/js/nav'
     ],
     home: [
