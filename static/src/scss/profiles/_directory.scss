@@ -77,6 +77,7 @@
 }
 
 .directory-group__name {
+    min-width: 0;
 
     h3,
     p {
@@ -99,6 +100,14 @@
             color: $color-accent;
         }
     }
+}
+
+.directory-group__url {
+    display: block;
+    width: 10rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .directory-group__people {

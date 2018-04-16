@@ -74,7 +74,7 @@ export class Resource extends React.Component {
                 </div>
               </div>
 
-              {this.props.resource.tags &&
+              {this.props.resource.tags.length > 0 &&
                 <div className="icon-list__row">
                   <svg className="icon">
                     <use xlinkHref="#tag"></use>

@@ -17,7 +17,7 @@
             {% endthumbnail %}
             <div class="directory-group__name">
               <h3><a href="{% url 'directory:organisation-detail' object.slug %}">{{ object.title }}</a></h3>
-              <p><a href="{{ object.url }}" target="_blank">{{ object.get_short_url }}</a></p>
+              <p><a href="{{ object.url }}" target="_blank" class="directory-group__url">{{ object.get_short_url }}</a></p>
             </div>
           </div>
           <p class="directory-group__stats">
