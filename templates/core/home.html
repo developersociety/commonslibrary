@@ -20,7 +20,7 @@
           <div class="intro-slide__content">
             <p class="resource-category">
               Today's featured resources
-              <span>1/{{ carousel_resources.count }}</span>
+              <span>{{ forloop.counter }}/{{ carousel_resources.count }}</span>
             </p>
             <h2 class="slide-title">
               {{ resource.title }}
