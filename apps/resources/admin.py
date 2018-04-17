@@ -1,10 +1,14 @@
 from django.contrib import admin
 
+from import_export.admin import ImportMixin
+
 from .models import Resource
+from .resources import ResourceResource
 
 
 @admin.register(Resource)
-class ResourceAdmin(admin.ModelAdmin):
+class ResourceAdmin(ImportMixin, admin.ModelAdmin):
+    resource_class = ResourceResource
     list_display = ('title', 'status', 'abstract', 'hits', 'created_by', 'created_at')
     list_editable = ('status',)
     readonly_fields = (
