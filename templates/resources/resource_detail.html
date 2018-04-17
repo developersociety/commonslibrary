@@ -217,5 +217,33 @@
 
 {% block extra_scripts %}
   {% render_bundle 'resource' %}
-{% endblock extra_scripts %}
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "NewsArticle",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "{{ resource.get_absolute_url }}"
+      },
+      "headline": "{{ resource.title }}",
+      "image": [
+        "{% thumbnail resource.image '1200' as thumb %}{{ thumb.url }}{% endthumbnail %}"
+       ],
+      "datePublished": "{{ resource.created_at }}",
+      "author": {
+        "@type": "Person",
+        "name": "{{ resource.created_by.get_full_name }}"
+      },
+       "publisher": {
+        "@type": "Organization",
+        "name": "{{ resource.organisation }}",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "{% thumbnail resource.organisation.logo '250' as thumb %}{{ thumb.url }}{% endthumbnail %}"
+        }
+      },
+      "description": "{{ resource.abstract }}"
+    }
+  </script>
 
+{% endblock extra_scripts %}
