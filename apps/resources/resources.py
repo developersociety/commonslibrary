@@ -4,9 +4,9 @@ from django.core.files import File
 from django.core.files.temp import NamedTemporaryFile
 from django.utils.text import slugify
 
-from import_export import fields, resources, widgets
-
 import requests
+from import_export import fields, resources
+
 from tags.models import Tag
 
 from .models import Resource

@@ -1,5 +1,6 @@
-from import_export.widgets import ManyToManyWidget as BaseManyToManyWidget
 from django.utils.text import slugify
+
+from import_export.widgets import ManyToManyWidget as BaseManyToManyWidget
 
 
 class TagsManyToManyWidget(BaseManyToManyWidget):
@@ -11,6 +12,4 @@ class TagsManyToManyWidget(BaseManyToManyWidget):
             if not self.model.objects.filter(title=tag).exists():
                 slug = slugify(tag)
                 self.model.objects.create(title=tag, slug=slug)
-        return self.model.objects.filter(**{
-            '%s__in' % self.field: ids
-        })
+        return self.model.objects.filter(**{'%s__in' % self.field: ids})
