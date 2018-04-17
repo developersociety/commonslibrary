@@ -9,11 +9,6 @@
 .main-navigation {
     @extend %reset-box;
 
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    z-index: 10000;
     display: flex;
     flex-flow: row nowrap;
     list-style: none;
@@ -58,6 +53,25 @@
     }
 }
 
+.main-navigation__holder {
+    width: 100%;
+
+    @media all and (max-width: 1060px) {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        z-index: 10000;
+        transform: translateY(100%);
+        will-change: transform;
+        transition: transform 0.25s ease-in-out;
+
+        .shown & {
+            transform: translateY(0);
+        }
+    }
+}
+
 .page-navigation__home {
     position: fixed;
     top: 0; left: 0;
@@ -89,6 +103,16 @@
         font-size: 1.25rem;
         padding: $width-gap*.75 $width-gap;
         border-right: 3px solid rgba(#ffffff, 0.25);
+    }
+
+    @media all and (max-width: 1060px) {
+        transform: translateY(-100%);
+        will-change: transform;
+        transition: transform 0.25s ease-in-out;
+
+        .shown & {
+            transform: translateY(0);
+        }
     }
 }
 

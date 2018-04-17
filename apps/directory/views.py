@@ -8,6 +8,7 @@ from .models import Organisation
 
 class OrganisationListView(ListView):
     model = Organisation
+    ordering = ['title']
 
 
 class OrganisationDetailView(DetailView):

@@ -1,50 +1,55 @@
-<header class="page-head">
+<header class="page-head shown">
   <nav class="page-navigation">
     <a href="/" class="page-navigation__home">
       Commons library
     </a>
-    <ul class="main-navigation">
-      <li class="main-navigation__item {% if request.path == '/explore/' %} active{% endif %}">
-        <a href="{% url 'explore' %}">
-          <svg class="icon">
-            <use xlink:href="#explore"></use>
-          </svg>
-          <span class="item-text">Explore</span>
-        </a>
-      </li>
-      {% if request.user.is_authenticated %}
-        <li class="main-navigation__item {% if request.path == '/directory/' %} active{% endif %}">
-          <a href="{% url 'directory:organisation-list' %}">
-            <svg class="icon">
-              <use xlink:href="#directory"></use>
-            </svg>
-            <span class="item-text">Directory</span>
-          </a>
-        </li>
-        <li class="main-navigation__item inverse {% if request.path == '/resources/add/' %} active{% endif %}">
-          <a href="{% url 'resources:resource-create' %}">
-            <svg class="icon">
-              <use xlink:href="#create"></use>
-            </svg>
-            <span class="item-text">Submit resource</span>
-          </a>
-        </li>
-        <li class="main-navigation__account">
-          <a href="{% url 'accounts:logout' %}">Logout</a>
-        </li>
-      {% else %}
-        <li class="main-navigation__item {% if request.path == '/accounts/login/' %} active{% endif %}">
-          <a href="{% url 'accounts:login' %}">
-            <svg class="icon">
-              <use xlink:href="#private"></use>
-            </svg>
-            Login
-          </a>
-        </li>
-        <li class="main-navigation__account">
-          <a href="{% url 'accounts:registration' %}">Register</a>
-        </li>
+    <div class="main-navigation__holder">
+      {% if action_buttons %}
+        {% include "includes/resource_actions.html" with extra_class="hide-desktop" %}
       {% endif %}
-    </ul>
+      <ul class="main-navigation">
+        <li class="main-navigation__item {% if request.path == '/explore/' %} active{% endif %}">
+          <a href="{% url 'explore' %}">
+            <svg class="icon">
+              <use xlink:href="#explore"></use>
+            </svg>
+            <span class="item-text">Explore</span>
+          </a>
+        </li>
+        {% if request.user.is_authenticated %}
+          <li class="main-navigation__item {% if request.path == '/directory/' %} active{% endif %}">
+            <a href="{% url 'directory:organisation-list' %}">
+              <svg class="icon">
+                <use xlink:href="#directory"></use>
+              </svg>
+              <span class="item-text">Directory</span>
+            </a>
+          </li>
+          <li class="main-navigation__item inverse {% if request.path == '/resources/add/' %} active{% endif %}">
+            <a href="{% url 'resources:resource-create' %}">
+              <svg class="icon">
+                <use xlink:href="#create"></use>
+              </svg>
+              <span class="item-text">Submit resource</span>
+            </a>
+          </li>
+          <li class="main-navigation__account">
+            <a href="{% url 'accounts:logout' %}">Logout</a>
+          </li>
+        {% else %}
+          <li class="main-navigation__item {% if request.path == '/accounts/login/' %} active{% endif %}">
+            <a href="{% url 'accounts:login' %}">
+              <svg class="icon">
+                <use xlink:href="#private"></use>
+              </svg>
+              Login
+            </a>
+          </li>
+          <li class="main-navigation__account">
+            <a href="{% url 'accounts:registration' %}">Register</a>
+          </li>
+        {% endif %}
+      </ul>
+    </div>
   </nav>
 </header>

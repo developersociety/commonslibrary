@@ -6,8 +6,7 @@
 
 
 {% block header_content %}
-  {{ block.super }}
-  {% include "includes/resource_actions.html" with extra_class="hide-large-desktop" %}
+  {% include 'includes/header.html' with action_buttons='true' %}
   {% include "includes/messages.html" %}
 {% endblock header_content %}
 
@@ -107,7 +106,7 @@
         </div>
       </header>
       <div class="resource-content">
-        <div class="resource-detail__stats hide-large-desktop">
+        <div class="resource-detail__stats hide-desktop">
           <div class="icon-list">
             {% if resource.privacy.all %}
               <div class="icon-list__row">
@@ -147,7 +146,7 @@
           {{ resource.content|safe }}
         </div>
         {% if resource.tags.all %}
-          <footer class="resource-detail__stats hide-large-desktop">
+          <footer class="resource-detail__stats hide-desktop">
             <div class="icon-list__row">
               <svg class="icon">
                 <use xlink:href="#tag"></use>

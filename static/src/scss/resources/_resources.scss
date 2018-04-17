@@ -294,7 +294,7 @@
 
 .resource-holder {
 
-    @media all and (min-width: 1261px) {
+    @media all and (min-width: 1061px) {
         position: relative;
         padding-left: 22.5rem;
     }
@@ -462,6 +462,7 @@ footer.resource-detail__stats {
     text-transform: uppercase;
     background: #fff;
     display: none;
+    min-height: 25rem;
 
     .icon-list__row {
         font-size: 1rem;
@@ -489,7 +490,7 @@ footer.resource-detail__stats {
         padding-top: 0.3rem;
     }
 
-    @media all and (min-width: 1261px) {
+    @media all and (min-width: 1061px) {
         display: block;
         width: 22.5rem;
         position: absolute;
@@ -498,7 +499,7 @@ footer.resource-detail__stats {
 }
 
 .group-row {
-    @media all and (max-width: 1260px) {
+    @media all and (max-width: 1060px) {
         margin-bottom: $width-gap/2;
 
         .icon-list__content {
