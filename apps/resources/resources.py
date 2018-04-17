@@ -14,7 +14,6 @@ from .widgets import TagsManyToManyWidget
 
 
 class ResourceResource(resources.ModelResource):
-
     tags = fields.Field(
         column_name='tags',
         attribute='tags',
