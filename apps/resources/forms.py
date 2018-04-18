@@ -13,6 +13,14 @@ class ResourceForm(forms.ModelForm):
         model = Resource
         fields = ('title', 'abstract', 'content', 'tags', 'image', 'organisation', 'privacy')
         labels = {'organisation': 'Group'}
+        help_texts = {
+            'privacy': """
+                Of the groups you belong to, which should this resource be visible to?
+                <span class="emphasise">
+                    Selecting no groups will make this resource public and visible to all
+                </span>
+            """
+        }
 
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user')

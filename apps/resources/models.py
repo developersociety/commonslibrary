@@ -42,7 +42,6 @@ class Resource(models.Model):
     )
     privacy = models.ManyToManyField(
         'directory.Organisation',
-        help_text='Of the groups you belong to, which should this resource be visible to?',
         related_name='resources_privacy',
         blank=True,
     )
