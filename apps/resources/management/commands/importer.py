@@ -8,6 +8,7 @@ from django.core.management.base import BaseCommand
 from django.utils.text import slugify
 
 import requests
+
 from resources.imports import ResourceCSVRow
 from resources.models import Resource
 from tags.models import Tag
