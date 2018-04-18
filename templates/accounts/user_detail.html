@@ -39,7 +39,7 @@
         <h1 class="profile-summary__title">
           {{ user.get_full_name }}
         </h1>
-        <small><a href="{% url "accounts:user-update" %}">Edit Profile</a></small>
+        <small><a href="{% url "accounts:user-update" %}">Update Profile</a></small> |
         <small><a href="{% url "accounts:password-change" %}">Change password</a></small>
 
         {% for organisation in user.approved_organisations.all %}
