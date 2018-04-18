@@ -27,7 +27,7 @@ class ResourceViewSet(viewsets.ReadOnlyModelViewSet):
 
     def get_queryset(self):
         user = self.request.user
-        qs = Resource.objects.approved(user).prefetch_related('tags').annotate(
+        qs = Resource.objects.approved(user).annotate(
             most_likes=models.Count('likes'), most_tried=models.Count('tried')
         ).select_related(
             'organisation',
