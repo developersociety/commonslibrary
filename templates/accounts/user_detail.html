@@ -136,10 +136,14 @@
   </div>
 
   {% if resources_waiting_for_approval %}
-    <h3>Waiting for approval</h3>
-    {% for resource in resources_waiting_for_approval %}
-    <a href="{{ resource.get_absolute_url }}">{{ resource.title }}</a>
-    {% endfor %}
+    <div class="awaiting-approval">
+      <h3>You have <strong>{{ resources_waiting_for_approval.count }} resource{{ resources_waiting_for_approval|pluralize }}</strong> waiting for approval </h3>
+      <div class="resources-grid">
+        {% for resource in resources_waiting_for_approval %}
+          {% include "includes/resource.html" %}
+        {% endfor %}
+      </div>
+    </div>
   {% endif %}
 
 {% endblock main_content %}
