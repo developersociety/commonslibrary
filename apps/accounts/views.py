@@ -5,6 +5,7 @@ from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView
 
 from resources.choices import RESOURCE_WAITING_FOR_APPROVAL
+
 from .forms import UserRegistrationForm, UserUpdateForm
 from .models import User
 
