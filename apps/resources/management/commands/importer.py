@@ -21,7 +21,6 @@ class Command(BaseCommand):
         parser.add_argument('file', nargs="?", help='csv file location.')
 
     def handle(self, *args, **options):
-        Resource.objects.all().delete()
         with open(options['file'], 'r') as csv_file:
             csv_file = csv.reader(csv_file, delimiter=',')
             next(csv_file, None)

@@ -56,7 +56,6 @@ THIRD_PARTY_APPS = [
     'crispy_forms',
     'django_filters',
     'django_mptt_admin',
-    'import_export',
     'mptt',
     'raven.contrib.django.raven_compat',
     'rest_framework',
