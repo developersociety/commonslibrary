@@ -1,14 +1,10 @@
 from django.contrib import admin
 
-from import_export.admin import ImportMixin
-
 from .models import Resource
-from .resources import ResourceResource
 
 
 @admin.register(Resource)
-class ResourceAdmin(ImportMixin, admin.ModelAdmin):
-    resource_class = ResourceResource
+class ResourceAdmin(admin.ModelAdmin):
     list_display = ('title', 'status', 'abstract', 'hits', 'created_by', 'created_at')
     list_editable = ('status',)
     readonly_fields = (
@@ -17,7 +13,7 @@ class ResourceAdmin(ImportMixin, admin.ModelAdmin):
     )
     prepopulated_fields = {'slug': ('title',)}
     filter_horizontal = ('tags', 'privacy')
-    search_fields = ['title', 'abstract', 'created_by', 'updated_by']
+    search_fields = ['title', 'abstract']
     date_hierarchy = 'created_at'
     fieldsets = [
         ('Resource', {
