@@ -47,7 +47,7 @@ class ResourceDetailView(DetailView, CreateView):
         if self.request.user.is_authenticated:
             waiting_for_approval = Resource.objects.filter(
                 created_by=self.request.user, status=RESOURCE_WAITING_FOR_APPROVAL
-            )
+            ).distinct()
             qs = qs | waiting_for_approval
 
         return qs
