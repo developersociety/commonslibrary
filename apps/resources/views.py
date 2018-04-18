@@ -61,6 +61,10 @@ class ResourceDetailView(DetailView, CreateView):
         context['people_commented'] = self.object.comment_set.order_by().values_list(
             'created_by', flat=True
         ).distinct().count()
+
+        if self.object.status == RESOURCE_WAITING_FOR_APPROVAL:
+            context['waiting_for_approval'] = True
+
         self.object.hits = F('hits') + 1
         self.object.save(update_fields=['hits'])
         return context
