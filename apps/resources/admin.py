@@ -13,7 +13,7 @@ class ResourceAdmin(admin.ModelAdmin):
     )
     prepopulated_fields = {'slug': ('title',)}
     filter_horizontal = ('tags', 'privacy')
-    search_fields = ['title', 'abstract', 'created_by', 'updated_by']
+    search_fields = ['title', 'abstract']
     date_hierarchy = 'created_at'
     fieldsets = [
         ('Resource', {
