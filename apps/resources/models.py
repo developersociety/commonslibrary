@@ -18,7 +18,7 @@ from .managers import ResourceManager
 
 class Resource(models.Model):
     title = models.CharField(max_length=140, unique=True)
-    slug = models.SlugField(unique=True, null=True)
+    slug = models.SlugField(unique=True, null=True, max_length=140)
     abstract = models.TextField(
         max_length=140,
         help_text='This text will appear in search results',
