@@ -4,7 +4,7 @@ from django.urls import reverse_lazy
 
 from pages.views import PageDetailView
 
-from .forms import LoginForm, PasswordResetForm, SetPasswordForm
+from .forms import LoginForm, PasswordResetForm, SetPasswordForm, PasswordChangeForm
 from .views import UserCreateView, UserDetailView, UserUpdateView
 
 app_name = 'accounts'
@@ -62,6 +62,8 @@ urlpatterns = [
         r'^password-change/$',
         views.PasswordChangeView.as_view(
             template_name='accounts/password_change.html',
+            form_class=PasswordChangeForm,
+            success_url=reverse_lazy('accounts:user-detail')
         ),
         name='password-change',
     ),

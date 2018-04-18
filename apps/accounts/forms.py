@@ -3,7 +3,7 @@ from django.contrib.auth import password_validation
 from django.contrib.auth.forms import (  # yapf: disable
     AuthenticationForm as BaseAuthenticatonForm, PasswordResetForm as BasePasswordResetForm,
     SetPasswordForm as BaseSetPasswordForm, UserChangeForm as BaseUserChangeForm,
-    UserCreationForm as BaseUserCreationForm
+    UserCreationForm as BaseUserCreationForm, PasswordChangeForm as BasePasswordChangeForm
 )
 
 from crispy_forms.helper import FormHelper
@@ -153,9 +153,17 @@ class UserUpdateForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ('first_name', 'last_name', 'photo', 'phone', 'address')
+        fields = ('first_name', 'last_name', 'email', 'photo', 'phone', 'address')
 
     def __init__(self, request=None, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
-        self.helper.add_input(Submit('submit', 'Submit'))
+        self.helper.add_input(Submit('submit', 'Update'))
+
+
+class PasswordChangeForm(BasePasswordChangeForm):
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.add_input(Submit('submit', 'Change'))
