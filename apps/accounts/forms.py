@@ -1,9 +1,9 @@
 from django import forms
 from django.contrib.auth import password_validation
 from django.contrib.auth.forms import (  # yapf: disable
-    AuthenticationForm as BaseAuthenticatonForm, PasswordResetForm as BasePasswordResetForm,
-    SetPasswordForm as BaseSetPasswordForm, UserChangeForm as BaseUserChangeForm,
-    UserCreationForm as BaseUserCreationForm, PasswordChangeForm as BasePasswordChangeForm
+    AuthenticationForm as BaseAuthenticatonForm, PasswordChangeForm as BasePasswordChangeForm,
+    PasswordResetForm as BasePasswordResetForm, SetPasswordForm as BaseSetPasswordForm,
+    UserChangeForm as BaseUserChangeForm, UserCreationForm as BaseUserCreationForm
 )
 
 from crispy_forms.helper import FormHelper
