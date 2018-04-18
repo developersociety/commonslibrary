@@ -4,7 +4,7 @@ from django.urls import reverse_lazy
 
 from pages.views import PageDetailView
 
-from .forms import LoginForm, PasswordResetForm, SetPasswordForm, PasswordChangeForm
+from .forms import LoginForm, PasswordChangeForm, PasswordResetForm, SetPasswordForm
 from .views import UserCreateView, UserDetailView, UserUpdateView
 
 app_name = 'accounts'
