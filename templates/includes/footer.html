@@ -16,11 +16,24 @@
     </p>
   </div>
   <div class="footer-logos">
-    <div class="commons-library-logo"></div>
-    {% for org in footer_orgs %}
-      {% thumbnail org.logo '500' as thumb %}
-        <img class="footer-logo" src="{{ thumb.url }}" />
-      {% endthumbnail %}
-    {% endfor %}
+    <div class="footer-logo__grid">
+      <div class="commons-library-logo"></div>
+    </div>
+    <h4>Brought to you by</h4>
+    <div class="footer-logo__grid">
+      {% for org in footer_orgs_founders %}
+        {% thumbnail org.logo '500' as thumb %}
+          <img class="footer-logo" src="{{ thumb.url }}" />
+        {% endthumbnail %}
+      {% endfor %}
+    </div>
+    <h4>Partners</h4>
+    <div class="footer-logo__grid">
+      {% for org in footer_orgs_partners %}
+        {% thumbnail org.logo '500' as thumb %}
+          <img class="footer-logo" src="{{ thumb.url }}" />
+        {% endthumbnail %}
+      {% endfor %}
+    </div>
   </div>
 </footer>

@@ -22,17 +22,33 @@
 }
 
 .footer-logos {
+    width: 100%;
+    max-width: 57.5rem;
+    min-width: 18rem;
+    margin-top: $width-gap*1.5;
+
+    h4 {
+        padding-bottom: $width-gap/2;
+        margin: $width-gap $width-gap 0 0;
+        border-bottom: 3px solid $color-accent;
+    }
+
+    @media all and (min-width: 741px) {
+        margin: 0;
+
+        h4 { text-align: right; }
+    }
+}
+
+.footer-logo__grid {
     display: flex;
     flex-flow: row wrap;
-    max-width: 30rem;
-    min-width: 18rem;
-    flex-shrink: 0;
     justify-content: flex-start;
-    margin-top: $width-gap*1.5;
+
+    + h4 { margin-top: $width-gap*2; }
 
     @media all and (min-width: 741px) {
         justify-content: flex-end;
-        margin-top: 0;
     }
 }
 
@@ -45,12 +61,16 @@
 }
 
 .footer-logo {
-    max-height: 2.5rem;
+    max-height: 1.75rem;
     width: auto;
     height: auto;
     flex-shrink: 0;
     margin: $width-gap $width-gap 0 0;
     filter: brightness(0) invert(1);
+
+    @media all and (min-width: 1061px) {
+        max-height: 2.5rem;
+    }
 }
 
 .messages {

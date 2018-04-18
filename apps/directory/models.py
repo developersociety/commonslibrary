@@ -24,6 +24,7 @@ class Organisation(models.Model):
     description = RichTextUploadingField(blank=True)
     logo = ImageField(blank=True, upload_to='uploads/directory/organisation/%Y/%m/%d')
     email = models.EmailField(blank=True)
+    founder = models.BooleanField(default=False)
     created_by = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='organisations_created'
     )
