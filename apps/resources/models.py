@@ -75,7 +75,10 @@ class Resource(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('resources:resource-detail', kwargs={'slug': self.slug})
+        url = ''
+        if self.slug:
+            url = reverse('resources:resource-detail', kwargs={'slug': self.slug})
+        return url
 
     def private_for_organisation(self, organisation):
         return organisation in self.privacy.all()

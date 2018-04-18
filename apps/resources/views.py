@@ -42,7 +42,7 @@ class ResourceDetailView(DetailView, CreateView):
         Return approved resources unless requested user is approved and resource is waiting
         for approval.
         """
-        qs = Resource.objects.approved(user=self.request.user)
+        qs = Resource.objects.approved(user=self.request.user).distinct()
 
         if self.request.user.is_authenticated:
             waiting_for_approval = Resource.objects.filter(
