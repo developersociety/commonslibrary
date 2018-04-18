@@ -134,6 +134,14 @@
   <div id="react-app" data-user="{{ user.pk }}">
     {% csrf_token %}
   </div>
+
+  {% if resources_waiting_for_approval %}
+    <h3>Waiting for approval</h3>
+    {% for resource in resources_waiting_for_approval %}
+    <a href="{{ resource.get_absolute_url }}">{{ resource.title }}</a>
+    {% endfor %}
+  {% endif %}
+
 {% endblock main_content %}
 
 {% block extra_scripts %}
