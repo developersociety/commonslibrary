@@ -44,7 +44,7 @@ class Organisation(models.Model):
 
     def get_short_url(self):
         netloc = urlparse(self.url).netloc
-        if 'www.' in netloc:
+        if netloc.startswith('www.'):
             netloc = netloc.replace('www.', '')
         return netloc
 
