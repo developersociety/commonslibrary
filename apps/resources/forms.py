@@ -8,9 +8,7 @@ from .models import Resource
 
 
 class ResourceForm(forms.ModelForm):
-    is_public = forms.BooleanField(
-        label='Make this resource public', initial=True
-    )
+    is_public = forms.BooleanField(label='Make this resource public', initial=True)
 
     class Meta:
         model = Resource
@@ -25,7 +23,7 @@ class ResourceForm(forms.ModelForm):
         self.fields['organisation'].empty_label = 'Select'
         self.fields['privacy'].queryset = self.user.approved_organisations.all()
         self.fields['privacy'].widget = forms.CheckboxSelectMultiple()
-        self.fields['privacy'].initial = [privacy[0]for privacy in self.fields['privacy'].choices]
+        self.fields['privacy'].initial = [privacy[0] for privacy in self.fields['privacy'].choices]
 
         self.helper = FormHelper()
         self.helper.layout = Layout(
