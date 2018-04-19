@@ -158,7 +158,21 @@ class UserUpdateForm(forms.ModelForm):
     def __init__(self, request=None, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
-        self.helper.add_input(Submit('submit', 'Update'))
+        self.helper.layout = Layout(
+            'first_name',
+            'last_name',
+            'email',
+            Div(
+                Field('photo', css_class="sr__input"),
+                Div(css_class='file-mount'),
+                css_class='file-group'
+            ),
+            'phone',
+            'address',
+            ButtonHolder(
+                Submit('submit', 'Update', css_class='submit'), css_class='form-actions'
+            ),
+        )
 
 
 class PasswordChangeForm(BasePasswordChangeForm):
