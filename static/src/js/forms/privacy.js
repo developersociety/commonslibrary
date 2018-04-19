@@ -14,7 +14,7 @@ owner_group.onchange=() => {
     // if org is selected hide from privacy
     if (selected_owner) {
         remove_class('#div_id_privacy .multiselect-option', 'sr__input');
-        owner_privacy_option = document.querySelector('#id__' + selected_owner).parentElement;
+        owner_privacy_option = get_checkbox(selected_owner);
         owner_privacy_option.classList.add('sr__input');
     } else {
         remove_class('#div_id_privacy .multiselect-option', 'sr__input');
@@ -39,4 +39,16 @@ function remove_class(query, css_class) {
     [...document.querySelectorAll(query)].map(element => {
         element.classList.remove(css_class);
     })
+}
+
+function get_checkbox(value) {
+    let checkbox;
+
+    [...document.querySelectorAll('#div_id_privacy .multiselect-option input')].map(element => {
+        if (element.value == value) {
+            checkbox = element.parentNode;
+        }
+    })
+
+    return checkbox;
 }
