@@ -94,9 +94,9 @@ class Resource(models.Model):
         return resources
 
     @staticmethod
-    def get_latest(user=None):
+    def get_latest(user=None, limit=20):
         try:
-            resource = Resource.objects.approved(user=user).earliest('created_at')
+            resource = Resource.objects.approved(user=user).earliest('created_at')[:20]
         except Resource.DoesNotExist:
             resource = None
         return resource
