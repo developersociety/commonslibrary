@@ -192,21 +192,39 @@
     }
 }
 
-.profile-admin {
-    margin-top: $width-gap*1.5;
+.profile-buttons {
+    @extend %flex-row;
 
     a {
         display: inline-block;
         color: inherit;
         background: $color-accent;
-        padding: $width-gap/4;
+        padding: $width-gap/2;
         color: $color-background;
         text-decoration: none;
+        position: relative;
+        flex: 1;
+        white-space: nowrap;
     }
 
     .icon {
         vertical-align: middle;
         margin-right: $width-gap/6;
+        width: 2rem;
+        height: 2rem;
+    }
+
+    a + a:before {
+        content: '';
+        display: block;
+        position: absolute;
+        left: 0; top: 0; bottom: 0;
+        width: 3px;
+        background: rgba($color-background, 0.05);
+    }
+
+    @media all and (min-width: 801px) {
+        display: inline-flex;
     }
 }
 

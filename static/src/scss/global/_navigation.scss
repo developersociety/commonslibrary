@@ -342,6 +342,11 @@
         position: relative;
         top: 1px;
         right: 1px;
+
+    }
+
+    @media all and (max-width: 1060px) {
+        transform: rotate(-45deg);
     }
 }
 
