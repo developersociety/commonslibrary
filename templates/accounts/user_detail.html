@@ -32,6 +32,23 @@
             <span><a href="{% url 'directory:organisation-detail' organisation.slug %}">{{ organisation.title }}</a></span>
           </div>
         {% endfor %}
+
+        {% if request.user == user %}
+          <div class="profile-admin">
+            <p>
+              <a href="{% url "accounts:user-update" %}">
+                <svg class="icon">
+                  <use xlink:href="#profile"></use>
+                </svg>Update Profile
+              </a>
+              <a href="{% url "accounts:password-change" %}">
+                <svg class="icon">
+                  <use xlink:href="#private"></use>
+                </svg>Change password
+              </a>
+            </p>
+          </div>
+        {% endif %}
       </div>
     </div>
     <div class="profile-summary__details">
@@ -49,6 +66,22 @@
           </div>
         {% endfor %}
 
+        {% if request.user == user %}
+          <div class="profile-admin">
+            <p>
+              <a href="{% url "accounts:user-update" %}">
+                <svg class="icon">
+                  <use xlink:href="#profile"></use>
+                </svg>Update Profile
+              </a>
+              <a href="{% url "accounts:password-change" %}">
+                <svg class="icon">
+                  <use xlink:href="#private"></use>
+                </svg>Change password
+              </a>
+            </p>
+          </div>
+        {% endif %}
       </div>
       <div class="profile-details">
         <div class="icon-list">

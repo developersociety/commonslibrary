@@ -192,6 +192,24 @@
     }
 }
 
+.profile-admin {
+    margin-top: $width-gap*1.5;
+
+    a {
+        display: inline-block;
+        color: inherit;
+        background: $color-accent;
+        padding: $width-gap/4;
+        color: $color-background;
+        text-decoration: none;
+    }
+
+    .icon {
+        vertical-align: middle;
+        margin-right: $width-gap/6;
+    }
+}
+
 .profile-name,
 .profile-group {
     display: inline-block;
