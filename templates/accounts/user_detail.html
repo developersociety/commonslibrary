@@ -39,8 +39,6 @@
         <h1 class="profile-summary__title">
           {{ user.get_full_name }}
         </h1>
-        <small><a href="{% url "accounts:user-update" %}">Update Profile</a></small> |
-        <small><a href="{% url "accounts:password-change" %}">Change password</a></small>
 
         {% for organisation in user.approved_organisations.all %}
           <div class="profile-summary__group">
@@ -50,6 +48,7 @@
             <span><a href="{% url 'directory:organisation-detail' organisation.slug %}">{{ organisation.title }}</a></span>
           </div>
         {% endfor %}
+
       </div>
       <div class="profile-details">
         <div class="icon-list">
