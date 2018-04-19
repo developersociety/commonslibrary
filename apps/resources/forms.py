@@ -8,7 +8,7 @@ from .models import Resource
 
 
 class ResourceForm(forms.ModelForm):
-    is_public = forms.BooleanField(label='Make this resource public', initial=True)
+    is_public = forms.BooleanField(label='Make this resource public', initial=True, required=False)
 
     class Meta:
         model = Resource
