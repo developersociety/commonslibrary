@@ -15,10 +15,10 @@ class ResourceForm(forms.ModelForm):
         fields = ('title', 'abstract', 'content', 'tags', 'image', 'organisation', 'privacy')
         labels = {
             'organisation': 'Group',
-            'privacy': 'Of your groups, who can view it?'
+            'privacy': 'Of your groups, who can view it?',
         }
         help_texts = {
-            'privacy': 'The group you belong to is selected by default'
+            'privacy': 'The group you belong to is selected by default',
         }
 
     def __init__(self, *args, **kwargs):
