@@ -198,9 +198,9 @@
     a {
         display: inline-block;
         color: inherit;
-        background: $color-accent;
-        padding: $width-gap/2;
-        color: $color-background;
+        background: $color-line;
+        padding: $width-gap/4 $width-gap/2;
+        color: $color-text;
         text-decoration: none;
         position: relative;
         flex: 1;
