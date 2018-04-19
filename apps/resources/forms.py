@@ -29,6 +29,7 @@ class ResourceForm(forms.ModelForm):
         self.fields['organisation'].empty_label = 'Select'
         self.fields['privacy'].queryset = self.user.approved_organisations.all()
         self.fields['privacy'].widget = forms.CheckboxSelectMultiple()
+        self.fields['privacy'].initial = [id for id, option in self.fields['privacy'].choices]
 
         self.helper = FormHelper()
         self.helper.layout = Layout(
