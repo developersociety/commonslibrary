@@ -27,7 +27,8 @@ module.exports = {
     forms: [
         'webpack-dev-server/client?http://127.0.0.1:' + webpackPort + '/',
         './static/src/js/forms/forms',
-        './static/src/js/forms/tags'
+        './static/src/js/forms/tags',
+        './static/src/js/forms/privacy'
     ],
     resource: [
         'webpack-dev-server/client?http://127.0.0.1:' + webpackPort + '/',

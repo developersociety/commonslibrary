@@ -13,7 +13,13 @@ class ResourceForm(forms.ModelForm):
     class Meta:
         model = Resource
         fields = ('title', 'abstract', 'content', 'tags', 'image', 'organisation', 'privacy')
-        labels = {'organisation': 'Group'}
+        labels = {
+            'organisation': 'Group',
+            'privacy': 'Of your groups, who can view it?'
+        }
+        help_texts = {
+            'privacy': 'The group you belong to is selected by default'
+        }
 
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user')
@@ -23,7 +29,6 @@ class ResourceForm(forms.ModelForm):
         self.fields['organisation'].empty_label = 'Select'
         self.fields['privacy'].queryset = self.user.approved_organisations.all()
         self.fields['privacy'].widget = forms.CheckboxSelectMultiple()
-        self.fields['privacy'].initial = [privacy[0] for privacy in self.fields['privacy'].choices]
 
         self.helper = FormHelper()
         self.helper.layout = Layout(
@@ -42,7 +47,7 @@ class ResourceForm(forms.ModelForm):
             ),
             'organisation',
             'is_public',
-            'privacy',
+            Field('privacy', wrapper_class="sr__input"),
             ButtonHolder(
                 Submit('submit', 'Submit your resource', css_class='submit'),
                 css_class='form-actions resource-form-actions'
