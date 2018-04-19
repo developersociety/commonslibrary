@@ -138,6 +138,9 @@
         width: auto !important;
         display: inline-block !important;
         margin-top: $width-gap/2;
+        font-family: $base-font !important;
+        text-transform: none !important;
+        font-style: italic;
     }
 }
 

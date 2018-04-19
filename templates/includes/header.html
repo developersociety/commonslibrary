@@ -39,15 +39,14 @@
           <li class="main-navigation__profile shown-false" id="profile_dropdown">
             {% thumbnail request.user.photo '500' as thumb %}
               <div class="profile-button" id="profile_dropdown_toggle" style="background: url({{ thumb.url }}) center center/cover no-repeat">
-                <svg class="icon">
-                  <use xlink:href="#profile"></use>
-                </svg>
+                <span class="drop-down__icon"></span>
               </div>
             {% empty %}
               <div class="profile-button" id="profile_dropdown_toggle">
                 <svg class="icon">
                   <use xlink:href="#profile"></use>
                 </svg>
+                <span class="drop-down__icon"></span>
               </div>
             {% endthumbnail %}
             <div class="main-navigation__dropdown">
