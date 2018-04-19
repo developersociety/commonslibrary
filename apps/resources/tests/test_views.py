@@ -7,6 +7,7 @@ from directory.tests.factories import OrganisationFactory
 from pages.tests.factories import PageFactory
 from resources.models import Resource
 
+
 class UserDetailTestView(WebTest):
 
     def setUp(self):
@@ -32,6 +33,7 @@ class ResourceThankTestView(WebTest):
 
 
 class ResourceCreateViewViewTest(WebTest):
+
     def setUp(self):
         self.user = UserFactory.create(
             approved_organisations=OrganisationFactory.create_batch(size=10)
