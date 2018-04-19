@@ -4,8 +4,6 @@ from django.utils.text import slugify
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import ButtonHolder, Div, Field, Layout, Submit
 
-from tags.models import Tag
-
 from .models import Resource
 
 

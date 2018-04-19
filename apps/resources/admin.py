@@ -45,7 +45,7 @@ class ResourceAdmin(admin.ModelAdmin):
     def get_readonly_fields(self, request, obj=None):
         readonly_fields = [
             'abstract', 'id', 'created_by', 'updated_by', 'created_at', 'updated_at', 'likes',
-            'tried', 'hits', 'organisation', 'tags',
+            'tried', 'hits', 'organisation', 'tags'
         ]
         user = request.user
         if obj.organisation not in user.approved_organisations.all():
