@@ -169,9 +169,7 @@ class UserUpdateForm(forms.ModelForm):
             ),
             'phone',
             'address',
-            ButtonHolder(
-                Submit('submit', 'Update', css_class='submit'), css_class='form-actions'
-            ),
+            ButtonHolder(Submit('submit', 'Update', css_class='submit'), css_class='form-actions'),
         )
 
 
