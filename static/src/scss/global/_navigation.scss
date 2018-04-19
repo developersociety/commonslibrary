@@ -212,6 +212,101 @@
     }
 }
 
+.main-navigation__profile {
+    @extend %flex-column;
+
+    align-items: center;
+    justify-content: center;
+    margin: 0 $width-gap 0 auto;
+
+
+    .main-navigation__dropdown {
+        position: absolute;
+        top: 4.8125rem;
+        right: $width-gap;
+        padding: $width-gap/2;
+        background: $color-text;
+        z-index: 100;
+        font-family: $base-font;
+        text-transform: none;
+        font-weight: normal;
+
+        .logout {
+            border-top: 1px solid rgba(#ffffff, 0.25);
+            padding-top: $width-gap/4;
+            margin-top: $width-gap/2;
+            opacity: 0.5;
+        }
+
+        &:after {
+            content: '';
+            display: inline-block;
+            width: 0;
+            height: 0;
+            border-left: 0.75rem solid transparent;
+            border-right: 0.75rem solid transparent;
+            border-bottom: 0.75rem solid $color-text;
+            position: absolute;
+            bottom: 100%; right: $width-gap/2;
+        }
+    }
+
+    &.shown-false .main-navigation__dropdown {
+        @extend .sr__input;
+    }
+
+    @media all and (max-width: 1060px) {
+        background: $color-background;
+        margin: 0;
+        padding: 0 $width-gap;
+        border-left: 3px solid rgba(#ffffff, 0.25);
+
+        .main-navigation__dropdown {
+            top: auto;
+            bottom: 3.8125rem;
+
+            &:after {
+                border-left: 0.75rem solid transparent;
+                border-right: 0.75rem solid transparent;
+                border-top: 0.75rem solid $color-text;
+                border-bottom: none;
+                position: absolute;
+                top: 100%; right: $width-gap/4; bottom: auto;
+                }
+        }
+    }
+}
+
+.main-navigation__dropdown a {
+    padding: 0;
+    font-size: 1rem;
+    justify-content: flex-end;
+
+    &:hover { color: $color-accent; }
+
+    + a { margin-top: $width-gap/4; }
+}
+
+.profile-button {
+    display: inline-block;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    flex-shrink: 0;
+    background: grey;
+    cursor: pointer;
+    border: 1px solid $color-line;
+
+    .icon {
+        pointer-events: none;
+    }
+
+    @media all and (max-width: 1060px) {
+        width: 2.25rem;
+        height: 2.25rem;
+    }
+}
+
 .footer-navigation {
     @extend %flex-row;
     @extend %reset-box;

@@ -1,3 +1,6 @@
+{% load thumbnail %}
+
+
 <header class="page-head shown">
   <nav class="page-navigation">
     <a href="/" class="page-navigation__home">
@@ -33,8 +36,26 @@
               <span class="item-text">Submit resource</span>
             </a>
           </li>
-          <li class="main-navigation__account">
-            <a href="{% url 'accounts:logout' %}">Logout</a>
+          <li class="main-navigation__profile shown-false" id="profile_dropdown">
+            {% thumbnail request.user.photo '500' as thumb %}
+              <div class="profile-button" id="profile_dropdown_toggle" style="background: url({{ thumb.url }}) center center/cover no-repeat">
+                <svg class="icon">
+                  <use xlink:href="#profile"></use>
+                </svg>
+              </div>
+            {% empty %}
+              <div class="profile-button" id="profile_dropdown_toggle">
+                <svg class="icon">
+                  <use xlink:href="#profile"></use>
+                </svg>
+              </div>
+            {% endthumbnail %}
+            <div class="main-navigation__dropdown">
+              <a href="{% url 'accounts:user-detail' %}">View profile</a>
+              <a href="{% url 'accounts:user-update' %}">Update details</a>
+              <a href="{% url 'accounts:password-change' %}">Change password</a>
+              <a href="{% url 'accounts:logout' %}" class="logout">Logout</a>
+            </div>
           </li>
         {% else %}
           <li class="main-navigation__item {% if request.path == '/accounts/login/' %} active{% endif %}">
