@@ -83,6 +83,18 @@
               {{ people_commented }} People
             </div>
           </div>
+
+          {% if editable %}
+            <div class="icon-list__row">
+              <svg class="icon">
+                <use xlink:href="#edit"></use>
+              </svg>
+              <div class="icon-list__content">
+                <a href="{% url 'resources:resource-update' object.slug %}">Edit</a>
+              </div>
+            </div>
+          {% endif %}
+
         </div>
       </div>
     </aside>

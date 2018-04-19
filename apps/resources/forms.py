@@ -4,6 +4,8 @@ from django.utils.text import slugify
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import ButtonHolder, Div, Field, Layout, Submit
 
+from tags.models import Tag
+
 from .models import Resource
 
 
@@ -16,6 +18,8 @@ class ResourceForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user')
+        self.button_title = kwargs.pop('button_title')
+
         super().__init__(*args, **kwargs)
         self.fields['abstract'].widget.attrs['rows'] = 3
         self.fields['organisation'].queryset = self.user.approved_organisations.all()
@@ -40,7 +44,7 @@ class ResourceForm(forms.ModelForm):
             'organisation',
             'privacy',
             ButtonHolder(
-                Submit('submit', 'Submit your resource', css_class='submit'),
+                Submit('submit', self.button_title, css_class='submit'),
                 css_class='form-actions resource-form-actions'
             ),
         )

@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+{% load render_bundle from webpack_loader %}
+
+
+{% block main_content %}
+  <div class="form-holder">
+    <h2>Update resource</h2>
+    {% crispy form %}
+  </div>
+{% endblock main_content %}
+
+{% block extra_scripts %}
+  {% render_bundle 'forms' %}
+{% endblock extra_scripts %}
+
+

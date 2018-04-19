@@ -1,9 +1,10 @@
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.exceptions import PermissionDenied
 from django.db.models import F
 from django.urls import reverse_lazy
 from django.views.generic.detail import DetailView
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView
 
 from comments.forms import CommentForm
 
@@ -28,6 +29,7 @@ class ResourceCreateView(LoginRequiredMixin, CreateView):
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
         kwargs.update({'user': self.request.user})
+        kwargs.update({'button_title': 'Submit your resource'})
         return kwargs
 
 
@@ -45,6 +47,7 @@ class ResourceDetailView(DetailView, CreateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['related_resources'] = self.object.get_related(user=self.request.user)
+        context['editable'] = self.request.user == self.object.created_by
         context['people_commented'] = self.object.comment_set.order_by().values_list(
             'created_by', flat=True
         ).distinct().count()
@@ -82,3 +85,32 @@ class ResourceDetailView(DetailView, CreateView):
         response = super().form_valid(form)
         messages.success(self.request, 'Thank you for your comment')
         return response
+
+
+class ResourceUpdateView(LoginRequiredMixin, UpdateView):
+    model = Resource
+    form_class = ResourceForm
+    template_name = 'resources/resource_update.html'
+
+    def get_success_url(self):
+        return self.object.get_absolute_url()
+
+    def get_object(self, queryset=None):
+        obj = super().get_object(queryset=queryset)
+        if obj.created_by != self.request.user:
+            raise PermissionDenied(
+                'No {verbose_name}s found matching the query'.format(
+                    verbose_name=self.model._meta.verbose_name,
+                )
+            )
+        return obj
+
+    def form_valid(self, form):
+        messages.success(self.request, 'Your resource has been updated')
+        return super().form_valid(form=form)
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs.update({'user': self.request.user})
+        kwargs.update({'button_title': 'Update your resource'})
+        return kwargs
