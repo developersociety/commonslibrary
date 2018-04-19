@@ -25,8 +25,13 @@ public_field.onchange=() => {
     const is_public = public_field.checked;
 
     // show field only if a user is a member of more than one group
-    if (!is_public && privacy_options.length > 1) {
-        privacy_field.classList.remove('sr__input');
+    if (!is_public) {
+        if(privacy_options.length > 1) {
+            privacy_field.classList.remove('sr__input');
+        }
+    } else {
+        privacy_field.classList.add('sr__input');
+
     }
 
     [...privacy_options].map(option => {
