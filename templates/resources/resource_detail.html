@@ -151,6 +151,16 @@
                 <p>{{ resource.created_at|date:'j F Y H:i' }}</p>
               </div>
             </div>
+            {% if editable %}
+              <div class="icon-list__row edit-resource">
+                <svg class="icon">
+                  <use xlink:href="#create"></use>
+                </svg>
+                <div class="icon-list__content">
+                  <a href="{% url 'resources:resource-update' object.slug %}">Edit this resource</a>
+                </div>
+              </div>
+            {% endif %}
           </div>
         </div>
 
