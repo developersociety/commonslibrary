@@ -16,7 +16,7 @@
       {% include "includes/resource_actions.html" %}
       <div class="resource-meta">
         <div class="icon-list">
-          {% if resource.privacy.all %}
+          {% if resource.privacy.exists %}
             <div class="icon-list__row">
               <svg class="icon">
                 <use xlink:href="#private"></use>
@@ -57,7 +57,7 @@
               <p>{{ resource.created_at|date:'j F Y H:i' }}</p>
             </div>
           </div>
-          {% if resource.tags.all %}
+          {% if resource.tags.exists %}
             <div class="icon-list__row">
               <svg class="icon">
                 <use xlink:href="#tag"></use>
@@ -107,7 +107,7 @@
       <div class="resource-content">
         <div class="resource-detail__stats hide-desktop">
           <div class="icon-list">
-            {% if resource.privacy.all %}
+            {% if resource.privacy.exists %}
               <div class="icon-list__row">
                 <svg class="icon">
                   <use xlink:href="#private"></use>
@@ -144,7 +144,7 @@
         <div class="resource-content__body">
           {{ resource.content|safe }}
         </div>
-        {% if resource.tags.all %}
+        {% if resource.tags.exists %}
           <footer class="resource-detail__stats hide-desktop">
             <div class="icon-list__row">
               <svg class="icon">
