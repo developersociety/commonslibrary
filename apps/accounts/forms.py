@@ -9,6 +9,8 @@ from django.contrib.auth.forms import (  # yapf: disable
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import HTML, ButtonHolder, Div, Field, Layout, Submit
 
+from directory.models import Organisation
+
 from .models import User
 
 
@@ -93,7 +95,22 @@ class UserRegistrationForm(forms.ModelForm):
         user.set_password(password)
         if commit:
             user.save()
+            self.grant_organisation(user)
             self.save_m2m()
+        return user
+
+    def grant_organisation(self, user):
+
+        email_domain = user.get_email_domain()
+
+        if Organisation.objects.filter(email__icontains=email_domain).exists():
+
+            organisation = Organisation.objects.get(email__icontains=email_domain)
+            if organisation in self.cleaned_data['chosen_organisations']:
+                org_email_domain = organisation.get_email_domain()
+                if org_email_domain == email_domain:
+                    user.is_active = True
+                    user.approved_organisations.add(organisation)
         return user
 
     def clean_confirm_password(self):
