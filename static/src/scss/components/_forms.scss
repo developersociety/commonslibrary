@@ -113,6 +113,14 @@
     padding: $width-gap 0;
     border-top: 3px solid $color-line;
     border-bottom: 3px solid $color-line;
+
+    input[type=checkbox]:checked ~ .file-uploader .file-uploader__stats {
+        color: $color-error;
+
+        .file-name {
+            text-decoration: line-through;
+        }
+    }
 }
 
 .file-uploader {
@@ -124,6 +132,15 @@
         width: auto;
         margin: 0 $width-gap 0 0;
         flex-shrink: 0;
+    }
+
+    + label {
+        width: auto !important;
+        display: inline-block !important;
+        margin-top: $width-gap/2;
+        font-family: $base-font !important;
+        text-transform: none !important;
+        font-style: italic;
     }
 }
 
