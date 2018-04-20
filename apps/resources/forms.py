@@ -18,7 +18,14 @@ class ResourceForm(forms.ModelForm):
             'privacy': 'Of your groups, who can view it?',
         }
         help_texts = {
-            'privacy': 'The group you belong to is selected by default',
+            'content': (
+                """
+                Use this for the main body of your resource – you can embed online documents
+                using HTML in "Source" and add drop down accordions using "MJ Accordions
+                """
+            ),
+            'privacy':
+                'The group you belong to is selected by default',
         }
 
     def __init__(self, *args, **kwargs):
