@@ -12,6 +12,7 @@ from resources.models import Resource
 from tags.models import Tag
 
 from .filters import ResourceFilter
+from .paginations import ResourcesPagination
 from .serializers import OrganisationSerializer, ResourceSerializer, TagSerializer, UserSerializer
 
 
@@ -19,6 +20,7 @@ class ResourceViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = ResourceSerializer
     filter_backends = (DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter)
     filter_class = ResourceFilter
+    pagination_class = ResourcesPagination
     search_fields = (
         'title', 'abstract', 'created_by__first_name', 'created_by__last_name',
         'organisation__title', 'tags__title'

@@ -67,7 +67,7 @@ a.home-intro__slide {
         width: 3px;
         position: absolute;
         top: 0; right: 0; bottom: 3px;
-        background: $color-line;
+        background: rgba($color-background, 0.1);
         pointer-events: none;
         user-select: none;
     }
