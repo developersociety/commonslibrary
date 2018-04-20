@@ -7,12 +7,19 @@ const tag_fields = document.querySelectorAll('.tag-group');
 [...tag_fields].map(field => {
     const select = field.querySelector('select');
     const options = [];
+    const selected = [];
 
     [...select.options].map(option => {
         options.push(option.text);
+
+        // if previously selected push to list
+        if (option.selected) {
+            selected.push(option.text)
+        }
     })
 
     const taggleField = new Taggle(field.querySelector('.tag-select'), {
+        tags: selected,
         allowedTags: options,
         placeholder: 'type to search for tags',
         onTagAdd: function(event, tag) {
