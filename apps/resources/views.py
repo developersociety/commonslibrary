@@ -30,7 +30,6 @@ class ResourceCreateView(LoginRequiredMixin, CreateView):
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
         kwargs.update({'user': self.request.user})
-        kwargs.update({'button_title': 'Submit your resource'})
         return kwargs
 
 
@@ -129,5 +128,4 @@ class ResourceUpdateView(LoginRequiredMixin, UpdateView):
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
         kwargs.update({'user': self.request.user})
-        kwargs.update({'button_title': 'Update your resource'})
         return kwargs

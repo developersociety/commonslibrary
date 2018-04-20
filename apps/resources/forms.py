@@ -23,7 +23,11 @@ class ResourceForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user')
-        self.button_title = kwargs.pop('button_title')
+
+        if self.instance.id:
+            button_title = 'Update your resource'
+        else:
+            button_title = 'Submit your resource'
 
         super().__init__(*args, **kwargs)
         self.fields['abstract'].widget.attrs['rows'] = 3
@@ -52,7 +56,7 @@ class ResourceForm(forms.ModelForm):
             'is_public',
             Field('privacy', wrapper_class="sr__input"),
             ButtonHolder(
-                Submit('submit', self.button_title, css_class='submit'),
+                Submit('submit', button_title, css_class='submit'),
                 css_class='form-actions resource-form-actions'
             ),
         )
