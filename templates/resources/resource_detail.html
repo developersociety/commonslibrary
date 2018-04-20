@@ -87,10 +87,10 @@
           {% if editable %}
             <div class="icon-list__row">
               <svg class="icon">
-                <use xlink:href="#edit"></use>
+                <use xlink:href="#create"></use>
               </svg>
               <div class="icon-list__content">
-                <a href="{% url 'resources:resource-update' object.slug %}">Edit</a>
+                <a href="{% url 'resources:resource-update' object.slug %}">Edit this resource</a>
               </div>
             </div>
           {% endif %}
