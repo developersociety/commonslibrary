@@ -36,6 +36,15 @@
     }
 }
 
+.load-more {
+    @extend %flex-row;
+
+    justify-content: center;
+    grid-column: 1 / -1;
+    padding: $width-gap/2
+
+}
+
 .resources-filter {
     @extend %flex-row;
     @extend %meta;

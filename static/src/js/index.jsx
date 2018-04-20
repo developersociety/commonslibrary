@@ -20,6 +20,8 @@ class ResourceList extends React.Component {
     super()
     this.state = {
       resources: [],
+      resourcesCount: 0,
+      resourcesNextPage: null,
       ordering: '&ordering=created_at',
       activeFilter: 'created_at',
       query: ''
@@ -29,10 +31,11 @@ class ResourceList extends React.Component {
     this.updateResourceOrder = this.updateResourceOrder.bind(this);
     this.updateResourceQuery = this.updateResourceQuery.bind(this);
     this.updateResourceList = this.updateResourceList.bind(this);
+    this.nextResourceList = this.nextResourceList.bind(this);
   }
 
   componentDidMount() {
-    // if fixed Org or user then use that in initial query
+    // if fixed Org, Tag, or User then use that in initial query
     if (fixedOrganisation !== undefined) {
       this.setState(
         {
@@ -101,16 +104,47 @@ class ResourceList extends React.Component {
       .then(response => response.json())
       .then(data => {
         this.setState({
-          resources: data
+          resources: data.results,
+          resourcesCount: data.count,
+          resourcesNextPage: data.next
         })
       })
   }
 
+  nextResourceList() {
+    fetch(this.state.resourcesNextPage, {
+        method: 'get',
+        credentials: 'same-origin'
+      })
+      .then(response => response.json())
+      .then(data => {
+        const mergedResourceList = this.state.resources.concat(data.results);
+
+        this.setState({
+          resources: mergedResourceList,
+          resourcesCount: data.count,
+          resourcesNextPage: data.next
+        })
+      })
+  }
+
+
   render() {
     let resourceGridClass = 'resources-grid ';
+    let loadMoreResources = '';
 
     if (this.state.resources.length == 0) {
       resourceGridClass += 'no-resources';
+    }
+
+    if (this.state.resourcesNextPage !== null) {
+        loadMoreResources = (
+            <div className="load-more">
+                <span className="button" onClick={this.nextResourceList}>
+                    Load more
+                </span>
+            </div>
+        )
     }
 
     return(
@@ -122,7 +156,7 @@ class ResourceList extends React.Component {
           preselectedTag={preselectedTag}
           />
         <ResourceFilter
-          resourceCount={this.state.resources.length}
+          resourceCount={this.state.resourcesCount}
           activeFilter={this.state.activeFilter}
           updateResourceOrder={this.updateResourceOrder}
           />
@@ -134,6 +168,7 @@ class ResourceList extends React.Component {
               csrf={csrf}
             />
           )}
+          {loadMoreResources}
         </div>
       </div>
     )
