@@ -63,13 +63,17 @@
     @extend %meta;
 
     grid-column: 1 / -1;
-    padding: $width-gap/3 $width-gap;
+    padding: $width-gap/3 $width-gap/2;
     background: $color-background;
     color: #ffffff;
     align-items: center;
     font-weight: 600;
 
     p { margin-bottom: 0; }
+
+    @media all and (min-width: 541px) {
+        padding: $width-gap/3 $width-gap;
+    }
 }
 
 .resource-filter__controls {
@@ -79,17 +83,26 @@
 }
 
 .resource-filter__option {
-    margin-left: 0.75rem;
+    margin-left: 0.25rem;
     cursor: pointer;
     user-select: none;
 
     .icon {
-        width: 1.75rem;
-        height: 1.75rem;
+        width: 1.5rem;
+        height: 1.5rem;
     }
 
     &.active {
         color: $color-accent;
+    }
+
+    @media all and (min-width: 541px) {
+        margin-left: $width-gap/2;
+
+        .icon {
+            width: 1.75rem;
+            height: 1.75rem;
+        }
     }
 }
 
@@ -97,6 +110,14 @@
     @extend %flex-row;
 
     align-items: center;
+
+    p {
+        margin-right: $width-gap/4;
+    }
+
+    @media all and (min-width: 541px) {
+        margin-right: 0;
+    }
 }
 
 .resource {
