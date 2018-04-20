@@ -36,6 +36,19 @@
     }
 }
 
+.featured-resources .resources-grid {
+    @media all and (min-width: 801px) and (max-width: 1260px) {
+        min-height: 25vw;
+        grid-template-columns: repeat(2, 1fr);
+
+        .resource-blurred,
+        .featured-org {
+            min-height: 25vw;
+        }
+    }
+
+}
+
 .load-more {
     @extend %flex-row;
 
