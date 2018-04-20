@@ -37,14 +37,11 @@ class UserDetailView(LoginRequiredMixin, DetailView):
 class UserUpdateView(LoginRequiredMixin, UpdateView):
     model = User
     form_class = UserUpdateForm
-    success_url = reverse_lazy('accounts:user-update')
+    success_url = reverse_lazy('accounts:user-detail')
 
     def get_object(self, queryset=None):
         return self.request.user
 
     def form_valid(self, form):
-        messages.success(
-            self.request,
-            'The user profile was successfully. You may edit it again below.',
-        )
+        messages.success(self.request, 'The user profile was successfully updated.')
         return super().form_valid(form)

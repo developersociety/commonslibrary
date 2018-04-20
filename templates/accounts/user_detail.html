@@ -35,8 +35,25 @@
       </div>
     </div>
     <div class="profile-summary__details">
+      {% if request.user == user %}
+        <div class="profile-buttons">
+          <a href="{% url "accounts:user-update" %}">
+            <svg class="icon">
+              <use xlink:href="#profile"></use>
+            </svg>Update Profile
+          </a>
+          <a href="{% url "accounts:password-change" %}">
+            <svg class="icon">
+              <use xlink:href="#private"></use>
+            </svg>Change password
+          </a>
+        </div>
+      {% endif %}
       <div class="profile-summary__identity">
-        <h1 class="profile-summary__title">{{ user.get_full_name }}</h1>
+        <h1 class="profile-summary__title">
+          {{ user.get_full_name }}
+        </h1>
+
         {% for organisation in user.approved_organisations.all %}
           <div class="profile-summary__group">
             {% thumbnail organisation.logo '250' as thumb %}

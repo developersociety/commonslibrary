@@ -43,7 +43,10 @@ class Organisation(models.Model):
         return reverse('directory:organisation-detail', kwargs={'slug': self.slug})
 
     def get_short_url(self):
-        return urlparse(self.url).netloc[4:]
+        netloc = urlparse(self.url).netloc
+        if netloc.startswith('www.'):
+            netloc = netloc.replace('www.', '')
+        return netloc
 
     def get_total_private_resources_count(self):
         return self.resources_privacy.approved().count()
