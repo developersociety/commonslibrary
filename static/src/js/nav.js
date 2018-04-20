@@ -1,3 +1,7 @@
+const profile_dropdown = document.querySelector('#profile_dropdown');
+const profile_dropdown_trigger = document.querySelector('#profile_dropdown_toggle');
+
+let profile_dropdown_open = false;
 let didScroll = false;
 let lastScrollTop = 0;
 let scrollDelta = 5;
@@ -17,6 +21,10 @@ function hasScrolled() {
       // Scroll Down
       pageHead.classList.remove('shown');
       pageHead.classList.add('not-shown');
+
+      if (profile_dropdown.classList.contains('shown-true')) {
+        profile_dropdown_trigger.click();
+      }
     } else {
       // Scroll Up
       if(scrollTop + window.outerHeight < document.documentElement.scrollHeight) {
@@ -32,8 +40,15 @@ window.addEventListener('scroll', function(e) {
 });
 
 window.setInterval(function() {
-    if(didScroll) {
+    if(didScroll && window.outerWidth <= 1060) {
         hasScrolled();
         didScroll = false;
     }
 });
+
+profile_dropdown_trigger.onclick = () => {
+    profile_dropdown.classList.remove('shown-' + profile_dropdown_open)
+    profile_dropdown_open = !profile_dropdown_open;
+    profile_dropdown.classList.add('shown-' + profile_dropdown_open)
+}
+

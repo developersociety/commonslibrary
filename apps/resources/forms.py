@@ -8,11 +8,18 @@ from .models import Resource
 
 
 class ResourceForm(forms.ModelForm):
+    is_public = forms.BooleanField(label='Make this resource public', initial=True, required=False)
 
     class Meta:
         model = Resource
         fields = ('title', 'abstract', 'content', 'tags', 'image', 'organisation', 'privacy')
-        labels = {'organisation': 'Group'}
+        labels = {
+            'organisation': 'Group',
+            'privacy': 'Of your groups, who can view it?',
+        }
+        help_texts = {
+            'privacy': 'The group you belong to is selected by default',
+        }
 
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user')
@@ -24,6 +31,8 @@ class ResourceForm(forms.ModelForm):
         self.fields['organisation'].empty_label = 'Select'
         self.fields['privacy'].queryset = self.user.approved_organisations.all()
         self.fields['privacy'].widget = forms.CheckboxSelectMultiple()
+        self.fields['privacy'].initial = [id for id, option in self.fields['privacy'].choices]
+
         self.helper = FormHelper()
         self.helper.layout = Layout(
             'title',
@@ -40,7 +49,8 @@ class ResourceForm(forms.ModelForm):
                 css_class='file-group'
             ),
             'organisation',
-            'privacy',
+            'is_public',
+            Field('privacy', wrapper_class="sr__input"),
             ButtonHolder(
                 Submit('submit', self.button_title, css_class='submit'),
                 css_class='form-actions resource-form-actions'
@@ -51,4 +61,8 @@ class ResourceForm(forms.ModelForm):
         self.instance.created_by = self.user
         self.instance.updated_by = self.user
         self.instance.slug = slugify(self.instance.title)
+
+        # If user selected make resource public make sure we emptying the privacy choices.
+        if self.cleaned_data['is_public']:
+            self.cleaned_data['privacy'] = ''
         return super().save(commit=commit)
