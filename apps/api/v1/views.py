@@ -37,6 +37,7 @@ class ResourceViewSet(viewsets.ReadOnlyModelViewSet):
         ).prefetch_related(
             'likes',
             'tried',
+            'privacy',
         )
         return qs
 
