@@ -9,12 +9,10 @@ class FileUploader extends React.Component {
   constructor() {
     super();
     this.state = {
-      currentFile: null,
-      toClear: false
+      currentFile: null
     }
 
     this.handleUpload = this.handleUpload.bind(this);
-    this.handleClear = this.handleClear.bind(this);
     this.getFileStats = this.getFileStats.bind(this);
   }
 
@@ -23,12 +21,6 @@ class FileUploader extends React.Component {
 
     this.setState({
       currentFile: file
-    })
-  }
-
-  handleClear() {
-    this.setState(prevState => {
-      toClear: !prevState.toClear
     })
   }
 
@@ -57,17 +49,29 @@ class FileUploader extends React.Component {
 
   render() {
     // remove initial DOM node
-    this.props.input.remove();
+    this.props.inputHolder.remove();
 
     const fileStats = this.getFileStats();
-    let fileClear = '';
+    let fileClearLabel = '';
+    let fileClearField = '';
 
     if (this.props.inputClear) {
-      fileClear = <label for={this.props.inputClear.is} onChange={this.handleClear}></label>
+      fileClearLabel = <label htmlFor={this.props.inputClear.id}>Clear</label>;
+      fileClearField = (
+        <input
+          type="checkbox"
+          className="sr__input"
+          id={this.props.inputClear.id}
+          name={this.props.inputClear.name}
+          onChange={this.handleClear}
+        />
+      );
     }
 
     return(
       <div>
+        <label htmlFor={this.props.input.id} className="control-label">{this.props.label}</label>
+        {fileClearField}
         <input
           type="file"
           className="sr__input"
@@ -80,7 +84,7 @@ class FileUploader extends React.Component {
           </label>
           {fileStats}
         </div>
-        {fileClear}
+        {fileClearLabel}
       </div>
     )
   }
@@ -88,13 +92,17 @@ class FileUploader extends React.Component {
 
 file_fields.map(field => {
   const mountPoint = field.querySelector('.file-mount');
+  const label = field.querySelector('.control-label').textContent;
   const input = field.querySelector('input[type=file]');
+  const inputHolder = field.querySelector('.control-group');
   const inputClear = field.querySelector('input[type=checkbox]');
   const inputFile = field.querySelector('a');
 
   ReactDOM.render(
     <FileUploader
       input={input}
+      label={label}
+      inputHolder={inputHolder}
       inputFile={inputFile}
       inputClear={inputClear}
       />,

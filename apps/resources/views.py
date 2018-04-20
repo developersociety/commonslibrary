@@ -7,6 +7,7 @@ from django.views.generic.edit import CreateView
 
 from comments.forms import CommentForm
 
+from .choices import RESOURCE_WAITING_FOR_APPROVAL
 from .forms import ResourceForm
 from .models import Resource
 
@@ -37,7 +38,19 @@ class ResourceDetailView(DetailView, CreateView):
     template_name = 'resources/resource_detail.html'
 
     def get_queryset(self):
-        return Resource.objects.approved(user=self.request.user)
+        """
+        Return approved resources unless requested user is approved and resource is waiting
+        for approval.
+        """
+        qs = Resource.objects.approved(user=self.request.user).distinct()
+
+        if self.request.user.is_authenticated:
+            waiting_for_approval = Resource.objects.filter(
+                created_by=self.request.user, status=RESOURCE_WAITING_FOR_APPROVAL
+            ).distinct()
+            qs = qs | waiting_for_approval
+
+        return qs
 
     def get_success_url(self):
         return self.get_object().get_absolute_url()
@@ -48,6 +61,10 @@ class ResourceDetailView(DetailView, CreateView):
         context['people_commented'] = self.object.comment_set.order_by().values_list(
             'created_by', flat=True
         ).distinct().count()
+
+        if self.object.status == RESOURCE_WAITING_FOR_APPROVAL:
+            context['waiting_for_approval'] = True
+
         self.object.hits = F('hits') + 1
         self.object.save(update_fields=['hits'])
         return context

@@ -21,7 +21,8 @@ module.exports = {
     ],
     forms: [
         './static/src/js/forms/forms',
-        './static/src/js/forms/tags'
+        './static/src/js/forms/tags',
+        './static/src/js/forms/privacy'
     ],
     resource: [
         './static/src/js/resource/resource_detail'

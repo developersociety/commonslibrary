@@ -41,3 +41,12 @@ class OrganisationTestCase(TestCase):
         organisation = Organisation.get_most_published_this_week()
 
         self.assertEqual(self.organisation_2.id, organisation.id)
+
+    def test_get_short_url(self):
+        organisation = OrganisationFactory.create(url='http://www.test.com')
+        organisation_1 = OrganisationFactory.create(url='http://home.test.com')
+        organisation_2 = OrganisationFactory.create(url='http://test.com')
+
+        self.assertEqual(organisation.get_short_url(), 'test.com')
+        self.assertEqual(organisation_1.get_short_url(), 'home.test.com')
+        self.assertEqual(organisation_2.get_short_url(), 'test.com')

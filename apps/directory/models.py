@@ -24,6 +24,7 @@ class Organisation(models.Model):
     description = RichTextUploadingField(blank=True)
     logo = ImageField(blank=True, upload_to='uploads/directory/organisation/%Y/%m/%d')
     email = models.EmailField(blank=True)
+    founder = models.BooleanField(default=False)
     created_by = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='organisations_created'
     )
@@ -43,7 +44,10 @@ class Organisation(models.Model):
         return reverse('directory:organisation-detail', kwargs={'slug': self.slug})
 
     def get_short_url(self):
-        return urlparse(self.url).netloc[4:]
+        netloc = urlparse(self.url).netloc
+        if netloc.startswith('www.'):
+            netloc = netloc.replace('www.', '')
+        return netloc
 
     def get_total_private_resources_count(self):
         return self.resources_privacy.approved().count()

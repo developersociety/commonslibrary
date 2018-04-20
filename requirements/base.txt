@@ -13,6 +13,7 @@ psycopg2==2.7.3.2
 pylibmc==1.5.2
 pytz==2018.3
 raven==6.5.0
+requests==2.18.4
 sorl-thumbnail==12.4.1
 
 # Storage

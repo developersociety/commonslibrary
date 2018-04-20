@@ -4,6 +4,8 @@ from django.urls import reverse_lazy
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView
 
+from resources.choices import RESOURCE_WAITING_FOR_APPROVAL
+
 from .forms import UserRegistrationForm, UserUpdateForm
 from .models import User
 
@@ -23,6 +25,9 @@ class UserDetailView(LoginRequiredMixin, DetailView):
         context['resources_created'] = user.resources_created.approved().count()
         context['resources_liked'] = user.resources_likes.approved().count()
         context['resources_tried'] = user.resources_tried.approved().count()
+        context['resources_waiting_for_approval'] = user.resources_created.filter(
+            status=RESOURCE_WAITING_FOR_APPROVAL
+        )
         return context
 
     def get_object(self, queryset=None):
@@ -32,14 +37,11 @@ class UserDetailView(LoginRequiredMixin, DetailView):
 class UserUpdateView(LoginRequiredMixin, UpdateView):
     model = User
     form_class = UserUpdateForm
-    success_url = reverse_lazy('accounts:user-update')
+    success_url = reverse_lazy('accounts:user-detail')
 
     def get_object(self, queryset=None):
         return self.request.user
 
     def form_valid(self, form):
-        messages.success(
-            self.request,
-            'The user profile was successfully. You may edit it again below.',
-        )
+        messages.success(self.request, 'The user profile was successfully updated.')
         return super().form_valid(form)

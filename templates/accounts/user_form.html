@@ -1,5 +1,16 @@
+{% extends "base.html" %}
+
+{% load render_bundle from webpack_loader %}
 {% load crispy_forms_tags %}
 
-{% block content %}
-  {% crispy form %}
-{% endblock content %}
+
+{% block main_content %}
+  <div class="form-holder">
+    <h2 class="form-title">Update Profile</h2>
+    {% crispy form %}
+  </div>
+{% endblock main_content %}
+
+{% block extra_scripts %}
+  {% render_bundle 'forms' %}
+{% endblock extra_scripts %}

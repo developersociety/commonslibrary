@@ -18,7 +18,7 @@ from .managers import ResourceManager
 
 class Resource(models.Model):
     title = models.CharField(max_length=140, unique=True)
-    slug = models.SlugField(unique=True, null=True)
+    slug = models.SlugField(unique=True, null=True, max_length=140)
     abstract = models.TextField(
         max_length=140,
         help_text='This text will appear in search results',
@@ -75,7 +75,10 @@ class Resource(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('resources:resource-detail', kwargs={'slug': self.slug})
+        url = ''
+        if self.slug:
+            url = reverse('resources:resource-detail', kwargs={'slug': self.slug})
+        return url
 
     def private_for_organisation(self, organisation):
         return organisation in self.privacy.all()
