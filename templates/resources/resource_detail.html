@@ -16,7 +16,7 @@
       {% include "includes/resource_actions.html" %}
       <div class="resource-meta">
         <div class="icon-list">
-          {% if resource.privacy.all %}
+          {% if resource.privacy.exists %}
             <div class="icon-list__row">
               <svg class="icon">
                 <use xlink:href="#private"></use>
@@ -57,7 +57,7 @@
               <p>{{ resource.created_at|date:'j F Y H:i' }}</p>
             </div>
           </div>
-          {% if resource.tags.all %}
+          {% if resource.tags.exists %}
             <div class="icon-list__row">
               <svg class="icon">
                 <use xlink:href="#tag"></use>
@@ -119,7 +119,7 @@
       <div class="resource-content">
         <div class="resource-detail__stats hide-desktop">
           <div class="icon-list">
-            {% if resource.privacy.all %}
+            {% if resource.privacy.exists %}
               <div class="icon-list__row">
                 <svg class="icon">
                   <use xlink:href="#private"></use>
@@ -166,7 +166,7 @@
         <div class="resource-content__body">
           {{ resource.content|safe }}
         </div>
-        {% if resource.tags.all %}
+        {% if resource.tags.exists %}
           <footer class="resource-detail__stats hide-desktop">
             <div class="icon-list__row">
               <svg class="icon">
@@ -185,50 +185,54 @@
 
       </div>
 
-      <div class="comments">
-        <div class="comments-title">
-          <svg class="icon">
-            <use xlink:href="#comment"></use>
-          </svg>
-          <h4>Comments</h4>
-        </div>
-        {% for comment in resource.comment_set.all %}
-          {% include "includes/comments.html" with comment=comment %}
-        {% empty %}
-          <div class="comment">
-            <div class="comment-content">
-                <p class="no-comments">There are currently no comments.</p>
+      {% if not waiting_for_approval %}
+        <div class="comments">
+          <div class="comments-title">
+            <svg class="icon">
+              <use xlink:href="#comment"></use>
+            </svg>
+            <h4>Comments</h4>
+          </div>
+          {% for comment in resource.comment_set.all %}
+            {% include "includes/comments.html" with comment=comment %}
+          {% empty %}
+            <div class="comment">
+              <div class="comment-content">
+                  <p class="no-comments">There are currently no comments.</p>
+                </div>
               </div>
-            </div>
-        {% endfor %}
+          {% endfor %}
 
-        {% if user.is_authenticated %}
-          <div class="comments-form form-holder">
-            <div class="comment-profile">
-              {% thumbnail user.photo "x50" as thumb %}
-                <div class="group-logo" style="background: url({{ thumb.url }}) center center/contain no-repeat"></div>
-              {% endthumbnail %}
-              <span>{{ user.get_full_name }}</span>
+          {% if user.is_authenticated %}
+            <div class="comments-form form-holder">
+              <div class="comment-profile">
+                {% thumbnail user.photo "x50" as thumb %}
+                  <div class="group-logo" style="background: url({{ thumb.url }}) center center/contain no-repeat"></div>
+                {% endthumbnail %}
+                <span>{{ user.get_full_name }}</span>
+              </div>
+              {% crispy form %}
             </div>
-            {% crispy form %}
+          {% endif %}
+        </div>
+      {% endif %}
+
+      {% if not waiting_for_approval %}
+        {% if related_resources %}
+          <div class="related-resources">
+            <h4 class="related-resources__title">
+              <svg class="icon">
+                <use xlink:href="#network"></use>
+              </svg>
+              <span>Related resources</span>
+            </h4>
+            <div class="related-resources__grid">
+              {% for resource in related_resources %}
+                {% include "includes/resource.html" %}
+              {% endfor %}
+            </div>
           </div>
         {% endif %}
-      </div>
-
-      {% if related_resources %}
-        <div class="related-resources">
-          <h4 class="related-resources__title">
-            <svg class="icon">
-              <use xlink:href="#network"></use>
-            </svg>
-            <span>Related resources</span>
-          </h4>
-          <div class="related-resources__grid">
-            {% for resource in related_resources %}
-              {% include "includes/resource.html" %}
-            {% endfor %}
-          </div>
-        </div>
       {% endif %}
 
   </main>

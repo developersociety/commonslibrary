@@ -4,6 +4,8 @@ from django.urls import reverse_lazy
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView
 
+from resources.choices import RESOURCE_WAITING_FOR_APPROVAL
+
 from .forms import UserRegistrationForm, UserUpdateForm
 from .models import User
 
@@ -23,6 +25,9 @@ class UserDetailView(LoginRequiredMixin, DetailView):
         context['resources_created'] = user.resources_created.approved().count()
         context['resources_liked'] = user.resources_likes.approved().count()
         context['resources_tried'] = user.resources_tried.approved().count()
+        context['resources_waiting_for_approval'] = user.resources_created.filter(
+            status=RESOURCE_WAITING_FOR_APPROVAL
+        )
         return context
 
     def get_object(self, queryset=None):

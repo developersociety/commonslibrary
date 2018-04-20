@@ -256,3 +256,10 @@
         }
     }
 }
+
+.awaiting-approval h3 {
+    padding: $width-gap;
+    margin-bottom: 0;
+    background: $color-background;
+    color: #ffffff;
+}
