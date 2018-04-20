@@ -24,12 +24,13 @@ class ResourceForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user')
 
+        super().__init__(*args, **kwargs)
+
         if self.instance.id:
             button_title = 'Update your resource'
         else:
             button_title = 'Submit your resource'
 
-        super().__init__(*args, **kwargs)
         self.fields['abstract'].widget.attrs['rows'] = 3
         self.fields['organisation'].queryset = self.user.approved_organisations.all()
         self.fields['organisation'].empty_label = 'Select'
