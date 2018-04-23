@@ -30,7 +30,7 @@
     h4 {
         padding-bottom: $width-gap/2;
         margin: $width-gap $width-gap 0 0;
-        border-bottom: 3px solid $color-accent;
+        border-bottom: 3px solid rgba(#ffffff, 0.3);
     }
 
     @media all and (min-width: 741px) {

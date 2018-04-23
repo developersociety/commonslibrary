@@ -111,7 +111,10 @@ class ResourceList extends React.Component {
       })
   }
 
-  nextResourceList() {
+  nextResourceList(event) {
+    event.persist();
+    event.target.classList.add('loading');
+
     fetch(this.state.resourcesNextPage, {
         method: 'get',
         credentials: 'same-origin'
@@ -124,7 +127,9 @@ class ResourceList extends React.Component {
           resources: mergedResourceList,
           resourcesCount: data.count,
           resourcesNextPage: data.next
-        })
+        });
+
+        event.target.classList.remove('loading');
       })
   }
 
@@ -142,6 +147,7 @@ class ResourceList extends React.Component {
             <div className="load-more">
                 <span className="button" onClick={this.nextResourceList}>
                     Load more
+                    <div className="load-more__circle"></div>
                 </span>
             </div>
         )

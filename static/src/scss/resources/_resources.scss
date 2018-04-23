@@ -55,8 +55,29 @@
 
     justify-content: center;
     grid-column: 1 / -1;
-    padding: $width-gap/2
+    padding: $width-gap/2;
 
+    .button {
+        display: inline-flex;
+        flex-flow: row nowrap;
+        align-items: center;
+        cursor: pointer;
+    }
+}
+
+.load-more__circle {
+    display: none;
+    border: $width-gap/6 solid #ffffff; /* Light grey */
+    border-top: $width-gap/6 solid $color-background; /* Blue */
+    border-radius: 50%;
+    width: $width-gap;
+    height: $width-gap;
+    animation: spin 0.875s cubic-bezier(0.645, 0.045, 0.355, 1) infinite;
+    margin-left: $width-gap/2;
+}
+
+.loading .load-more__circle {
+    display: block;
 }
 
 .resources-filter {
@@ -674,4 +695,9 @@ footer.resource-detail__stats {
 @keyframes faderesource {
     from   { opacity: 0; }
     to { opacity: 1; }
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
