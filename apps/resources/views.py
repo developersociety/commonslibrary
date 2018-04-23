@@ -1,12 +1,14 @@
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.exceptions import PermissionDenied
 from django.db.models import F
 from django.urls import reverse_lazy
 from django.views.generic.detail import DetailView
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView
 
 from comments.forms import CommentForm
 
+from .choices import RESOURCE_WAITING_FOR_APPROVAL
 from .forms import ResourceForm
 from .models import Resource
 
@@ -37,7 +39,19 @@ class ResourceDetailView(DetailView, CreateView):
     template_name = 'resources/resource_detail.html'
 
     def get_queryset(self):
-        return Resource.objects.approved(user=self.request.user)
+        """
+        Return approved resources unless requested user is approved and resource is waiting
+        for approval.
+        """
+        qs = Resource.objects.approved(user=self.request.user).distinct()
+
+        if self.request.user.is_authenticated:
+            waiting_for_approval = Resource.objects.filter(
+                created_by=self.request.user, status=RESOURCE_WAITING_FOR_APPROVAL
+            ).distinct()
+            qs = qs | waiting_for_approval
+
+        return qs
 
     def get_success_url(self):
         return self.get_object().get_absolute_url()
@@ -45,9 +59,14 @@ class ResourceDetailView(DetailView, CreateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['related_resources'] = self.object.get_related(user=self.request.user)
+        context['editable'] = self.request.user == self.object.created_by
         context['people_commented'] = self.object.comment_set.order_by().values_list(
             'created_by', flat=True
         ).distinct().count()
+
+        if self.object.status == RESOURCE_WAITING_FOR_APPROVAL:
+            context['waiting_for_approval'] = True
+
         self.object.hits = F('hits') + 1
         self.object.save(update_fields=['hits'])
         return context
@@ -82,3 +101,31 @@ class ResourceDetailView(DetailView, CreateView):
         response = super().form_valid(form)
         messages.success(self.request, 'Thank you for your comment')
         return response
+
+
+class ResourceUpdateView(LoginRequiredMixin, UpdateView):
+    model = Resource
+    form_class = ResourceForm
+    template_name = 'resources/resource_update.html'
+
+    def get_success_url(self):
+        return self.object.get_absolute_url()
+
+    def get_object(self, queryset=None):
+        obj = super().get_object(queryset=queryset)
+        if obj.created_by != self.request.user:
+            raise PermissionDenied(
+                'No {verbose_name}s found matching the query'.format(
+                    verbose_name=self.model._meta.verbose_name,
+                )
+            )
+        return obj
+
+    def form_valid(self, form):
+        messages.success(self.request, 'Your resource has been updated')
+        return super().form_valid(form=form)
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs.update({'user': self.request.user})
+        return kwargs

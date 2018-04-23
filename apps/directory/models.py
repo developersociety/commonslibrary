@@ -27,6 +27,7 @@ class Organisation(models.Model):
         blank=True,
         help_text='This email helps to get auto access for the users with the same email domain',
     )
+    founder = models.BooleanField(default=False)
     created_by = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='organisations_created'
     )

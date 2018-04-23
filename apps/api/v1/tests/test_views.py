@@ -35,12 +35,12 @@ class ResourceTests(APITestCase):
     def test_get_list(self):
         response = self.client.get(self.url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(len(response.data), 1)
+        self.assertEqual(response.data['count'], 1)
 
     def test_get_list_with_privacy(self):
         response = self.logged_in_client.get(self.url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(len(response.data), 2)
+        self.assertEqual(response.data['count'], 2)
 
     def test_update_with_anonymous(self):
         response = self.client.put(self.like_url)

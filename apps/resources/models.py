@@ -24,11 +24,7 @@ class Resource(models.Model):
         help_text='This text will appear in search results',
     )
     content = RichTextUploadingField()
-    tags = models.ManyToManyField(
-        Tag,
-        limit_choices_to=models.Q(level=1) | models.Q(level=2),
-        blank=True,
-    )
+    tags = models.ManyToManyField(Tag, blank=True)
     image = ImageField(
         'Background Image',
         upload_to='uploads/resources/images/%Y/%m/%d',
@@ -75,7 +71,10 @@ class Resource(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('resources:resource-detail', kwargs={'slug': self.slug})
+        url = ''
+        if self.slug:
+            url = reverse('resources:resource-detail', kwargs={'slug': self.slug})
+        return url
 
     def private_for_organisation(self, organisation):
         return organisation in self.privacy.all()

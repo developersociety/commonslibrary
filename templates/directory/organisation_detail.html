@@ -63,7 +63,9 @@
         </div>
         <div class="profile-description">
           {% if organisation.description %}
-            <p class="profile-description">{{ organisation.description }}</p>
+            <div>
+              {{ organisation.description|safe }}
+            </div>
           {% endif %}
           <p class="profile-stats">
             <svg class="icon">

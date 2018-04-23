@@ -18,12 +18,26 @@ class ResourceForm(forms.ModelForm):
             'privacy': 'Of your groups, who can view it?',
         }
         help_texts = {
-            'privacy': 'The group you belong to is selected by default',
+            'content': (
+                """
+                Use this for the main body of your resource – you can embed online documents
+                using HTML in "Source" and add drop down accordions using "MJ Accordions
+                """
+            ),
+            'privacy':
+                'The group you belong to is selected by default',
         }
 
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user')
+
         super().__init__(*args, **kwargs)
+
+        if self.instance.id:
+            button_title = 'Update your resource'
+        else:
+            button_title = 'Submit your resource'
+
         self.fields['abstract'].widget.attrs['rows'] = 3
         self.fields['organisation'].queryset = self.user.approved_organisations.all()
         self.fields['organisation'].empty_label = 'Select'
@@ -50,7 +64,7 @@ class ResourceForm(forms.ModelForm):
             'is_public',
             Field('privacy', wrapper_class="sr__input"),
             ButtonHolder(
-                Submit('submit', 'Submit your resource', css_class='submit'),
+                Submit('submit', button_title, css_class='submit'),
                 css_class='form-actions resource-form-actions'
             ),
         )
