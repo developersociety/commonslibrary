@@ -520,6 +520,10 @@ footer.resource-detail__stats {
     }
 }
 
+.edit-resource a {
+    text-decoration: none;
+}
+
 .group-row {
     @media all and (max-width: 1060px) {
         margin-bottom: $width-gap/2;
