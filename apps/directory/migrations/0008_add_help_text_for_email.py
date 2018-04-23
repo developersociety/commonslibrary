@@ -8,7 +8,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('directory', '0006_change_field_upload_images'),
+        ('directory', '0007_organisation_founder'),
     ]
 
     operations = [
