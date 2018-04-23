@@ -22,7 +22,7 @@ function hasScrolled() {
       pageHead.classList.remove('shown');
       pageHead.classList.add('not-shown');
 
-      if (profile_dropdown.classList.contains('shown-true')) {
+      if (profile_dropdown !== null && profile_dropdown.classList.contains('shown-true')) {
         profile_dropdown_trigger.click();
       }
     } else {

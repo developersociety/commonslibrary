@@ -19,6 +19,7 @@ class ResourceList extends React.Component {
   constructor () {
     super()
     this.state = {
+      hasSearched: false,
       resources: [],
       resourcesCount: 0,
       resourcesNextPage: null,
@@ -104,6 +105,7 @@ class ResourceList extends React.Component {
       .then(response => response.json())
       .then(data => {
         this.setState({
+          hasSearched: true,
           resources: data.results,
           resourcesCount: data.count,
           resourcesNextPage: data.next
@@ -138,8 +140,10 @@ class ResourceList extends React.Component {
     let resourceGridClass = 'resources-grid ';
     let loadMoreResources = '';
 
-    if (this.state.resources.length == 0) {
+    if (this.state.resources.length == 0 && this.state.hasSearched) {
       resourceGridClass += 'no-resources';
+    } else if (!this.state.hasSearched) {
+      resourceGridClass += 'loading-resources';
     }
 
     if (this.state.resourcesNextPage !== null) {
