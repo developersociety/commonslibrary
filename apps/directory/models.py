@@ -23,7 +23,10 @@ class Organisation(models.Model):
     address = RichTextUploadingField(blank=True)
     description = RichTextUploadingField(blank=True)
     logo = ImageField(blank=True, upload_to='uploads/directory/organisation/%Y/%m/%d')
-    email = models.EmailField(blank=True)
+    email = models.EmailField(
+        blank=True,
+        help_text='This email helps to get auto access for the users with the same email domain',
+    )
     founder = models.BooleanField(default=False)
     created_by = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='organisations_created'
@@ -48,6 +51,12 @@ class Organisation(models.Model):
         if netloc.startswith('www.'):
             netloc = netloc.replace('www.', '')
         return netloc
+
+    def get_email_domain(self):
+        domain = None
+        if self.email:
+            username, domain = self.email.split('@')
+        return domain
 
     def get_total_private_resources_count(self):
         return self.resources_privacy.approved().count()

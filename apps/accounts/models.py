@@ -89,3 +89,9 @@ class User(AbstractBaseUser, PermissionsMixin):
         except Resource.DoesNotExist:
             resource = None
         return resource
+
+    def get_email_domain(self):
+        domain = None
+        if self.email:
+            username, domain = self.email.split('@')
+        return domain
