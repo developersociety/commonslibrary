@@ -123,6 +123,7 @@ a.home-intro__slide {
     color: #ffffff;
     opacity: 0.125;
     transition: all 0.25s;
+    cursor: pointer;
 
     &.next {
         border-top-right-radius: 0;
