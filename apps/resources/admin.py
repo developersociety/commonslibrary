@@ -7,10 +7,6 @@ from .models import Resource
 class ResourceAdmin(admin.ModelAdmin):
     list_display = ('title', 'status', 'abstract', 'hits', 'created_by', 'created_at')
     list_editable = ('status',)
-    readonly_fields = (
-        'abstract', 'id', 'created_by', 'updated_by', 'created_at', 'updated_at', 'likes', 'tried',
-        'hits', 'privacy', 'organisation', 'tags',
-    )
     prepopulated_fields = {'slug': ('title',)}
     filter_horizontal = ('tags', 'privacy')
     search_fields = ['title', 'abstract']
