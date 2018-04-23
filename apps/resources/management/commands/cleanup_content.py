@@ -8,9 +8,6 @@ from resources.models import Resource
 class Command(BaseCommand):
     help = 'Cleanup imported resources'
 
-    def add_arguments(self, parser):
-        parser.add_argument('file', nargs="?", help='csv file location.')
-
     def handle(self, *args, **options):
         html_content = """
             <li>
