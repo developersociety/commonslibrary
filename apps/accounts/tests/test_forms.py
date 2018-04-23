@@ -25,7 +25,6 @@ class UserRegistrationFormTest(TestCase):
         })
         self.assertTrue(form.is_valid())
         user = form.save()
-        self.assertTrue(user.is_active)
         self.assertEqual(user.approved_organisations.first().id, self.organisation.id)
 
     def test_permissions_no_grant(self):
@@ -43,5 +42,4 @@ class UserRegistrationFormTest(TestCase):
         })
         self.assertTrue(form.is_valid())
         user = form.save()
-        self.assertFalse(user.is_active)
         self.assertFalse(user.approved_organisations.exists())

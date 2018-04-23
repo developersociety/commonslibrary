@@ -109,7 +109,6 @@ class UserRegistrationForm(forms.ModelForm):
             if organisation in self.cleaned_data['chosen_organisations']:
                 org_email_domain = organisation.get_email_domain()
                 if org_email_domain == email_domain:
-                    user.is_active = True
                     user.approved_organisations.add(organisation)
         return user
 
