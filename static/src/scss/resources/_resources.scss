@@ -42,6 +42,7 @@
         grid-template-columns: repeat(2, 1fr);
 
         .resource-blurred,
+        .resource-focused,
         .featured-org {
             min-height: 25vw;
         }
