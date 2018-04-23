@@ -166,6 +166,7 @@ class ResourceList extends React.Component {
               key={resource.id}
               resource={resource}
               csrf={csrf}
+              index={index}
             />
           )}
           {loadMoreResources}

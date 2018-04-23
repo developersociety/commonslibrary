@@ -639,8 +639,11 @@ footer.resource-detail__stats {
 }
 
 
-.related-resources {
-
+.resources .resources-grid > .resource {
+    opacity: 0;
+    animation-name: faderesource;
+    animation-fill-mode: forwards;
+    animation-duration: 0.125s;
 }
 
 .related-resources__title {
@@ -668,3 +671,7 @@ footer.resource-detail__stats {
     }
 }
 
+@keyframes faderesource {
+    from   { opacity: 0; }
+    to { opacity: 1; }
+}
