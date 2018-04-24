@@ -50,3 +50,12 @@ class OrganisationTestCase(TestCase):
         self.assertEqual(organisation.get_short_url(), 'test.com')
         self.assertEqual(organisation_1.get_short_url(), 'home.test.com')
         self.assertEqual(organisation_2.get_short_url(), 'test.com')
+
+    def test_get_email_domain(self):
+        email = 'testing@gmail.com'
+        email_1 = 'test1@test.co.uk'
+        organisation_1 = OrganisationFactory(email=email)
+        organisation_2 = OrganisationFactory(email=email_1)
+
+        self.assertEqual(organisation_1.get_email_domain(), 'gmail.com')
+        self.assertEqual(organisation_2.get_email_domain(), 'test.co.uk')
