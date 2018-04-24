@@ -16,8 +16,6 @@
 }
 
 .footer-details {
-    width: 100%;
-    max-width: 15rem;
     margin: $width-gap $width-gap*1.5 0 0;
 }
 
@@ -25,16 +23,18 @@
     width: 100%;
     max-width: 57.5rem;
     min-width: 18rem;
-    margin-top: $width-gap*1.5;
 
     h4 {
         padding-bottom: $width-gap/2;
-        margin: $width-gap $width-gap 0 0;
+        margin: $width-gap*3 $width-gap 0 0;
         border-bottom: 3px solid rgba(#ffffff, 0.15);
     }
 
     @media all and (min-width: 741px) {
-        h4 { text-align: right; }
+        h4 {
+            margin-top: $width-gap*2;
+            text-align: right;
+        }
     }
 }
 
