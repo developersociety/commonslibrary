@@ -19,6 +19,7 @@ class ResourceList extends React.Component {
   constructor () {
     super()
     this.state = {
+      hasSearched: false,
       resources: [],
       resourcesCount: 0,
       resourcesNextPage: null,
@@ -104,6 +105,7 @@ class ResourceList extends React.Component {
       .then(response => response.json())
       .then(data => {
         this.setState({
+          hasSearched: true,
           resources: data.results,
           resourcesCount: data.count,
           resourcesNextPage: data.next
@@ -111,7 +113,10 @@ class ResourceList extends React.Component {
       })
   }
 
-  nextResourceList() {
+  nextResourceList(event) {
+    event.persist();
+    event.target.classList.add('loading');
+
     fetch(this.state.resourcesNextPage, {
         method: 'get',
         credentials: 'same-origin'
@@ -124,7 +129,9 @@ class ResourceList extends React.Component {
           resources: mergedResourceList,
           resourcesCount: data.count,
           resourcesNextPage: data.next
-        })
+        });
+
+        event.target.classList.remove('loading');
       })
   }
 
@@ -133,8 +140,10 @@ class ResourceList extends React.Component {
     let resourceGridClass = 'resources-grid ';
     let loadMoreResources = '';
 
-    if (this.state.resources.length == 0) {
+    if (this.state.resources.length == 0 && this.state.hasSearched) {
       resourceGridClass += 'no-resources';
+    } else if (!this.state.hasSearched) {
+      resourceGridClass += 'loading-resources';
     }
 
     if (this.state.resourcesNextPage !== null) {
@@ -142,6 +151,7 @@ class ResourceList extends React.Component {
             <div className="load-more">
                 <span className="button" onClick={this.nextResourceList}>
                     Load more
+                    <div className="load-more__circle"></div>
                 </span>
             </div>
         )
@@ -166,6 +176,7 @@ class ResourceList extends React.Component {
               key={resource.id}
               resource={resource}
               csrf={csrf}
+              index={index}
             />
           )}
           {loadMoreResources}
