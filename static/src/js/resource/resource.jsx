@@ -1,10 +1,19 @@
 import React from 'react';
 
 export class Resource extends React.Component {
+
+  animationDelay(index) {
+
+  }
+
   render() {
     let resourceClass = 'resource';
     let resourceHeader = null;
     let resourceOrgLogo = null;
+
+    const animationStyles = {
+      animationDelay: ((this.props.index % 20) * 0.05) + 's'
+    }
 
     if (this.props.resource.image) {
       resourceClass = resourceClass + ' with-image';
@@ -26,7 +35,7 @@ export class Resource extends React.Component {
     }
 
     return (
-      <a href={this.props.resource.url} className={resourceClass}>
+      <a href={this.props.resource.url} className={resourceClass} style={animationStyles}>
         <div className="resource-blurred">
           {resourceHeader}
           <div className="resource-summary">
