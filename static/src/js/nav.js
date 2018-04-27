@@ -22,7 +22,7 @@ function hasScrolled() {
       pageHead.classList.remove('shown');
       pageHead.classList.add('not-shown');
 
-      if (profile_dropdown.classList.contains('shown-true')) {
+      if (profile_dropdown !== null && profile_dropdown.classList.contains('shown-true')) {
         profile_dropdown_trigger.click();
       }
     } else {
@@ -46,9 +46,11 @@ window.setInterval(function() {
     }
 });
 
-profile_dropdown_trigger.onclick = () => {
-    profile_dropdown.classList.remove('shown-' + profile_dropdown_open)
-    profile_dropdown_open = !profile_dropdown_open;
-    profile_dropdown.classList.add('shown-' + profile_dropdown_open)
+if (profile_dropdown !== null) {
+    profile_dropdown_trigger.onclick = () => {
+        profile_dropdown.classList.remove('shown-' + profile_dropdown_open)
+        profile_dropdown_open = !profile_dropdown_open;
+        profile_dropdown.classList.add('shown-' + profile_dropdown_open)
+    }
 }
 
