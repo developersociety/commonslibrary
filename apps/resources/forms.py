@@ -78,3 +78,9 @@ class ResourceForm(forms.ModelForm):
         if self.cleaned_data['is_public']:
             self.cleaned_data['privacy'] = ''
         return super().save(commit=commit)
+
+    def clean_title(self):
+        title = self.cleaned_data['title']
+        if Resource.objects.filter(slug=slugify(title)).exists():
+            raise forms.ValidationError('Resource with this title already exist')
+        return title
