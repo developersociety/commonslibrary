@@ -81,6 +81,10 @@ class ResourceForm(forms.ModelForm):
 
     def clean_title(self):
         title = self.cleaned_data['title']
-        if Resource.objects.filter(slug=slugify(title)).exists():
-            raise forms.ValidationError('Resource with this title already exists')
+        if self.instance.id:
+            if Resource.objects.filter(slug=slugify(title)).exclude(id=self.instance.id).exists():
+                raise forms.ValidationError('Resource with this title already exists')
+        else:
+            if Resource.objects.filter(slug=slugify(title)).exists():
+                raise forms.ValidationError('Resource with this title already exists')
         return title

@@ -24,7 +24,11 @@ class ResourceThankTestView(WebTest):
 class ResourceUpdateTestView(WebTest):
 
     def setUp(self):
-        self.resource = ResourceFactory.create(status=RESOURCE_APPROVED)
+        self.organisation = OrganisationFactory.create()
+        self.resource = ResourceFactory.create(
+            status=RESOURCE_APPROVED,
+            organisation=self.organisation,
+        )
         self.user = UserFactory.create()
 
     def test_view_no_auth(self):
@@ -49,6 +53,20 @@ class ResourceUpdateTestView(WebTest):
         form = response.form
         self.assertEqual(response.status_code, 200)
         self.assertEqual(form.fields['title'][0].value, self.resource.title)
+
+    def test_submit_form(self):
+        self.resource.created_by.approved_organisations.add(self.organisation)
+        response = self.app.get(
+            reverse('resources:resource-update', kwargs={'slug': self.resource.slug}),
+            user=self.resource.created_by,
+        )
+        form = response.form
+        form['abstract'] = 'testing'
+        response = form.submit()
+        self.resource.refresh_from_db()
+
+        self.assertEqual(self.resource.abstract, 'testing')
+        self.assertEqual(response.status_code, 302)
 
 
 class ResourceCreateViewViewTest(WebTest):
