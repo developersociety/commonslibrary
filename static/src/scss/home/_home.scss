@@ -48,6 +48,11 @@
     }
 }
 
+.flickity-prev-next-button {
+    position: absolute;
+    z-index: 10;
+}
+
 a.home-intro__slide {
     @extend %flex-row;
 
@@ -129,22 +134,12 @@ a.home-intro__slide {
         border-top-right-radius: 0;
         border-bottom-right-radius: 0;
         right: 0;
-        transform: translate(50%, -50%);
-
-        .flickity-button-icon {
-            transform: translateX(-32.5%) scale(0.75);
-        }
     }
 
     &.previous {
         border-top-left-radius: 0;
         border-bottom-left-radius: 0;
         left: 0;
-        transform: translate(-50%, -50%);
-
-        .flickity-button-icon {
-            transform: translateX(32.5%) scale(0.75);
-        }
     }
 
     .flickity-button-icon {
@@ -154,10 +149,33 @@ a.home-intro__slide {
 
     &:hover {
         background: $color-background;
-        transform: translate(0, -50%);
+    }
 
-        .flickity-button-icon {
-            transform: translateX(0) scale(1);
+    @media all and (min-width: 841px) {
+        &.next {
+            transform: translate(50%, -50%);
+
+            .flickity-button-icon {
+                transform: translateX(-32.5%) scale(0.75);
+            }
+        }
+
+        &.previous {
+            transform: translate(-50%, -50%);
+
+            .flickity-button-icon {
+                transform: translateX(32.5%) scale(0.75);
+            }
+        }
+
+
+        &:hover {
+            background: $color-background;
+            transform: translate(0, -50%);
+
+            .flickity-button-icon {
+                transform: translateX(0) scale(1);
+            }
         }
     }
 }
