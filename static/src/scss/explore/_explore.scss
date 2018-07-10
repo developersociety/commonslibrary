@@ -17,8 +17,8 @@
 
 .explore-list {
     @extend %reset-box;
-    @extend %grid-template;
 
+    columns: 18rem;
     list-style: none;
 
     a {
