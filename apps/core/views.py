@@ -1,6 +1,5 @@
 from django.views.generic import TemplateView
 
-from accounts.models import User
 from directory.models import Organisation
 from pages.models import Page
 from resources.models import Resource
