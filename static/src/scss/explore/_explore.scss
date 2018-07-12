@@ -3,8 +3,6 @@
 }
 
 .explore-grid {
-    @extend %grid-template;
-
     background: $color-line;
 
     > div {
@@ -20,6 +18,7 @@
 .explore-list {
     @extend %reset-box;
 
+    columns: 18rem;
     list-style: none;
 
     a {

@@ -150,6 +150,7 @@
         display: none;
     }
 
+
     &.active:after {
         content: '';
         display: inline-block;
@@ -161,6 +162,12 @@
         position: absolute;
         bottom: 100%; left: 50%;
         transform: translateX(-50%);
+        opacity: 0;
+        transition: opacity 0.25s;
+
+        .shown & {
+            opacity: 1;
+        }
     }
 
     @media all and (min-width: 841px) {

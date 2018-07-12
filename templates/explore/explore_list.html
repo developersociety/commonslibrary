@@ -30,26 +30,6 @@
           {% endrecursetree %}
         </ul>
       </div>
-      <div class="explore-people">
-        <h4 class="explore-type">People</h4>
-        <ul class="explore-list">
-          {% for person in people %}
-            <li>
-              <a href="{% url 'directory:organisation-user' person.pk %}">{{ person.get_full_name }}</a>
-            </li>
-          {% endfor %}
-        </ul>
-      </div>
-      <div class="explore-groups">
-        <h4 class="explore-type">Groups</h4>
-        <ul class="explore-list">
-          {% for group in groups %}
-            <li>
-              <a href="{% url 'directory:organisation-detail' group.slug %}">{{ group.title }}</a>
-            </li>
-          {% endfor %}
-        </ul>
-      </div>
     </div>
   </div>
 {% endblock main_content %}
