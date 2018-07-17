@@ -57,7 +57,11 @@ class UserRegistrationForm(forms.ModelForm):
             'chosen_organisations': 'Groups',
         }
         help_texts = {
-            'chosen_organisations': 'Check all of the options that apply to you',
+            'chosen_organisations':
+                """
+                Check all of the options that apply to you. If you don't belong to an existing
+                group, please select 'Individual Changemaker'.
+                """,
         }
         widgets = {
             'address': forms.TextInput(),
