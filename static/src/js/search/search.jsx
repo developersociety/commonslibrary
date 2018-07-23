@@ -165,7 +165,7 @@ export class Search extends React.Component {
         <form onSubmit={this.handleSubmit} className="search-form">
           <input
             type="text"
-            placeholder="Type here to search for resource"
+            placeholder="Type here to search for resources"
             onChange={this.handleChange}
             onKeyDown={this.handleKeyPress}
             id="search_input"
