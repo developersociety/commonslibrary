@@ -9,8 +9,8 @@ from django.template import TemplateDoesNotExist, loader
 
 from core.views import ExploreView, HomeView, SearchView
 
-admin.site.site_title = 'Commons Library'
-admin.site.site_header = 'Commons Library'
+admin.site.site_title = 'Commons Library Workspace'
+admin.site.site_header = 'Commons Library Workspace'
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
