@@ -1,6 +1,6 @@
-===============
-Commons Library
-===============
+=========================
+Commons Library Workspace
+=========================
 
 Development setup
 =================
