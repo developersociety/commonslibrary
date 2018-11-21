@@ -1,4 +1,4 @@
-from rest_framework.authentication import SessionAuthentication, BaseSessionAuthentication
+from rest_framework.authentication import BaseSessionAuthentication
 from rest_framework.authtoken.models import Token
 
 
@@ -13,5 +13,5 @@ class SessionAuthentication(BaseSessionAuthentication):
             is_valid_api_user = Token.objects.filter(user=user).exists()
             if not is_valid_api_user:
                 session_auth = None
-        
+
         return session_auth
