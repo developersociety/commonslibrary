@@ -59,6 +59,7 @@ THIRD_PARTY_APPS = [
     'mptt',
     'raven.contrib.django.raven_compat',
     'rest_framework',
+    'rest_framework.authtoken',
     'sorl.thumbnail',
     'webpack_loader',
 ]
@@ -314,5 +315,6 @@ REST_FRAMEWORK = {
     ],
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
     ]
 }
