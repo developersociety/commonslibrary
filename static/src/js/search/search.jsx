@@ -166,7 +166,7 @@ export class Search extends React.Component {
           <input
             type="text"
             className="search-bar__input"
-            placeholder="Type here to search for resources"
+            placeholder="Type to search resources"
             onChange={this.handleChange}
             onKeyDown={this.handleKeyPress}
             id="search_input"
