@@ -124,14 +124,26 @@ class ResourceDetailViewTest(WebTest):
         self.assertEqual(response.location, reverse('home'))
 
     def test_resource_exist_no_access(self):
-        resource = ResourceFactory.create(slug='testing', status=RESOURCE_APPROVED)
+        organisation = OrganisationFactory.create()
+        resource = ResourceFactory.create(
+            slug='testing',
+            status=RESOURCE_APPROVED,
+            organisation=organisation,
+            privacy=[organisation],
+        )
         response = self.app.get(
             reverse('resources:resource-detail', kwargs={'slug': resource.slug})
         )
         self.assertEqual(response.location, reverse('accounts:login'))
 
     def test_resource_detail(self):
-        resource = ResourceFactory.create(slug='testing', status=RESOURCE_APPROVED)
+        organisation = OrganisationFactory.create()
+        resource = ResourceFactory.create(
+            slug='testing',
+            status=RESOURCE_APPROVED,
+            organisation=organisation,
+            privacy=[organisation],
+        )
         user = UserFactory.create(
             approved_organisations=[resource.organisation],
         )
