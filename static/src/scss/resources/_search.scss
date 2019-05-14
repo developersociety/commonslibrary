@@ -4,10 +4,13 @@
 
 .search-bar form.search-form {
     @extend %flex-row;
+    border: $color-accent 3px solid;
 
-    input {
+    // Hate to use !important but without refactoring the specificity
+    // set in ../components/_forms.scss:4 it's needed.
+    .search-bar__input {
         width: 100%;
-        background: none;
+        background-color: white !important;
         outline: none;
         line-height: inherit;
         color: $color-background;
@@ -23,7 +26,7 @@
         }
     }
 
-    button {
+    .search-bar__button {
         @extend %flex-row;
 
         background: $color-background;
@@ -135,11 +138,9 @@
 .search-filter {
     @extend %grid-template;
 
-    padding-top: 3px;
     font-family: $base-font-headline;
     font-size: 1.25rem;
     text-transform: uppercase;
-    background: rgba($color-background, 0.05);
     min-width: 0;
 
     &.show-false {
