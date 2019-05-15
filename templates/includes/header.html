@@ -19,6 +19,14 @@
             <span class="item-text">Explore</span>
           </a>
         </li>
+        <li class="main-navigation__item {% if request.path == '/search/' %} active{% endif %}">
+          <a href="{% url 'search' %}">
+            <svg class="icon">
+              <use xlink:href="#search"></use>
+            </svg>
+            <span class="item-text">Search</span>
+          </a>
+        </li>
         {% if request.user.is_authenticated %}
           <li class="main-navigation__item {% if request.path == '/directory/' %} active{% endif %}">
             <a href="{% url 'directory:organisation-list' %}">
@@ -36,6 +44,7 @@
               <span class="item-text">Submit resource</span>
             </a>
           </li>
+
           <li class="main-navigation__profile shown-false" id="profile_dropdown">
             {% thumbnail request.user.photo '500' as thumb %}
               <div class="profile-button" id="profile_dropdown_toggle" style="background: url({{ thumb.url }}) center center/cover no-repeat">
@@ -62,7 +71,7 @@
               <svg class="icon">
                 <use xlink:href="#private"></use>
               </svg>
-              Login
+              <span class="item-text">Login</span>
             </a>
           </li>
           <li class="main-navigation__account">
