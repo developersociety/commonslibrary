@@ -165,13 +165,14 @@ export class Search extends React.Component {
         <form onSubmit={this.handleSubmit} className="search-form">
           <input
             type="text"
-            placeholder="Type here to search for resources"
+            className="search-bar__input"
+            placeholder="Type to search resources"
             onChange={this.handleChange}
             onKeyDown={this.handleKeyPress}
             id="search_input"
             autoComplete="off"
             ref={input => this.searchInput = input}/>
-          <button type="submit">
+          <button type="submit" className="search-bar__button">
             <svg className="icon">
               <use xlinkHref="#search"></use>
             </svg>
