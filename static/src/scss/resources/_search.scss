@@ -4,7 +4,7 @@
 
 .search-bar form.search-form {
     @extend %flex-row;
-    border: $color-accent 3px solid;
+    border: $color-accent 8px solid;
 
     // Hate to use !important but without refactoring the specificity
     // set in ../components/_forms.scss:4 it's needed.
@@ -48,8 +48,8 @@
 
         input,
         button,
-        .home-page & input,
-        .home-page & button, {
+        .home-page & .search-bar__input,
+        .home-page & .search-bar__button, {
             padding: $width-gap/2 !important;
             font-size: 1.25rem !important;
         }
