@@ -134,7 +134,11 @@ class ResourceDetailViewTest(WebTest):
         response = self.app.get(
             reverse('resources:resource-detail', kwargs={'slug': resource.slug})
         )
-        self.assertEqual(response.location, reverse('accounts:login'))
+        url = '{url}?next={next}'.format(
+            url=reverse('accounts:login'),
+            next=resource.get_absolute_url(),
+        )
+        self.assertEqual(response.location, url)
 
     def test_resource_detail(self):
         organisation = OrganisationFactory.create()
