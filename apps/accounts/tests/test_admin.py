@@ -55,3 +55,15 @@ class UserAdminTest(TestCase):
         qs = self.user_admin.get_queryset(request)
 
         self.assertEqual(qs.count(), 2)
+
+    def test_readonly_fields_is_staff(self):
+        request = RequestFactory().request()
+        request.user = self.user_with_org
+        readonly_fields = self.user_admin.get_readonly_fields(request)
+        self.assertEqual(readonly_fields, ['chosen_organisations', 'is_superuser', 'is_staff'])
+
+    def test_readonly_fields_is_superuser(self):
+        request = RequestFactory().request()
+        request.user = self.superuser
+        readonly_fields = self.user_admin.get_readonly_fields(request)
+        self.assertEqual(readonly_fields, ['chosen_organisations'])
