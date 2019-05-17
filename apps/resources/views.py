@@ -70,7 +70,9 @@ class ResourceDetailView(DetailView, CreateView):
                     "resource belongs to, log in here "
                 ),
             )
-            return HttpResponseRedirect(reverse('accounts:login'))
+            return HttpResponseRedirect(
+                '{url}?next={next}'.format(url=reverse('accounts:login'), next=request.path)
+            )
         return super().dispatch(request, *args, **kwargs)
 
     def get_success_url(self):
