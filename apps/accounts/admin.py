@@ -44,6 +44,8 @@ class UserAdmin(BaseUserAdmin):
 
     def get_readonly_fields(self, request, obj=None):
         readonly_fields = ['chosen_organisations']
+        if request.user.is_staff and not request.user.is_superuser:
+            readonly_fields += ['is_superuser', 'is_staff']
         return readonly_fields
 
     def response_change(self, request, obj):

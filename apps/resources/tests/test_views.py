@@ -115,3 +115,43 @@ class ResourceCreateViewViewTest(WebTest):
 
         resource = Resource.objects.get(title='test')
         self.assertEqual(resource.privacy.count(), self.user.approved_organisations.count())
+
+
+class ResourceDetailViewTest(WebTest):
+
+    def test_resource_doesnot_exist(self):
+        response = self.app.get(reverse('resources:resource-detail', kwargs={'slug': 'cat'}))
+        self.assertEqual(response.location, reverse('home'))
+
+    def test_resource_exist_no_access(self):
+        organisation = OrganisationFactory.create()
+        resource = ResourceFactory.create(
+            slug='testing',
+            status=RESOURCE_APPROVED,
+            organisation=organisation,
+            privacy=[organisation],
+        )
+        response = self.app.get(
+            reverse('resources:resource-detail', kwargs={'slug': resource.slug})
+        )
+        url = '{url}?next={next}'.format(
+            url=reverse('accounts:login'),
+            next=resource.get_absolute_url(),
+        )
+        self.assertEqual(response.location, url)
+
+    def test_resource_detail(self):
+        organisation = OrganisationFactory.create()
+        resource = ResourceFactory.create(
+            slug='testing',
+            status=RESOURCE_APPROVED,
+            organisation=organisation,
+            privacy=[organisation],
+        )
+        user = UserFactory.create(
+            approved_organisations=[resource.organisation],
+        )
+        response = self.app.get(
+            reverse('resources:resource-detail', kwargs={'slug': resource.slug}), user=user
+        )
+        self.assertEqual(response.status_code, 200)

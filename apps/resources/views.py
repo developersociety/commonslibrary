@@ -2,7 +2,8 @@ from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import PermissionDenied
 from django.db.models import F
-from django.urls import reverse_lazy
+from django.http import HttpResponseRedirect
+from django.urls import reverse, reverse_lazy
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView
 
@@ -52,6 +53,27 @@ class ResourceDetailView(DetailView, CreateView):
             qs = qs | waiting_for_approval
 
         return qs
+
+    def dispatch(self, request, *args, **kwargs):
+        slug = self.kwargs.get(self.slug_url_kwarg)
+        if not Resource.objects.filter(slug=slug).exists():
+            messages.error(
+                request,
+                "Whoops! This resource doesn't exist. Please try another search",
+            )
+            return HttpResponseRedirect(reverse('home'))
+        elif not Resource.objects.approved(user=self.request.user).filter(slug=slug).exists():
+            messages.error(
+                request,
+                (
+                    "Whoops! This a private resource. If you're a member of the group this "
+                    "resource belongs to, log in here "
+                ),
+            )
+            return HttpResponseRedirect(
+                '{url}?next={next}'.format(url=reverse('accounts:login'), next=request.path)
+            )
+        return super().dispatch(request, *args, **kwargs)
 
     def get_success_url(self):
         return self.get_object().get_absolute_url()
