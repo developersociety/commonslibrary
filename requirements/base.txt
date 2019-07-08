@@ -1,4 +1,4 @@
-Django==1.11.21
+Django==1.11.22
 Pillow==4.3.0
 dj-database-url==0.4.1
 django-ckeditor==5.4.0
