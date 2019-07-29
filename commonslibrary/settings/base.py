@@ -30,7 +30,7 @@ ADMINS = (('Developer Society', 'studio@dev.ngo'),)
 MANAGERS = ADMINS
 
 SERVER_EMAIL = 'commonslibrary@devsoc.org'
-DEFAULT_FROM_EMAIL = 'librarian@commonslibrary.org'
+DEFAULT_FROM_EMAIL = 'librarian@the-open.net'
 EMAIL_SUBJECT_PREFIX = '[commonslibrary] '
 
 PROJECT_APPS_ROOT = os.path.join(BASE_DIR, 'apps')
