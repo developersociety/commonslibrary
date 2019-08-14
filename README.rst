@@ -1,5 +1,5 @@
 =========================
-Campaigns Library Workspace
+The Campaigns Library
 =========================
 
 Development setup
