@@ -23,8 +23,8 @@ PROJECT_SLUG=commonslibrary
 help: ## This help dialog.
 help: help-display
 
-clean: ## Full wipe of the local environment, uncommitted files, and database.
-clean: venv-check venv-wipe git-full-clean database-drop
+nuke: ## Full wipe of the local environment, uncommitted files, and database.
+nuke: venv-check venv-wipe git-full-clean database-drop
 
 reset: ## Reset your local environment. Useful after switching branches, etc.
 reset: venv-check venv-wipe install-local fab-get-data django-migrate django-dev-createsuperuser
