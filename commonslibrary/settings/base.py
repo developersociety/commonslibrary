@@ -273,7 +273,8 @@ THUMBNAIL_PRESERVE_FORMAT = True
 THUMBNAIL_QUALITY = 100
 
 # Cloud storage
-CONTENTFILES_PREFIX = 'commonslibrary'
+CONTENTFILES_PREFIX = os.environ.get('CONTENTFILES_PREFIX', 'commonslibrary')
+CONTENTFILES_HOSTNAME = os.environ.get('CONTENTFILES_HOSTNAME')
 CONTENTFILES_SSL = True
 
 # Improved cookie security
