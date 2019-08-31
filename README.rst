@@ -1,6 +1,6 @@
-=========================
+=====================
 The Campaigns Library
-=========================
+=====================
 
 Development setup
 =================
@@ -13,6 +13,7 @@ Presuming you are using those tools, getting started on this project is pretty s
 .. code:: console
 
     $ dev-clone commonslibrary
+    $ workon commonslibrary
     $ make reset
 
 You can now run the development server:
