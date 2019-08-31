@@ -3,10 +3,12 @@ from django.conf import settings
 from django.conf.urls import include, url
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from django.contrib.staticfiles.views import serve as staticfiles_serve
 from django.http import HttpResponseServerError
 from django.template import TemplateDoesNotExist, loader
+from django.views.decorators.cache import never_cache
 from django.views.generic import TemplateView
+from django.views.static import serve
 
 from core.views import ExploreView, HomeView, SearchView
 
@@ -46,8 +48,8 @@ if apps.is_installed('debug_toolbar'):
     ]
 
 # Serving static/media under debug
-urlpatterns += staticfiles_urlpatterns()
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+urlpatterns += static(settings.STATIC_URL, never_cache(staticfiles_serve))
+urlpatterns += static(settings.MEDIA_URL, never_cache(serve), document_root=settings.MEDIA_ROOT)
 
 
 def handler500(request, template_name='500.html'):
