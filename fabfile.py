@@ -18,6 +18,7 @@ env.roledefs = {
 }
 
 env.home = env.get('home', '/var/www/commonslibrary')
+env.appname = env.get('appname', 'commonslibrary')
 env.repo = env.get('repo', 'commonslibrary')
 env.media = env.get('media', 'commonslibrary')
 env.database = env.get('database', 'commonslibrary_django')
@@ -152,9 +153,9 @@ def reload_uwsgi(force_reload=None):
     fab reload:force_reload=True
     """
     if force_reload:
-        run('killall -TERM uwsgi')
+        run('uwsgi --stop /run/uwsgi/{}/uwsgi.pid'.format(env.appname))
     else:
-        run('killall -HUP uwsgi')
+        run('uwsgi --reload /run/uwsgi/{}/uwsgi.pid'.format(env.appname))
 
 
 @task
