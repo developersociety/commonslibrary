@@ -21,6 +21,7 @@ env.home = env.get('home', '/var/www/commonslibrary')
 env.appname = env.get('appname', 'commonslibrary')
 env.repo = env.get('repo', 'commonslibrary')
 env.media = env.get('media', 'commonslibrary')
+env.media_bucket = env.get('media_bucket', 'contentfiles-media-eu-west-1')
 env.database = env.get('database', 'commonslibrary_django')
 env.database_ssh = env.get('database_ssh', 'golestandt.devsoc.org')
 
@@ -40,6 +41,7 @@ def demo():
     env.roledefs['web'] = env.roledefs['demo']
     env.roledefs['cron'] = env.roledefs['demo']
     env.database_ssh = 'trogdor.devsoc.org'
+    env.media_bucket = 'contentfiles-demo-media-eu-west-1'
 
 
 @task
@@ -236,7 +238,10 @@ def get_media(directory=''):
     fab get_media:assets
     """
     # Sync files from our S3 bucket/directory
-    local((
+    local(
         'aws s3 sync '
-        's3://contentfiles-media-eu-west-1/{media}/{directory} '
-        'htdocs/media/{directory}').format(media=env.media, directory=directory))
+        's3://{media_bucket}/{media}/{directory} '
+        'htdocs/media/{directory}'.format(
+            media_bucket=env.media_bucket, media=env.media, directory=directory
+        )
+    )
