@@ -130,7 +130,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = os.environ.get('STATIC_URL', '/static/')
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'htdocs/static')
 
@@ -139,7 +139,6 @@ STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesSto
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 
 # Webpack
-
 WEBPACK_LOADER = {
     'DEFAULT': {
         'CACHE': not DEBUG,
@@ -152,7 +151,7 @@ WEBPACK_LOADER = {
 # File uploads
 # https://docs.djangoproject.com/en/1.11/ref/settings/#file-uploads
 
-MEDIA_URL = '/media/'
+MEDIA_URL = os.environ.get('MEDIA_URL', '/media/')
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'htdocs/media')
 
