@@ -104,13 +104,10 @@ fab-deploy:
 
 
 # ISort
-isort-version:
-	isort --version
-
-isort-lint: isort-version
+isort-lint:
 	isort --recursive --check-only --diff commonslibrary apps
 
-isort-format: isort-version
+isort-format:
 	isort --recursive commonslibrary apps
 
 
