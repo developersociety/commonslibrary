@@ -12,7 +12,7 @@
 .coverage
 .tox
 htmlcov
-reports
+/reports/
 
 # NodeJS
 /node_modules
