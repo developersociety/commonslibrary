@@ -56,6 +56,7 @@ THIRD_PARTY_APPS = [
     'crispy_forms',
     'django_filters',
     'django_mptt_admin',
+    'maskpostgresdata',
     'mptt',
     'raven.contrib.django.apps.RavenConfig',
     'rest_framework',
