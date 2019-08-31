@@ -6,6 +6,7 @@ from django.contrib import admin
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.http import HttpResponseServerError
 from django.template import TemplateDoesNotExist, loader
+from django.views.generic import TemplateView
 
 from core.views import ExploreView, HomeView, SearchView
 
@@ -22,6 +23,10 @@ urlpatterns = [
     url(r'^resources/', include('resources.urls')),
     url(r'^api/v1/', include('api.v1.urls')),
     url(r'^ckeditor/', include('ckeditor_uploader.urls')),
+    url(
+        r'^robots\.txt$',
+        TemplateView.as_view(template_name='robots.txt', content_type='text/plain'),
+    ),
 ]
 
 # Make it easier to see a 404 page under debug
