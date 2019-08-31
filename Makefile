@@ -136,7 +136,7 @@ coverage-clean:
 django-check: django-check-missing-migrations django-check-validate-templates
 
 django-test: django-collectstatic
-	coverage run --include="commonslibrary/*,apps/*" ./manage.py test --noinput . apps
+	coverage run --include="apps/*" ./manage.py test --noinput . apps
 
 django-check-missing-migrations:
 	./manage.py makemigrations --settings=commonslibrary.settings.migrations --check --dry-run
