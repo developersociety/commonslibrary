@@ -1,19 +1,11 @@
 Django==1.11.23
 Pillow==4.3.0
 dj-database-url==0.4.1
-django-ckeditor==5.4.0
-django-colorfield==0.1.14
-django-crispy-forms==1.7.1
-django-filter==1.1.0
-django-mptt-admin==0.5.0
-django-mptt==0.9.0
-djangorestframework==3.7.7
 olefile==0.45.1
 psycopg2==2.7.3.2
 pylibmc==1.5.2
 pytz==2018.3
 raven==6.5.0
-sorl-thumbnail==12.4.1
 
 # Storage
 django-storages==1.6.5
@@ -25,3 +17,27 @@ blanc-admin-theme==1.0.2
 
 # Webpack
 django-webpack-loader==0.6.0
+
+# Thumbnailing
+sorl-thumbnail==12.4.1
+
+# MPTT trees
+django-mptt==0.9.0
+django-mptt-admin==0.5.0
+django-js-asset==1.2.2
+six==1.12.0
+
+# Form styling
+django-crispy-forms==1.7.1
+
+# Form colour input
+django-colorfield==0.1.14
+
+# WYSIWYG
+django-ckeditor==5.4.0
+
+# API
+djangorestframework==3.7.7
+
+# API filtering
+django-filter==1.1.0
