@@ -1,6 +1,6 @@
 -r testing.txt
 
-django-debug-toolbar==1.9.1
-awscli==1.14.42
-ipdb==0.11
-tox==2.9.1
+awscli==1.16.230
+django-debug-toolbar==2.0
+ipdb==0.12.2
+tox==3.13.2

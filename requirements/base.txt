@@ -1,15 +1,15 @@
 Django==1.11.23
 Pillow==4.3.0
-dj-database-url==0.4.1
+dj-database-url==0.5.0
 olefile==0.45.1
 psycopg2==2.7.3.2
-pylibmc==1.5.2
-pytz==2018.3
-raven==6.5.0
+pylibmc==1.6.1
+pytz==2019.2
+raven==6.10.0
 
 # Storage
-django-storages==1.6.5
-boto==2.48.0
+django-storages==1.7.1
+boto==2.49.0
 blanc-contentfiles==0.2.4
 
 # Admin theme
