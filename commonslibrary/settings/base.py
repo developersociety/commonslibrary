@@ -40,13 +40,13 @@ DEFAULT_APPS = [
     # These apps should come first to load correctly.
     'blanc_admin_theme',
     'core',
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'django.contrib.sites',
+    'django.contrib.admin.apps.AdminConfig',
+    'django.contrib.auth.apps.AuthConfig',
+    'django.contrib.contenttypes.apps.ContentTypesConfig',
+    'django.contrib.sessions.apps.SessionsConfig',
+    'django.contrib.messages.apps.MessagesConfig',
+    'django.contrib.staticfiles.apps.StaticFilesConfig',
+    'django.contrib.sites.apps.SitesConfig',
 ]
 
 THIRD_PARTY_APPS = [
@@ -57,7 +57,7 @@ THIRD_PARTY_APPS = [
     'django_filters',
     'django_mptt_admin',
     'mptt',
-    'raven.contrib.django.raven_compat',
+    'raven.contrib.django.apps.RavenConfig',
     'rest_framework',
     'rest_framework.authtoken',
     'sorl.thumbnail',
