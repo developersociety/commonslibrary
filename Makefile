@@ -27,10 +27,10 @@ nuke: ## Full wipe of the local environment, uncommitted files, and database.
 nuke: venv-check venv-wipe git-full-clean database-drop
 
 reset: ## Reset your local environment. Useful after switching branches, etc.
-reset: venv-check venv-wipe install-local fab-get-data django-migrate django-dev-createsuperuser
+reset: venv-check venv-wipe install-local fab-get-data django-migrate django-user-passwords django-dev-createsuperuser
 
 clear: ## Like reset but without the wiping of the installs.
-clear: fab-get-data django-migrate django-dev-createsuperuser
+clear: fab-get-data django-migrate django-user-passwords django-dev-createsuperuser
 
 check: ## Check for any obvious errors in the project's setup.
 check: pipdeptree-check npm-check django-check
@@ -147,6 +147,7 @@ django-collectstatic:
 django-check-validate-templates:
 	./manage.py validate_templates --verbosity 0
 
+django-dev-createsuperuser: DJANGO_DEV_USERNAME ?= _dev@dev.ngo
 django-dev-createsuperuser: DJANGO_DEV_PASSWORD ?= password
 django-dev-createsuperuser: DJANGO_DEV_EMAIL ?= _dev@dev.ngo
 django-dev-createsuperuser: DJANGO_DEV_FIRST_NAME ?= _dev
@@ -156,8 +157,12 @@ django-dev-createsuperuser:
 	@echo
 	@echo "Superuser details: "
 	@echo
-	@echo "    $(DJANGO_DEV_EMAIL):$(DJANGO_DEV_PASSWORD)"
+	@echo "    $(DJANGO_DEV_USERNAME):$(DJANGO_DEV_PASSWORD)"
 	@echo
+
+django-user-passwords: DJANGO_USER_PASSWORD ?= password
+django-user-passwords:
+	@echo "from django.contrib.auth.hashers import make_password; from django.contrib.auth import get_user_model; get_user_model().objects.update(password=make_password('$(DJANGO_USER_PASSWORD)'));" | python manage.py shell >> /dev/null
 
 django-migrate:
 	./manage.py migrate
