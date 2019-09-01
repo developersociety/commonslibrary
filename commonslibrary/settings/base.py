@@ -180,6 +180,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.messages.context_processors.messages',
                 'directory.context_processors.footer_orgs',
+                'core.context_processors.demo',
             ],
         },
     },
@@ -279,6 +280,8 @@ CONTENTFILES_SSL = True
 
 # Improved cookie security
 CSRF_COOKIE_HTTPONLY = True
+
+DEMO_SITE = False
 
 AUTH_USER_MODEL = 'accounts.User'
 
