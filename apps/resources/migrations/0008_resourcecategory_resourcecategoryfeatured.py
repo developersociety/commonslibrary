@@ -25,4 +25,12 @@ class Migration(migrations.Migration):
                 'ordering': ('title',),
             },
         ),
+        migrations.CreateModel(
+            name='ResourceCategoryFeatured',
+            fields=[
+                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('category', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='category_featured_resources', to='resources.ResourceCategory')),
+                ('resource', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='resources.Resource')),
+            ],
+        ),
     ]
