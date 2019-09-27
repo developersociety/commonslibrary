@@ -1,7 +1,7 @@
 .main-content form {
     width: 100%;
 
-    input:not([type=checkbox]):not([type=radio]):not([type=submit]):not([type=file]),
+    input:not([type='checkbox']):not([type='radio']):not([type='submit']):not([type='file']),
     textarea,
     select {
         width: 100%;
@@ -22,7 +22,7 @@
     }
 
     .error {
-        input:not([type=checkbox]):not([type=radio]):not([type=submit]):not([type=file]),
+        input:not([type='checkbox']):not([type='radio']):not([type='submit']):not([type='file']),
         textarea,
         select {
             border-color: $color-error;
@@ -42,7 +42,7 @@
         text-transform: uppercase;
     }
 
-    input[type=button],
+    input[type='button'],
     button {
         @extend .button;
     }
@@ -64,10 +64,12 @@
 .form-feedback {
     width: 100%;
     max-width: 730px;
-    margin: $width-gap*2.5 auto;
+    margin: $width-gap * 2.5 auto;
     padding: 0 $width-gap;
 
-    a { color: inherit; }
+    a {
+        color: inherit;
+    }
 }
 
 .comments-form {
@@ -98,7 +100,6 @@
 }
 
 .control-group {
-
     + .control-group {
         margin-top: $width-gap;
     }
@@ -114,7 +115,7 @@
     border-top: 3px solid $color-line;
     border-bottom: 3px solid $color-line;
 
-    input[type=checkbox]:checked ~ .file-uploader .file-uploader__stats {
+    input[type='checkbox']:checked ~ .file-uploader .file-uploader__stats {
         color: $color-error;
 
         .file-name {
@@ -223,12 +224,12 @@
 }
 
 .main-content .select {
-    padding-right: $width-gap*3;
+    padding-right: $width-gap * 3;
     background-color: #ffffff;
     background-image: url(../img/down-chevron.png);
-    background-position: right $width-gap*0.75 bottom 50%;
+    background-position: right $width-gap * 0.75 bottom 50%;
     background-repeat: no-repeat;
-    background-size: $width-gap*1.5;
+    background-size: $width-gap * 1.5;
 }
 
 .multiselect {
@@ -246,7 +247,6 @@
 }
 
 .alert-error {
-
     ul {
         @extend %reset-box;
 
@@ -292,7 +292,8 @@
     min-width: 0;
     overflow: hidden;
     list-style: none;
-    margin: 0; padding: 0;
+    margin: 0;
+    padding: 0;
     align-items: flex-start;
 }
 
@@ -303,7 +304,7 @@
 }
 
 .main-content .taggle_list {
-    padding: $width-gap*0.75 $width-gap $width-gap*0.5 $width-gap;
+    padding: $width-gap * 0.75 $width-gap $width-gap * 0.5 $width-gap;
     border: 3px solid $color-line;
 
     input {
@@ -314,7 +315,9 @@
         padding: 0 !important;
         border: none !important;
 
-        &:focus { width: auto !important; }
+        &:focus {
+            width: auto !important;
+        }
     }
 
     li {
@@ -330,7 +333,7 @@
         margin-right: $width-gap/4;
         vertical-align: top;
         overflow: hidden;
-        color: #fff;
+        color: #ffffff;
         padding: $width-gap/4;
     }
 
@@ -340,13 +343,17 @@
         font-family: $base-font-headline;
         font-weight: 600;
 
-        span { font-size: 1.25rem; }
+        span {
+            font-size: 1.25rem;
+        }
 
         &.custom {
             background: $color-line;
             color: inherit;
 
-            button { color: inherit; }
+            button {
+                color: inherit;
+            }
         }
 
         button {
@@ -355,14 +362,18 @@
             margin-left: 0.5rem;
             color: inherit;
 
-            &:hover { color: $color-error; }
+            &:hover {
+                color: $color-error;
+            }
         }
 
         &.taggle_hot {
             background: $color-line;
             color: $color-text;
 
-            button { color: $color-error; }
+            button {
+                color: $color-error;
+            }
         }
     }
 }
@@ -386,7 +397,7 @@
     font-size: 1.25rem;
 
     li {
-        padding: $width-gap/2 calc(#{$width-gap*1.25} + 3px);
+        padding: $width-gap/2 calc(#{$width-gap * 1.25} + 3px);
         cursor: pointer;
         line-height: 30px;
 
@@ -396,7 +407,8 @@
             color: $color-text;
         }
 
-        + li { border-top: 3px solid rgba(#ffffff, 0.25); }
+        + li {
+            border-top: 3px solid rgba(#ffffff, 0.25);
+        }
     }
 }
-

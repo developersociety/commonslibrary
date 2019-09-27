@@ -24,14 +24,14 @@ const tag_fields = document.querySelectorAll('.tag-group');
         placeholder: 'type to search for tags',
         onTagAdd(event, tag) {
             [...select.options].map((option) => {
-                if (option.text.toLowerCase() == tag) {
+                if (option.text.toLowerCase() === tag) {
                     option.selected = true;
                 }
             });
         },
         onTagRemove(event, tag) {
             [...select.options].map((option) => {
-                if (option.text.toLowerCase() == tag) {
+                if (option.text.toLowerCase() === tag) {
                     option.selected = false;
                 }
             });

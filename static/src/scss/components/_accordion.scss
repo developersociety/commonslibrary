@@ -1,5 +1,5 @@
 .mj_accordion {
-    margin: $width-gap*2 0;
+    margin: $width-gap * 2 0;
     border-top: 3px solid $color-line;
     max-width: none;
     padding: 0;
@@ -37,9 +37,13 @@
         flex-shrink: 0;
     }
 
-    .close { display: none; }
+    .close {
+        display: none;
+    }
 
-    h3 { margin: 0; }
+    h3 {
+        margin: 0;
+    }
 }
 
 .mj_accordion > li.active :after {
@@ -53,7 +57,6 @@
 }
 
 .mj_accordion .active {
-
     .mj_accordion_content {
         display: block;
     }

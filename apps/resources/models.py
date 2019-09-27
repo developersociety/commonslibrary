@@ -159,5 +159,7 @@ class ResourceCategory(models.Model):
 
 
 class ResourceCategoryFeatured(models.Model):
-    category = models.ForeignKey(ResourceCategory, on_delete=models.CASCADE, related_name='category_featured_resources')
+    category = models.ForeignKey(
+        ResourceCategory, on_delete=models.CASCADE, related_name='category_featured_resources'
+    )
     resource = models.ForeignKey(Resource, on_delete=models.CASCADE)

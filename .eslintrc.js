@@ -7,7 +7,9 @@ module.exports = {
         'no-new': [0],
         'comma-dangle': ['error', 'never'],
         'no-param-reassign': [2, { props: false }],
+        'array-callback-return': 'off',
         'operator-linebreak': ['error', 'after'],
+        'react/prop-types': false,
         'import/no-extraneous-dependencies': [
             'error',
             {
