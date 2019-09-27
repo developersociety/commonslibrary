@@ -1,8 +1,6 @@
 {% extends 'base.html' %}
 
-{% load crispy_forms_tags %}
-{% load render_bundle from webpack_loader %}
-{% load thumbnail %}
+{% load crispy_forms_tags staticfiles thumbnail %}
 
 
 {% block header_content %}
@@ -242,7 +240,7 @@
 {% endblock main_content %}
 
 {% block extra_scripts %}
-  {% render_bundle 'resource' %}
+  <script src="{% static 'dist/js/resource.js' %}"></script>
   <script type="application/ld+json">
     {
       "@context": "http://schema.org",

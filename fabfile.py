@@ -24,6 +24,7 @@ env.repo = env.get('repo', 'commonslibrary')
 env.media = env.get('media', 'commonslibrary')
 env.media_bucket = env.get('media_bucket', 'contentfiles-media-eu-west-1')
 env.database = env.get('database', 'commonslibrary_django')
+env.database_ssh = env.get('database_ssh', 'golestandt.devsoc.org')
 
 CRONTAB = """
 MAILTO=""
@@ -210,17 +211,9 @@ def get_backup(hostname=None, replace_hostname='127.0.0.1', replace_port=8000):
 
     # Connect to the server and dump database.
     backup_ssh = random.choice(env.roledefs['web'])
-    commands = [
-        """
-        ssh -C {} '(
-            source $HOME/.bash_env \
-            && source {}/bin/activate \
-            && {}/manage.py dump_masked_data
-        )'
-        """.format(
-            backup_ssh, env.virtualenv, env.home,
-        ).strip()
-    ]
+    commands = ['ssh -C {} sudo -u postgres pg_dump --no-owner {}'.format(
+        env.database_ssh, env.database
+    )]
 
     if hostname:
         if replace_port:

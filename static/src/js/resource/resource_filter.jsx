@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { ResourceFilterOption } from './resource_filter_option';
+import { ResourceFilterOption } from './resource_filter_option.jsx';
 
 const api = '/api/v1/resources/?format=json'
 const filterOptions = {

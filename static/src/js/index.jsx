@@ -1,10 +1,9 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import ReactDOM from "react-dom";
 
-import { Search } from './search/search';
-
-import { Resource } from './resource/resource';
-import { ResourceFilter } from './resource/resource_filter';
+import { Search } from './search/search.jsx';
+import { Resource } from './resource/resource.jsx';
+import { ResourceFilter } from './resource/resource_filter.jsx';
 
 const pageUrl = new URL(window.location.href);
 
