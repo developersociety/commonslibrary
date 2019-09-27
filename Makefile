@@ -175,12 +175,19 @@ npm-install:
 	cmp --silent package-lock.json node_modules/.package-lock.json || npm ci && cp -a package-lock.json node_modules/.package-lock.json
 
 npm-run-production:
-	npm run production
+	npm run production --silent
 
 
-# JSHint
-jshint-lint:
-	npm run jshint -- --exclude="static/vendor/" static/
+# ESLint
+eslint-lint:
+	npm run eslint -- static/src/js
+
+# Prettier
+prettier-lint:
+	npm run prettier --silent -- --list-different "static/src/{js,scss}/**" "*.js"
+
+prettier-format:
+	npm run prettier --silent -- --write "static/src/{js,scss}/**" "*.js"
 
 
 # YAPF

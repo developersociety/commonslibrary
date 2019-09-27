@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { SearchOptionManager } from './search_option_manager';
+import { SearchOptionManager } from './search_option_manager.jsx';
 
 export class Search extends React.Component {
   constructor () {
