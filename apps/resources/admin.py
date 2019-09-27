@@ -3,16 +3,6 @@ from django.contrib import admin
 from . import models
 
 
-class ResourceCategoryFeaturedInline(admin.TabularInline):
-    model = models.ResourceCategoryFeatured
-
-
-@admin.register(models.ResourceCategory)
-class ResourceCategoryAdmin(admin.ModelAdmin):
-    list_display = ('title',)
-    inlines = [ResourceCategoryFeaturedInline]
-
-
 @admin.register(models.Resource)
 class ResourceAdmin(admin.ModelAdmin):
     list_display = ('title', 'status', 'abstract', 'hits', 'created_by', 'created_at')

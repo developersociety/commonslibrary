@@ -144,22 +144,3 @@ class Resource(models.Model):
         preserved = Case(* [When(pk=pk, then=pos) for pos, pk in enumerate(resources_ids)])
         resources = Resource.objects.filter(id__in=resources_ids).order_by(preserved)
         return resources
-
-
-class ResourceCategory(models.Model):
-    title = models.CharField(max_length=64, unique=True)
-    slug = models.SlugField(max_length=64, unique=True)
-    description = models.TextField()
-
-    class Meta:
-        ordering = ('title',)
-
-    def __str__(self):
-        return self.title
-
-
-class ResourceCategoryFeatured(models.Model):
-    category = models.ForeignKey(
-        ResourceCategory, on_delete=models.CASCADE, related_name='category_featured_resources'
-    )
-    resource = models.ForeignKey(Resource, on_delete=models.CASCADE)
