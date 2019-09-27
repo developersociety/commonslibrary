@@ -39,7 +39,7 @@ format: ## Run this project's code formatters.
 format: yapf-format isort-format
 
 lint: ## Lint the project.
-lint: npm-install yapf-lint isort-lint flake8-lint
+lint: npm-install yapf-lint isort-lint flake8-lint eslint-lint prettier-lint
 
 test: ## Run unit and integration tests.
 test: django-test
@@ -175,8 +175,7 @@ npm-install:
 	cmp --silent package-lock.json node_modules/.package-lock.json || npm ci && cp -a package-lock.json node_modules/.package-lock.json
 
 npm-run-production:
-	npm run production --silent
-
+	npm run production
 
 # ESLint
 eslint-lint:
@@ -188,7 +187,6 @@ prettier-lint:
 
 prettier-format:
 	npm run prettier --silent -- --write "static/src/{js,scss}/**" "*.js"
-
 
 # YAPF
 yapf-lint:
