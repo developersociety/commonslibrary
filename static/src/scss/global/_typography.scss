@@ -36,11 +36,16 @@ h5 {
 }
 
 @media all and (max-width: 540px) {
-    h1 { font-size: 3rem; }
-    h2 { font-size: 2rem; }
-    h3 { font-size: 1.375rem; }
+    h1 {
+        font-size: 3rem;
+    }
+    h2 {
+        font-size: 2rem;
+    }
+    h3 {
+        font-size: 1.375rem;
+    }
 }
-
 
 p {
     margin: 1rem 0;

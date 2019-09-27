@@ -25,17 +25,14 @@ function hasScrolled() {
         if (profile_dropdown !== null && profile_dropdown.classList.contains('shown-true')) {
             profile_dropdown_trigger.click();
         }
-    } else {
-        // Scroll Up
-        if (scrollTop + window.outerHeight < document.documentElement.scrollHeight) {
-            pageHead.classList.remove('not-shown');
-            pageHead.classList.add('shown');
-        }
+    } else if (scrollTop + window.outerHeight < document.documentElement.scrollHeight) {
+        pageHead.classList.remove('not-shown');
+        pageHead.classList.add('shown');
     }
 
     lastScrollTop = scrollTop;
 }
-window.addEventListener('scroll', (e) => {
+window.addEventListener('scroll', () => {
     didScroll = true;
 });
 

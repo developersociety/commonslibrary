@@ -9,7 +9,9 @@
         display: block;
         height: 3px;
         position: absolute;
-        bottom: 0; left: 0; right: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
         background: rgba($color-background, 0.1);
         pointer-events: none;
         user-select: none;
@@ -42,7 +44,7 @@
     @media all and (min-width: 1261px) {
         &.intro-slide {
             width: 50%;
-            padding: $width-gap*1.675 $width-gap $width-gap $width-gap;
+            padding: $width-gap * 1.675 $width-gap $width-gap $width-gap;
             min-height: 22rem;
         }
     }
@@ -72,7 +74,9 @@ a.home-intro__slide {
         display: block;
         width: 3px;
         position: absolute;
-        top: 0; right: 0; bottom: 3px;
+        top: 0;
+        right: 0;
+        bottom: 3px;
         background: rgba($color-background, 0.1);
         pointer-events: none;
         user-select: none;
@@ -109,7 +113,6 @@ a.home-intro__slide {
 }
 
 .inline-stats {
-
     .resource-user,
     .resource-liked,
     .resource-tried {
@@ -168,7 +171,6 @@ a.home-intro__slide {
             }
         }
 
-
         &:hover {
             background: $color-background;
             transform: translate(0, -50%);
@@ -183,10 +185,14 @@ a.home-intro__slide {
 .org-logo__large {
     width: 11rem;
     height: 11rem;
-    margin: $width-gap*1.5 auto;
+    margin: $width-gap * 1.5 auto;
 }
 
 @keyframes slide {
-    0% { transform: translateX(0%); }
-    100% { transform: translateX(-100%); }
+    0% {
+        transform: translateX(0%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
 }

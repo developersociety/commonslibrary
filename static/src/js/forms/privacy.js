@@ -5,6 +5,25 @@ const privacy_options = privacy_field.querySelectorAll('input');
 
 let selected_owner;
 
+// remove class of given query selector
+function remove_class(query, css_class) {
+    [...document.querySelectorAll(query)].map((element) => {
+        element.classList.remove(css_class);
+    });
+}
+
+function get_checkbox(value) {
+    let checkbox;
+
+    [...document.querySelectorAll('#div_id_privacy .multiselect-option input')].map((element) => {
+        if (element.value === value) {
+            checkbox = element.parentNode;
+        }
+    });
+
+    return checkbox;
+}
+
 owner_group.onchange = () => {
     let owner_privacy_option;
 
@@ -37,22 +56,3 @@ public_field.onchange = () => {
         option.checked = !is_public;
     });
 };
-
-// remove class of given query selector
-function remove_class(query, css_class) {
-    [...document.querySelectorAll(query)].map((element) => {
-        element.classList.remove(css_class);
-    });
-}
-
-function get_checkbox(value) {
-    let checkbox;
-
-    [...document.querySelectorAll('#div_id_privacy .multiselect-option input')].map((element) => {
-        if (element.value == value) {
-            checkbox = element.parentNode;
-        }
-    });
-
-    return checkbox;
-}

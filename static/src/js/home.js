@@ -14,18 +14,18 @@ const flkty = new Flickity(homeCarousel, {
     prevNextButtons: false
 });
 
-prevButton.onclick = (e) => {
+prevButton.onclick = () => {
     flkty.previous();
 };
 
-nextButton.onclick = (e) => {
+nextButton.onclick = () => {
     flkty.next();
 };
 
 // if wrap isn't enabled and at end, add class to button
-if (homeSlideCount == 2) {
+if (homeSlideCount === 2) {
     flkty.on('select', (index) => {
-        if (index == homeSlideCount - 1) {
+        if (index === homeSlideCount - 1) {
             nextButton.disabled = true;
             prevButton.disabled = false;
         } else {

@@ -35,7 +35,7 @@
 
         display: none;
         list-style: none;
-        padding-left: $width-gap*1.5;
+        padding-left: $width-gap * 1.5;
         margin-top: $width-gap/4;
 
         li {
@@ -60,25 +60,32 @@
         }
     }
 
-    label { cursor: pointer; }
+    label {
+        cursor: pointer;
+    }
 
     .icon {
         width: 1em;
         height: 1em;
-
     }
 
-    .open { color: $color-line; }
+    .open {
+        color: $color-line;
+    }
 
-    .close { display: none; }
+    .close {
+        display: none;
+    }
 
     .explore-list__toggle:checked {
-
         ~ label {
+            .open {
+                display: none;
+            }
 
-            .open { display: none; }
-
-            .close { display: inline-block; }
+            .close {
+                display: inline-block;
+            }
         }
 
         ~ ul {

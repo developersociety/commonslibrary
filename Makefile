@@ -36,7 +36,7 @@ check: ## Check for any obvious errors in the project's setup.
 check: pipdeptree-check npm-check django-check
 
 format: ## Run this project's code formatters.
-format: yapf-format isort-format
+format: yapf-format isort-format prettier-format
 
 lint: ## Lint the project.
 lint: npm-install yapf-lint isort-lint flake8-lint eslint-lint prettier-lint

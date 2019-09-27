@@ -10,10 +10,7 @@ class ResourceCategoryFeaturedInline(admin.TabularInline):
 @admin.register(models.ResourceCategory)
 class ResourceCategoryAdmin(admin.ModelAdmin):
     list_display = ('title',)
-    inlines = [
-        ResourceCategoryFeaturedInline
-    ]
-
+    inlines = [ResourceCategoryFeaturedInline]
 
 
 @admin.register(models.Resource)

@@ -45,7 +45,9 @@
         display: block;
         height: 3px;
         position: absolute;
-        bottom: 0; left: 0; right: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
         background: rgba($color-background, 0.1);
         pointer-events: none;
         user-select: none;
@@ -57,7 +59,9 @@
         display: block;
         width: 3px;
         position: absolute;
-        top: 0; bottom: 3px; right: 0;
+        top: 0;
+        bottom: 3px;
+        right: 0;
         background: rgba($color-background, 0.1);
         pointer-events: none;
         user-select: none;
@@ -132,7 +136,6 @@
         display: grid;
         grid-template-columns: repeat(4, 1fr);
     }
-
 }
 
 .directory-group__stats {
@@ -163,7 +166,9 @@
         display: block;
         width: 3px;
         position: absolute;
-        top: 0; bottom: 0; right: 0;
+        top: 0;
+        bottom: 0;
+        right: 0;
         background: rgba($color-background, 0.1);
         pointer-events: none;
         user-select: none;
@@ -175,7 +180,9 @@
         display: block;
         height: 3px;
         position: absolute;
-        bottom: 0; left: 0; right: 3px;
+        bottom: 0;
+        left: 0;
+        right: 3px;
         background: rgba($color-background, 0.1);
         pointer-events: none;
         user-select: none;
@@ -226,7 +233,7 @@
         align-items: center;
 
         + span {
-          margin-left: $width-gap/2;
+            margin-left: $width-gap/2;
         }
     }
 }

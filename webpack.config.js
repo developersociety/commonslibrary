@@ -11,15 +11,9 @@ const browsersync_port = parseInt(process.env.BROWSERSYNC_PORT || django_port + 
 const browsersyncui_port = browsersync_port + 1;
 const config = {
     entry: {
-        main: [
-            './static/src/js/index.jsx',
-        ],
-        styles: [
-            './static/src/scss/styles.scss'
-        ],
-        nav : [
-            './static/src/js/nav.js',
-        ],
+        main: ['./static/src/js/index.jsx'],
+        styles: ['./static/src/scss/styles.scss'],
+        nav: ['./static/src/js/nav.js'],
         home: [
             '@babel/polyfill',
             './static/src/js/index.jsx',
@@ -30,12 +24,9 @@ const config = {
             '@babel/polyfill',
             './static/src/js/forms/forms.jsx',
             './static/src/js/forms/tags.js',
-            './static/src/js/forms/privacy.js',
+            './static/src/js/forms/privacy.js'
         ],
-        resource: [
-            '@babel/polyfill',
-            './static/src/js/resource/resource_detail.js'
-        ]
+        resource: ['@babel/polyfill', './static/src/js/resource/resource_detail.js']
     },
     output: {
         path: path.resolve('./static/dist/'),
@@ -91,7 +82,7 @@ module.exports = [
             rules: [
                 {
                     enforce: 'pre',
-                    test: /\.(js|jsx)$/,
+                    test: /\.(js)$/,
                     exclude: /node_modules/,
                     use: {
                         loader: 'eslint-loader',
@@ -207,6 +198,6 @@ module.exports = [
                     })
                 }
             ]
-        },
+        }
     }
 ];
