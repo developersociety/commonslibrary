@@ -4,7 +4,16 @@ import factory
 
 from accounts.tests.factories import UserFactory
 from directory.tests.factories import OrganisationFactory
-from resources.models import Resource
+from resources.models import Resource, ResourceCategory
+
+
+class ResourceCategoryFactory(factory.django.DjangoModelFactory):
+    title = factory.Sequence(lambda n: '{id}'.format(id=n))
+    slug = factory.LazyAttribute(lambda a: slugify(a.title))
+    description = factory.Faker('job')
+
+    class Meta:
+        model = ResourceCategory
 
 
 class ResourceFactory(factory.django.DjangoModelFactory):

@@ -24,6 +24,7 @@ class UserRegistrationTestView(WebTest):
         form['password'] = 'test123'
         form['confirm_password'] = 'test123'
         form['chosen_organisations'] = self.organisation.id
+        form['privacy_agreement'] = True,
 
         response = form.submit()
 

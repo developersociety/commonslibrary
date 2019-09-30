@@ -22,6 +22,7 @@ class UserRegistrationFormTest(TestCase):
             'first_name': 'test',
             'last_name': 'test',
             'chosen_organisations': [self.organisation],
+            'privacy_agreement': True,
         })
         self.assertTrue(form.is_valid())
         user = form.save()
@@ -39,6 +40,7 @@ class UserRegistrationFormTest(TestCase):
             'first_name': 'test',
             'last_name': 'test',
             'chosen_organisations': [self.organisation],
+            'privacy_agreement': True,
         })
         self.assertTrue(form.is_valid())
         user = form.save()
