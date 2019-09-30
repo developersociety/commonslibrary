@@ -1,6 +1,19 @@
 from django.contrib import admin
 
+from adminsortable.admin import NonSortableParentAdmin, SortableStackedInline
+
 from . import models
+
+
+class ResourceCategoryFeaturedInline(SortableStackedInline):
+    model = models.ResourceCategoryFeatured
+
+
+@admin.register(models.ResourceCategory)
+class ResourceCategoryAdmin(NonSortableParentAdmin):
+    list_display = ('title',)
+    extra = 1
+    inlines = [ResourceCategoryFeaturedInline]
 
 
 @admin.register(models.Resource)

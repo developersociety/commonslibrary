@@ -50,6 +50,7 @@ class ResourceForm(forms.ModelForm):
             'title',
             'abstract',
             'content',
+            Field('category'),
             Div(
                 Field('tags', css_class="sr__input"),
                 Div(css_class='tag-select'),
