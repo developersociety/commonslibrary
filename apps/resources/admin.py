@@ -27,7 +27,7 @@ class ResourceAdmin(admin.ModelAdmin):
     date_hierarchy = 'created_at'
     fieldsets = [
         ('Resource', {
-            'fields': ('title', 'slug', 'abstract', 'tags', 'status'),
+            'fields': ('title', 'slug', 'abstract', 'categories', 'tags', 'status'),
         }),
         ('Content', {
             'fields': ('content', 'image'),

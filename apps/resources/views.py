@@ -1,3 +1,5 @@
+from django.db import models
+
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import PermissionDenied
@@ -6,12 +8,13 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse, reverse_lazy
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic.list import ListView
 
 from comments.forms import CommentForm
 
 from .choices import RESOURCE_WAITING_FOR_APPROVAL
 from .forms import ResourceForm
-from .models import Resource
+from .models import ResourceCategory, Resource
 
 
 class ResourceCreateView(LoginRequiredMixin, CreateView):
@@ -151,3 +154,27 @@ class ResourceUpdateView(LoginRequiredMixin, UpdateView):
         kwargs = super().get_form_kwargs()
         kwargs.update({'user': self.request.user})
         return kwargs
+
+
+class ResourceCategoryListView(ListView):
+    model = ResourceCategory
+
+
+class ResourceCategoryDetailView(DetailView):
+    model = ResourceCategory
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        user = self.request.user
+        context['resources'] = Resource.objects.approved(user).filter(categories=self.get_object()).annotate(
+            most_likes=models.Count('likes'), most_tried=models.Count('tried')
+        ).select_related(
+            'organisation',
+            'created_by',
+        ).prefetch_related(
+            'likes',
+            'tried',
+            'privacy',
+        )
+        return context

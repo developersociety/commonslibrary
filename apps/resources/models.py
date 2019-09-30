@@ -160,6 +160,9 @@ class ResourceCategory(models.Model):
     def __str__(self):
         return self.title
 
+    def get_resource_count(self):
+        return self.resource_set.count()
+
 
 class ResourceCategoryFeatured(SortableMixin):
     category = models.ForeignKey(
