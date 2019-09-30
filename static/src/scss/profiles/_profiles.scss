@@ -268,3 +268,16 @@
     background: $color-background;
     color: #ffffff;
 }
+
+#div_id_privacy_agreement {
+    .controls {
+        flex-flow: row wrap;
+
+        label {
+            flex: 1;
+        }
+    }
+    .help-block {
+        width: 100%;
+    }
+}
