@@ -12,6 +12,7 @@ class ResourceCategoryFeaturedInline(SortableStackedInline):
 @admin.register(models.ResourceCategory)
 class ResourceCategoryAdmin(NonSortableParentAdmin):
     list_display = ('title',)
+    prepopulated_fields = {'slug': ('title',)}
     extra = 1
     inlines = [ResourceCategoryFeaturedInline]
 
