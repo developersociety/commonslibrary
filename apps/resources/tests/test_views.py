@@ -8,7 +8,7 @@ from pages.tests.factories import PageFactory
 from resources.choices import RESOURCE_APPROVED
 from resources.models import Resource
 
-from .factories import ResourceFactory
+from .factories import ResourceCategoryFactory, ResourceFactory
 
 
 class ResourceThankTestView(WebTest):
@@ -25,6 +25,7 @@ class ResourceUpdateTestView(WebTest):
 
     def setUp(self):
         self.organisation = OrganisationFactory.create()
+        self.resource_category = ResourceCategoryFactory.create()
         self.resource = ResourceFactory.create(
             status=RESOURCE_APPROVED,
             organisation=self.organisation,
@@ -61,6 +62,7 @@ class ResourceUpdateTestView(WebTest):
             user=self.resource.created_by,
         )
         form = response.form
+        form['category'] = self.resource_category
         form['abstract'] = 'testing'
         response = form.submit()
         self.resource.refresh_from_db()
@@ -75,6 +77,7 @@ class ResourceCreateViewViewTest(WebTest):
         self.user = UserFactory.create(
             approved_organisations=OrganisationFactory.create_batch(size=10)
         )
+        self.resource_category = ResourceCategoryFactory.create()
         self.initial = {
             'title': 'test',
             'abstract': 'abstract',
@@ -93,6 +96,7 @@ class ResourceCreateViewViewTest(WebTest):
             if self.initial.get(name):
                 field[0].value = self.initial[name]
         form['is_public'] = True
+        form['category'] = self.resource_category
         form['organisation'] = str(organisation.id)
         response = form.submit()
 
@@ -110,6 +114,7 @@ class ResourceCreateViewViewTest(WebTest):
             if self.initial.get(name):
                 form[name].value = self.initial[name]
         form['is_public'] = False
+        form['category'] = self.resource_category
         form['organisation'] = str(organisation.id)
         response = form.submit()
 
