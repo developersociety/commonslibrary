@@ -25,7 +25,7 @@ class Resource(models.Model):
         help_text='This text will appear in search results',
     )
     content = RichTextUploadingField()
-    category = models.ManyToManyField('resources.ResourceCategory')
+    categories = models.ManyToManyField('resources.ResourceCategory')
     tags = models.ManyToManyField(Tag, blank=True)
     image = ImageField(
         'Background Image',

@@ -62,7 +62,7 @@ class ResourceUpdateTestView(WebTest):
             user=self.resource.created_by,
         )
         form = response.form
-        form['category'] = self.resource_category
+        form['categories'] = self.resource_category
         form['abstract'] = 'testing'
         response = form.submit()
         self.resource.refresh_from_db()
@@ -96,7 +96,7 @@ class ResourceCreateViewViewTest(WebTest):
             if self.initial.get(name):
                 field[0].value = self.initial[name]
         form['is_public'] = True
-        form['category'] = self.resource_category
+        form['categories'] = self.resource_category
         form['organisation'] = str(organisation.id)
         response = form.submit()
 
@@ -114,7 +114,7 @@ class ResourceCreateViewViewTest(WebTest):
             if self.initial.get(name):
                 form[name].value = self.initial[name]
         form['is_public'] = False
-        form['category'] = self.resource_category
+        form['categories'] = self.resource_category
         form['organisation'] = str(organisation.id)
         response = form.submit()
 

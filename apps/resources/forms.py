@@ -13,7 +13,8 @@ class ResourceForm(forms.ModelForm):
     class Meta:
         model = Resource
         fields = (
-            'title', 'abstract', 'content', 'category', 'tags', 'image', 'organisation', 'privacy'
+            'title', 'abstract', 'content', 'categories', 'tags', 'image', 'organisation',
+            'privacy'
         )
         labels = {
             'organisation': 'Group',
@@ -41,7 +42,7 @@ class ResourceForm(forms.ModelForm):
             button_title = 'Submit your resource'
 
         self.fields['abstract'].widget.attrs['rows'] = 3
-        self.fields['category'].widget = forms.CheckboxSelectMultiple()
+        self.fields['categories'].widget = forms.CheckboxSelectMultiple()
         self.fields['organisation'].queryset = self.user.approved_organisations.all()
         self.fields['organisation'].empty_label = 'Select'
         self.fields['privacy'].queryset = self.user.approved_organisations.all()
@@ -53,7 +54,7 @@ class ResourceForm(forms.ModelForm):
             'title',
             'abstract',
             'content',
-            Field('category'),
+            Field('categories'),
             Div(
                 Field('tags', css_class="sr__input"),
                 Div(css_class='tag-select'),
