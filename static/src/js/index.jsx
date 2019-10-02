@@ -6,7 +6,9 @@ import { Resource } from './resource/resource.jsx';
 import { ResourceFilter } from './resource/resource_filter.jsx';
 
 const api = '/api/v1/resources/?format=json';
+const hideSearch = document.getElementById('react-app').dataset.hidesearch == 'true' || false;
 const fixedOrganisation = document.getElementById('react-app').dataset.organisation;
+const fixedCategory = document.getElementById('react-app').dataset.category;
 const fixedUser = document.getElementById('react-app').dataset.user;
 const preselectedTag = location.search.split('tags=')[1];
 const componentHolder = document.getElementById('react-app');
@@ -22,6 +24,7 @@ class ResourceList extends React.Component {
             resourcesNextPage: null,
             ordering: '&ordering=created_at',
             activeFilter: 'created_at',
+            hideSearch: hideSearch,
             query: ''
         };
 
@@ -38,6 +41,14 @@ class ResourceList extends React.Component {
             this.setState(
                 {
                     query: `&organisation=${fixedOrganisation}`
+                },
+                this.updateResourceList
+            );
+        }
+        if (fixedCategory !== undefined) {
+            this.setState(
+                {
+                    query: `&categories=${fixedCategory}&page_size=100`
                 },
                 this.updateResourceList
             );
@@ -157,12 +168,14 @@ class ResourceList extends React.Component {
 
         return (
             <div className="resources">
-                <Search
-                    updateResourceQuery={this.updateResourceQuery}
-                    fixedOrganisation={fixedOrganisation}
-                    fixedUser={fixedUser}
-                    preselectedTag={preselectedTag}
-                />
+                {this.state.hideSearch == false && (
+                    <Search
+                        updateResourceQuery={this.updateResourceQuery}
+                        fixedOrganisation={fixedOrganisation}
+                        fixedUser={fixedUser}
+                        preselectedTag={preselectedTag}
+                    />
+                )}
                 <ResourceFilter
                     resourceCount={this.state.resourcesCount}
                     activeFilter={this.state.activeFilter}

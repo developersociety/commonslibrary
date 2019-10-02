@@ -3,7 +3,7 @@ from django_filters.rest_framework import FilterSet
 
 from accounts.models import User
 from directory.models import Organisation
-from resources.models import Resource
+from resources.models import Resource, ResourceCategory
 
 
 class ResourceFilter(FilterSet):
@@ -32,4 +32,4 @@ class ResourceFilter(FilterSet):
 
     class Meta:
         model = Resource
-        fields = ('tags', 'organisation', 'created_by')
+        fields = ('tags', 'categories', 'organisation', 'created_by')

@@ -1,6 +1,23 @@
 {% extends 'base.html' %}
 
+{% load staticfiles %}
+
 
 {% block main_content %}
   <h1>{{ resource_category }}</h1>
+
+  <div class="featured-resources resources-grid">
+    {% for resource in resourcecategory.category_featured_resources.all %}
+      {% include 'includes/resource.html' with resource=resource.resource %}
+    {% endfor %}
+  </div>
+
+  <div id="react-app" data-hidesearch="true" data-category="{{ resourcecategory.pk }}">
+    {% csrf_token %}
+  </div>
 {% endblock %}
+
+
+{% block extra_scripts %}
+  <script src="{% static 'dist/js/main.js' %}"></script>
+{% endblock extra_scripts %}

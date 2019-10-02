@@ -163,6 +163,9 @@ class ResourceCategory(models.Model):
     def get_resource_count(self):
         return self.resource_set.count()
 
+    def get_absolute_url(self):
+        return reverse('resources:resource-detail', kwargs={'slug': self.slug})
+
 
 class ResourceCategoryFeatured(SortableMixin):
     category = models.ForeignKey(

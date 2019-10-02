@@ -12,7 +12,7 @@ app_name = 'resources'
 urlpatterns = [
     url(r'^add/$', ResourceCreateView.as_view(), name='resource-create'),
     url(r'^thank-you/$', PageDetailView.as_view(), name='resource-thank-you'),
-    url(r'^categories/$', ResourceCategoryListView.as_view(), name='resource-category-detail'),
+    url(r'^categories/$', ResourceCategoryListView.as_view(), name='resource-category-list'),
     url(
         r'^category/(?P<slug>[\w-]+)/$',
         ResourceCategoryDetailView.as_view(),
