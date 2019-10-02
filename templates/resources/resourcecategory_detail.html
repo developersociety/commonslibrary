@@ -4,7 +4,28 @@
 
 
 {% block main_content %}
-  <h1>{{ resource_category }}</h1>
+  <div class="background">
+    <div class="backgroundContent">
+      <div class="backButtonHolder">
+        <a href="{% url 'resources:resource-category-list' %}" class="backButton button">
+          Back To Categories
+        </a>
+      </div>
+      <div class="resource-title">
+        <h1>
+          <span>{{ resourcecategory.title }}</span>
+        </h1>
+      </div>
+      <div class="resource-subtitle">
+        <h3>
+          <span>{{ resourcecategory.description }}</span>
+        </h3>
+      </div>
+    </div>
+    <a href="#" class="featuredButton">
+      Featured Resources
+    </a> 
+  </div>
 
   <div class="featured-resources resources-grid">
     {% for resource in resourcecategory.category_featured_resources.all %}
@@ -15,6 +36,7 @@
   <div id="react-app" data-hidesearch="true" data-category="{{ resourcecategory.pk }}">
     {% csrf_token %}
   </div>
+
 {% endblock %}
 
 
