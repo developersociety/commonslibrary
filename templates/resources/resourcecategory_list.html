@@ -1,5 +1,8 @@
 {% extends "base.html" %}
 
+{% load thumbnail staticfiles %}
+
+
 {% block main_content %}
   <div class="explore">
     <div class="categories-grid">
@@ -7,36 +10,42 @@
         <h1>Categories</h1>
         <div class="category-grid">
           {% for category in resourcecategory_list %}
-            <div class="grid-item">
-              <h2>{{ category.title }}</h2>
-              <p>{{ category.get_resource_count }}</p>
-            </div> 
-          {% endfor %}
-        </div>  
-        
-        <div class ="resources-holder">
-          <div class="resource-description">
-            <h2>Test Category</h2>
-            <p>
-              A resting leg is a crush of the mind. To be more specific, they were lost without the groggy development that composed their mailman. The grizzled route reveals itself as a burghal cold to those who look. Some pronounced bells are thought of simply as twines. A vest can hardly be considered a togaed mascara without also being a pastry. 
-            </p>
-            <div class="more-button-holder">
-                <a href="#" class="more-button button">
-                    More
-                </a>
-            </div>
-         
-          </div>
-          
-          <div class="featured-resources">
-            <h5> Featured resources </h5>
-              
+            {% thumbnail category.image '500' as category_image %}
+              <div class="category-grid__item" style="background: url({{ category_image.url }}) center center/cover no-repeat">
+                <div class="category-grid__item-detail">
+                  <h2><a href="#" class="category_toggle" data-target="{{ category.pk }}">{{ category.title }}</a></h2>
+                  <p>{{ category.get_resource_count }} resource{{ category.get_resource_count|pluralize }}</p>
+                </div>
               </div>
-
-          </div>
+            {% endthumbnail %}
+          {% endfor %}
         </div>
+
+        {% for category in resourcecategory_list %}
+          <div class="resources-holder hidden" data-category="{{ category.pk }}">
+            <div class="resource-description">
+              <h2>{{ category.title }}</h2>
+              <p>{{ category.description }}</p>
+              <div class="more-button-holder">
+                <a href="{{ category.get_absolute_url }}" class="more-button button">Read more</a>
+              </div>
+            </div>
+
+            <div class="featured-resources">
+              <h5> Featured resources </h5>
+              <div class="featured-resources__holder">
+                {% for resource_relation in category.category_featured_resources.all|slice:':2' %}
+                  {% include 'includes/resource.html' with resource=resource_relation.resource %}
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        {% endfor %}
       </div>
     </div>
   </div>
-  
 {% endblock main_content %}
+
+{% block extra_scripts %}
+  <script src="{% static 'dist/js/categories.js' %}"></script>
+{% endblock extra_scripts %}

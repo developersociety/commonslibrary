@@ -14,6 +14,7 @@ const config = {
         main: ['./static/src/js/index.jsx'],
         styles: ['./static/src/scss/styles.scss'],
         nav: ['./static/src/js/nav.js'],
+        categories: ['./static/src/js/categories.js'],
         home: [
             '@babel/polyfill',
             './static/src/js/index.jsx',
