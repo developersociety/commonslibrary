@@ -161,21 +161,3 @@ class ResourceCategoryListView(ListView):
 
 class ResourceCategoryDetailView(DetailView):
     model = ResourceCategory
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-
-        user = self.request.user
-        context['resources'] = Resource.objects.approved(user).filter(
-            categories=self.get_object()
-        ).annotate(
-            most_likes=models.Count('likes'), most_tried=models.Count('tried')
-        ).select_related(
-            'organisation',
-            'created_by',
-        ).prefetch_related(
-            'likes',
-            'tried',
-            'privacy',
-        )
-        return context
