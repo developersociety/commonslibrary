@@ -183,11 +183,22 @@
 }
 
 
+.featured-resources {
+    h5 {
+        margin-bottom: 0;
+    }
+}
+
 .featured-resources__holder {
     display: flex;
+    margin-bottom: 1.5rem;
 
     .resource {
         flex: 1;
+
+        &:last-child:after {
+            content: none;
+        }
     }
 
     @media all and (min-width: 1120px) {
