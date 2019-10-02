@@ -1,0 +1,165 @@
+.category-grid {
+    
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 2px;
+
+    div {
+        background: red;
+    }
+    p{
+        text-align: right;
+    }
+}
+
+.resources-holder{
+    display: flex;
+    
+
+    .resource-description {
+        width: 50%; 
+        padding: 1rem;
+        
+        h2{
+            padding: 1rem 0 0 0;
+        }
+
+        p{
+            padding-right: 4rem;
+            padding-bottom: 4rem;
+        }
+        .more-button-holder{
+            display: flex;
+            justify-content: flex-end;
+            padding-right: 3rem;
+        }
+
+        .more-button {
+            text-decoration: none;
+            color: black;
+
+            @media all and (max-width: 885px) {
+                background: black;
+                color: white;
+                padding: 0.8rem 1.5rem;
+                position: relative;
+                top: 1.5rem;
+            }
+        }
+    }
+
+    .featured-resources {
+        width: 50%;
+        background: #50E3C2;
+    
+        h5 {
+            color: white;
+            padding: 1rem;
+        }
+    }
+
+   
+    
+    @media all and (max-width: 885px) {
+        flex-flow: row wrap;
+
+        .resource-description{
+            width: 100%;
+            padding: 0 1rem;
+            
+            p {
+                padding-bottom: 0;
+                padding-right: 0;
+            }
+        }
+        .featured-resources{
+            width: 100%;
+            padding: 0
+           
+        }
+
+    }
+}
+
+
+.background{
+    background: url("https://picsum.photos/id/237/1200/900") center center/cover no-repeat;
+    padding: 4rem 0 20rem 0;
+    position: relative;
+
+
+    .backgroundContent{
+        padding-left: 25%;
+        position: relative;
+    }
+
+    .backButtonHolder {
+        position: absolute;
+        left: 0;
+        width: 25%;
+        display: flex;
+        justify-content: flex-end;
+        padding-top: 2rem;
+        
+
+    }
+    .backButton{
+        text-decoration: none;
+        color: black;
+        padding: 18px 28px;
+        display: inline-block;
+    }
+    
+    .header{
+        color: white;
+        background: black;
+        padding: 0.5rem;
+    }
+    .description{
+        margin-top: 1.5rem;
+        padding: 1rem 1rem;
+        background: black;
+        color: white;
+
+
+    }
+    .featuredButton{
+        position: absolute;
+        bottom: 0;
+        background: black;
+        padding: 0.5rem;
+        color: white;
+        text-decoration: none;
+    }
+    @media all and (max-width: 1120px) {
+       
+        padding: 3rem 0 12rem 0;
+
+        .backgroundContent{
+            display: flex; 
+            flex-flow: row wrap;
+            padding-left: 0;
+        }
+        
+        .backButtonHolder {
+            position: static;
+            width: auto;
+            justify-content: flex-start;
+            order: 200;
+            width: 100%;
+        }
+
+        .resource-subtitle {
+            width: 100%;
+        }
+
+    }
+
+    @media all and (max-width: 400px) {
+        padding: 1rem 0 12rem 0;
+    }
+
+
+}
+
+

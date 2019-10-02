@@ -2,15 +2,41 @@
 
 {% block main_content %}
   <div class="explore">
-    <div class="explore-grid">
+    <div class="categories-grid">
       <div class="explore-tags">
-        <h4 class="explore-type">Categories</h4>
-        <ul class="explore-list">
+        <h1>Categories</h1>
+        <div class="category-grid">
           {% for category in resourcecategory_list %}
-            {{ category }}
+            <div class="grid-item">
+              <h2>{{ category.title }}</h2>
+              <p>{{ category.get_resource_count }}</p>
+            </div> 
           {% endfor %}
-        </ul>
+        </div>  
+        
+        <div class ="resources-holder">
+          <div class="resource-description">
+            <h2>Test Category</h2>
+            <p>
+              A resting leg is a crush of the mind. To be more specific, they were lost without the groggy development that composed their mailman. The grizzled route reveals itself as a burghal cold to those who look. Some pronounced bells are thought of simply as twines. A vest can hardly be considered a togaed mascara without also being a pastry. 
+            </p>
+            <div class="more-button-holder">
+                <a href="#" class="more-button button">
+                    More
+                </a>
+            </div>
+         
+          </div>
+          
+          <div class="featured-resources">
+            <h5> Featured resources </h5>
+              
+              </div>
+
+          </div>
+        </div>
       </div>
     </div>
   </div>
+  
 {% endblock main_content %}
