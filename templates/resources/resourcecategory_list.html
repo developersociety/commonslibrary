@@ -18,29 +18,26 @@
                 </div>
               </div>
             {% endthumbnail %}
+            <div class="resources-holder hidden" data-category="{{ category.pk }}">
+              <div class="resource-description">
+                <h2>{{ category.title }}</h2>
+                <p>{{ category.description }}</p>
+                <div class="more-button-holder">
+                  <a href="{{ category.get_absolute_url }}" class="more-button button">Read more</a>
+                </div>
+              </div>
+
+              <div class="featured-resources">
+                <h5> Featured resources </h5>
+                <div class="featured-resources__holder">
+                  {% for resource_relation in category.category_featured_resources.all|slice:':2' %}
+                    {% include 'includes/resource.html' with resource=resource_relation.resource %}
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
           {% endfor %}
         </div>
-
-        {% for category in resourcecategory_list %}
-          <div class="resources-holder hidden" data-category="{{ category.pk }}">
-            <div class="resource-description">
-              <h2>{{ category.title }}</h2>
-              <p>{{ category.description }}</p>
-              <div class="more-button-holder">
-                <a href="{{ category.get_absolute_url }}" class="more-button button">Read more</a>
-              </div>
-            </div>
-
-            <div class="featured-resources">
-              <h5> Featured resources </h5>
-              <div class="featured-resources__holder">
-                {% for resource_relation in category.category_featured_resources.all|slice:':2' %}
-                  {% include 'includes/resource.html' with resource=resource_relation.resource %}
-                {% endfor %}
-              </div>
-            </div>
-          </div>
-        {% endfor %}
       </div>
     </div>
   </div>
