@@ -2,33 +2,26 @@
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     position: relative;
+    grid-auto-flow: dense;
 
-    @media all and (max-width: 1060px){
+    @media all and (max-width: 1060px) {
         grid-template-columns: repeat(3, 1fr);
     }
 
-    @media all and (max-width: 700px){
+    @media all and (max-width: 700px) {
         grid-template-columns: repeat(2, 1fr);
     }
 
-    @media all and (max-width: 400px){
+    @media all and (max-width: 400px) {
         grid-template-columns: repeat(1, 1fr);
-    }
-
-    @media all and (min-width: 401px) {
-        margin-bottom: 30rem;
-    }
-
-    p {
-        text-align: right;
     }
 }
 
 .resources-holder {
     display: flex;
-    position: absolute;
     left: 0;
     right: 0;
+    grid-column: span 4;
 
     .resource-description {
         width: 50%;
@@ -38,21 +31,26 @@
         min-height: 100%;
         align-items: flex-start;
 
-        h2{
+        h2 {
             padding: 1rem 0 0 0;
         }
 
-        p{
+        p {
             padding-right: 4rem;
             padding-bottom: 4rem;
             word-wrap: break-word;
         }
-        .more-button-holder{
+        .more-button-holder {
             display: flex;
             justify-content: flex-end;
             padding-right: 3rem;
             margin-top: auto;
             width: 100%;
+
+            @media all and (max-width: 885px) {
+                padding-right: 0;
+                margin-top: 1rem;
+            }
         }
 
         .more-button {
@@ -63,15 +61,13 @@
                 background: black;
                 color: white;
                 padding: 0.8rem 1.5rem;
-                position: relative;
-                top: 1.5rem;
             }
         }
     }
 
     .featured-resources {
         width: 50%;
-        background: #50E3C2;
+        background: #50e3c2;
 
         h5 {
             color: white;
@@ -79,11 +75,10 @@
         }
     }
 
-    @media all and (max-width: 400px) {
+    @media all and (max-width: 885px) {
         flex-flow: row wrap;
-        position: static;
 
-        .resource-description{
+        .resource-description {
             width: 100%;
             padding: 0 1rem;
 
@@ -93,11 +88,22 @@
                 word-wrap: break-word;
             }
         }
-        .featured-resources{
+        .featured-resources {
             width: 100%;
-            padding: 0
+            padding: 0;
         }
+    }
 
+    @media all and (max-width: 1060px) {
+        grid-column: span 3;
+    }
+
+    @media all and (max-width: 700px) {
+        grid-column: span 2;
+    }
+
+    @media all and (max-width: 400px) {
+        grid-column: span 1;
     }
 }
 
@@ -158,13 +164,12 @@
     }
 }
 
-.background{
-    background: url("https://picsum.photos/id/237/1200/900") center center/cover no-repeat;
+.background {
+    background: url('https://picsum.photos/id/237/1200/900') center center/cover no-repeat;
     padding: 4rem 0 20rem 0;
     position: relative;
 
-
-    .backgroundContent{
+    .backgroundContent {
         padding-left: 25%;
         position: relative;
     }
@@ -176,30 +181,26 @@
         display: flex;
         justify-content: flex-end;
         padding-top: 2.5rem;
-
-
     }
-    .backButton{
+    .backButton {
         text-decoration: none;
         color: black;
         padding: 18px 28px;
         display: inline-block;
     }
 
-    .header{
+    .header {
         color: white;
         background: black;
         padding: 0.5rem;
     }
-    .description{
+    .description {
         margin-top: 1.5rem;
         padding: 1rem 1rem;
         background: black;
         color: white;
-
-
     }
-    .featuredButton{
+    .featuredButton {
         position: absolute;
         bottom: 0;
         background: black;
@@ -214,10 +215,9 @@
     }
 
     @media all and (max-width: 1060px) {
-
         padding: 3rem 0 12rem 0;
 
-        .backgroundContent{
+        .backgroundContent {
             display: flex;
             flex-flow: row wrap;
             padding-left: 0;
@@ -234,19 +234,15 @@
         .resource-subtitle {
             width: 100%;
         }
-        .backButton{
+        .backButton {
             padding: 8px 20px;
         }
     }
 
-   
-
     @media all and (max-width: 400px) {
         padding: 1rem 0 12rem 0;
     }
-
 }
-
 
 .featured-resources {
     h5 {
@@ -256,19 +252,25 @@
 
 .featured-resources__holder {
     display: flex;
+    flex-flow: row wrap;
     margin-bottom: 1.5rem;
+    padding: 0 1rem;
 
     .resource {
-        flex: 1;
-
         &:last-child:after {
             content: none;
         }
     }
 
-    @media all and (min-width: 1120px) {
+    @media all and (min-width: 884px) {
         position: relative;
+        flex-flow: row nowrap;
         left: -2rem;
-        box-shadow: 2px 2px 8px 0px rgba(#000000, .125);
+        padding: 0;
+        box-shadow: 2px 2px 8px 0px rgba(#000000, 0.125);
+
+        .resource {
+            flex: 1;
+        }
     }
 }

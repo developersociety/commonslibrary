@@ -6,7 +6,6 @@ category_toggles.forEach((category) => {
         event.preventDefault();
 
         const category_element = category.closest('.category-grid__item');
-        const height_offset = category_element.offsetTop + category_element.offsetHeight;
 
         category_details.forEach((detail_panel) => {
             detail_panel.classList.add('hidden');
@@ -24,7 +23,6 @@ category_toggles.forEach((category) => {
             `.resources-holder[data-category="${target}"]`
         );
 
-        target_element.style.top = `${height_offset}px`;
         target_element.classList.remove('hidden');
     };
 });
