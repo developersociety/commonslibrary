@@ -13,7 +13,7 @@
             {% thumbnail category.image '500' as category_image %}
               <div class="category-grid__item" style="background: url({{ category_image.url }}) center center/cover no-repeat">
                 <div class="category-grid__item-detail">
-                  <h2><a href="#" class="category_toggle" data-target="{{ category.pk }}">{{ category.title }}</a></h2>
+                  <h3><a href="#" class="category_toggle" data-target="{{ category.pk }}">{{ category.title }}</a></h3>
                   <p>{{ category.get_resource_count }} resource{{ category.get_resource_count|pluralize }}</p>
                 </div>
               </div>

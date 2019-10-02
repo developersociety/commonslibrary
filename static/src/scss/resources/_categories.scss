@@ -3,8 +3,24 @@
     grid-template-columns: repeat(4, 1fr);
     position: relative;
 
+    @media all and (max-width: 1060px){
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    @media all and (max-width: 700px){
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media all and (max-width: 400px){
+        grid-template-columns: repeat(1, 1fr);
+    }
+
     @media all and (min-width: 401px) {
         margin-bottom: 30rem;
+    }
+
+    p {
+        text-align: right;
     }
 }
 
@@ -29,6 +45,7 @@
         p{
             padding-right: 4rem;
             padding-bottom: 4rem;
+            word-wrap: break-word;
         }
         .more-button-holder{
             display: flex;
@@ -73,6 +90,7 @@
             p {
                 padding-bottom: 0;
                 padding-right: 0;
+                word-wrap: break-word;
             }
         }
         .featured-resources{
@@ -157,7 +175,7 @@
         width: 25%;
         display: flex;
         justify-content: flex-end;
-        padding-top: 2rem;
+        padding-top: 2.5rem;
 
 
     }
@@ -185,11 +203,17 @@
         position: absolute;
         bottom: 0;
         background: black;
-        padding: 0.5rem;
+        padding: 1rem;
         color: white;
         text-decoration: none;
+        font-size: 20px;
     }
-    @media all and (max-width: 1120px) {
+
+    .resource-subtitle {
+        word-wrap: break-word;
+    }
+
+    @media all and (max-width: 1060px) {
 
         padding: 3rem 0 12rem 0;
 
@@ -210,12 +234,17 @@
         .resource-subtitle {
             width: 100%;
         }
-
+        .backButton{
+            padding: 8px 20px;
+        }
     }
+
+   
 
     @media all and (max-width: 400px) {
         padding: 1rem 0 12rem 0;
     }
+
 }
 
 
