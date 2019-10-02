@@ -3,6 +3,7 @@ from django_filters.rest_framework import FilterSet
 
 from accounts.models import User
 from directory.models import Organisation
+from resources.models import Resource
 
 
 class ResourceFilter(FilterSet):
