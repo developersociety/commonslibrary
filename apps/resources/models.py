@@ -152,6 +152,10 @@ class ResourceCategory(models.Model):
     title = models.CharField(max_length=64, unique=True)
     slug = models.SlugField(max_length=64, unique=True)
     description = models.TextField()
+    image = ImageField(
+        'Lead category image',
+        upload_to='uploads/resources/categories/images/%Y/%m/%d',
+    )
 
     class Meta:
         ordering = ('title',)
@@ -164,7 +168,7 @@ class ResourceCategory(models.Model):
         return self.resource_set.count()
 
     def get_absolute_url(self):
-        return reverse('resources:resource-detail', kwargs={'slug': self.slug})
+        return reverse('resources:resource-category-detail', kwargs={'slug': self.slug})
 
 
 class ResourceCategoryFeatured(SortableMixin):
