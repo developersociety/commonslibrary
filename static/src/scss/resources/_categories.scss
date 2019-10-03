@@ -257,9 +257,15 @@
     padding: 0 1rem;
 
     .resource {
+        width: 100%;
+
         &:last-child:after {
             content: none;
         }
+    }
+
+    @media all and (min-width: 541px) {
+        flex-flow: row nowrap;
     }
 
     @media all and (min-width: 884px) {
