@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 
-{% load render_bundle from webpack_loader %}
-{% load thumbnail %}
+{% load thumbnail staticfiles %}
 
 {% block extra_head %}
   {% if organisation.colour %}
@@ -94,5 +93,5 @@
 {% endblock main_content %}
 
 {% block extra_scripts %}
-  {% render_bundle 'main' 'js' %}
+  <script src="{% static 'dist/js/main.js' %}"></script>
 {% endblock extra_scripts %}

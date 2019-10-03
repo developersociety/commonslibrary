@@ -27,12 +27,6 @@ TEMPLATES[0]['OPTIONS']['loaders'] = [
     ),
 ]
 
-# Webpack
-WEBPACK_LOADER['DEFAULT'].update({
-    'BUNDLE_DIR_NAME': 'dist/', 'STATS_FILE':
-        os.path.join(BASE_DIR, 'webpack-production-stats.json')
-})
-
 # SSL required for session/CSRF cookies
 CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True

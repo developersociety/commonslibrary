@@ -1,18 +1,20 @@
 .demo-announcement {
     padding: 0.75rem 0;
-    background: #000;
-    color: #fff;
+    background: #000000;
+    color: #ffffff;
     text-align: center;
 }
 
 .page-footer {
-    padding: $width-gap/2 $width-gap $width-gap*3;
+    padding: $width-gap/2 $width-gap $width-gap * 3;
     background: $color-background;
     box-shadow: 0 100vh 0 100vh $color-background;
     color: #ffffff;
     position: relative;
 
-    h4 { margin: 0; }
+    h4 {
+        margin: 0;
+    }
 
     @media all and (min-width: 741px) {
         padding-top: 0;
@@ -23,7 +25,7 @@
 }
 
 .footer-details {
-    margin: $width-gap $width-gap*1.5 0 0;
+    margin: $width-gap $width-gap * 1.5 0 0;
 }
 
 .footer-logos {
@@ -33,13 +35,13 @@
 
     h4 {
         padding-bottom: $width-gap/2;
-        margin: $width-gap*3 $width-gap 0 0;
+        margin: $width-gap * 3 $width-gap 0 0;
         border-bottom: 3px solid rgba(#ffffff, 0.15);
     }
 
     @media all and (min-width: 741px) {
         h4 {
-            margin-top: $width-gap*2;
+            margin-top: $width-gap * 2;
             text-align: right;
         }
     }
@@ -50,7 +52,9 @@
     flex-flow: row wrap;
     justify-content: flex-start;
 
-    + h4 { margin-top: $width-gap*3; }
+    + h4 {
+        margin-top: $width-gap * 3;
+    }
 
     @media all and (min-width: 741px) {
         justify-content: flex-end;
@@ -81,7 +85,8 @@
     @extend %reset-box;
 
     position: fixed;
-    top: 0; left: 0;
+    top: 0;
+    left: 0;
     width: 100%;
     background: $color-accent;
     color: $color-background;
@@ -100,15 +105,22 @@
 }
 
 body {
-
     @media all and (max-width: 1060px) {
         padding: 1.9375rem 0 3rem 0;
     }
 }
 
 @keyframes show-message {
-  0%  { transform: translateY(-100%); }
-  10%  { transform: translateY(0); }
-  75%  { transform: translateY(0); }
-  100%  { transform: translateY(-100%); }
+    0% {
+        transform: translateY(-100%);
+    }
+    10% {
+        transform: translateY(0);
+    }
+    75% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-100%);
+    }
 }

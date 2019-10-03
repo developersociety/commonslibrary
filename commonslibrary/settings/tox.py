@@ -23,12 +23,6 @@ INSTALLED_APPS += [
     'django_extensions',
 ]
 
-# Webpack
-WEBPACK_LOADER['DEFAULT'].update({
-    'BUNDLE_DIR_NAME': 'dist/', 'STATS_FILE':
-        os.path.join(BASE_DIR, 'webpack-production-stats.json')
-})
-
 # Test Runner
 # - Use XMLTestRunner for tox to output per test XML files
 # - Output these to a separate directory to avoid clutter

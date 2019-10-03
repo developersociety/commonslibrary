@@ -1,89 +1,203 @@
+/* eslint-disable radix */
 const path = require('path');
-const webpack = require('webpack');
-const BundleTracker = require('webpack-bundle-tracker');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const StyleLintPlugin = require('stylelint-webpack-plugin');
+const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
+const WebpackNotifierPlugin = require('webpack-notifier');
 
-const webpackPort = parseInt(process.env.WEBPACK_PORT || 3000);
+const django_ip = process.env.DJANGO_IP || '127.0.0.1';
+const django_port = parseInt(process.env.DJANGO_PORT || 8000);
+const browsersync_port = parseInt(process.env.BROWSERSYNC_PORT || django_port + 1);
+const browsersyncui_port = browsersync_port + 1;
+const config = {
+    entry: {
+        main: ['./static/src/js/index.jsx'],
+        styles: ['./static/src/scss/styles.scss'],
+        nav: ['./static/src/js/nav.js'],
+        home: [
+            '@babel/polyfill',
+            './static/src/js/index.jsx',
+            './static/src/js/home.js',
+            './static/src/scss/styles.scss'
+        ],
+        forms: [
+            '@babel/polyfill',
+            './static/src/js/forms/forms.jsx',
+            './static/src/js/forms/tags.js',
+            './static/src/js/forms/privacy.js'
+        ],
+        resource: ['@babel/polyfill', './static/src/js/resource/resource_detail.js']
+    },
+    output: {
+        path: path.resolve('./static/dist/'),
+        filename: 'js/[name].js'
+    }
+};
 
-module.exports = {
-  context: __dirname,
+require('es6-promise').polyfill();
 
-  entry: {
-    main: [
-        'webpack-dev-server/client?http://127.0.0.1:' + webpackPort + '/',
-        './static/src/js/index',
-        './static/src/scss/styles.scss'
-    ],
-    nav : [
-        'webpack-dev-server/client?http://127.0.0.1:' + webpackPort + '/',
-        './static/src/js/nav',
-    ],
-    home: [
-        'webpack-dev-server/client?http://127.0.0.1:' + webpackPort + '/',
-        './static/src/js/index',
-        './static/src/js/home',
-        './static/src/scss/styles.scss'
-    ],
-    forms: [
-        'webpack-dev-server/client?http://127.0.0.1:' + webpackPort + '/',
-        './static/src/js/forms/forms',
-        './static/src/js/forms/tags',
-        './static/src/js/forms/privacy'
-    ],
-    resource: [
-        'webpack-dev-server/client?http://127.0.0.1:' + webpackPort + '/',
-        './static/src/js/resource/resource_detail'
-    ]
-  },
+module.exports = [
+    // Development webpack config
+    {
+        name: 'development',
+        entry: config.entry,
+        output: config.output,
+        plugins: [
+            // Set css name
+            new ExtractTextPlugin({
+                filename: 'css/[name].css'
+            }),
 
-  output: {
-    path: path.resolve('./static/bundles/'),
-    filename: "[name].js",
-    publicPath: 'http://127.0.0.1:' + webpackPort + '/static/bundles/'
-  },
+            // Stylelint plugin
+            new StyleLintPlugin({
+                configFile: '.stylelintrc',
+                context: '',
+                files: '/static/src/scss/**/*.scss',
+                syntax: 'scss',
+                failOnError: false,
+                quiet: false
+            }),
 
-  plugins: [
-    new BundleTracker({filename: './webpack-stats.json'}),
-    new ExtractTextPlugin({
-      filename: 'css/[name].css',
-      allChunks: true,
-    })
-  ],
+            // BrowserSync
+            new BrowserSyncPlugin(
+                {
+                    host: django_ip,
+                    port: browsersync_port,
+                    injectCss: true,
+                    logLevel: 'silent',
+                    files: ['./static/dist/css/*.css', './static/dist/js/*.js'],
+                    ui: {
+                        port: browsersyncui_port
+                    }
+                },
+                {
+                    reload: false
+                }
+            ),
 
-  module: {
-    rules: [
-      {
-        test: /\.(js|jsx)$/,
-        exclude: /node_modules/,
-        loader: 'babel-loader'
-      },
-      {
-        test: /\.css$/,
-        exclude: '/node_modules/',
-        loader: ExtractTextPlugin.extract({
-          use: ['css-loader?importLoaders=1'],
-        })
-      },
-      {
-        test: /\.scss$/,
-        exclude: '/node_modules/',
-        loader: ExtractTextPlugin.extract([
-          'css-loader',
-          'sass-loader'
-        ])
-      },
-      {
-        test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/,
-        loader: 'file-loader',
-        options: {
-          name: 'assets/[name].[ext]'
+            new WebpackNotifierPlugin()
+        ],
+
+        module: {
+            rules: [
+                {
+                    enforce: 'pre',
+                    test: /\.(js)$/,
+                    exclude: /node_modules/,
+                    use: {
+                        loader: 'eslint-loader',
+                        options: {
+                            configFile: path.resolve('.eslintrc.js'),
+                            fix: true
+                        }
+                    }
+                },
+                {
+                    test: /\.(png|jpg|woff|woff2|eot|ttf|svg|otf)$/,
+                    loader: 'url-loader',
+                    exclude: /node_modules/
+                },
+                {
+                    test: /\.(js|jsx)$/,
+                    exclude: /node_modules/,
+                    use: {
+                        loader: 'babel-loader',
+                        options: {
+                            presets: ['babel-preset-env', 'react']
+                        }
+                    }
+                },
+                {
+                    test: /\.scss$/,
+                    exclude: /node_modules/,
+                    use: ExtractTextPlugin.extract({
+                        fallback: 'style-loader',
+                        use: ['css-loader', 'postcss-loader', 'sass-loader']
+                    })
+                },
+                {
+                    test: /\.css$/,
+                    exclude: /node_modules/,
+                    loader: 'style-loader!css-loader!'
+                }
+            ]
+        },
+
+        stats: {
+            // Colors and log settings
+            colors: true,
+            version: true,
+            timings: true,
+            assets: true,
+            chunks: false,
+            source: true,
+            errors: true,
+            errorDetails: true,
+            warnings: true,
+            hash: false,
+            modules: false,
+            reasons: false,
+            children: false,
+            publicPath: false
+        },
+
+        // Create Sourcemaps for the files
+        devtool: 'source-map',
+
+        resolve: {
+            alias: {
+                vue: 'vue/dist/vue.js'
+            }
         }
-      }
-    ]
-  },
+    },
+    // Production webpack config
+    {
+        name: 'production',
+        entry: config.entry,
+        output: config.output,
 
-  resolve: {
-    modules: ['node_modules'],
-    extensions: ['.js', '.jsx']
-  }
-}
+        plugins: [
+            // Specify the resulting CSS filename
+            new ExtractTextPlugin({
+                filename: 'css/[name].css'
+            }),
+
+            // Stylelint plugin
+            new StyleLintPlugin({
+                configFile: '.stylelintrc',
+                context: '',
+                files: '/static/src/scss/**/*.scss',
+                syntax: 'scss',
+                failOnError: false,
+                quiet: false
+            })
+        ],
+
+        module: {
+            rules: [
+                {
+                    test: /\.(js|jsx)$/,
+                    exclude: /node_modules/,
+                    use: {
+                        loader: 'babel-loader',
+                        options: {
+                            presets: ['babel-preset-env', 'react']
+                        }
+                    }
+                },
+                {
+                    test: /\.(png|jpg|woff|woff2|eot|ttf|svg|otf)$/,
+                    loader: 'url-loader',
+                    exclude: /node_modules/
+                },
+                {
+                    test: /\.scss$/,
+                    use: ExtractTextPlugin.extract({
+                        fallback: 'style-loader',
+                        use: ['css-loader', 'postcss-loader', 'sass-loader']
+                    })
+                }
+            ]
+        }
+    }
+];

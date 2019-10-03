@@ -1,7 +1,7 @@
 import Sticky from 'sticky-js';
 
 new Sticky('#resource_sidebar', {
-    'stickyFor': 1060
+    stickyFor: 1060
 });
 
 const csrf = document.querySelector('[name="csrfmiddlewaretoken"]').value;
@@ -10,53 +10,56 @@ const actionButtons = document.querySelectorAll('.js-resource-action');
 const accordions = document.querySelectorAll('.mj_accordion');
 
 function resourceAction(action, button) {
-    const requestUrl = '/api/v1/resources/' + resource + '/' + action +'/';
-    const allButtonsOfType = document.querySelectorAll('[data-type=' + action + ']');
+    const requestUrl = `/api/v1/resources/${resource}/${action}/`;
+    const allButtonsOfType = document.querySelectorAll(`[data-type=${action}]`);
 
     fetch(requestUrl, {
         method: 'put',
         credentials: 'include',
         headers: {
-            "X-CSRFToken": csrf
+            'X-CSRFToken': csrf
         }
-    }).then(response => {
+    }).then((response) => {
         if (response.ok) {
             const prevStatus = button.classList.contains('true');
             const newStatus = !prevStatus;
 
-            [...allButtonsOfType].map(button => {
-                button.classList.replace(prevStatus.toString(), newStatus.toString());
+            [...allButtonsOfType].map((button_instance) => {
+                button_instance.classList.replace(prevStatus.toString(), newStatus.toString());
 
-                let count = button.querySelector('.js-count');
-                let oldCount = parseInt(count.textContent);
+                const count = button_instance.querySelector('.js-count');
+                const oldCount = parseInt(count.textContent, 10);
 
-                count.textContent = newStatus == true ? oldCount + 1 : oldCount - 1;
-            })
+                count.textContent = newStatus === true ? oldCount + 1 : oldCount - 1;
+            });
         }
-    })
+    });
 }
 
-[...actionButtons].map(button => {
-    button.addEventListener('click', e => {
+[...actionButtons].map((button) => {
+    button.addEventListener('click', (e) => {
         e.preventDefault();
 
-        const button = e.target.parentElement;
-        const type = button.dataset.type;
+        const button_element = e.target.parentElement;
+        const type = button_element.dataset.type;
 
-        resourceAction(type, button);
-    })
+        resourceAction(type, button_element);
+    });
 });
 
-[...accordions].map(accordion => {
-    const accordionPanels = accordion.children;
+[...accordions].map((accordion) => {
     const accordionToggles = accordion.querySelectorAll('.mj_accordion_item');
 
-    [...accordionToggles].map(toggle => {
-        toggle.addEventListener('click', e => {
+    [...accordionToggles].map((toggle) => {
+        toggle.addEventListener('click', (e) => {
             const panel = e.target.parentElement;
-            const panelClass = panel.classList
+            const panelClass = panel.classList;
 
-            panelClass.contains('active') ? panelClass.remove('active') : panelClass.add('active');
-        })
+            if (panelClass.contains('active')) {
+                panelClass.remove('active');
+            } else {
+                panelClass.add('active');
+            }
+        });
     });
 });

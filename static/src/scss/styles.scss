@@ -1,4 +1,4 @@
-@import '~normalize.css/normalize.css';
+@import 'node_modules/normalize-scss/sass/normalize/import-now';
 
 // Global rules
 * {
@@ -26,7 +26,6 @@
 @import 'global/typography';
 @import 'global/navigation';
 @import 'global/page';
-
 
 // Resources styles
 @import 'resources/comments';

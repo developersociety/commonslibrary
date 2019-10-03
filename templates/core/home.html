@@ -1,7 +1,6 @@
 {% extends "base.html" %}
 
-{% load render_bundle from webpack_loader %}
-{% load thumbnail %}
+{% load thumbnail staticfiles %}
 
 
 {% block body_class %}home-page{% endblock body_class %}
@@ -81,5 +80,5 @@
 {% endblock main_content %}
 
 {% block extra_scripts %}
-  {% render_bundle 'home' 'js' %}
+  <script src="{% static 'dist/js/home.js' %}"></script>
 {% endblock extra_scripts %}

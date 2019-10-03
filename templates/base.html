@@ -1,4 +1,4 @@
-{% load render_bundle from webpack_loader %}
+
 {% load staticfiles %}
 
 <!DOCTYPE html>
@@ -18,7 +18,7 @@
       <!-- End Google Analytics -->
     {% endif %}
 
-    {% render_bundle 'main' 'css' %}
+    <link rel="stylesheet" href="{% static 'dist/css/styles.css' %}">
     <title>{% block title %}{{ request.site.name }}{% endblock %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -60,7 +60,7 @@
 
     {% include 'includes/footer.html' %}
 
-    {% render_bundle 'nav' %}
+    <script src="{% static 'dist/js/nav.js' %}"></script>
 
     {% block extra_scripts %}
     {% endblock extra_scripts %}

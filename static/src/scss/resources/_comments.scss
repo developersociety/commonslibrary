@@ -14,7 +14,9 @@
     align-items: center;
     padding: $width-gap/2 $width-gap;
 
-    h4 { margin: 0 0 0 $width-gap/2; }
+    h4 {
+        margin: 0 0 0 $width-gap/2;
+    }
 
     .icon {
         width: 2rem;
@@ -50,7 +52,7 @@
     }
 
     .profile-summary__group {
-        margin: 0 $width-gap/2 0 0 ;
+        margin: 0 $width-gap/2 0 0;
     }
 }
 

@@ -38,7 +38,7 @@
     position: absolute;
     background: hsla(0, 0%, 100%, 0.75);
     border: none;
-    color: #333;
+    color: #333333;
 }
 .flickity-button:hover {
     background: white;
@@ -46,7 +46,7 @@
 }
 .flickity-button:focus {
     outline: none;
-    box-shadow: 0 0 0 5px #19f;
+    box-shadow: 0 0 0 5px #1199ff;
 }
 .flickity-button:active {
     opacity: 0.6;
@@ -58,7 +58,7 @@
     pointer-events: none;
 }
 .flickity-button-icon {
-    fill: #333;
+    fill: #333333;
 }
 /* ---- previous/next buttons ---- */
 .flickity-prev-next-button {
@@ -110,7 +110,7 @@
     width: 10px;
     height: 10px;
     margin: 0 8px;
-    background: #333;
+    background: #333333;
     border-radius: 50%;
     opacity: 0.25;
     cursor: pointer;

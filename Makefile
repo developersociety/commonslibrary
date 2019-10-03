@@ -36,10 +36,10 @@ check: ## Check for any obvious errors in the project's setup.
 check: pipdeptree-check npm-check django-check
 
 format: ## Run this project's code formatters.
-format: yapf-format isort-format
+format: yapf-format isort-format prettier-format
 
 lint: ## Lint the project.
-lint: npm-install yapf-lint isort-lint flake8-lint
+lint: npm-install yapf-lint isort-lint flake8-lint eslint-lint prettier-lint
 
 test: ## Run unit and integration tests.
 test: django-test
@@ -177,11 +177,16 @@ npm-install:
 npm-run-production:
 	npm run production
 
+# ESLint
+eslint-lint:
+	npm run eslint -- static/src/js
 
-# JSHint
-jshint-lint:
-	npm run jshint -- --exclude="static/vendor/" static/
+# Prettier
+prettier-lint:
+	npm run prettier --silent -- --list-different "static/src/{js,scss}/**" "*.js"
 
+prettier-format:
+	npm run prettier --silent -- --write "static/src/{js,scss}/**" "*.js"
 
 # YAPF
 yapf-lint:

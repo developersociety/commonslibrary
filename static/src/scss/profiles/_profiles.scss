@@ -10,7 +10,9 @@
         display: block;
         height: 3px;
         position: absolute;
-        bottom: 0; left: 0; right: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
         background: rgba($color-background, 0.1);
         pointer-events: none;
         user-select: none;
@@ -27,7 +29,7 @@
     @extend %flex-row;
 
     grid-column: auto / span 1;
-    background: #fff;
+    background: #ffffff;
     position: relative;
 
     .profile-image {
@@ -39,7 +41,9 @@
         display: block;
         width: 3px;
         position: absolute;
-        top: 0; right: 0; bottom: 3px;
+        top: 0;
+        right: 0;
+        bottom: 3px;
         background: rgba($color-background, 0.1);
     }
 
@@ -83,8 +87,8 @@
     }
 
     @media all and (min-width: 801px) {
-        width: calc(100% - #{$width-gap*2});
-        height: calc(100% - #{$width-gap*2});
+        width: calc(100% - #{$width-gap * 2});
+        height: calc(100% - #{$width-gap * 2});
     }
 }
 
@@ -103,14 +107,14 @@
     padding: $width-gap/2 $width-gap;
 
     @media all and (min-width: 801px) {
-    display: none;
+        display: none;
     }
 }
 
 .profile-summary__details {
     grid-column: 2 / -1;
     padding: 0;
-    background: #fff;
+    background: #ffffff;
 }
 
 .profile-summary__identity {
@@ -146,11 +150,12 @@
     }
 }
 
-
 .profile-description {
     padding: 0 $width-gap $width-gap calc(#{$width-gap} + 3px);
 
-    .icon { vertical-align: middle; }
+    .icon {
+        vertical-align: middle;
+    }
 
     @media all and (min-width: 1261px) {
         padding: $width-gap $width-gap $width-gap calc(#{$width-gap} + 3px);
@@ -177,7 +182,6 @@
     + .icon-list {
         padding-top: 0;
     }
-
 
     @media all and (min-width: 1261px) {
         width: calc(100% / 3);
@@ -218,7 +222,9 @@
         content: '';
         display: block;
         position: absolute;
-        left: 0; top: 0; bottom: 0;
+        left: 0;
+        top: 0;
+        bottom: 0;
         width: 3px;
         background: rgba($color-background, 0.05);
     }
@@ -247,7 +253,6 @@
 }
 
 .profile-name {
-
     @media all and (min-width: 1061px) {
         margin-top: 0;
 

@@ -39,25 +39,34 @@ class Command(StaticfilesRunserverCommand):
             os.environ['WEBPACK_PORT'] = str(int(self.port) + 1)
 
     def start_webpack(self, **options):
-        inner_process = 'RUN_MAIN' in os.environ
-        use_reloader = options.get('use_reloader')
+        inner_process = "RUN_MAIN" in os.environ
+        use_reloader = options.get("use_reloader")
 
-        # Don't start webpack on the inner process with autoreload
+        # Don"t start webpack on the inner process with autoreload
         if inner_process and use_reloader:
             return
 
-        self.stdout.write('>>> Starting webpack')
+        webpack_args = []
+
+        # Only be noisy if verbosity >= 1
+        if options.get("verbosity") < 1:
+            webpack_args.append("--display=errors-only")
+
+        if webpack_args:
+            webpack_args = ["--"] + webpack_args
+
+        self.stdout.write(">>> Starting webpack")
         self.webpack_process = subprocess.Popen(
-            ['node', 'server.js'],
+            ["npm", "start"] + webpack_args,
             shell=False,
             stdin=subprocess.PIPE,
-            stdout=self.stdout,
-            stderr=self.stderr,
+            stdout=self.stdout._out,
+            stderr=self.stderr._out,
         )
-        self.stdout.write('>>> webpack process on pid {}'.format(self.webpack_process.pid))
+        self.stdout.write(">>> Webpack process on pid {}".format(self.webpack_process.pid))
 
         def kill_webpack_process():
-            self.stdout.write('>>> Closing webpack process')
+            self.stdout.write(">>> Closing webpack process")
             self.webpack_process.terminate()
             self.webpack_process.wait()
 

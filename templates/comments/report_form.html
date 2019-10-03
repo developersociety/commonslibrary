@@ -1,8 +1,6 @@
 {% extends 'base.html' %}
 
-{% load crispy_forms_tags %}
-{% load render_bundle from webpack_loader %}
-{% load thumbnail %}
+{% load crispy_forms_tags staticfiles thumbnail %}
 
 
 {% block main_content %}
@@ -22,7 +20,7 @@
 {% endblock main_content %}
 
 {% block extra_scripts %}
-  {% render_bundle 'forms' %}
+  <script src="{% static 'dist/js/forms.js' %}"></script>
 {% endblock extra_scripts %}
 
 
