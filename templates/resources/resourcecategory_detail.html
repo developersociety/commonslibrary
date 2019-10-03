@@ -1,31 +1,33 @@
 {% extends 'base.html' %}
 
-{% load staticfiles %}
+{% load thumbnail staticfiles %}
 
 
 {% block main_content %}
-  <div class="background">
-    <div class="backgroundContent">
-      <div class="backButtonHolder">
-        <a href="{% url 'resources:resource-category-list' %}" class="backButton button">
-          Back To Categories
-        </a>
+  {% thumbnail resourcecategory.image '500' as category_image %}
+    <div class="background" style="background: url({{ category_image.url }}) center center/cover no-repeat">
+      <div class="backgroundContent">
+        <div class="backButtonHolder">
+          <a href="{% url 'resources:resource-category-list' %}" class="backButton button">
+            Back To Categories
+          </a>
+        </div>
+        <div class="resource-title">
+          <h1>
+            <span>{{ resourcecategory.title }}</span>
+          </h1>
+        </div>
+        <div class="resource-subtitle">
+          <h3>
+            <span>{{ resourcecategory.description }}</span>
+          </h3>
+        </div>
       </div>
-      <div class="resource-title">
-        <h1>
-          <span>{{ resourcecategory.title }}</span>
-        </h1>
-      </div>
-      <div class="resource-subtitle">
-        <h3>
-          <span>{{ resourcecategory.description }}</span>
-        </h3>
-      </div>
+      <a href="#" class="featuredButton button">
+        Featured Resources
+      </a> 
     </div>
-    <a href="#" class="featuredButton button">
-      Featured Resources
-    </a> 
-  </div>
+  {% endthumbnail %}
 
   <div class="featured-resources resources-grid">
     {% for resource in resourcecategory.category_featured_resources.all %}

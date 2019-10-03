@@ -7,7 +7,10 @@
   <div class="explore">
     <div class="categories-grid">
       <div class="explore-tags">
-        <h1>Categories</h1>
+        <div class ="intro">
+          <h1>Categories</h1>
+          <h3>A sub line which adds clarity to what that area is</h3>
+        </div>
         <div class="category-grid">
           {% for category in resourcecategory_list %}
             {% thumbnail category.image '500' as category_image %}
