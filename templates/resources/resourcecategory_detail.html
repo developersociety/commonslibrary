@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% load thumbnail staticfiles %}
+
+
+{% block main_content %}
+  {% thumbnail resourcecategory.image '500' as category_image %}
+    <div class="background" style="background: url({{ category_image.url }}) center center/cover no-repeat">
+      <div class="backgroundContent">
+        <div class="backButtonHolder">
+          <a href="{% url 'resources:resource-category-list' %}" class="backButton button">
+            Back To Categories
+          </a>
+        </div>
+        <div class="resource-title">
+          <h1>
+            <span>{{ resourcecategory.title }}</span>
+          </h1>
+        </div>
+        <div class="resource-subtitle">
+          <h3>
+            <span>{{ resourcecategory.description }}</span>
+          </h3>
+        </div>
+      </div>
+      <a href="#" class="featuredButton button">
+        Featured Resources
+      </a> 
+    </div>
+  {% endthumbnail %}
+
+  <div class="featured-resources resources-grid">
+    {% for resource in resourcecategory.category_featured_resources.all %}
+      {% include 'includes/resource.html' with resource=resource.resource %}
+    {% endfor %}
+  </div>
+
+  <div id="react-app" data-hidesearch="true" data-category="{{ resourcecategory.pk }}">
+    {% csrf_token %}
+  </div>
+
+{% endblock %}
+
+
+{% block extra_scripts %}
+  <script src="{% static 'dist/js/main.js' %}"></script>
+{% endblock extra_scripts %}

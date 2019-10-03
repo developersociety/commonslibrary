@@ -46,6 +46,14 @@ class UserRegistrationForm(forms.ModelForm):
         strip=False,
         widget=forms.PasswordInput,
     )
+    privacy_agreement = forms.BooleanField(
+        required=True,
+        label='I agree to The Campaigns Library contacting me about my membership.',
+        help_text='''
+            Your personal information will be held securely. By submitting information you are
+            agreeing to the use of data and cookies in accordance with our privacy policy.
+        '''
+    )
 
     class Meta:
         model = User
@@ -88,6 +96,7 @@ class UserRegistrationForm(forms.ModelForm):
             ),
             'phone',
             'address',
+            'privacy_agreement',
             ButtonHolder(
                 Submit('submit', 'Apply for access', css_class='submit'), css_class='form-actions'
             ),

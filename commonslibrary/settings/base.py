@@ -62,6 +62,7 @@ THIRD_PARTY_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'sorl.thumbnail',
+    'adminsortable',
 ]
 
 PROJECT_APPS = [
@@ -69,6 +70,7 @@ PROJECT_APPS = [
     'api.v1.apps.ApiConfig',
     'comments.apps.CommentsConfig',
     'directory.apps.DirectoryConfig',
+    'future.apps.FutureConfig',
     'pages.apps.PagesConfig',
     'resources.apps.ResourcesConfig',
     'tags.apps.TagsConfig',

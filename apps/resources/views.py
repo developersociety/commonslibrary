@@ -6,12 +6,13 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse, reverse_lazy
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic.list import ListView
 
 from comments.forms import CommentForm
 
 from .choices import RESOURCE_WAITING_FOR_APPROVAL
 from .forms import ResourceForm
-from .models import Resource
+from .models import Resource, ResourceCategory
 
 
 class ResourceCreateView(LoginRequiredMixin, CreateView):
@@ -151,3 +152,11 @@ class ResourceUpdateView(LoginRequiredMixin, UpdateView):
         kwargs = super().get_form_kwargs()
         kwargs.update({'user': self.request.user})
         return kwargs
+
+
+class ResourceCategoryListView(ListView):
+    model = ResourceCategory
+
+
+class ResourceCategoryDetailView(DetailView):
+    model = ResourceCategory

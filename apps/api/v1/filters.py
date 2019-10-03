@@ -32,4 +32,4 @@ class ResourceFilter(FilterSet):
 
     class Meta:
         model = Resource
-        fields = ('tags', 'organisation', 'created_by')
+        fields = ('tags', 'categories', 'organisation', 'created_by')

@@ -7,6 +7,7 @@ from django.db.models.functions import Cast
 from django.urls import reverse
 from django.utils import timezone
 
+from adminsortable.models import SortableMixin
 from ckeditor_uploader.fields import RichTextUploadingField
 from sorl.thumbnail import ImageField
 
@@ -24,6 +25,7 @@ class Resource(models.Model):
         help_text='This text will appear in search results',
     )
     content = RichTextUploadingField()
+    categories = models.ManyToManyField('resources.ResourceCategory')
     tags = models.ManyToManyField(Tag, blank=True)
     image = ImageField(
         'Background Image',
@@ -144,3 +146,41 @@ class Resource(models.Model):
         preserved = Case(* [When(pk=pk, then=pos) for pos, pk in enumerate(resources_ids)])
         resources = Resource.objects.filter(id__in=resources_ids).order_by(preserved)
         return resources
+
+
+class ResourceCategory(models.Model):
+    title = models.CharField(max_length=64, unique=True)
+    slug = models.SlugField(max_length=64, unique=True)
+    description = models.TextField()
+    image = ImageField(
+        'Lead category image',
+        upload_to='uploads/resources/categories/images/%Y/%m/%d',
+    )
+
+    class Meta:
+        ordering = ('title',)
+        verbose_name_plural = 'Resource categories'
+
+    def __str__(self):
+        return self.title
+
+    def get_resource_count(self):
+        return self.resource_set.count()
+
+    def get_absolute_url(self):
+        return reverse('resources:resource-category-detail', kwargs={'slug': self.slug})
+
+
+class ResourceCategoryFeatured(SortableMixin):
+    category = models.ForeignKey(
+        ResourceCategory, on_delete=models.CASCADE, related_name='category_featured_resources'
+    )
+    resource = models.ForeignKey(Resource, on_delete=models.CASCADE)
+    project_order = models.PositiveIntegerField(default=0, editable=False, db_index=True)
+
+    class Meta:
+        verbose_name = 'Featured Resource'
+        ordering = ['project_order']
+
+    def __str__(self):
+        return self.resource.title
