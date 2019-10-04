@@ -205,7 +205,7 @@
             background: url(../icons/down.svg) center center/contain no-repeat;
             transform: rotate(90deg);
         }
-        span{
+        span {
             margin: 0 0 0 0.5em;
         }
     }
@@ -215,6 +215,7 @@
         background: black;
         padding: 0.5rem;
     }
+
     .description {
         margin-top: 1.5rem;
         padding: 1rem 1rem;
@@ -256,10 +257,9 @@
         .resource-subtitle {
             width: 100%;
         }
+
         .backButton {
             padding: 8px 20px;
-            
-
         }
     }
 
@@ -274,7 +274,7 @@
 
     h3 {
         text-transform: uppercase;
-        color: #fff;
+        color: #ffffff;
         padding-top: 1.5rem;
         padding-bottom: 1.5rem;
         font-family: Brandon;
@@ -322,6 +322,3 @@
         }
     }
 }
-
-
-   
