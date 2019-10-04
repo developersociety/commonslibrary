@@ -189,7 +189,6 @@
         display: flex;
         justify-content: flex-end;
         top: 0;
-
     }
     .backButton {
         text-decoration: none;
@@ -197,7 +196,7 @@
         padding: 18px 28px;
         display: inline-flex;
         align-items: center;
-    
+
         &::before {
             content: '';
             display: inline-block;
