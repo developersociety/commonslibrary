@@ -176,27 +176,38 @@
 }
 
 .background {
-    padding: 4rem 0 20rem 0;
+    padding: 4rem 0 18rem 0;
     position: relative;
 
     .backgroundContent {
         padding-left: 25%;
-        position: relative;
     }
 
     .backButtonHolder {
         position: absolute;
         left: 0;
-        width: 25%;
         display: flex;
         justify-content: flex-end;
-        padding-top: 2.5rem;
+        top: 0;
     }
     .backButton {
         text-decoration: none;
         color: black;
         padding: 18px 28px;
-        display: inline-block;
+        display: inline-flex;
+        align-items: center;
+
+        &::before {
+            content: '';
+            display: inline-block;
+            width: 1.5em;
+            height: 1.5em;
+            background: url(../icons/down.svg) center center/contain no-repeat;
+            transform: rotate(90deg);
+        }
+        span {
+            margin: 0 0 0 0.5em;
+        }
     }
 
     .header {
@@ -204,6 +215,7 @@
         background: black;
         padding: 0.5rem;
     }
+
     .description {
         margin-top: 1.5rem;
         padding: 1rem 1rem;
@@ -239,11 +251,13 @@
             justify-content: flex-start;
             order: 200;
             width: 100%;
+            margin-top: 1em;
         }
 
         .resource-subtitle {
             width: 100%;
         }
+
         .backButton {
             padding: 8px 20px;
         }
@@ -255,8 +269,26 @@
 }
 
 .featured-resources {
+    padding: 0 2rem;
+    background: #50e3c2;
+
+    h3 {
+        text-transform: uppercase;
+        color: #ffffff;
+        padding-top: 1.5rem;
+        padding-bottom: 1.5rem;
+        font-family: Brandon;
+        font-weight: 600;
+        font-size: 1.2rem;
+        margin-bottom: 0;
+    }
+
     h5 {
         margin-bottom: 0;
+    }
+
+    .resources-grid {
+        background: unset;
     }
 }
 
