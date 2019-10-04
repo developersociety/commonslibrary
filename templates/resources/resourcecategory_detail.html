@@ -9,7 +9,7 @@
       <div class="backgroundContent">
         <div class="backButtonHolder">
           <a href="{% url 'resources:resource-category-list' %}" class="backButton button">
-            Back To Categories
+            <span>Back To Categories</span>
           </a>
         </div>
         <div class="resource-title">
@@ -23,17 +23,17 @@
           </h3>
         </div>
       </div>
-      <a href="#" class="featuredButton button">
-        Featured Resources
-      </a> 
     </div>
   {% endthumbnail %}
 
-  <div class="featured-resources resources-grid">
+  <div class="featured-resources">
+    <h3> Featured Resources</h3>
+    <div class="resources-grid">
     {% for resource in resourcecategory.category_featured_resources.all %}
       {% include 'includes/resource.html' with resource=resource.resource %}
     {% endfor %}
   </div>
+</div>
 
   <div id="react-app" data-hidesearch="true" data-category="{{ resourcecategory.pk }}">
     {% csrf_token %}
