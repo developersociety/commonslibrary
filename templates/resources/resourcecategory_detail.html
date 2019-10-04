@@ -27,7 +27,7 @@
   {% endthumbnail %}
 
   {% if resourcecategory.category_featured_resources.exists %}
-    <div class="featured-resources">
+    <div class="featured-resources detail-page__featured-resources">
       <h3> Featured Resources</h3>
       <div class="resources-grid">
         {% for resource in resourcecategory.category_featured_resources.all %}
