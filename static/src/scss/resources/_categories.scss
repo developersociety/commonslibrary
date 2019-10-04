@@ -269,7 +269,7 @@
 }
 
 .featured-resources {
-    padding: 0 2rem;
+    padding: 0 2rem 2rem 2rem;
     background: #50e3c2;
 
     h3 {
@@ -288,9 +288,17 @@
     }
 
     .resources-grid {
-        background: unset;
+        background: unset;  
+    }
+
+    .resource {
+        box-shadow: 2px 2px 8px 0px rgba(#000000, 0.125);
+        &:last-child:after {
+            content: none;
+        }
     }
 }
+
 
 .featured-resources__holder {
     display: flex;
