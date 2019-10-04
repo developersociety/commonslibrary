@@ -173,6 +173,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'directory.context_processors.footer_orgs',
                 'core.context_processors.demo',
+                'resources.context_processors.resource_categories',
             ],
         },
     },

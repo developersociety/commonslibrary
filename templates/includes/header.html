@@ -11,13 +11,22 @@
         {% include "includes/resource_actions.html" with extra_class="hide-desktop" %}
       {% endif %}
       <ul class="main-navigation">
-        <li class="main-navigation__item {% if request.path == '/explore/' %} active{% endif %}">
+        <li class="main-navigation__item explore-link {% if resources_categories %}with-dropdown{% endif %} {% if request.path == '/explore/' %} active{% endif %}">
           <a href="{% url 'resources:resource-category-list' %}">
             <svg class="icon">
               <use xlink:href="#explore"></use>
             </svg>
             <span class="item-text">Explore</span>
           </a>
+          {% if resources_categories %} 
+            <ul class="dropdown-navigation">
+              {% for category in resources_categories %}
+                <li class="dropdown-navigation__item">
+                  <a href="{{ category.get_absolute_url }}">{{ category }}</a>
+                </li>
+              {% endfor %}
+            </ul>
+          {% endif %}
         </li>
         <li class="main-navigation__item {% if request.path == '/search/' %} active{% endif %}">
           <a href="{% url 'search' %}">
