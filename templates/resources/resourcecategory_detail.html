@@ -9,7 +9,7 @@
       <div class="backgroundContent">
         <div class="backButtonHolder">
           <a href="{% url 'resources:resource-category-list' %}" class="backButton button">
-            <span>Back To Categories</span>
+            <span>All Categories</span>
           </a>
         </div>
         <div class="resource-title">
@@ -26,14 +26,16 @@
     </div>
   {% endthumbnail %}
 
-  <div class="featured-resources">
-    <h3> Featured Resources</h3>
-    <div class="resources-grid">
-    {% for resource in resourcecategory.category_featured_resources.all %}
-      {% include 'includes/resource.html' with resource=resource.resource %}
-    {% endfor %}
-  </div>
-</div>
+  {% if resourcecategory.category_featured_resources.exists %}
+    <div class="featured-resources">
+      <h3> Featured Resources</h3>
+      <div class="resources-grid">
+        {% for resource in resourcecategory.category_featured_resources.all %}
+          {% include 'includes/resource.html' with resource=resource.resource %}
+        {% endfor %}
+      </div>
+    </div>
+  {% endif %}
 
   <div id="react-app" data-hidesearch="true" data-category="{{ resourcecategory.pk }}">
     {% csrf_token %}
