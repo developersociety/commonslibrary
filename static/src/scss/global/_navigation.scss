@@ -145,7 +145,7 @@
             &:hover {
                 background: $color-accent;
                 color: #000000;
-    
+
                 &:after {
                     content: '';
                     display: block;
@@ -160,7 +160,7 @@
                     border-top: 0.825rem solid $color-accent;
                     z-index: 2000;
                 }
-    
+
                 .dropdown-navigation {
                     display: block;
                 }
