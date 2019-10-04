@@ -139,32 +139,32 @@
     }
 
     &.explore-link.with-dropdown {
-        &:hover {
-            background: $color-accent;
-            color: #000000;
-
-            &:after {
-                content: '';
-                display: block;
-                position: absolute;
-                left: 50%;
-                top: calc(100% - 3px);
-                transform: translateX(-50%);
-                width: 0;
-                height: 0;
-                border-left: 0.825rem solid transparent;
-                border-right: 0.825rem solid transparent;
-                border-top: 0.825rem solid $color-accent;
-                z-index: 2000;
-            }
-
-            .dropdown-navigation {
-                display: block;
-            }
-        }
-
         @media all and (min-width: 1061px) {
             display: block;
+
+            &:hover {
+                background: $color-accent;
+                color: #000000;
+    
+                &:after {
+                    content: '';
+                    display: block;
+                    position: absolute;
+                    left: 50%;
+                    top: calc(100% - 3px);
+                    transform: translateX(-50%);
+                    width: 0;
+                    height: 0;
+                    border-left: 0.825rem solid transparent;
+                    border-right: 0.825rem solid transparent;
+                    border-top: 0.825rem solid $color-accent;
+                    z-index: 2000;
+                }
+    
+                .dropdown-navigation {
+                    display: block;
+                }
+            }
         }
     }
 
