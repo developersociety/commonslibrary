@@ -51,6 +51,7 @@
             padding-bottom: 4rem;
             word-wrap: break-word;
         }
+
         .more-button-holder {
             display: flex;
             justify-content: flex-end;
@@ -74,6 +75,23 @@
                 padding: 0.8rem 1.5rem;
             }
         }
+
+        .close-button-holder {
+            display: flex;
+            justify-content: flex-end;
+            padding-right: 2rem;
+            width: 100%;
+
+            .icon {
+                width: 1em;
+                color: black;
+            }
+
+            @media all and (max-width: 885px) {
+                padding-right: 0;
+                margin-top: 1rem;
+            }
+        }
     }
 
     .featured-resources {
@@ -81,7 +99,7 @@
         background: #50e3c2;
 
         h5 {
-            color: white;
+            color: #000000;
             padding: 1rem;
         }
     }
@@ -98,7 +116,12 @@
                 padding-right: 0;
                 word-wrap: break-word;
             }
+
+            h2 {
+                padding: 0;
+            }
         }
+
         .featured-resources {
             width: 100%;
             padding: 0;
@@ -146,7 +169,11 @@
     }
 
     &.active {
-        background: #000000 !important;
+        background: darken(#50e3c2, 20%) !important;
+
+        &:before {
+            background: none;
+        }
 
         &:after {
             content: '';
@@ -159,7 +186,7 @@
             height: 0;
             border-left: 0.675rem solid transparent;
             border-right: 0.675rem solid transparent;
-            border-top: 0.675rem solid #000000;
+            border-top: 0.675rem solid darken(#50e3c2, 20%);
         }
     }
 
@@ -171,12 +198,12 @@
         right: 0;
         bottom: 0;
         left: 0;
-        background: rgba(#000000, 0.625);
+        background: rgba(#000000, 0.5);
     }
 }
 
 .background {
-    padding: 4rem 0 18rem 0;
+    padding: 4rem 0 12rem 0;
     position: relative;
 
     .backgroundContent {
@@ -190,6 +217,7 @@
         justify-content: flex-end;
         top: 0;
     }
+
     .backButton {
         text-decoration: none;
         color: black;
@@ -205,6 +233,7 @@
             background: url(../icons/down.svg) center center/contain no-repeat;
             transform: rotate(90deg);
         }
+
         span {
             margin: 0 0 0 0.5em;
         }
@@ -222,6 +251,7 @@
         background: black;
         color: white;
     }
+
     .featuredButton {
         position: absolute;
         bottom: 0;
@@ -237,7 +267,7 @@
     }
 
     @media all and (max-width: 1060px) {
-        padding: 3rem 0 12rem 0;
+        padding: 3rem 0 10rem 0;
 
         .backgroundContent {
             display: flex;
@@ -264,7 +294,7 @@
     }
 
     @media all and (max-width: 400px) {
-        padding: 1rem 0 12rem 0;
+        padding: 1rem 0 10rem 0;
     }
 }
 
@@ -274,7 +304,7 @@
 
     h3 {
         text-transform: uppercase;
-        color: #ffffff;
+        color: #000000;
         padding-top: 1.5rem;
         padding-bottom: 1.5rem;
         font-family: Brandon;
@@ -310,6 +340,9 @@
 
         &:last-child:after {
             content: none;
+        }
+        @media all and (max-width: 540px) {
+            margin-bottom: 1em;
         }
     }
 
