@@ -144,7 +144,6 @@
 .category-grid__item {
     display: flex;
     position: relative;
-    padding: 1rem;
     min-height: 7.5rem;
     flex-flow: column nowrap;
 
@@ -153,13 +152,14 @@
         flex-flow: column nowrap;
         position: relative;
         color: #ffffff;
-        height: 100%;
         justify-content: space-between;
         flex: 1;
-
+       
         a {
             color: inherit;
             text-decoration: none;
+            height: 100%;
+            padding: 1rem;
         }
 
         p {
