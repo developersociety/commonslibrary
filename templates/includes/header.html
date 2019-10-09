@@ -20,7 +20,10 @@
           </a>
           {% if resources_categories %} 
             <ul class="dropdown-navigation">
-              {% for category in resources_categories %}
+                <li class="dropdown-navigation__item">
+                    <a href= "/resources/categories/">All Categories</a>
+                </li>
+                {% for category in resources_categories %}
                 <li class="dropdown-navigation__item">
                   <a href="{{ category.get_absolute_url }}">{{ category }}</a>
                 </li>

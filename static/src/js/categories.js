@@ -25,7 +25,7 @@ category_toggles.forEach((category) => {
         );
 
         target_element.classList.remove('hidden');
-        category.scrollIntoView({ behavior: 'smooth' });
+        category_element.scrollIntoView({ behavior: 'smooth' });
     };
 });
 
