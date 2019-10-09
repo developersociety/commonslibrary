@@ -44,6 +44,7 @@
 
         h2 {
             padding: 1rem 0 0 0;
+            margin: 0;
         }
 
         p {
@@ -85,6 +86,7 @@
             .icon {
                 width: 1em;
                 color: black;
+                cursor: pointer;
             }
 
             @media all and (max-width: 885px) {
@@ -96,11 +98,12 @@
 
     .featured-resources {
         width: 50%;
-        background: #50e3c2;
+        background: $color-accent;
 
         h5 {
             color: #000000;
             padding: 1rem;
+            margin: 0;
         }
     }
 
@@ -169,7 +172,7 @@
     }
 
     &.active {
-        background: darken(#50e3c2, 20%) !important;
+        background: darken($color-accent-fixed, 20%) !important;
 
         &:before {
             background: none;
@@ -186,7 +189,7 @@
             height: 0;
             border-left: 0.675rem solid transparent;
             border-right: 0.675rem solid transparent;
-            border-top: 0.675rem solid darken(#50e3c2, 20%);
+            border-top: 0.675rem solid darken($color-accent-fixed, 20%);
         }
     }
 
@@ -300,7 +303,7 @@
 
 .featured-resources.detail-page__featured-resources {
     padding: 0 2rem 2rem 2rem;
-    background: #50e3c2;
+    background: $color-accent;
 
     h3 {
         text-transform: uppercase;
