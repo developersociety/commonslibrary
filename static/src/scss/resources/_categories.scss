@@ -172,7 +172,7 @@
     }
 
     &.active {
-        background: darken($color-accent-fixed, 20%) !important;
+        background: #000000 !important;
 
         &:before {
             background: none;
@@ -189,7 +189,7 @@
             height: 0;
             border-left: 0.675rem solid transparent;
             border-right: 0.675rem solid transparent;
-            border-top: 0.675rem solid darken($color-accent-fixed, 20%);
+            border-top: 0.675rem solid #000000;
         }
     }
 
