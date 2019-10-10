@@ -1,5 +1,6 @@
 const category_toggles = document.querySelectorAll('.category_toggle');
 const category_details = document.querySelectorAll('.resources-holder');
+const close_toggles = document.querySelectorAll('.close-resource');
 
 category_toggles.forEach((category) => {
     category.onclick = (event) => {
@@ -24,5 +25,19 @@ category_toggles.forEach((category) => {
         );
 
         target_element.classList.remove('hidden');
+        category_element.scrollIntoView({ behavior: 'smooth' });
+    };
+});
+
+close_toggles.forEach((close) => {
+    close.onclick = (event) => {
+        event.preventDefault();
+        category_details.forEach((detail_panel) => {
+            detail_panel.classList.add('hidden');
+        });
+
+        category_toggles.forEach((category_toggle) => {
+            category_toggle.closest('.category-grid__item').classList.remove('active');
+        });
     };
 });

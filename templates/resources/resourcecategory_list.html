@@ -16,20 +16,26 @@
             {% thumbnail category.image '500' as category_image %}
               <div class="category-grid__item" style="background: url({{ category_image.url }}) center center/cover no-repeat">
                 <div class="category-grid__item-detail">
-                  <h3><a href="#" class="category_toggle" data-target="{{ category.pk }}">{{ category.title }}</a></h3>
-                  <p>{{ category.get_resource_count }} resource{{ category.get_resource_count|pluralize }}</p>
+                  <a href="#" class="category_toggle" data-target="{{ category.pk }}">
+                    <h3>{{ category.title }}</h3>
+                    <p>{{ category.get_resource_count }} resource{{ category.get_resource_count|pluralize }}</p>
+                  </a>
                 </div>
               </div>
             {% endthumbnail %}
             <div class="resources-holder hidden" data-category="{{ category.pk }}">
               <div class="resource-description">
-                <h2>{{ category.title }}</h2>
+                <div class="close-button-holder">
+                  <svg class="icon close-resource">
+                    <use xlink:href="#remove"></use>
+                  </svg>
+                </div> 
+                <h1>{{ category.title }}</h1>
                 <p>{{ category.description }}</p>
                 <div class="more-button-holder">
                   <a href="{{ category.get_absolute_url }}" class="more-button button">See all resources</a>
                 </div>
               </div>
-
               <div class="featured-resources">
                 <h5> Featured resources </h5>
                 <div class="featured-resources__holder">
