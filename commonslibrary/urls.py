@@ -11,6 +11,7 @@ from django.views.generic import TemplateView
 from django.views.static import serve
 
 from core.views import ExploreView, HomeView, SearchView
+from resources.views import ResourceCategoryListView
 
 admin.site.site_title = 'The Campaigns Library'
 admin.site.site_header = 'The Campaigns Library'
@@ -23,6 +24,7 @@ urlpatterns = [
     url(r'^accounts/', include('accounts.urls')),
     url(r'^directory/', include('directory.urls')),
     url(r'^resources/', include('resources.urls')),
+    url(r'^explore/', ResourceCategoryListView.as_view(), name="resource-category-list"),
     url(r'^api/v1/', include('api.v1.urls')),
     url(r'^ckeditor/', include('ckeditor_uploader.urls')),
     url(
