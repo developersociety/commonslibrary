@@ -10,7 +10,8 @@ from django.views.decorators.cache import never_cache
 from django.views.generic import TemplateView
 from django.views.static import serve
 
-from core.views import ExploreView, HomeView, SearchView
+from core.views import HomeView, SearchView
+from resources.views import ResourceCategoryListView
 
 admin.site.site_title = 'The Campaigns Library'
 admin.site.site_header = 'The Campaigns Library'
@@ -19,7 +20,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', HomeView.as_view(), name='home'),
     url(r'^search/$', SearchView.as_view(), name='search'),
-    url(r'^explore/$', ExploreView.as_view(), name='explore'),
+    url(r'^explore/$', ResourceCategoryListView.as_view(), name='explore'),
     url(r'^accounts/', include('accounts.urls')),
     url(r'^directory/', include('directory.urls')),
     url(r'^resources/', include('resources.urls')),
