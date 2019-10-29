@@ -204,9 +204,32 @@
         }
     }
 
+
     .resource-focused {
         display: none;
         background: $color-background;
+        padding: $width-gap;
+    }
+
+    &:hover,
+    &:focus {
+        .resource-focused{
+            display: flex;
+            flex-flow: column nowrap;
+            color: #ffffff;
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+        }
+        .resource-blurred{
+            display: none;
+        }
+
+        .resource-list-title {
+            font-size: 1.25rem;
+        }
     }
 
     .resource-meta {
@@ -240,11 +263,7 @@
     }
 
     @media all and (min-width: 541px) {
-        &:focus,
-        &:hover {
-            background: $color-background;
-            color: $color-line;
-        }
+
 
         &:after {
             content: '';
@@ -453,12 +472,8 @@ footer.resource-detail__stats {
 }
 
 .resource-abstract {
-    font-size: 1.125rem;
+    font-size: 0.85rem;
     margin-top: 0;
-
-    .private & {
-        padding-right: 3rem;
-    }
 }
 
 .private .resource-list-abstract {
