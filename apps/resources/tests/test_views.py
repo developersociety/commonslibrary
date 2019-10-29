@@ -8,7 +8,7 @@ from pages.tests.factories import PageFactory
 from resources.choices import RESOURCE_APPROVED
 from resources.models import Resource
 
-from .factories import ResourceCategoryFactory, ResourceFactory
+from .factories import ResourceCategoryFactory, ResourceCategoryFeaturedFactory, ResourceFactory
 
 
 class ResourceThankTestView(WebTest):
@@ -160,3 +160,70 @@ class ResourceDetailViewTest(WebTest):
             reverse('resources:resource-detail', kwargs={'slug': resource.slug}), user=user
         )
         self.assertEqual(response.status_code, 200)
+
+
+class ResourceCategoryDetailView(WebTest):
+
+    def setUp(self):
+        self.organisation = OrganisationFactory.create()
+        self.resource_category = ResourceCategoryFactory.create()
+
+    def test_view_response(self):
+        response = self.app.get(
+            reverse(
+                'resources:resource-category-detail', kwargs={'slug': self.resource_category.slug}
+            ),
+        )
+        self.assertEqual(response.status_code, 200)
+
+    def test_featured_resources_visible(self):
+        resource = ResourceFactory.create(status=RESOURCE_APPROVED)
+        ResourceCategoryFeaturedFactory.create(
+            category=self.resource_category,
+            resource=resource,
+        )
+        response = self.app.get(
+            reverse(
+                'resources:resource-category-detail', kwargs={'slug': self.resource_category.slug}
+            )
+        )
+        featured_resources = response.context['featured_resources']
+        self.assertTrue(featured_resources.exists())
+
+    def test_featured_resources_not_visible(self):
+        resource = ResourceFactory.create(
+            status=RESOURCE_APPROVED,
+            organisation=self.organisation,
+            privacy=[self.organisation],
+        )
+        ResourceCategoryFeaturedFactory.create(
+            category=self.resource_category,
+            resource=resource,
+        )
+        response = self.app.get(
+            reverse(
+                'resources:resource-category-detail', kwargs={'slug': self.resource_category.slug}
+            ),
+        )
+        featured_resources = response.context['featured_resources']
+        self.assertFalse(featured_resources.exists())
+
+    def test_featured_resources_visible_for_user(self):
+        user = UserFactory.create(approved_organisations=[self.organisation])
+        resource = ResourceFactory.create(
+            status=RESOURCE_APPROVED,
+            organisation=self.organisation,
+            privacy=[self.organisation],
+        )
+        ResourceCategoryFeaturedFactory.create(
+            category=self.resource_category,
+            resource=resource,
+        )
+        response = self.app.get(
+            reverse(
+                'resources:resource-category-detail', kwargs={'slug': self.resource_category.slug}
+            ),
+            user=user,
+        )
+        featured_resources = response.context['featured_resources']
+        self.assertTrue(featured_resources.exists())

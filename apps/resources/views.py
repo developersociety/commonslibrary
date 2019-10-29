@@ -160,3 +160,15 @@ class ResourceCategoryListView(ListView):
 
 class ResourceCategoryDetailView(DetailView):
     model = ResourceCategory
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        resource_category = context['resourcecategory']
+        categories_featured_resources = resource_category.category_featured_resources.values_list(
+            'resource_id'
+        )
+        featured_resources = Resource.objects.approved(self.request.user).filter(
+            id__in=categories_featured_resources
+        )
+        context['featured_resources'] = featured_resources
+        return context
