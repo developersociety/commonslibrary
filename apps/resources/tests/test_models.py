@@ -6,6 +6,8 @@ from resources.models import Resource
 from resources.tests.factories import ResourceFactory
 from tags.tests.factories import TagFactory
 
+from .factories import ResourceCategoryFeaturedFactory
+
 
 class ResourceModelTestCase(TestCase):
 
@@ -36,3 +38,10 @@ class ResourceModelTestCase(TestCase):
         self.assertEqual(resource_4.id, resources[0].id)
         self.assertEqual(resource_3.id, resources[1].id)
         self.assertEqual(resource_2.id, resources[2].id)
+
+
+class ResourceCategoryFeaturedTest(TestCase):
+
+    def test_factory(self):
+        obj = ResourceCategoryFeaturedFactory.create()
+        self.assertIsNotNone(obj.id)

@@ -4,8 +4,7 @@ from comments.views import CommentUpdateView, ReportCommentView
 from pages.views import PageDetailView
 
 from .views import (
-    ResourceCategoryDetailView, ResourceCategoryListView, ResourceCreateView, ResourceDetailView,
-    ResourceUpdateView
+    ResourceCategoryDetailView, ResourceCreateView, ResourceDetailView, ResourceUpdateView
 )
 
 app_name = 'resources'
