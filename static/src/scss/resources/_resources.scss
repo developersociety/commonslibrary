@@ -204,16 +204,14 @@
         }
     }
 
-
     .resource-focused {
         display: none;
         background: $color-background;
-        padding: $width-gap;
     }
 
     &:hover,
     &:focus {
-        .resource-focused{
+        .resource-focused {
             display: flex;
             flex-flow: column nowrap;
             color: #ffffff;
@@ -222,13 +220,6 @@
             right: 0;
             bottom: 0;
             left: 0;
-        }
-        .resource-blurred{
-            display: none;
-        }
-
-        .resource-list-title {
-            font-size: 1.25rem;
         }
     }
 
@@ -263,8 +254,6 @@
     }
 
     @media all and (min-width: 541px) {
-
-
         &:after {
             content: '';
             display: block;
