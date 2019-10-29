@@ -3,43 +3,78 @@
 
 {% if resource %}
   <a href="{{ resource.get_absolute_url }}" class="resource {% if resource.image %}with-image {% endif %}{% if resource.privacy.all.count != 0 %}private{% endif %}">
-    {% thumbnail resource.image '1000' as thumb %}
-      <header class='resource-image' style="background-image: url({{ thumb.url }})">
-        {% if resource_category %}
+    <div class="resource-blurred">
+      {% thumbnail resource.image '1000' as thumb %}
+        <header class='resource-image' style="background-image: url({{ thumb.url }})">
+          {% if resource_category %}
+            <p class="resource-category">{{ resource_category }}</p>
+          {% endif %}
+        </header>
+      {% endthumbnail %}
+      <div class="resource-summary">
+        {% if not resource.image and resource_category %}
           <p class="resource-category">{{ resource_category }}</p>
         {% endif %}
-      </header>
-    {% endthumbnail %}
-    <div class="resource-summary">
-      {% if not resource.image and resource_category %}
-        <p class="resource-category">{{ resource_category }}</p>
-      {% endif %}
-      <div class="resource-list-title">{{ resource.title }}</div>
+        <div class="resource-list-title">{{ resource.title }}</div>
+      </div>
+      <footer class="resource-footer">
+        <div class="resource-user">
+          {% thumbnail resource.organisation.logo '250' as thumb %}
+            <div class="resource-user__group" style="background: url({{ thumb.url }}) left center/contain no-repeat">
+            </div>
+          {% endthumbnail %}
+          <p class="resource-user__name">
+            {{ resource.created_by.get_full_name }}
+          </p>
+        </div>
+        <div class="resource-actions">
+          <span class="resource-liked">
+            <svg class="icon">
+              <use xlink:href="#liked"></use>
+            </svg>
+            {{ resource.likes.count }}
+          </span>
+          <span class="resource-tried">
+            <svg class="icon">
+              <use xlink:href="#tried"></use>
+            </svg>
+            {{ resource.tried.count }}
+          </span>
+        </div>
+      </footer>
     </div>
-    <footer class="resource-footer">
-      <div class="resource-user">
-        {% thumbnail resource.organisation.logo '250' as thumb %}
-          <div class="resource-user__group" style="background: url({{ thumb.url }}) left center/contain no-repeat">
-          </div>
-        {% endthumbnail %}
-        <p class="resource-user__name">
-          {{ resource.created_by.get_full_name }}
-        </p>
+
+
+    <div class="resource-focused">
+      <div class="resource-summary">
+        <div class="resource-list-title">{{ resource.title }}</div>
+        <div class="resource-abstract"> {{ resource.abstract }}</div>
       </div>
-      <div class="resource-actions">
-        <span class="resource-liked">
-          <svg class="icon">
-            <use xlink:href="#liked"></use>
-          </svg>
-          {{ resource.likes.count }}
-        </span>
-        <span class="resource-tried">
-          <svg class="icon">
-            <use xlink:href="#tried"></use>
-          </svg>
-          {{ resource.tried.count }}
-        </span>
-      </div>
-    </footer>
+      <footer class="resource-footer">
+        <div class="resource-user">
+          {% thumbnail resource.organisation.logo '250' as thumb %}
+            <div class="resource-user__group" style="background: url({{ thumb.url }}) left center/contain no-repeat">
+            </div>
+          {% endthumbnail %}
+          <p class="resource-user__name">
+            {{ resource.created_by.get_full_name }}
+          </p>
+        </div>
+        <div class="resource-actions">
+          <span class="resource-liked">
+            <svg class="icon">
+              <use xlink:href="#liked"></use>
+            </svg>
+            {{ resource.likes.count }}
+          </span>
+          <span class="resource-tried">
+            <svg class="icon">
+              <use xlink:href="#tried"></use>
+            </svg>
+            {{ resource.tried.count }}
+          </span>
+        </div>
+      </footer>
+    </div>
   </a>
 {% endif %}
