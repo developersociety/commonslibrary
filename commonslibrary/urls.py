@@ -20,7 +20,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', HomeView.as_view(), name='home'),
     url(r'^search/$', SearchView.as_view(), name='search'),
-    url(r'^explore/$', ResourceCategoryListView.as_view(), name='explore'),
+    url(r'^explore/$', ResourceCategoryListView.as_view(), name='resource-category-list'),
     url(r'^accounts/', include('accounts.urls')),
     url(r'^directory/', include('directory.urls')),
     url(r'^resources/', include('resources.urls')),
