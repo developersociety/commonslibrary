@@ -14,7 +14,7 @@ class ResourceCategoryFeaturedInline(SortableStackedInline):
         """
         formset = super().get_formset(request, obj, **kwargs)
         resource_field = formset.form.base_fields['resource']
-        resource_field.queryset = resource_field.queryset.order_by('title')
+        resource_field.queryset = resource_field.queryset.filter(categories=obj).order_by('title')
         return formset
 
 

@@ -227,3 +227,10 @@ class ResourceCategoryDetailView(WebTest):
         )
         featured_resources = response.context['featured_resources']
         self.assertTrue(featured_resources.exists())
+
+
+class TestResourceCategoryListView(WebTest):
+
+    def test_empty_return_code(self):
+        response = self.app.get(reverse('resource-category-list'))
+        self.assertEqual(response.status_code, 200)
