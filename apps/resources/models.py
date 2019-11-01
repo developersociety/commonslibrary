@@ -167,6 +167,8 @@ class ResourceCategory(models.Model):
     def get_resource_count(self):
         return self.resource_set.count()
 
+    get_resource_count.verbose_name = 'Resources'
+
     def get_absolute_url(self):
         return reverse('resources:resource-category-detail', kwargs={'slug': self.slug})
 

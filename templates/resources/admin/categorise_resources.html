@@ -1,0 +1,18 @@
+{% extends "admin/base_site.html" %}
+{% load i18n %}
+
+{% block breadcrumbs %}{% endblock %}
+{% block content %}
+<h1>Categorise Resources</h1>
+<form method="POST">
+    {% csrf_token %}
+    <label for="category_ids">Categories</label>
+    <select multiple name="category_ids">
+{% for category in categories %}
+<option value="{{ category.id }}">{{ category.title }}</option>
+{% endfor %}
+    </select>
+<hr>
+<input type="submit" value="{% trans 'Add to categories' %}"></input>
+</form>
+{% endblock %}
