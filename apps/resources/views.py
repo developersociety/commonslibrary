@@ -1,9 +1,12 @@
 from django.contrib import messages
+from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import PermissionDenied
 from django.db.models import F
 from django.http import HttpResponseRedirect
+from django.shortcuts import render
 from django.urls import reverse, reverse_lazy
+from django.views.decorators.http import require_http_methods
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic.list import ListView
@@ -172,3 +175,34 @@ class ResourceCategoryDetailView(DetailView):
         )
         context['featured_resources'] = featured_resources
         return context
+
+
+# @permission_required('resources.update_model')
+@require_http_methods(['GET', 'POST'])
+@staff_member_required
+def admin_categorise_resources_view(request):
+    """
+    Quick View for assigning categories to resources.
+    """
+    template = 'resources/admin/categorise_resources.html'
+
+    resources = Resource.objects.filter(id__in=request.GET['resource_ids'].split(','))
+
+    if request.method == 'GET':
+        categories = ResourceCategory.objects.all()
+        messages.info(request, '{} resources selected'.format(resources.count()))
+        return render(request, template, {
+            "categories": categories,
+            "resources": resources,
+        })
+
+    # POST:
+
+    categories = ResourceCategory.objects.filter(id__in=request.POST['category_ids'])
+
+    for resource in resources:
+        for category in categories:
+            resource.categories.add(category)
+
+    messages.success(request, "{} resources updated".format(resources.count()))
+    return HttpResponseRedirect(reverse('admin:resources_resource_changelist'))

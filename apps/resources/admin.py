@@ -1,4 +1,6 @@
 from django.contrib import admin
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 
 from adminsortable.admin import NonSortableParentAdmin, SortableStackedInline
 
@@ -20,7 +22,7 @@ class ResourceCategoryFeaturedInline(SortableStackedInline):
 
 @admin.register(models.ResourceCategory)
 class ResourceCategoryAdmin(NonSortableParentAdmin):
-    list_display = ('title',)
+    list_display = ('title', 'get_resource_count')
     prepopulated_fields = {'slug': ('title',)}
     extra = 1
     inlines = [ResourceCategoryFeaturedInline]
@@ -28,12 +30,14 @@ class ResourceCategoryAdmin(NonSortableParentAdmin):
 
 @admin.register(models.Resource)
 class ResourceAdmin(admin.ModelAdmin):
+    actions = ['add_to_category']
     list_display = ('title', 'status', 'abstract', 'hits', 'created_by', 'created_at')
     list_editable = ('status',)
     prepopulated_fields = {'slug': ('title',)}
     filter_horizontal = ('tags', 'privacy')
     search_fields = ['title', 'abstract']
     date_hierarchy = 'created_at'
+
     fieldsets = [
         ('Resource', {
             'fields': ('title', 'slug', 'abstract', 'categories', 'tags', 'status'),
@@ -84,3 +88,12 @@ class ResourceAdmin(admin.ModelAdmin):
         if request.user.is_superuser:
             list_filter.append('organisation')
         return list_filter
+
+    def add_to_category(self, request, queryset):
+        selected = request.POST.getlist(admin.ACTION_CHECKBOX_NAME)
+        return HttpResponseRedirect(
+            reverse('resources:admin-categorise-resources') + '?resource_ids=' +
+            ','.join(selected)
+        )
+
+    add_to_category.short_description = 'Categorise selected resources'
