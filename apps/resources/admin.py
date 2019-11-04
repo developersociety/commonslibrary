@@ -1,5 +1,5 @@
-from django.contrib import admin
-from django.http import HttpResponseRedirect
+from django.contrib import admin, messages
+from django.shortcuts import render
 from django.urls import reverse
 
 from adminsortable.admin import NonSortableParentAdmin, SortableStackedInline
@@ -90,10 +90,23 @@ class ResourceAdmin(admin.ModelAdmin):
         return list_filter
 
     def add_to_category(self, request, queryset):
-        selected = request.POST.getlist(admin.ACTION_CHECKBOX_NAME)
-        return HttpResponseRedirect(
-            reverse('resources:admin-categorise-resources') + '?resource_ids=' +
-            ','.join(selected)
+        template = 'resources/admin/categorise_resources.html'
+
+        ids = ','.join(str(pk) for pk in queryset.values_list('pk', flat=True))
+        categories = models.ResourceCategory.objects.all()
+
+        messages.info(request, '{} resources selected'.format(queryset.count()))
+
+        return render(
+            request, template, {
+                "title": "Categorise Resources",
+                "site_title": admin.site.site_title,
+                "site_header": admin.site.site_header,
+                "categories": categories,
+                "resource_ids": ids,
+                "post_to": reverse('resources:admin-categorise-resources'),
+            }
         )
 
     add_to_category.short_description = 'Categorise selected resources'
+    add_to_category.allowed_permissions = ('change',)
