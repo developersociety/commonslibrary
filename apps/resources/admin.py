@@ -31,7 +31,9 @@ class ResourceCategoryAdmin(NonSortableParentAdmin):
 @admin.register(models.Resource)
 class ResourceAdmin(admin.ModelAdmin):
     actions = ['add_to_category']
-    list_display = ('title', 'status', 'abstract', 'hits', 'created_by', 'created_at')
+    list_display = (
+        'title', 'status', 'abstract', 'hits', 'created_by', 'created_at', 'categories_list'
+    )
     list_editable = ('status',)
     prepopulated_fields = {'slug': ('title',)}
     filter_horizontal = ('tags', 'privacy')
@@ -84,10 +86,14 @@ class ResourceAdmin(admin.ModelAdmin):
         Returns a sequence containing the fields to be displayed as filters in
         the right sidebar of the changelist page.
         """
-        list_filter = ['status', 'tags']
+        list_filter = ['status', 'categories', 'tags']
         if request.user.is_superuser:
             list_filter.append('organisation')
+
         return list_filter
+
+    def categories_list(self, obj):
+        return ', '.join(obj.categories.all().values_list('title', flat=True))
 
     def add_to_category(self, request, queryset):
         template = 'resources/admin/categorise_resources.html'
