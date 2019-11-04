@@ -30,7 +30,7 @@ class ResourceCategoryAdmin(NonSortableParentAdmin):
 
 @admin.register(models.Resource)
 class ResourceAdmin(admin.ModelAdmin):
-    actions = ['add_to_category']
+    actions = ['action_categorise']
     list_display = (
         'title', 'status', 'abstract', 'hits', 'created_by', 'created_at', 'categories_list'
     )
@@ -95,7 +95,9 @@ class ResourceAdmin(admin.ModelAdmin):
     def categories_list(self, obj):
         return ', '.join(obj.categories.all().values_list('title', flat=True))
 
-    def add_to_category(self, request, queryset):
+    categories_list.short_description = 'Categories'
+
+    def action_categorise(self, request, queryset):
         template = 'resources/admin/categorise_resources.html'
 
         ids = ','.join(str(pk) for pk in queryset.values_list('pk', flat=True))
@@ -114,5 +116,5 @@ class ResourceAdmin(admin.ModelAdmin):
             }
         )
 
-    add_to_category.short_description = 'Categorise selected resources'
-    add_to_category.allowed_permissions = ('change',)
+    action_categorise.short_description = 'Categorise selected resources'
+    action_categorise.allowed_permissions = ('change',)
