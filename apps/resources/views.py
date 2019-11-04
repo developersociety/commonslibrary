@@ -188,6 +188,11 @@ def admin_categorise_resources_view(request):
     categories = ResourceCategory.objects.filter(id__in=request.POST.getlist('category_ids', []))
     remove_categories = request.POST.get('remove') == '1'
 
+    # Ensure permissions - this shouldn't be needed unless someone is being malicious:
+    if not request.user.is_superuser and request.user.approved_organisations.exists():
+        resources = resources.filter(organisation__in=request.user.approved_organisations.all()
+                                     ).distinct()
+
     if categories:
         for resource in resources:
             for category in categories:
