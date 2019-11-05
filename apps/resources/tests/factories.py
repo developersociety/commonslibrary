@@ -4,7 +4,7 @@ import factory
 
 from accounts.tests.factories import UserFactory
 from directory.tests.factories import OrganisationFactory
-from resources.models import Resource, ResourceCategory
+from resources.models import Resource, ResourceCategory, ResourceCategoryFeatured
 
 
 class ResourceCategoryFactory(factory.django.DjangoModelFactory):
@@ -59,3 +59,11 @@ class ResourceFactory(factory.django.DjangoModelFactory):
         if extracted:
             for user in extracted:
                 self.likes.add(user)
+
+
+class ResourceCategoryFeaturedFactory(factory.django.DjangoModelFactory):
+    category = factory.SubFactory(ResourceCategoryFactory)
+    resource = factory.SubFactory(ResourceFactory)
+
+    class Meta:
+        model = ResourceCategoryFeatured

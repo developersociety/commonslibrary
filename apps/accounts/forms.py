@@ -5,6 +5,7 @@ from django.contrib.auth.forms import (  # yapf: disable
     PasswordResetForm as BasePasswordResetForm, SetPasswordForm as BaseSetPasswordForm,
     UserChangeForm as BaseUserChangeForm, UserCreationForm as BaseUserCreationForm
 )
+from django.utils.safestring import mark_safe
 
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import HTML, ButtonHolder, Div, Field, Layout, Submit
@@ -49,10 +50,13 @@ class UserRegistrationForm(forms.ModelForm):
     privacy_agreement = forms.BooleanField(
         required=True,
         label='I agree to The Campaigns Library contacting me about my membership.',
-        help_text='''
+        help_text=mark_safe(
+            '''
             Your personal information will be held securely. By submitting information you are
-            agreeing to the use of data and cookies in accordance with our privacy policy.
-        '''
+            agreeing to the use of data and cookies in accordance with our
+            <a href="/privacy/" target="_blank">privacy policy</a>.
+            '''
+        )
     )
 
     class Meta:

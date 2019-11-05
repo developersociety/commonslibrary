@@ -8,6 +8,15 @@ from . import models
 class ResourceCategoryFeaturedInline(SortableStackedInline):
     model = models.ResourceCategoryFeatured
 
+    def get_formset(self, request, obj=None, **kwargs):
+        """
+        Change order by title for the resource field
+        """
+        formset = super().get_formset(request, obj, **kwargs)
+        resource_field = formset.form.base_fields['resource']
+        resource_field.queryset = resource_field.queryset.order_by('title')
+        return formset
+
 
 @admin.register(models.ResourceCategory)
 class ResourceCategoryAdmin(NonSortableParentAdmin):
