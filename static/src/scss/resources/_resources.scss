@@ -177,6 +177,10 @@
         &.with-image:before {
             filter: invert(100%);
         }
+
+        .resource-summary {
+            padding-right: 3rem;
+        }
     }
 
     &.featured-org {
@@ -207,6 +211,20 @@
     .resource-focused {
         display: none;
         background: $color-background;
+    }
+
+    &:hover,
+    &:focus {
+        .resource-focused {
+            display: flex;
+            flex-flow: column nowrap;
+            color: #ffffff;
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+        }
     }
 
     .resource-meta {
@@ -240,12 +258,6 @@
     }
 
     @media all and (min-width: 541px) {
-        &:focus,
-        &:hover {
-            background: $color-background;
-            color: $color-line;
-        }
-
         &:after {
             content: '';
             display: block;
@@ -453,12 +465,9 @@ footer.resource-detail__stats {
 }
 
 .resource-abstract {
-    font-size: 1.125rem;
+    font-size: 0.85rem;
     margin-top: 0;
-
-    .private & {
-        padding-right: 3rem;
-    }
+    padding: 1rem 0;
 }
 
 .private .resource-list-abstract {
