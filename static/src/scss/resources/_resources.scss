@@ -177,6 +177,10 @@
         &.with-image:before {
             filter: invert(100%);
         }
+
+        .resource-summary {
+            padding-right: 3rem;
+        }
     }
 
     &.featured-org {
