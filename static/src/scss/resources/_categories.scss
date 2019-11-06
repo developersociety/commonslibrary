@@ -43,12 +43,12 @@
         align-items: flex-start;
 
         h1 {
-            padding: 0 1rem 0 0;
+            padding: 0 3rem 0 0;
             margin: 0;
         }
 
         p {
-            padding-right: 4rem;
+            padding-right: 3rem;
             padding-bottom: 4rem;
             word-wrap: break-word;
         }
@@ -206,7 +206,7 @@
 }
 
 .background {
-    padding: 4rem 0 12rem 0;
+    padding: 4rem 0 6rem 0;
     position: relative;
 
     .backgroundContent {
@@ -302,7 +302,7 @@
 }
 
 .featured-resources.detail-page__featured-resources {
-    padding: 0 2rem 2rem 2rem;
+    padding: 0 2rem 1rem 2rem;
     background: $color-accent;
 
     h3 {
@@ -326,6 +326,7 @@
 
     .resource {
         box-shadow: 2px 2px 8px 0px rgba(#000000, 0.125);
+        margin-bottom: 1rem;
         &:last-child:after {
             content: none;
         }
