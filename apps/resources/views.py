@@ -185,7 +185,7 @@ def admin_categorise_resources_view(request):
     """
     Admin Action for assigning categories to resources.
     """
-    xref = Resource.categories.through
+    m2m_relationship = Resource.categories.through
     resources = Resource.objects.filter(id__in=request.POST.get('resource_ids', '').split(','))
     categories = ResourceCategory.objects.filter(id__in=request.POST.getlist('category_ids', []))
     remove_categories = request.POST.get('remove') == '1'
@@ -201,14 +201,14 @@ def admin_categorise_resources_view(request):
     if categories:
         with transaction.atomic():
             # As django 1.11 bulk_create doesn't have ignore_conflicts, the easiest way
-            # is to delete any existing xrefs, and then recreate them as needed.
-            xref.objects.filter(
+            # is to delete any existing through_model, and then recreate them as needed.
+            m2m_relationship.objects.filter(
                 resource_id__in=resource_ids, resourcecategory_id__in=category_ids
             ).delete()
 
             if not remove_categories:
-                xref.objects.bulk_create((
-                    xref(resource_id=resource_id, resourcecategory_id=category_id)
+                m2m_relationship.objects.bulk_create((
+                    m2m_relationship(resource_id=resource_id, resourcecategory_id=category_id)
                     for resource_id in resource_ids for category_id in category_ids
                 ))
 
