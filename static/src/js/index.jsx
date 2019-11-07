@@ -22,8 +22,8 @@ class ResourceList extends React.Component {
             resources: [],
             resourcesCount: 0,
             resourcesNextPage: null,
-            ordering: '&ordering=created_at',
-            activeFilter: 'created_at',
+            ordering: '&ordering=-created_at',
+            activeFilter: '-created_at',
             hideSearch: hideSearch,
             query: ''
         };
