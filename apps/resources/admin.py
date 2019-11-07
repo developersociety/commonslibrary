@@ -1,4 +1,6 @@
-from django.contrib import admin
+from django.contrib import admin, messages
+from django.shortcuts import render
+from django.urls import reverse
 
 from adminsortable.admin import NonSortableParentAdmin, SortableStackedInline
 
@@ -20,7 +22,7 @@ class ResourceCategoryFeaturedInline(SortableStackedInline):
 
 @admin.register(models.ResourceCategory)
 class ResourceCategoryAdmin(NonSortableParentAdmin):
-    list_display = ('title',)
+    list_display = ('title', 'get_resource_count')
     prepopulated_fields = {'slug': ('title',)}
     extra = 1
     inlines = [ResourceCategoryFeaturedInline]
@@ -28,12 +30,16 @@ class ResourceCategoryAdmin(NonSortableParentAdmin):
 
 @admin.register(models.Resource)
 class ResourceAdmin(admin.ModelAdmin):
-    list_display = ('title', 'status', 'abstract', 'hits', 'created_by', 'created_at')
+    actions = ['action_categorise']
+    list_display = (
+        'title', 'status', 'abstract', 'hits', 'created_by', 'created_at', 'categories_list'
+    )
     list_editable = ('status',)
     prepopulated_fields = {'slug': ('title',)}
     filter_horizontal = ('tags', 'privacy')
     search_fields = ['title', 'abstract']
     date_hierarchy = 'created_at'
+
     fieldsets = [
         ('Resource', {
             'fields': ('title', 'slug', 'abstract', 'categories', 'tags', 'status'),
@@ -80,7 +86,35 @@ class ResourceAdmin(admin.ModelAdmin):
         Returns a sequence containing the fields to be displayed as filters in
         the right sidebar of the changelist page.
         """
-        list_filter = ['status', 'tags']
+        list_filter = ['status', 'categories', 'tags']
         if request.user.is_superuser:
             list_filter.append('organisation')
+
         return list_filter
+
+    def categories_list(self, obj):
+        return ', '.join(obj.categories.all().values_list('title', flat=True))
+
+    categories_list.short_description = 'Categories'
+
+    def action_categorise(self, request, queryset):
+        template = 'resources/admin/categorise_resources.html'
+
+        ids = ','.join(str(pk) for pk in queryset.values_list('pk', flat=True))
+        categories = models.ResourceCategory.objects.all()
+
+        messages.info(request, '{} resources selected'.format(queryset.count()))
+
+        return render(
+            request, template, {
+                "title": "Categorise Resources",
+                "site_title": admin.site.site_title,
+                "site_header": admin.site.site_header,
+                "categories": categories,
+                "resource_ids": ids,
+                "post_to": reverse('resources:admin-categorise-resources'),
+            }
+        )
+
+    action_categorise.short_description = 'Categorise selected resources'
+    action_categorise.allowed_permissions = ('change',)

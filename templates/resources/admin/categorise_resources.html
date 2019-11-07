@@ -1,0 +1,41 @@
+{% extends "admin/base_site.html" %}
+{% load i18n %}
+{% block breadcrumbs %}{% endblock %}
+{% block content %}
+<p>Add the selected resources to the following categories:</p>
+<form method="POST" action="{{ post_to }}">
+    {% csrf_token %}
+    <input type="hidden" name="resource_ids" value="{{ resource_ids }}">
+    <fieldset class="module aligned">
+        <div class="form-row field-title">
+            <div>
+                <label for="category_ids">Categories</label>
+                <select multiple name="category_ids">
+                    {% for category in categories %}
+                        <option value="{{ category.id }}">{{ category.title }}</option>
+                    {% endfor %}
+                </select>
+                <div class="help">
+                    {% trans 'Hold down "Control", or "Command" on a Mac, to select more than one.' %}
+                </div>
+            </div>
+        </div>
+    </fieldset>
+    <fieldset class="module aligned">
+        <div class="form-row field-title">
+            <div>
+                <label for="remove">{% trans 'Remove from selected categories' %}</label>
+                <input type="checkbox" value="1" name="remove">
+                <div class="help">
+                    Instead of adding these categories to the selected resources,
+                    remove them (if they are in them)
+                </div>
+            </div>
+        </div>
+
+    </fieldset>
+
+<hr>
+<input type="submit" value="{% trans 'Update Categories' %}"></input>
+</form>
+{% endblock %}

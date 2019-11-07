@@ -1,9 +1,13 @@
 from django.contrib import messages
+from django.contrib.admin.views.decorators import staff_member_required
+from django.contrib.auth.decorators import permission_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import PermissionDenied
+from django.db import transaction
 from django.db.models import F
 from django.http import HttpResponseRedirect
 from django.urls import reverse, reverse_lazy
+from django.views.decorators.http import require_POST
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic.list import ListView
@@ -172,3 +176,44 @@ class ResourceCategoryDetailView(DetailView):
         )
         context['featured_resources'] = featured_resources
         return context
+
+
+@require_POST
+@staff_member_required
+@permission_required('resources.change_resource')
+def admin_categorise_resources_view(request):
+    """
+    Admin Action for assigning categories to resources.
+    """
+    m2m_relationship = Resource.categories.through
+    resources = Resource.objects.filter(id__in=request.POST.get('resource_ids', '').split(','))
+    categories = ResourceCategory.objects.filter(id__in=request.POST.getlist('category_ids', []))
+    remove_categories = request.POST.get('remove') == '1'
+
+    # Ensure permissions - this shouldn't be needed unless someone is being malicious:
+    if not request.user.is_superuser and request.user.approved_organisations.exists():
+        resources = resources.filter(organisation__in=request.user.approved_organisations.all()
+                                     ).distinct()
+
+    resource_ids = resources.values_list('id', flat=True)
+    category_ids = categories.values_list('id', flat=True)
+
+    if categories:
+        with transaction.atomic():
+            # As django 1.11 bulk_create doesn't have ignore_conflicts, the easiest way
+            # is to delete any existing through_model, and then recreate them as needed.
+            m2m_relationship.objects.filter(
+                resource_id__in=resource_ids, resourcecategory_id__in=category_ids
+            ).delete()
+
+            if not remove_categories:
+                m2m_relationship.objects.bulk_create((
+                    m2m_relationship(resource_id=resource_id, resourcecategory_id=category_id)
+                    for resource_id in resource_ids for category_id in category_ids
+                ))
+
+        messages.success(request, "{} resources updated".format(resources.count()))
+    else:
+        messages.info(request, "No Categories Selected")
+
+    return HttpResponseRedirect(reverse('admin:resources_resource_changelist'))
