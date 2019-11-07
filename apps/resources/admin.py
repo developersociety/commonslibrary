@@ -1,6 +1,7 @@
 from django.contrib import admin, messages
 from django.shortcuts import render
 from django.urls import reverse
+from django.utils.html import mark_safe
 
 from adminsortable.admin import NonSortableParentAdmin, SortableStackedInline
 
@@ -22,10 +23,21 @@ class ResourceCategoryFeaturedInline(SortableStackedInline):
 
 @admin.register(models.ResourceCategory)
 class ResourceCategoryAdmin(NonSortableParentAdmin):
-    list_display = ('title', 'get_resource_count')
+    list_display = ('title', 'approved_resources', 'all_resources', 'admin_list_resources')
     prepopulated_fields = {'slug': ('title',)}
     extra = 1
     inlines = [ResourceCategoryFeaturedInline]
+
+    def approved_resources(self, obj):
+        return obj.get_resource_count()
+
+    def all_resources(self, obj):
+        return obj.resource_set.all().count()
+
+    def admin_list_resources(self, obj):
+        url = reverse('admin:resources_resource_changelist'
+                      ) + '?categories__id__exact={}'.format(obj.id)
+        return mark_safe('<a href="{}">{} Resources</a>'.format(url, obj.title))
 
 
 @admin.register(models.Resource)
