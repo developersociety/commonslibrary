@@ -3,6 +3,7 @@ from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.decorators import permission_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import PermissionDenied
+from django.db import transaction
 from django.db.models import F
 from django.http import HttpResponseRedirect
 from django.urls import reverse, reverse_lazy
@@ -184,6 +185,7 @@ def admin_categorise_resources_view(request):
     """
     Admin Action for assigning categories to resources.
     """
+    xref = Resource.categories.through
     resources = Resource.objects.filter(id__in=request.POST.get('resource_ids', '').split(','))
     categories = ResourceCategory.objects.filter(id__in=request.POST.getlist('category_ids', []))
     remove_categories = request.POST.get('remove') == '1'
@@ -193,13 +195,22 @@ def admin_categorise_resources_view(request):
         resources = resources.filter(organisation__in=request.user.approved_organisations.all()
                                      ).distinct()
 
+    resource_ids = resources.values_list('id', flat=True)
+    category_ids = categories.values_list('id', flat=True)
+
     if categories:
-        for resource in resources:
-            for category in categories:
-                if remove_categories:
-                    resource.categories.remove(category)
-                else:
-                    resource.categories.add(category)
+        with transaction.atomic():
+            # As django 1.11 bulk_create doesn't have ignore_conflicts, the easiest way
+            # is to delete any existing xrefs, and then recreate them as needed.
+            xref.objects.filter(
+                resource_id__in=resource_ids, resourcecategory_id__in=category_ids
+            ).delete()
+
+            if not remove_categories:
+                xref.objects.bulk_create((
+                    xref(resource_id=resource_id, resourcecategory_id=category_id)
+                    for resource_id in resource_ids for category_id in category_ids
+                ))
 
         messages.success(request, "{} resources updated".format(resources.count()))
     else:
