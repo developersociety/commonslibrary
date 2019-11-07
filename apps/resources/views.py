@@ -161,6 +161,15 @@ class ResourceUpdateView(LoginRequiredMixin, UpdateView):
 class ResourceCategoryListView(ListView):
     model = ResourceCategory
 
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+
+        for category in context['resourcecategory_list']:
+            category.get_approved_featured_resources = category.get_approved_featured_resources(
+                self.request.user
+            )
+        return context
+
 
 class ResourceCategoryDetailView(DetailView):
     model = ResourceCategory
@@ -168,13 +177,8 @@ class ResourceCategoryDetailView(DetailView):
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
         resource_category = context['resourcecategory']
-        categories_featured_resources = resource_category.category_featured_resources.values_list(
-            'resource_id'
-        )
-        featured_resources = Resource.objects.approved(self.request.user).filter(
-            id__in=categories_featured_resources
-        )
-        context['featured_resources'] = featured_resources
+        context['featured_resources'] = \
+            resource_category.get_approved_featured_resources(self.request.user)
         return context
 
 
