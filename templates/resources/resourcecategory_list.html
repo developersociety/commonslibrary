@@ -39,8 +39,8 @@
               <div class="featured-resources">
                 <h5> Featured resources </h5>
                 <div class="featured-resources__holder">
-                  {% for resource_relation in category.category_featured_resources.all|slice:':2' %}
-                    {% include 'includes/resource.html' with resource=resource_relation.resource %}
+                  {% for featured_resource in category.get_approved_featured_resources|slice:':2' %}
+                    {% include 'includes/resource.html' with resource=featured_resource %}
                   {% endfor %}
                 </div>
               </div>

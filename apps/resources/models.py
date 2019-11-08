@@ -172,6 +172,11 @@ class ResourceCategory(models.Model):
     def get_absolute_url(self):
         return reverse('resources:resource-category-detail', kwargs={'slug': self.slug})
 
+    def get_approved_featured_resources(self, user):
+        categories_featured_resources = self.category_featured_resources.values_list('resource_id')
+
+        return Resource.objects.approved(user).filter(id__in=categories_featured_resources)
+
 
 class ResourceCategoryFeatured(SortableMixin):
     category = models.ForeignKey(
