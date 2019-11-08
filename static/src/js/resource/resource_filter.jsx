@@ -4,7 +4,7 @@ import { ResourceFilterOption } from './resource_filter_option.jsx';
 
 const api = '/api/v1/resources/?format=json';
 const filterOptions = {
-    created_at: 'date',
+    '-created_at': 'date',
     title: 'alphabetical',
     most_likes: 'liked',
     most_tried: 'tried'
