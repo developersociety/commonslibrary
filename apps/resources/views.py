@@ -164,10 +164,10 @@ class ResourceCategoryListView(ListView):
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
 
+        # monkey-patching, as calling the method from the template cannot send the request.user
         for category in context['resourcecategory_list']:
-            category.get_approved_featured_resources = category.get_approved_featured_resources(
-                self.request.user
-            )
+            category.get_approved_featured_resources = \
+                category.get_approved_featured_resources(self.request.user)
         return context
 
 
