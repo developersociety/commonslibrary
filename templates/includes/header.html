@@ -11,6 +11,7 @@
         {% include "includes/resource_actions.html" with extra_class="hide-desktop" %}
       {% endif %}
       <ul class="main-navigation">
+        {% if request.user.is_superuser %} {# only until finished categoriesing #}
         <li class="main-navigation__item explore-link {% if resources_categories %}with-dropdown{% endif %} {% if request.path == '/explore/' %} active{% endif %}">
           <a href="{% url 'resource-category-list' %}">
             <svg class="icon">
@@ -31,6 +32,7 @@
             </ul>
           {% endif %}
         </li>
+        {% endif %}
         <li class="main-navigation__item {% if request.path == '/search/' %} active{% endif %}">
           <a href="{% url 'search' %}">
             <svg class="icon">
