@@ -22,10 +22,16 @@ class ResourceCategoryFeaturedInline(SortableStackedInline):
 
 @admin.register(models.ResourceCategory)
 class ResourceCategoryAdmin(NonSortableParentAdmin):
-    list_display = ('title', 'get_resource_count')
+    list_display = ('title', 'public_resource_count', 'total_resource_count')
     prepopulated_fields = {'slug': ('title',)}
     extra = 1
     inlines = [ResourceCategoryFeaturedInline]
+
+    def public_resource_count(self, obj):
+        return obj.get_resource_count()
+
+    def total_resource_count(self, obj):
+        return obj.resource_set.count()
 
 
 @admin.register(models.Resource)
