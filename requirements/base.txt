@@ -1,4 +1,4 @@
-Django==1.11.27
+Django==1.11.28
 Pillow==4.3.0
 dj-database-url==0.5.0
 olefile==0.45.1
