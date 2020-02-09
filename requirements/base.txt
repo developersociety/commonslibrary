@@ -20,7 +20,7 @@ blanc-contentfiles==0.2.4
 blanc-admin-theme==1.0.2
 
 # APM
-elastic-apm==4.2.2
+elastic-apm==5.3.3
 urllib3==1.25.3
 certifi==2019.6.16
 
