@@ -9,7 +9,7 @@ raven==6.10.0
 django-admin-sortable==2.1.18
 
 # Masked database backups
-django-maskpostgresdata==0.1.8
+django-maskpostgresdata==0.1.11
 
 # Storage
 django-storages==1.7.1
