@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% load thumbnail staticfiles %}
+{% load thumbnail staticfiles resource_count %}
 
 
 {% block main_content %}
@@ -18,7 +18,8 @@
                 <div class="category-grid__item-detail">
                   <a href="#" class="category_toggle" data-target="{{ category.pk }}">
                     <h3>{{ category.title }}</h3>
-                    <p>{{ category.get_resource_count }} resource{{ category.get_resource_count|pluralize }}</p>
+                    {% resource_count category request.user as resource_count %}
+                    <p>{{ resource_count }} resource{{ resource_count|pluralize }}</p>
                   </a>
                 </div>
               </div>
