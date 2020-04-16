@@ -122,11 +122,20 @@ class UserRegistrationForm(forms.ModelForm):
 
         if Organisation.objects.filter(email__icontains=email_domain).exists():
 
-            organisation = Organisation.objects.get(email__icontains=email_domain)
-            if organisation in self.cleaned_data['chosen_organisations']:
-                org_email_domain = organisation.get_email_domain()
-                if org_email_domain == email_domain:
-                    user.approved_organisations.add(organisation)
+            # more than one org can share the same email domain
+            # find all organisations that have been selected in the form that also contain the
+            # same email domain as the user
+            organisations = Organisation.objects.filter(
+                email__icontains=email_domain,
+                pk__in=self.cleaned_data['chosen_organisations'].values_list("pk", flat=True)
+            )
+
+            # if orgs match the query, add the orgs who's email domain matches that of the user
+            if organisations.exists():
+                org_domain_matches = [
+                    org for org in organisations if org.get_email_domain() == email_domain
+                ]
+                user.approved_organisations.add(*org_domain_matches)
         return user
 
     def clean_confirm_password(self):
