@@ -109,13 +109,27 @@ def update():
     with cd(env.home):
         run('git pull')
 
-        # Install python/node packages
+        # Install python packages
         run('pip install --quiet --requirement requirements/production.txt')
+
+        # Install nvm using .nvmrc version
+        run('nvm install --no-progress')
+
+        # Check for changes in nvm or package-lock.json
+        run(
+            'cmp --silent .nvmrc node_modules/.nvmrc || '
+            'rm -f node_modules/.package-lock.json'
+        )
         run(
             'cmp --silent package-lock.json node_modules/.package-lock.json || '
-            'npm ci --no-progress && '
-            'cp -a package-lock.json node_modules/.package-lock.json'
+            'rm -f node_modules/.package-lock.json'
         )
+
+        # Install node packages
+        if not exists('node_modules/.package-lock.json'):
+            run('npm ci --no-progress')
+            run('cp -a package-lock.json node_modules/.package-lock.json')
+            run('cp -a .nvmrc node_modules/.nvmrc')
 
         # Clean up any potential cruft
         run('find -name "__pycache__" -prune -exec rm -rf {} \;')
