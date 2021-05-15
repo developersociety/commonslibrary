@@ -12,16 +12,21 @@ django-admin-sortable==2.1.18
 django-maskpostgresdata==0.1.13
 
 # Storage
-django-storages==1.7.1
-boto==2.49.0
-blanc-contentfiles==0.2.4
+devsoc-contentfiles==0.3
+django-storages==1.9.1
+boto3==1.17.73
+botocore==1.20.73
+jmespath==0.10.0
+python-dateutil==2.8.1
+s3transfer==0.4.2
+six==1.16.0
+urllib3==1.26.4
 
 # Admin theme
 blanc-admin-theme==1.0.2
 
 # APM
 elastic-apm==5.3.3
-urllib3==1.25.3
 certifi==2019.6.16
 
 # Webpack
@@ -34,7 +39,6 @@ sorl-thumbnail==12.4.1
 django-mptt==0.9.0
 django-mptt-admin==0.5.0
 django-js-asset==1.2.2
-six==1.12.0
 
 # Form styling
 django-crispy-forms==1.7.1

@@ -1,6 +1,6 @@
 -r testing.txt
 
-awscli==1.16.230
+awscli==1.19.73
 django-debug-toolbar==2.0
 ipdb==0.12.2
 tox==3.13.2

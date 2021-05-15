@@ -22,7 +22,7 @@ env.virtualenv = env.get('virtualenv', '/var/envs/commonslibrary')
 env.appname = env.get('appname', 'commonslibrary')
 env.repo = env.get('repo', 'commonslibrary')
 env.media = env.get('media', 'commonslibrary')
-env.media_bucket = env.get('media_bucket', 'contentfiles-media-eu-west-1')
+env.media_bucket = env.get('media_bucket', 'contentfiles-media-eu-west-2')
 env.database = env.get('database', 'commonslibrary_django')
 env.database_ssh = env.get('database_ssh', 'golestandt.devsoc.org')
 
@@ -41,7 +41,7 @@ GIT_REMOTE = 'git@github.com:developersociety/{env.repo}.git'
 def demo():
     env.roledefs['web'] = env.roledefs['demo']
     env.roledefs['cron'] = env.roledefs['demo']
-    env.media_bucket = 'contentfiles-demo-media-eu-west-1'
+    env.media_bucket = 'contentfiles-demo-media-eu-west-2'
 
 
 @task
@@ -254,6 +254,7 @@ def get_media(directory=''):
     """
     # Sync files from our S3 bucket/directory
     local(
+        'aws-vault exec devsoc-contentfiles-download -- '
         'aws s3 sync '
         's3://{media_bucket}/{media}/{directory} '
         'htdocs/media/{directory}'.format(
