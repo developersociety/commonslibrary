@@ -2,5 +2,5 @@
 
 awscli==1.19.73
 django-debug-toolbar==2.0
-ipdb==0.12.2
+ipdb==0.13.9
 tox==3.13.2
