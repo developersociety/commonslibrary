@@ -105,11 +105,11 @@ DATABASES = {
 # https://docs.djangoproject.com/en/1.11/topics/cache/
 
 CACHES = {}
-if os.environ.get('MEMCACHED_SERVERS'):
+if os.environ.get('REDIS_SERVERS'):
     CACHES['default'] = {
-        'BACKEND': 'django.core.cache.backends.memcached.PyLibMCCache',
-        'LOCATION': os.environ['MEMCACHED_SERVERS'].split(' '),
-        'KEY_PREFIX': os.environ.get('MEMCACHED_PREFIX'),
+        'BACKEND': 'django_redis.cache.RedisCache',
+        'LOCATION': os.environ['REDIS_SERVERS'].split(' '),
+        'KEY_PREFIX': '{}:cache'.format(os.environ['REDIS_PREFIX']),
     }
 else:
     CACHES['default'] = {

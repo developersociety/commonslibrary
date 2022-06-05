@@ -29,7 +29,6 @@ env.database_ssh = env.get('database_ssh', 'golestandt.devsoc.org')
 CRONTAB = """
 MAILTO=""
 
-{daily}         /usr/local/bin/django-cron python manage.py clearsessions
 """
 
 # Avoid tweaking these

@@ -3,10 +3,13 @@ Pillow==4.3.0
 dj-database-url==0.5.0
 olefile==0.45.1
 psycopg2==2.7.3.2
-pylibmc==1.6.1
 pytz==2019.2
 raven==6.10.0
 django-admin-sortable==2.1.18
+
+# Caching
+django-redis==4.11.0
+redis==3.5.3
 
 # Masked database backups
 django-maskpostgresdata==0.1.13
