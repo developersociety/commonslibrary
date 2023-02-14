@@ -87,6 +87,7 @@ install-local: npm-install pip-install-local
 
 # Pip
 pip-install-local: venv-check
+	pip install setuptools==59.8.0
 	pip install -r requirements/local.txt
 
 
