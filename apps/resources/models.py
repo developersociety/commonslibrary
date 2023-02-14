@@ -143,7 +143,7 @@ class Resource(models.Model):
             results[resource_id] = len(matches)
 
         resources_ids = sorted(results, key=results.get, reverse=True)[:limit]
-        preserved = Case(* [When(pk=pk, then=pos) for pos, pk in enumerate(resources_ids)])
+        preserved = Case(*[When(pk=pk, then=pos) for pos, pk in enumerate(resources_ids)])
         resources = Resource.objects.filter(id__in=resources_ids).order_by(preserved)
         return resources
 
