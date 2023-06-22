@@ -36,6 +36,7 @@ class Organisation(models.Model):
     )
     created_at = models.DateTimeField(default=timezone.now)
     updated_at = models.DateTimeField(auto_now=True)
+    show_logo_on_footer = models.BooleanField(default=True)
 
     class Meta:
         ordering = ('-created_at',)
