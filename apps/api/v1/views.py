@@ -2,7 +2,7 @@ from django.db import models
 
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters, status, viewsets
-from rest_framework.decorators import detail_route
+from rest_framework.decorators import detail_route, list_route
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 
@@ -13,7 +13,10 @@ from tags.models import Tag
 
 from .filters import ResourceFilter
 from .paginations import ResourcesPagination
-from .serializers import OrganisationSerializer, ResourceSerializer, TagSerializer, UserSerializer
+from .serializers import (
+    OrganisationSerializer, ResourceFavouriteSerializer, ResourceSerializer, TagSerializer,
+    UserSerializer
+)
 
 
 class ResourceViewSet(viewsets.ReadOnlyModelViewSet):
@@ -58,6 +61,37 @@ class ResourceViewSet(viewsets.ReadOnlyModelViewSet):
         else:
             obj.likes.add(request.user)
         return Response(status=status.HTTP_202_ACCEPTED)
+
+    @list_route(methods=['get'])
+    def favourites(self, request, pk=None):
+        data = {}
+        # Latest resource
+        latest_resource = Resource.get_latest(self.request.user)
+        latest_resource_ser = ResourceSerializer(
+            instance=latest_resource, context={'request': request}
+        )
+        data['latest_resource'] = latest_resource_ser.data
+
+        # Most tried
+        most_tried = Resource.get_most_tried(self.request.user).first()
+        most_tried_ser = ResourceSerializer(instance=most_tried, context={'request': request})
+        data['most_tried'] = most_tried_ser.data
+
+        # Most liked
+        most_liked = Resource.get_most_liked().first()
+        most_liked_ser = ResourceSerializer(instance=most_liked, context={'request': request})
+        data['most_liked'] = most_liked_ser.data
+
+        # Most published
+        most_published = Organisation.get_most_published_this_week()
+        most_published_ser = OrganisationSerializer(
+            instance=most_published, context={'request': request}
+        )
+        data['most_published'] = most_published_ser.data
+
+
+
+        return Response(data)
 
 
 class OrganisationViewSet(viewsets.ReadOnlyModelViewSet):
