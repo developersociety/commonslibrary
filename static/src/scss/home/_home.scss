@@ -3,6 +3,7 @@
     overflow: hidden;
     background: $color-background;
     position: relative;
+    display: grid;
 
     &:after {
         content: '';
@@ -17,6 +18,11 @@
         user-select: none;
         z-index: 10;
     }
+}
+
+.home-intro {
+    display: grid;
+    justify-items: center;
 }
 
 .home-intro__slide {
