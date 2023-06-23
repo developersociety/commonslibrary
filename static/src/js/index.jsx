@@ -5,7 +5,8 @@ import { Search } from './search/search.jsx';
 import { Resource } from './resource/resource.jsx';
 import { ResourceFilter } from './resource/resource_filter.jsx';
 
-const api = '/api/v1/resources/?format=json';
+const allResourcesApi = '/api/v1/resources/?format=json';
+const featuredResourcesApi = '/api/v1/resources/favourites/?format=json';
 const hideSearch = document.getElementById('react-app').dataset.hidesearch == 'true' || false;
 const fixedOrganisation = document.getElementById('react-app').dataset.organisation;
 const fixedCategory = document.getElementById('react-app').dataset.category;
@@ -106,7 +107,7 @@ class ResourceList extends React.Component {
 
     // Call API with resource list criteria
     updateResourceList() {
-        const searchQuery = api + this.state.ordering + this.state.query;
+        const searchQuery = allResourcesApi + this.state.ordering + this.state.query;
 
         fetch(searchQuery, {
             method: 'get',
@@ -122,6 +123,35 @@ class ResourceList extends React.Component {
                 });
             });
     }
+
+    //HERE!!!!!!
+    // Call API for featured resources
+    // getFeaturedResources() {
+
+        //but I can't use state here without intefering with
+        //how state is being used for the main resources
+        const [featuredResourcesData, setFeaturedResourcesData] = useState([])
+
+        const fetchFeaturedResources = () => {
+            fetch(featuredResourcesApi)
+            .then (response => {return response.json()})
+            .then (featuredResourcesData => {setFeaturedResourcesData(featuredResourcesData)})
+        }
+
+        useEffect(() => {
+            fetchFeaturedResources()
+        }, [])
+
+        // return (
+        //     <div>
+
+        //     </div>
+        // )
+    // }
+
+    useEffect(() => {
+        fetchFeaturedResources()
+    }, [])
 
     nextResourceList(event) {
         event.persist();
@@ -176,6 +206,7 @@ class ResourceList extends React.Component {
                         preselectedTag={preselectedTag}
                     />
                 )}
+                {/* <FeaturesResources /> */}
                 <ResourceFilter
                     resourceCount={this.state.resourcesCount}
                     activeFilter={this.state.activeFilter}

@@ -86,8 +86,6 @@ class ResourceViewSet(viewsets.ReadOnlyModelViewSet):
         )
         data['most_published'] = most_published_ser.data
 
-
-
         return Response(data)
 
 
