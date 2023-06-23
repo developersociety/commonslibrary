@@ -12,8 +12,10 @@ class OrganisationAdmin(admin.ModelAdmin):
     fieldsets = [
         (
             'Organisation', {
-                'fields':
-                    ('title', 'slug', 'colour', 'url', 'email', 'telephone', 'logo', 'founder'),
+                'fields': (
+                    'title', 'slug', 'colour', 'url', 'email', 'telephone', 'logo',
+                    'show_logo_on_footer', 'founder'
+                ),
             }
         ),
         ('Texts', {
