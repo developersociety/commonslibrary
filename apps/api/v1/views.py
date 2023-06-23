@@ -13,10 +13,7 @@ from tags.models import Tag
 
 from .filters import ResourceFilter
 from .paginations import ResourcesPagination
-from .serializers import (
-    OrganisationSerializer, ResourceFavouriteSerializer, ResourceSerializer, TagSerializer,
-    UserSerializer
-)
+from .serializers import OrganisationSerializer, ResourceSerializer, TagSerializer, UserSerializer
 
 
 class ResourceViewSet(viewsets.ReadOnlyModelViewSet):
