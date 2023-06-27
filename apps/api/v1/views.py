@@ -21,10 +21,6 @@ class ResourceViewSet(viewsets.ReadOnlyModelViewSet):
     filter_backends = (DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter)
     filter_class = ResourceFilter
     pagination_class = ResourcesPagination
-    search_fields = (
-        'title', 'abstract', 'created_by__first_name', 'created_by__last_name',
-        'organisation__title', 'tags__title'
-    )
     permission_classes = (AllowAny,)
 
     def get_queryset(self):
