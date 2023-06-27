@@ -3,6 +3,7 @@
     overflow: hidden;
     background: $color-background;
     position: relative;
+    display: grid;
 
     &:after {
         content: '';
@@ -17,6 +18,11 @@
         user-select: none;
         z-index: 10;
     }
+}
+
+.home-intro {
+    display: grid;
+    justify-items: center;
 }
 
 .home-intro__slide {
@@ -47,6 +53,15 @@
             padding: $width-gap * 1.675 $width-gap $width-gap $width-gap;
             min-height: 22rem;
         }
+    }
+    .site-title {
+        width: fit-content;
+        padding: 1rem 1.5rem 1.5rem 1.5rem;
+        vertical-align: center;
+        border-width: 0.438rem;
+        border-style: solid;
+        border-color: white;
+        text-align: center;
     }
 }
 

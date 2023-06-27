@@ -9,61 +9,12 @@
   <div class="home-intro__wrapper">
     <div class="home-intro">
       <div class="home-intro__slide intro-slide inverted">
-        <h1 class="slide-title">
-          Hello there!
+        <h1 class="slide-title site-title">
+          The Campaigns Library
         </h1>
         <h3>Welcome to The Campaigns Library, where campaigners speed up innovation and impact by sharing and discussing best practice.</h3>
       </div>
-      {% for resource in carousel_resources %}
-        <a href="{{ resource.get_absolute_url }}" class="home-intro__slide">
-          <div class="intro-slide__content">
-            <p class="resource-category">
-              Today's featured resources
-              <span>{{ forloop.counter }}/{{ carousel_resources.count }}</span>
-            </p>
-            <h2 class="slide-title">
-              {{ resource.title }}
-            </h2>
-            <footer class="resource-footer inline-stats">
-              <div class="resource-user">
-                {% thumbnail resource.organisation.logo '250' as thumb %}
-                  <div class="resource-user__group" style="background: url({{ thumb.url }}) left center/contain no-repeat">
-                  </div>
-                {% endthumbnail %}
-                <p class="resource-user__name">
-                  {{ resource.created_by.get_full_name }}
-                </p>
-              </div>
-              <div class="resource-actions">
-                <span class="resource-liked">
-                  <svg class="icon">
-                    <use xlink:href="#liked"></use>
-                  </svg>
-                  {{ resource.likes.count }}
-                </span>
-                <span class="resource-tried">
-                  <svg class="icon">
-                    <use xlink:href="#tried"></use>
-                  </svg>
-                  {{ resource.tried.count }}
-                </span>
-              </div>
-            </footer>
-          </div>
-          {% thumbnail resource.image '750' as thumb %}
-            <div class="intro-slide__image" style="background: url({{ thumb.url }}) center center/cover no-repeat"></div>
-          {% endthumbnail %}
-        </a>
-      {% endfor %}
     </div>
-    {% if carousel_resources.exists %}
-      <button class="flickity-prev-next-button flickity-button previous">
-        <svg class="flickity-button-icon" viewBox="0 0 100 100"><path d="M 10,50 L 60,100 L 70,90 L 30,50  L 70,10 L 60,0 Z" class="arrow"></path></svg>
-      </button>
-      <button class="flickity-prev-next-button flickity-button next">
-        <svg class="flickity-button-icon" viewBox="0 0 100 100"><path d="M 10,50 L 60,100 L 70,90 L 30,50  L 70,10 L 60,0 Z" class="arrow" transform="translate(100, 100) rotate(180) "></path></svg>
-      </button>
-    {% endif %}
   </div>
   <div class="resources featured-resources">
     <div class="resources-grid">
