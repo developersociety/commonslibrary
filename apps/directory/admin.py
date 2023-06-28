@@ -14,7 +14,7 @@ class OrganisationAdmin(admin.ModelAdmin):
             'Organisation', {
                 'fields': (
                     'title', 'slug', 'colour', 'url', 'email', 'telephone', 'logo',
-                    'show_logo_on_footer', 'founder'
+                    'show_logo_on_footer', 'logo_sort_order', 'founder'
                 ),
             }
         ),

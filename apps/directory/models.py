@@ -37,6 +37,10 @@ class Organisation(models.Model):
     created_at = models.DateTimeField(default=timezone.now)
     updated_at = models.DateTimeField(auto_now=True)
     show_logo_on_footer = models.BooleanField(default=True)
+    logo_sort_order = models.PositiveSmallIntegerField(
+        default=0,
+        help_text='The organisation logos with the higher numbers are showed first from the left',
+    )
 
     class Meta:
         ordering = ('-created_at',)
