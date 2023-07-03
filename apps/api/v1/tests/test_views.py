@@ -15,7 +15,8 @@ class ResourceTests(APITestCase):
     def setUp(self):
         self.url = reverse('resource-list')
 
-        self.resource_1 = ResourceFactory.create(status=RESOURCE_APPROVED)
+        self.test_tag = TagFactory(title='test')
+        self.resource_1 = ResourceFactory.create(status=RESOURCE_APPROVED, tags=[self.test_tag])
         self.like_url = reverse('resource-like', kwargs={'pk': self.resource_1.id})
         self.tried_url = reverse('resource-tried', kwargs={'pk': self.resource_1.id})
 
@@ -65,6 +66,21 @@ class ResourceTests(APITestCase):
         response = self.logged_in_client.put(self.tried_url, format='json')
         self.assertEqual(response.status_code, status.HTTP_202_ACCEPTED)
         self.assertFalse(self.user in self.resource_1.tried.all())
+
+    def test_single_tags(self):
+        test2_tag = TagFactory(title='test2')
+        ResourceFactory.create(status=RESOURCE_APPROVED, tags=[test2_tag])
+        url = f'{self.url}?tags={self.test_tag.id}'
+        response = self.client.get(url)
+        self.assertEqual(response.json()['count'], 1)
+
+    def test_multi_tags(self):
+        test2_tag = TagFactory(title='test2')
+        ResourceFactory.create(status=RESOURCE_APPROVED, tags=[test2_tag])
+        ResourceFactory.create(status=RESOURCE_APPROVED, tags=[test2_tag, self.test_tag])
+        url = f'{self.url}?tags={self.test_tag.id}&tags={test2_tag.id}'
+        response = self.client.get(url)
+        self.assertEqual(response.json()['count'], 1)
 
 
 class OrganisationTests(APITestCase):
