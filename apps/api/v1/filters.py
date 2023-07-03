@@ -4,6 +4,7 @@ from django_filters.rest_framework import FilterSet
 from accounts.models import User
 from directory.models import Organisation
 from resources.models import Resource
+from tags.models import Tag
 
 
 class ResourceFilter(FilterSet):
@@ -29,7 +30,11 @@ class ResourceFilter(FilterSet):
             'most_tried': 'Most tried',
         }
     )
+    tags = django_filters.filters.ModelMultipleChoiceFilter(
+        queryset=Tag.objects.all(),
+        conjoined=True,
+    )
 
     class Meta:
         model = Resource
-        fields = ('tags', 'categories', 'organisation', 'created_by')
+        fields = ('categories', 'organisation', 'created_by')
