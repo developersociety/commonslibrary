@@ -5,7 +5,9 @@ from .models import Organisation
 
 @admin.register(Organisation)
 class OrganisationAdmin(admin.ModelAdmin):
-    list_display = ('title', 'url', 'telephone', 'email', 'created_by', 'created_at',)
+    list_display = (
+        'title', 'url', 'telephone', 'email', 'logo_sort_order', 'created_by', 'created_at',
+    )
     readonly_fields = ('id', 'created_by', 'updated_by', 'created_at', 'updated_at',)
     search_fields = ['title']
     date_hierarchy = 'created_at'
