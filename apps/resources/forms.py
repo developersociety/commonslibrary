@@ -31,6 +31,9 @@ class ResourceForm(forms.ModelForm):
                 'The group you belong to is selected by default',
         }
 
+    class Media:
+        js = ['src/js/forms/abstract_count.js']
+
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user')
 
