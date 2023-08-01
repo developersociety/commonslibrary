@@ -23,7 +23,7 @@ class ResourceViewSet(viewsets.ReadOnlyModelViewSet):
     pagination_class = ResourcesPagination
     search_fields = (
         'title', 'abstract', 'created_by__first_name', 'created_by__last_name',
-        'organisation__title', 'tags__title'
+        'organisation__title',
     )
     permission_classes = (AllowAny,)
 

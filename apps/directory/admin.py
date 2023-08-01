@@ -5,15 +5,19 @@ from .models import Organisation
 
 @admin.register(Organisation)
 class OrganisationAdmin(admin.ModelAdmin):
-    list_display = ('title', 'url', 'telephone', 'email', 'created_by', 'created_at',)
+    list_display = (
+        'title', 'url', 'telephone', 'email', 'logo_sort_order', 'created_by', 'created_at',
+    )
     readonly_fields = ('id', 'created_by', 'updated_by', 'created_at', 'updated_at',)
     search_fields = ['title']
     date_hierarchy = 'created_at'
     fieldsets = [
         (
             'Organisation', {
-                'fields':
-                    ('title', 'slug', 'colour', 'url', 'email', 'telephone', 'logo', 'founder'),
+                'fields': (
+                    'title', 'slug', 'colour', 'url', 'email', 'telephone', 'logo',
+                    'show_logo_on_footer', 'logo_sort_order', 'founder'
+                ),
             }
         ),
         ('Texts', {

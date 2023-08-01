@@ -109,7 +109,7 @@ def update():
         run('git pull')
 
         # Install python packages
-        run('pip install --quiet setuptools==59.8.0')
+        run('pip install --quiet setuptools==59.6.0')
         run('pip install --quiet --requirement requirements/production.txt')
 
         # Install nvm using .nvmrc version
