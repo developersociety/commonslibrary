@@ -51,7 +51,7 @@ jobs:
           tox
     services:
       postgres:
-        image: postgres:12-alpine
+        image: postgres:17-alpine
         env:
           POSTGRES_PASSWORD: password
         ports:
