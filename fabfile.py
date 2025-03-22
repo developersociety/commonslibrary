@@ -6,14 +6,14 @@ from fabric.contrib.files import exists
 # Changable settings
 env.roledefs = {
     'web': [
-        'commonslibrary@scorch.devsoc.org',
-        'commonslibrary@smaug.devsoc.org',
+        'commonslibrary@moondancer.devsoc.org',
+        'commonslibrary@morning.devsoc.org',
     ],
     'demo': [
         'commonslibrary@trogdor.devsoc.org',
     ],
     'cron': [
-        'commonslibrary@smaug.devsoc.org',
+        'commonslibrary@morning.devsoc.org',
     ],
 }
 
